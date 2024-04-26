@@ -2,4 +2,24 @@ package com.dam.model;
 
 public class Usuarios {
 
+	private int idUsuario;
+	private String nick;
+	private String fotoPerfil;
+	private int monedas;
+	private String contraseña;
+	
+	public Usuarios(int id_usuario, String nick, String fotoPerfil,  int monedas, String contraseña) {
+		this.idUsuario = id_usuario;
+		this.nick = nick;
+		this.fotoPerfil = fotoPerfil;
+		this.monedas = monedas;
+		this.contraseña = contraseña;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuarios [id_usuario=" + idUsuario + ", nick=" + nick + ", fotoPerfil=" + fotoPerfil + ", monedas=" + monedas + ", contraseña="
+				+ contraseña + "]";
+	}
+		
 }
