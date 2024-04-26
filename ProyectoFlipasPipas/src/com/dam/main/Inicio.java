@@ -28,8 +28,6 @@ public class Inicio {
 
 				
 				vi.mostrarVentana(); // Empezar en INICIAR SESIÓN
-				
-				
 			}
 			
 		});
