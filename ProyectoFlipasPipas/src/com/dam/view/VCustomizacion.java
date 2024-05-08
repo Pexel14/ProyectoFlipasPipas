@@ -119,4 +119,8 @@ public class VCustomizacion extends JFrame {
 		
 	}
 	
+	public void setListener() {
+		//TODO
+	}
+	
 }

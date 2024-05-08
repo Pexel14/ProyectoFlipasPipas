@@ -10,9 +10,6 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class PnlCursos extends JPanel {
-	
-	private static final int ANCHO = VPrincipal.ANCHO_PANEL;
-	private static final int ALTO = VPrincipal.ALTO_PANEL;
 	private JButton btnJava;
 	private JButton btnSql;
 	private JButton btnHtml;
@@ -20,7 +17,7 @@ public class PnlCursos extends JPanel {
 
 	public PnlCursos() {
 		setBackground(new Color(50, 50, 75));
-		setSize(ANCHO, ALTO);
+		setSize(VPrincipal.ANCHO_PANEL, VPrincipal.ALTO_PANEL);
 		configurarComponentes();
 	}
 
@@ -52,6 +49,22 @@ public class PnlCursos extends JPanel {
 		add(btnCss);
 	}
 
+	public JButton getBtnCss() {
+		return btnCss;
+	}
+	
+	public JButton getBtnHtml() {
+		return btnHtml;
+	}
+	
+	public JButton getBtnJava() {
+		return btnJava;
+	}
+	
+	public JButton getBtnSql() {
+		return btnSql;
+	}
+	
 	// TODO
 	public void setListener(ListenerProvisional listener) {
 		

@@ -14,7 +14,7 @@ import javax.swing.UIManager;
 public class PnlTemario extends JPanel {
 	
 	private static final int ANCHO_TOTAL = 1292;
-	private static final int ANCHO = 1274;
+	//private static final int ANCHO = 1274;
 	private static final int ALTO_PANEL = 811;
 	private static final int ALTO_TOTAL = 5275;
 

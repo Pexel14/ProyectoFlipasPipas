@@ -21,7 +21,7 @@ public class Vdefiniciones extends JFrame {
 
 	private void configurarFrame() {
 		
-		setSize(265, 270);
+		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(new Color(50, 50, 75));	

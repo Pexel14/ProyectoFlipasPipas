@@ -16,7 +16,6 @@ public class VPrincipal extends JFrame {
 	public static final int ANCHO_PANEL = 1292;
 	private static final int ANCHO = 1920;
 	private static final int ALTO = 1080;
-	private final ButtonGroup botonesMenu = new ButtonGroup();
 	private JScrollPane scrpPanel;
 	private JButton btnHome;
 	private JButton btnRanking;
@@ -29,65 +28,52 @@ public class VPrincipal extends JFrame {
 
 	public VPrincipal() {
 		super("Flipas Pipas");
-		configurarFrame();
+		cargarPanel();
 		componentes();
 	}
 
 
 	private void componentes() {
-		
+		getContentPane().setBackground(new Color(50, 50, 75));
 		setSize(ANCHO, ALTO);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 
 	}
 
-	private void configurarFrame() {
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(ANCHO, ALTO);
-		setLocationRelativeTo(null);
+	private void cargarPanel() {
 		getContentPane().setLayout(null);
 		
-		getContentPane().setBackground(new Color(50, 50, 75));
-		
 		btnHome = new JButton("Home");
-		botonesMenu.add(btnHome);
 		btnHome.setBounds(1320, 109, 75, 75);
 		getContentPane().add(btnHome);
 		
 		btnRanking = new JButton("Ranking");
-		botonesMenu.add(btnRanking);
 		btnRanking.setBounds(1320, 293, 75, 75);
 		getContentPane().add(btnRanking);
 		
 		btnTemario = new JButton("Temario");
-		botonesMenu.add(btnTemario);
 		btnTemario.setBounds(1320, 477, 75, 75);
 		getContentPane().add(btnTemario);
 		
 		btnTienda = new JButton("Tienda");
-		botonesMenu.add(btnTienda);
 		btnTienda.setBounds(1320, 661, 75, 75);
 		getContentPane().add(btnTienda);
 		
 		btnNotis = new JButton("Notis");
-		botonesMenu.add(btnNotis);
 		btnNotis.setBounds(1445, 477, 75, 75);
 		getContentPane().add(btnNotis);
 		
 		btnVidas = new JButton("Vidas");
-		botonesMenu.add(btnVidas);
 		btnVidas.setBounds(1445, 293, 75, 75);
 		getContentPane().add(btnVidas);
 		
 		btnPerfil = new JButton("Perfil");
-		botonesMenu.add(btnPerfil);
 		btnPerfil.setBounds(1445, 109, 75, 75);
 		getContentPane().add(btnPerfil);
 		
 		btnAjustes = new JButton("Ajustes");
-		botonesMenu.add(btnAjustes);
 		btnAjustes.setBounds(1445, 661, 75, 75);
 		getContentPane().add(btnAjustes);
 		
@@ -107,7 +93,7 @@ public class VPrincipal extends JFrame {
 		
 	}
 	
-	public void configurarFrame(JPanel panel) {
+	public void cargarPanel(JPanel panel) {
 		scrpPanel.setViewportView(panel);
 	}
 	

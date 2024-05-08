@@ -9,9 +9,6 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 
 public class PnlRanking extends JPanel {
-	
-	private static final int ANCHO = VPrincipal.ANCHO_PANEL;
-	private static final int ALTO = VPrincipal.ALTO_PANEL;
 
 	public PnlRanking() {
 		
@@ -22,7 +19,7 @@ public class PnlRanking extends JPanel {
 
 	private void configurarPanel() {
 		setBackground(new Color(50, 50, 75));
-		setSize(ANCHO, ALTO);
+		setSize(VPrincipal.ANCHO_PANEL, VPrincipal.ALTO_PANEL);
 		setLayout(null);
 	}
 

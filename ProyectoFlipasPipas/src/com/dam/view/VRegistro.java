@@ -30,7 +30,7 @@ public class VRegistro extends JFrame {
 	}
 
 	private void componentes() {
-		
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);		
@@ -38,11 +38,6 @@ public class VRegistro extends JFrame {
 	}
 
 	private void configurarFrame() {
-		
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(ANCHO, ALTO);
-		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
 		getContentPane().setBackground(new Color(50, 50, 75));
@@ -95,10 +90,6 @@ public class VRegistro extends JFrame {
 	
 	public void mostrarVentana() {
 		setVisible(true);
-	}
-	
-	public void ocultarVentana() {
-		setVisible(false);
 	}
 	
 	public JTextField getTxt(int i) {

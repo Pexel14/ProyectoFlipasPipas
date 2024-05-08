@@ -7,7 +7,6 @@ import javax.swing.WindowConstants;
 
 import java.awt.Font;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 
 /*
@@ -31,18 +30,13 @@ public class VPreguntas extends JFrame {
 	private JButton btnSalir;
 
 	public VPreguntas() {
-		
-		
 		ConfigurarFrame();
 
 		componentes();
 		
-		mostrarVentana();
-		
-		
 	}
 
-	private void mostrarVentana() {
+	public void mostrarVentana() {
 		setVisible(true);
 	}
 

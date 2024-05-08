@@ -33,16 +33,16 @@ public class ListenerProvisional implements ActionListener {
 			// Home (CURSOS)
 			if (e.getSource().equals(vp.getBtn(1))) {
 				
-				vp.configurarFrame(pc);
+				vp.cargarPanel(pc);
 				
 			}
 			
 			// Regístrate (REGISTRO)
 			if (e.getSource().equals(vr.getBtn(1))) {
 				
-				vr.ocultarVentana();
+				vr.dispose();
 				
-				vp.configurarFrame(pc);
+				vp.cargarPanel(pc);
 				vp.mostrarVentana();
 				
 			}
@@ -52,16 +52,16 @@ public class ListenerProvisional implements ActionListener {
 
 				vi.mostrarVentana();
 				
-				vr.ocultarVentana();
+				vr.dispose();
 				
 			}
 			//
 			// Iniciar sesión (INICIAR SESIÓN)
 			if (e.getSource().equals(vi.getBtn(1))) {
 				
-				vi.ocultarVentana();
+				vi.dispose();
 				
-				vp.configurarFrame(pc);
+				vp.cargarPanel(pc);
 				vp.mostrarVentana();
 				
 			}
@@ -69,7 +69,7 @@ public class ListenerProvisional implements ActionListener {
 			// Registrarse (INICIAR SESIÓN)
 			if (e.getSource().equals(vi.getBtn(2))) {
 				
-				vi.ocultarVentana();
+				vi.dispose();
 				
 				vr.mostrarVentana();
 				

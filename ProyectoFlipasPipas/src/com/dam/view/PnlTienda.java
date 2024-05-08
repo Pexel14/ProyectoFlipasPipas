@@ -20,6 +20,7 @@ public class PnlTienda extends JPanel {
 	private JButton btnObj5;
 	private JButton btnObj6;
 	private JLabel lblCantPipas;
+	private JButton btnImgPipa;
 	
 	public PnlTienda() {
 		configurarComponentes();
@@ -35,7 +36,7 @@ public class PnlTienda extends JPanel {
 		lblPipaCoins.setBounds(116, 111, 175, 50);
 		add(lblPipaCoins);
 		
-		JButton btnImgPipa = new JButton("");
+		btnImgPipa = new JButton("");
 		btnImgPipa.setBounds(410, 111, 50, 50);
 		add(btnImgPipa);
 		

@@ -13,6 +13,8 @@ import javax.swing.JButton;
 
 public class VInicioSesion extends JFrame {
 	
+	public static final String ACT_COM_BTN_INICIO_SESION = "Iniciar sesión";
+	public static final String ACT_COM_BTN_REGISTRO = "¿Aún no tienes cuenta?";
 	private static final int ANCHO = 1920;
 	private static final int ALTO = 1080;
 	private JTextField textField_1;
@@ -21,13 +23,13 @@ public class VInicioSesion extends JFrame {
 	private JButton btnIniciarSesion;
 
 	public VInicioSesion() {
-		super("Iniciar sesión");
+		super(ACT_COM_BTN_INICIO_SESION);
 		configurarFrame();
 		componentes();
 	}
 
 	private void componentes() {
-		
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -35,16 +37,11 @@ public class VInicioSesion extends JFrame {
 	}
 
 	private void configurarFrame() {
-		
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(ANCHO, ALTO);
-		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
 		getContentPane().setBackground(new Color(50, 50, 75));
 		
-		JLabel lblIniciarSesin = new JLabel("Iniciar sesión");
+		JLabel lblIniciarSesin = new JLabel(ACT_COM_BTN_INICIO_SESION);
 		lblIniciarSesin.setForeground(Color.WHITE);
 		lblIniciarSesin.setFont(new Font("Tahoma", Font.BOLD, 60));
 		lblIniciarSesin.setBounds(565, 25, 410, 75);
@@ -64,12 +61,12 @@ public class VInicioSesion extends JFrame {
 		textField_2.setBounds(420, 284, 700, 50);
 		getContentPane().add(textField_2);
 		
-		btnIniciarSesion = new JButton("Iniciar sesión");
+		btnIniciarSesion = new JButton(ACT_COM_BTN_INICIO_SESION);
 		btnIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnIniciarSesion.setBounds(595, 401, 350, 100);
 		getContentPane().add(btnIniciarSesion);
 		
-		btnRegistrarse = new JButton("¿Aún no tienes cuenta?");
+		btnRegistrarse = new JButton(ACT_COM_BTN_REGISTRO);
 		btnRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRegistrarse.setBounds(595, 700, 350, 30);
 		getContentPane().add(btnRegistrarse);
@@ -79,11 +76,15 @@ public class VInicioSesion extends JFrame {
 	public void mostrarVentana() {
 		setVisible(true);
 	}
-	
-	public void ocultarVentana() {
-		setVisible(false);
-	}
 
+	public JButton getBtnIniciarSesion() {
+		return btnIniciarSesion;
+	}
+	
+	public JButton getBtnRegistrarse() {
+		return btnRegistrarse;
+	}
+	
 	public void setListener(ListenerProvisional listener) {
 		
 		btnIniciarSesion.addActionListener(listener);
