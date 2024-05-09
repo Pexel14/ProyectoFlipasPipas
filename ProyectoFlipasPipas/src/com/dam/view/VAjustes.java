@@ -3,6 +3,9 @@ package com.dam.view;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JSlider;
+
+import com.dam.control.ProjectListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -32,6 +35,10 @@ public class VAjustes extends JFrame {
 		
 	}
 
+	public void hacerVisible() {
+		setVisible(true);
+	}
+	
 	private void componentes() {
 		JLabel lblAjustes = new JLabel("Ajustes");
 		lblAjustes.setForeground(Color.WHITE);
@@ -71,6 +78,11 @@ public class VAjustes extends JFrame {
 		btnSalir = new JButton("x");
 		btnSalir.setBounds(394, 10, 46, 43);
 		getContentPane().add(btnSalir);
+	}
+
+	public void setListener(ProjectListener listener) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 //	public void setLisener(Lissener l) {

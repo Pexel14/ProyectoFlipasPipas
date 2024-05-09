@@ -2,7 +2,7 @@ package com.dam.view;
 
 import javax.swing.JPanel;
 
-import com.dam.control.ListenerProvisional;
+import com.dam.control.ProjectListener;
 
 import javax.swing.JButton;
 
@@ -17,7 +17,7 @@ public class PnlCursos extends JPanel {
 
 	public PnlCursos() {
 		setBackground(new Color(50, 50, 75));
-		setSize(VPrincipal.ANCHO_PANEL, VPrincipal.ALTO_PANEL);
+		setSize(VMenu.ANCHO_PANEL, VMenu.ALTO_PANEL);
 		configurarComponentes();
 	}
 
@@ -66,7 +66,10 @@ public class PnlCursos extends JPanel {
 	}
 	
 	// TODO
-	public void setListener(ListenerProvisional listener) {
-		
+	public void setListener(ProjectListener listener) {
+		btnCss.addActionListener(listener);
+		btnHtml.addActionListener(listener);
+		btnJava.addActionListener(listener);
+		btnSql.addActionListener(listener);
 	}
 }

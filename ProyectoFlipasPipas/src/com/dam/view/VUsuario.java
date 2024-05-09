@@ -6,7 +6,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JPanel;
 
-import com.dam.control.ListenerProvisional;
+import com.dam.control.ProjectListener;
 
 import javax.swing.JButton;
 
@@ -30,7 +30,7 @@ public class VUsuario extends JFrame {
 	private void componentes() {
 		
 		setSize(ANCHO, ALTO);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
 	}
@@ -64,7 +64,7 @@ public class VUsuario extends JFrame {
 		
 		btnEditarPerfil = new JButton("editar");
 		btnEditarPerfil.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnEditarPerfil.setBounds(465, 65, 30, 30);
+		btnEditarPerfil.setBounds(465, 65, 57, 30);
 		getContentPane().add(btnEditarPerfil);
 		
 		lblRacha = new JLabel("100 días de racha");
@@ -88,11 +88,23 @@ public class VUsuario extends JFrame {
 		getContentPane().add(btnCerrarVentana);
 	}
 	
-	public void mostrarVentana() {
+	public JButton getBtnEditarPerfil() {
+		return btnEditarPerfil;
+	}
+	
+	public JButton getBtnCerrarSesion() {
+		return btnCerrarSesion;
+	}
+	
+	public JButton getBtnCerrarVentana() {
+		return btnCerrarVentana;
+	}
+	
+	public void hacerVisible() {
 		setVisible(true);
 	}
 	
-	public void setListener(ListenerProvisional listener) {
-		// TODO
+	public void setListener(ProjectListener listener) {
+		btnEditarPerfil.addActionListener(listener);
 	}
 }

@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JTextArea;
 
+import com.dam.control.ProjectListener;
+
 public class Vdefiniciones extends JFrame {
 	
 	private static final int ANCHO = 265;
@@ -22,7 +24,7 @@ public class Vdefiniciones extends JFrame {
 	private void configurarFrame() {
 		
 		setSize(ANCHO, ALTO);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(new Color(50, 50, 75));	
 		
@@ -38,7 +40,13 @@ public class Vdefiniciones extends JFrame {
 		
 	}
 	
-	public void mostrarVentana() {
+	public void hacerVisible() {
 		setVisible(true);
 	}
+
+	public void setListener(ProjectListener listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

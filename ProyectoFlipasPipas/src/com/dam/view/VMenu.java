@@ -3,7 +3,7 @@ package com.dam.view;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import com.dam.control.ListenerProvisional;
+import com.dam.control.ProjectListener;
 
 import javax.swing.JButton;
 import java.awt.Color;
@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 
-public class VPrincipal extends JFrame {
+public class VMenu extends JFrame {
 	public static final int ALTO_PANEL = 845;
 	public static final int ANCHO_PANEL = 1292;
 	private static final int ANCHO = 1920;
@@ -26,7 +26,7 @@ public class VPrincipal extends JFrame {
 	private JButton btnPerfil;
 	private JButton btnAjustes;
 
-	public VPrincipal() {
+	public VMenu() {
 		super("Flipas Pipas");
 		cargarPanel();
 		componentes();
@@ -66,6 +66,7 @@ public class VPrincipal extends JFrame {
 		getContentPane().add(btnNotis);
 		
 		btnVidas = new JButton("Vidas");
+		btnVidas.setEnabled(false);
 		btnVidas.setBounds(1445, 293, 75, 75);
 		getContentPane().add(btnVidas);
 		
@@ -97,28 +98,69 @@ public class VPrincipal extends JFrame {
 		scrpPanel.setViewportView(panel);
 	}
 	
-	public void mostrarVentana() {
+	public void hacerVisible() {
 		setVisible(true);
 	}
 	
-	public JButton getBtn(int i) {
-		
-		switch (i) {
-			case 1 :
-				return btnHome;
-			default :
-				return null;
-		}
+//	public JButton getBtn(int i) {
+//		
+//		switch (i) {
+//			case 1 :
+//				return btnHome;
+//			default :
+//				return null;
+//		}
+//	}
+
+	
+	
+	public JButton getBtnHome() {
+		return btnHome;
 	}
 
 
-	public void setListener(ListenerProvisional listener) {
-		
+	public JButton getBtnRanking() {
+		return btnRanking;
+	}
+
+
+	public JButton getBtnTemario() {
+		return btnTemario;
+	}
+
+
+	public JButton getBtnTienda() {
+		return btnTienda;
+	}
+
+	public JButton getBtnVidas() {
+		return btnVidas;
+	}
+
+	public JButton getBtnNotis() {
+		return btnNotis;
+	}
+
+
+	public JButton getBtnPerfil() {
+		return btnPerfil;
+	}
+
+
+	public JButton getBtnAjustes() {
+		return btnAjustes;
+	}
+
+
+	public void setListener(ProjectListener listener) {
 		btnHome.addActionListener(listener);
+		btnPerfil.addActionListener(listener);
+		btnRanking.addActionListener(listener);
+		btnTienda.addActionListener(listener);
+		btnTemario.addActionListener(listener);
+		btnNotis.addActionListener(listener);
+		btnAjustes.addActionListener(listener);
 		
 	}
 	
-	public void cerrarVentana() {
-		System.exit(0);
-	}
 }

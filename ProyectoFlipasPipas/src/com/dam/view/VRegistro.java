@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import com.dam.control.ListenerProvisional;
+import com.dam.control.ProjectListener;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -88,7 +88,7 @@ public class VRegistro extends JFrame {
 		
 	}
 	
-	public void mostrarVentana() {
+	public void hacerVisible() {
 		setVisible(true);
 	}
 	
@@ -105,17 +105,25 @@ public class VRegistro extends JFrame {
 		
 	}
 	
-	public JButton getBtn(int i) {
-		
-		switch (i) {
-			case 1:
-				return btnRegistrar;
-			case 2:
-				return btnVolver;
-			default :
-				return null;
-		}
-		
+//	public JButton getBtn(int i) {
+//		
+//		switch (i) {
+//			case 1:
+//				return btnRegistrar;
+//			case 2:
+//				return btnVolver;
+//			default :
+//				return null;
+//		}
+//		
+//	}
+	
+	public JButton getBtnRegistrar() {
+		return btnRegistrar;
+	}
+	
+	public JButton getBtnVolver() {
+		return btnVolver;
 	}
 	
 	public void establecerTexto (int i, String s) {
@@ -129,7 +137,7 @@ public class VRegistro extends JFrame {
 		
 	}
 
-	public void setListener(ListenerProvisional listener) {
+	public void setListener(ProjectListener listener) {
 		btnRegistrar.addActionListener(listener);
 		btnVolver.addActionListener(listener);
 	}

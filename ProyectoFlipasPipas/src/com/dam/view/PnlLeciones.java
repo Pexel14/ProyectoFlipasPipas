@@ -3,6 +3,9 @@ package com.dam.view;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JPanel;
+
+import com.dam.control.ProjectListener;
+
 import javax.swing.ButtonGroup;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -13,12 +16,16 @@ public class PnlLeciones extends JPanel {
 	private JButton btnLec_3;
 	private JButton btnLec_2;
 	private JButton btnLec_4;
-	private JButton btnTetx_1;
-	private JButton btnTetx_2;
-
+	private JButton btnRepaso;
+	private JButton btnExamen;
+	
+	private JButton btnDfn_1;
+	private JButton btnDfn_2;
+	private JButton btnDfn_3;
+	private JButton btnDfn_4;
 
 	public PnlLeciones() {
-		setSize(VPrincipal.ANCHO_PANEL, VPrincipal.ALTO_PANEL); //Para que no ocurran errores
+		setSize(VMenu.ANCHO_PANEL, VMenu.ALTO_PANEL); //Para que no ocurran errores
 		setBackground(new Color(50,50,75));
 		componentes();
 	}
@@ -47,31 +54,31 @@ public class PnlLeciones extends JPanel {
 		btnLec_4.setBounds(867, 500, 111, 111);
 		add(btnLec_4);
 		
-		btnTetx_1 = new JButton("Text");
-		btnTetx_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		btnTetx_1.setBounds(439, 500, 147, 111);
-		add(btnTetx_1);
+		btnRepaso = new JButton("Text");
+		btnRepaso.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		btnRepaso.setBounds(439, 500, 147, 111);
+		add(btnRepaso);
 		
-		btnTetx_2 = new JButton("Text");
-		btnTetx_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		btnTetx_2.setBounds(1048, 249, 147, 111);
-		add(btnTetx_2);
+		btnExamen = new JButton("Text");
+		btnExamen.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		btnExamen.setBounds(1048, 249, 147, 111);
+		add(btnExamen);
 		
-		JButton dfn_1 = new JButton("?");
-		dfn_1.setBounds(150, 418, 45, 38);
-		add(dfn_1);
+		btnDfn_1 = new JButton("?");
+		btnDfn_1.setBounds(150, 418, 45, 38);
+		add(btnDfn_1);
 		
-		JButton dfn_2 = new JButton("?");
-		dfn_2.setBounds(374, 178, 45, 38);
-		add(dfn_2);
+		btnDfn_2 = new JButton("?");
+		btnDfn_2.setBounds(374, 178, 45, 38);
+		add(btnDfn_2);
 		
-		JButton dfn_3 = new JButton("?");
-		dfn_3.setBounds(749, 178, 45, 38);
-		add(dfn_3);
+		btnDfn_3 = new JButton("?");
+		btnDfn_3.setBounds(749, 178, 45, 38);
+		add(btnDfn_3);
 		
-		JButton dfn_4 = new JButton("?");
-		dfn_4.setBounds(975, 418, 45, 38);
-		add(dfn_4);
+		btnDfn_4 = new JButton("?");
+		btnDfn_4.setBounds(975, 418, 45, 38);
+		add(btnDfn_4);
 		
 		JLabel lblTitulo_1 = new JLabel("Titulo");
 		lblTitulo_1.setForeground(Color.WHITE);
@@ -103,8 +110,35 @@ public class PnlLeciones extends JPanel {
 
 	}
 	
+
+
+
+	public JButton getBtnDfn_1() {
+		return btnDfn_1;
+	}
+
+
+	public JButton getBtnDfn_2() {
+		return btnDfn_2;
+	}
+
+
+	public JButton getBtnDfn_3() {
+		return btnDfn_3;
+	}
+
+
+	public JButton getBtnDfn_4() {
+		return btnDfn_4;
+	}
+
+
 	public JButton getBtnLec_1() {
 		return btnLec_1;
+	}
+
+	public JButton getBtnLec_2() {
+		return btnLec_2;
 	}
 
 	public JButton getBtnLec_3() {
@@ -115,16 +149,28 @@ public class PnlLeciones extends JPanel {
 		return btnLec_4;
 	}
 
-	public JButton getBtnTetx_1() {
-		return btnTetx_1;
+	public JButton getBtnRepaso() {
+		return btnRepaso;
 	}
 
-	public JButton getBtnTetx_2() {
-		return btnTetx_2;
+	public JButton getBtnExamen() {
+		return btnExamen;
 	}
 
-	public JButton getBtnLec_2() {
-		return btnLec_2;
+
+
+	public void setListener(ProjectListener listener) {
+		btnLec_1.addActionListener(listener);
+		btnLec_2.addActionListener(listener);
+		btnRepaso.addActionListener(listener);
+		btnLec_3.addActionListener(listener);
+		btnLec_4.addActionListener(listener);
+		btnExamen.addActionListener(listener);
+		
+		btnDfn_1.addActionListener(listener);
+		btnDfn_2.addActionListener(listener);
+		btnDfn_3.addActionListener(listener);
+		btnDfn_4.addActionListener(listener);
 	}
 	
 }

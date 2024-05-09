@@ -11,6 +11,8 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
+import com.dam.control.ProjectListener;
+
 public class PnlTemario extends JPanel {
 	
 	private static final int ANCHO_TOTAL = 1292;
@@ -134,6 +136,11 @@ public class PnlTemario extends JPanel {
 		lblCss.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCss.setBounds(50, 100, 1074, 900);
 		pnlCss.add(lblCss);
+		
+	}
+
+	public void setListener(ProjectListener listener) {
+		// TODO Auto-generated method stub
 		
 	}
 }

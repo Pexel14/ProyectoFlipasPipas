@@ -5,6 +5,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
+import com.dam.control.ProjectListener;
+
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -36,7 +38,7 @@ public class VPreguntas extends JFrame {
 		
 	}
 
-	public void mostrarVentana() {
+	public void hacerVisible() {
 		setVisible(true);
 	}
 
@@ -71,8 +73,29 @@ public class VPreguntas extends JFrame {
 		
 	}
 
+	
+	
+	public JButton getBtnA() {
+		return btnA;
+	}
+
+	public JButton getBtnB() {
+		return btnB;
+	}
+
+	public JButton getBtnC() {
+		return btnC;
+	}
+
+	public JButton getBtnD() {
+		return btnD;
+	}
+
+	public JButton getBtnSalir() {
+		return btnSalir;
+	}
+
 	private void ConfigurarFrame() {
-		
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(ANCHO, ALTO);
@@ -80,4 +103,13 @@ public class VPreguntas extends JFrame {
 		getContentPane().setLayout(null);
 		
 	}
+	
+	public void setListener(ProjectListener pl) {
+		btnA.addActionListener(pl);
+		btnB.addActionListener(pl);
+		btnC.addActionListener(pl);
+		btnD.addActionListener(pl);
+		btnSalir.addActionListener(pl);
+	}
+	
 }

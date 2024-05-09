@@ -3,7 +3,7 @@ package com.dam.view;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import com.dam.control.ListenerProvisional;
+import com.dam.control.ProjectListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -83,15 +83,15 @@ public class VNotis extends JFrame {
 
 	private void configurarFrame() {
 		setSize(ANCHO, ALTO);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}
 
-	public void mostrarVentana() {
+	public void hacerVisible() {
 		setVisible(true);
 	}
 
-	public void setListener(ListenerProvisional l) {
+	public void setListener(ProjectListener l) {
 		// TODO
 		
 	}

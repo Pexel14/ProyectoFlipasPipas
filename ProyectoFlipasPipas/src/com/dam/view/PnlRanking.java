@@ -8,6 +8,8 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 
+import com.dam.control.ProjectListener;
+
 public class PnlRanking extends JPanel {
 
 	public PnlRanking() {
@@ -19,7 +21,7 @@ public class PnlRanking extends JPanel {
 
 	private void configurarPanel() {
 		setBackground(new Color(50, 50, 75));
-		setSize(VPrincipal.ANCHO_PANEL, VPrincipal.ALTO_PANEL);
+		setSize(VMenu.ANCHO_PANEL, VMenu.ALTO_PANEL);
 		setLayout(null);
 	}
 
@@ -143,6 +145,11 @@ public class PnlRanking extends JPanel {
 		lblPuesto4.setFont(new Font("Tahoma", Font.BOLD, 40));
 		lblPuesto4.setBounds(20, 0, 60, 100);
 		pnlPuesto4.add(lblPuesto4);
+	}
+
+	public void setListener(ProjectListener listener) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

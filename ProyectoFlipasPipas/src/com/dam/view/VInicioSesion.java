@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import com.dam.control.ListenerProvisional;
+import com.dam.control.ProjectListener;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -73,7 +73,7 @@ public class VInicioSesion extends JFrame {
 		
 	}
 	
-	public void mostrarVentana() {
+	public void hacerVisible() {
 		setVisible(true);
 	}
 
@@ -85,24 +85,24 @@ public class VInicioSesion extends JFrame {
 		return btnRegistrarse;
 	}
 	
-	public void setListener(ListenerProvisional listener) {
+	public void setListener(ProjectListener listener) {
 		
 		btnIniciarSesion.addActionListener(listener);
 		btnRegistrarse.addActionListener(listener);
 		
 	}
 
-	public JButton getBtn(int i) {
-		
-		switch (i) {
-			case 1:
-				return btnIniciarSesion;
-			case 2:
-				return btnRegistrarse;
-			default:
-				return null;
-		}
-		
-	}
+//	public JButton getBtn(int i) {
+//		
+//		switch (i) {
+//			case 1:
+//				return btnIniciarSesion;
+//			case 2:
+//				return btnRegistrarse;
+//			default:
+//				return null;
+//		}
+//		
+//	}
 	
 }

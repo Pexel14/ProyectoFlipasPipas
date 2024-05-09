@@ -9,10 +9,12 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import com.dam.control.ProjectListener;
+
 public class PnlTienda extends JPanel {
 	
-	private static final int ANCHO = VPrincipal.ANCHO_PANEL;
-	private static final int ALTO = VPrincipal.ALTO_PANEL;
+	private static final int ANCHO = VMenu.ANCHO_PANEL;
+	private static final int ALTO = VMenu.ALTO_PANEL;
 	private JButton btnObj1;
 	private JButton btnObj2;
 	private JButton btnObj3;
@@ -86,5 +88,10 @@ public class PnlTienda extends JPanel {
 	private void configurarFrame() {
 		setBackground(new Color(50, 50, 75));
 		setSize(ANCHO, ALTO);
+	}
+
+	public void setListener(ProjectListener listener) {
+		// TODO Auto-generated method stub
+		
 	}
 }

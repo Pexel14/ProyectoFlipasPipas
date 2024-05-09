@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.dam.control.ProjectListener;
+
 public class VCustomizacion extends JFrame {
 	
 	private static final int ANCHO = 500;
@@ -119,7 +121,7 @@ public class VCustomizacion extends JFrame {
 		
 	}
 	
-	public void setListener() {
+	public void setListener(ProjectListener listener) {
 		//TODO
 	}
 	

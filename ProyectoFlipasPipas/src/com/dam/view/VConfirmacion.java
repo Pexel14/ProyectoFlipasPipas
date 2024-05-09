@@ -2,6 +2,9 @@ package com.dam.view;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import com.dam.control.ProjectListener;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -37,8 +40,13 @@ public class VConfirmacion extends JFrame {
 	private void configurarFrame() {
 		
 		setSize(ANCHO, ALTO);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		
+	}
+
+	public void setListener(ProjectListener listener) {
+		// TODO Auto-generated method stub
 		
 	}
 	
