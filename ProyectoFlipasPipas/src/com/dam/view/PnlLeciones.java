@@ -7,11 +7,19 @@ import javax.swing.JPanel;
 import com.dam.control.ProjectListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+
 import java.awt.Font;
 import javax.swing.JLabel;
 
 public class PnlLeciones extends JPanel {
 	
+	public static final String ACT_COM_BTN_1 = "1";
+	public static final String ACT_COM_BTN_2 = "2";
+	public static final String ACT_COM_BTN_3 = "3";
+	public static final String ACT_COM_BTN_4 = "4";
+	public static final String ACT_COM_BTN_REPASO = "Text";
+	private static final String ACT_COM_BTN_EXAMEN = "Text";
 	private JButton btnLec_1;
 	private JButton btnLec_3;
 	private JButton btnLec_2;
@@ -34,32 +42,32 @@ public class PnlLeciones extends JPanel {
 	private void componentes() {
 		setLayout(null);
 		
-		btnLec_1 = new JButton("1");
+		btnLec_1 = new JButton(ACT_COM_BTN_1);
 		btnLec_1.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		btnLec_1.setBounds(44, 488, 111, 111);
 		add(btnLec_1);
 		
-		btnLec_2 = new JButton("2");
+		btnLec_2 = new JButton(ACT_COM_BTN_2);
 		btnLec_2.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		btnLec_2.setBounds(252, 249, 111, 111);
 		add(btnLec_2);
 		
-		btnLec_3 = new JButton("3");
+		btnLec_3 = new JButton(ACT_COM_BTN_3);
 		btnLec_3.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		btnLec_3.setBounds(640, 249, 111, 111);
 		add(btnLec_3);
 		
-		btnLec_4 = new JButton("4");
+		btnLec_4 = new JButton(ACT_COM_BTN_4);
 		btnLec_4.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		btnLec_4.setBounds(867, 500, 111, 111);
 		add(btnLec_4);
 		
-		btnRepaso = new JButton("Text");
+		btnRepaso = new JButton(ACT_COM_BTN_REPASO);
 		btnRepaso.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		btnRepaso.setBounds(439, 500, 147, 111);
 		add(btnRepaso);
 		
-		btnExamen = new JButton("Text");
+		btnExamen = new JButton(ACT_COM_BTN_EXAMEN);
 		btnExamen.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		btnExamen.setBounds(1048, 249, 147, 111);
 		add(btnExamen);

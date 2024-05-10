@@ -36,6 +36,9 @@ public class Vdefiniciones extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		txtInfo = new JTextArea();
+		txtInfo.setBackground(new Color(50, 50, 75));
+		txtInfo.setForeground(new Color(255, 255, 255));
+		txtInfo.setEditable(false);
 		scrollPane.setViewportView(txtInfo);
 		
 	}

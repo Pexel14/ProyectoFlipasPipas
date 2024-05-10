@@ -6,30 +6,38 @@ import javax.swing.JLabel;
 import com.dam.control.ProjectListener;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 
 public class VConfirmacion extends JFrame {
 	
+	public static final String ACT_COM_BTN_SI = "Si";
+	public static final String ACT_COM_BTN_NO = "No";
 	private static final int ANCHO = 300;
 	private static final int ALTO = 200;
-
+	
+	private JButton btnRespSi;
+	private JButton btnRespNo;
+	
 	public VConfirmacion() {
 		
 		super("Confirmacion");
 		getContentPane().setLayout(null);
+		getContentPane().setBackground(new Color(50, 50, 75));
 		
 		JLabel lblPregunta = new JLabel("¿Está segur@?");
 		lblPregunta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPregunta.setForeground(Color.WHITE);
 		lblPregunta.setBounds(75, 30, 135, 25);
 		getContentPane().add(lblPregunta);
 		
-		JButton btnRespSi = new JButton("Si");
+		btnRespSi = new JButton(ACT_COM_BTN_SI);
 		btnRespSi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRespSi.setBounds(28, 118, 100, 35);
 		getContentPane().add(btnRespSi);
 		
-		JButton btnRespNo = new JButton("No");
+		btnRespNo = new JButton(ACT_COM_BTN_NO);
 		btnRespNo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRespNo.setBounds(156, 118, 100, 35);
 		getContentPane().add(btnRespNo);
@@ -37,6 +45,14 @@ public class VConfirmacion extends JFrame {
 		
 	}
 
+	public JButton getBtnRespNo() {
+		return btnRespNo;
+	}
+	
+	public JButton getBtnRespSi() {
+		return btnRespSi;
+	}
+	
 	private void configurarFrame() {
 		
 		setSize(ANCHO, ALTO);
@@ -46,7 +62,12 @@ public class VConfirmacion extends JFrame {
 	}
 
 	public void setListener(ProjectListener listener) {
-		// TODO Auto-generated method stub
+		btnRespNo.addActionListener(listener);
+		btnRespSi.addActionListener(listener);
+	}
+
+	public void hacerVisible() {
+		setVisible(true);
 		
 	}
 	

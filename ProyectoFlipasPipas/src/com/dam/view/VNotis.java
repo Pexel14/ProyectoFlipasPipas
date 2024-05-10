@@ -1,5 +1,6 @@
 package com.dam.view;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -21,6 +22,7 @@ public class VNotis extends JFrame {
 	private static final int ANCHO = 400;
 	private static final int ALTO = 600;
 	private JLabel lblNoti1;
+	private JButton btnSalir;
 	
 	public VNotis() {
 		
@@ -49,6 +51,7 @@ public class VNotis extends JFrame {
 		lblNoti1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNoti1.setBounds(30, 50, 300, 100);
 		panel.add(lblNoti1);
+		
 		
 		JPanel pnlDecoracion1 = new JPanel();
 		pnlDecoracion1.setBackground(new Color(50, 50, 75));
@@ -79,8 +82,16 @@ public class VNotis extends JFrame {
 		lblNoti4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNoti4.setBounds(35, 530, 300, 100);
 		panel.add(lblNoti4);
+		
+		btnSalir = new JButton("x");
+		btnSalir.setBounds(306, 11, 48, 23);
+		panel.add(btnSalir);
 	}
 
+	public JButton getBtnSalir() {
+		return btnSalir;
+	}
+	
 	private void configurarFrame() {
 		setSize(ANCHO, ALTO);
 //		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -92,7 +103,6 @@ public class VNotis extends JFrame {
 	}
 
 	public void setListener(ProjectListener l) {
-		// TODO
-		
+		btnSalir.addActionListener(l);
 	}
 }

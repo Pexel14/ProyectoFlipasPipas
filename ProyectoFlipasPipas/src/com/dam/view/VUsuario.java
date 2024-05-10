@@ -12,6 +12,9 @@ import javax.swing.JButton;
 
 public class VUsuario extends JFrame {
 	
+	public static final String ACT_COM_BTN_COINS = "1000 pipa coins";
+	public static final String ACT_COM_BTN_RACHA = "100 días de racha";
+	public static final String ACT_COM_BTN_EDITAR = "Editar";
 	private static final int ANCHO = 600;
 	private static final int ALTO = 400;
 	private JLabel lblNomUsuario;
@@ -62,17 +65,17 @@ public class VUsuario extends JFrame {
 		lblEmailUsuario.setBounds(175, 105, 180, 15);
 		getContentPane().add(lblEmailUsuario);
 		
-		btnEditarPerfil = new JButton("editar");
+		btnEditarPerfil = new JButton(ACT_COM_BTN_EDITAR);
 		btnEditarPerfil.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnEditarPerfil.setBounds(465, 65, 57, 30);
+		btnEditarPerfil.setBounds(465, 65, 85, 30);
 		getContentPane().add(btnEditarPerfil);
 		
-		lblRacha = new JLabel("100 días de racha");
+		lblRacha = new JLabel(ACT_COM_BTN_RACHA);
 		lblRacha.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblRacha.setBounds(175, 182, 250, 20);
 		getContentPane().add(lblRacha);
 		
-		lblPipaCoins = new JLabel("1000 pipa coins");
+		lblPipaCoins = new JLabel(ACT_COM_BTN_COINS);
 		lblPipaCoins.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPipaCoins.setBounds(175, 212, 250, 20);
 		getContentPane().add(lblPipaCoins);
@@ -84,7 +87,7 @@ public class VUsuario extends JFrame {
 		
 		btnCerrarVentana = new JButton("X");
 		btnCerrarVentana.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnCerrarVentana.setBounds(525, 10, 25, 25);
+		btnCerrarVentana.setBounds(503, 10, 47, 25);
 		getContentPane().add(btnCerrarVentana);
 	}
 	
@@ -106,5 +109,7 @@ public class VUsuario extends JFrame {
 	
 	public void setListener(ProjectListener listener) {
 		btnEditarPerfil.addActionListener(listener);
+		btnCerrarVentana.addActionListener(listener);
+		btnCerrarSesion.addActionListener(listener);
 	}
 }

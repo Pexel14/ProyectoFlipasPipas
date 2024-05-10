@@ -17,10 +17,17 @@ public class VCustomizacion extends JFrame {
 	private static final int ANCHO = 500;
 	private static final int ALTO = 550;
 	private static final String ACT_CMD_BTN_SALIRCUSTOM = "X";
+	public static final String ACT_COM_BTN_FP1 = "";
+	public static final String ACT_COM_BTN_FP2 = "";
+	public static final String ACT_COM_BTN_FP3 = "";
+	public static final String ACT_COM_BTN_FP4 = "";
+	public static final String ACT_COM_BTN_FP5 = "";
+	public static final String ACT_COM_BTN_FP6 = "";
+	
 	private JTextField txtNombre;
 	private JButton btnFP2;
 	private JButton btnFP1;
-	private JButton btnNewFP3;
+	private JButton btnFP3;
 	private JButton btnFP4;
 	private JButton btnFP6;
 	private JButton btnFP5;
@@ -91,27 +98,27 @@ public class VCustomizacion extends JFrame {
 		btnSalir.setBounds(401, 11, 48, 41);
 		getContentPane().add(btnSalir);
 		
-		btnFP1 = new JButton("");
+		btnFP1 = new JButton(ACT_COM_BTN_FP1);
 		btnFP1.setBounds(54, 260, 89, 76);
 		getContentPane().add(btnFP1);
-		
-		btnNewFP3 = new JButton("");
-		btnNewFP3.setBounds(202, 260, 89, 76);
-		getContentPane().add(btnNewFP3);
-		
-		btnFP5 = new JButton("");
-		btnFP5.setBounds(350, 260, 89, 76);
-		getContentPane().add(btnFP5);
-		
-		btnFP2 = new JButton("");
+
+		btnFP2 = new JButton(ACT_COM_BTN_FP2);
 		btnFP2.setBounds(54, 355, 89, 76);
 		getContentPane().add(btnFP2);
 		
-		btnFP4 = new JButton("");
+		btnFP3 = new JButton(ACT_COM_BTN_FP3);
+		btnFP3.setBounds(202, 260, 89, 76);
+		getContentPane().add(btnFP3);
+
+		btnFP4 = new JButton(ACT_COM_BTN_FP4);
 		btnFP4.setBounds(202, 355, 89, 76);
 		getContentPane().add(btnFP4);
 		
-		btnFP6 = new JButton("");
+		btnFP5 = new JButton(ACT_COM_BTN_FP5);
+		btnFP5.setBounds(350, 260, 89, 76);
+		getContentPane().add(btnFP5);
+		
+		btnFP6 = new JButton(ACT_COM_BTN_FP6);
 		btnFP6.setBounds(350, 355, 89, 76);
 		getContentPane().add(btnFP6);
 		
@@ -121,8 +128,12 @@ public class VCustomizacion extends JFrame {
 		
 	}
 	
+	public JButton getBtnSalir() {
+		return btnSalir;
+	}
+	
 	public void setListener(ProjectListener listener) {
-		//TODO
+		btnSalir.addActionListener(listener);
 	}
 	
 }

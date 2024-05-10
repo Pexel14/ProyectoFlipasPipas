@@ -2,6 +2,8 @@ package com.dam.view;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JSlider;
 
 import com.dam.control.ProjectListener;
@@ -10,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class VAjustes extends JFrame {
 	
@@ -25,14 +28,17 @@ public class VAjustes extends JFrame {
 	
 	public VAjustes() {
 		
+		frame();
+		
+		componentes();
+	}
+
+	private void frame() {
 		getContentPane().setBackground(new Color(84, 84, 126));
 		getContentPane().setLayout(null);
 		setSize(ANCHO,ALTO);
-		
-		componentes();
-		
-		
-		
+		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();                
+		setLocation((pantalla.width - this.getSize().width) / 2, (pantalla.height - this.getSize().height) / 2);
 	}
 
 	public void hacerVisible() {
@@ -79,10 +85,18 @@ public class VAjustes extends JFrame {
 		btnSalir.setBounds(394, 10, 46, 43);
 		getContentPane().add(btnSalir);
 	}
+	
+	public JButton getBtnBorrarCuenta() {
+		return btnBorrarCuenta;
+	}
+
+	public JButton getBtnSalir() {
+		return btnSalir;
+	}
 
 	public void setListener(ProjectListener listener) {
-		// TODO Auto-generated method stub
-		
+		btnSalir.addActionListener(listener);
+		btnBorrarCuenta.addActionListener(listener);
 	}
 	
 //	public void setLisener(Lissener l) {
