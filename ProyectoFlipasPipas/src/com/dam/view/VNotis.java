@@ -1,6 +1,7 @@
 package com.dam.view;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -16,17 +17,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
-public class VNotis extends JFrame {
+public class VNotis extends JDialog {
 	
 	private static final int ALTO_TOTAL = 655;
 	private static final int ANCHO = 400;
 	private static final int ALTO = 600;
 	private JLabel lblNoti1;
 	private JButton btnSalir;
+	private static VMenu vm;
 	
 	public VNotis() {
 		
-		super("Notificaciones");
+		super(vm, "Notificaciones", true);
 		configurarFrame();
 		componentes();
 		
@@ -94,7 +96,7 @@ public class VNotis extends JFrame {
 	
 	private void configurarFrame() {
 		setSize(ANCHO, ALTO);
-//		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}
 

@@ -1,5 +1,6 @@
 package com.dam.view;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
@@ -8,13 +9,15 @@ import javax.swing.JTextArea;
 
 import com.dam.control.ProjectListener;
 
-public class Vdefiniciones extends JFrame {
+public class Vdefiniciones extends JDialog {
 	
 	private static final int ANCHO = 265;
 	private static final int ALTO = 270;
 	private JTextArea txtInfo;
+	private static VMenu vm;
+	
 	public Vdefiniciones() {
-		super("definición");
+		super(vm, "definición", true);
 				
 		configurarFrame();
 		componentes();		
@@ -24,7 +27,7 @@ public class Vdefiniciones extends JFrame {
 	private void configurarFrame() {
 		
 		setSize(ANCHO, ALTO);
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(new Color(50, 50, 75));	
 		

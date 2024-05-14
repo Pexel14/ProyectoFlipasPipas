@@ -9,12 +9,13 @@ import javax.swing.JSlider;
 import com.dam.control.ProjectListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import java.awt.Color;
 import java.awt.Dimension;
 
-public class VAjustes extends JFrame {
+public class VAjustes extends JDialog {
 	
 	public static final String ACT_CMD_BTN_BORRAR_CUENTA = "Borrar cuenta";
 	
@@ -26,8 +27,12 @@ public class VAjustes extends JFrame {
 	private static final int ANCHO = 465;
 	private static final int ALTO = 475;
 	
+	private static VMenu vm;
+	
 	public VAjustes() {
 		
+		super(vm, "Configuración", true); // ROBERTO : Lo he puesto aquí porque sino da error
+
 		frame();
 		
 		componentes();

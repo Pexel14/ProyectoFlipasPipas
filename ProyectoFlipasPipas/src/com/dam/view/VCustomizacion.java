@@ -6,13 +6,14 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.dam.control.ProjectListener;
 
-public class VCustomizacion extends JFrame {
+public class VCustomizacion extends JDialog {
 	
 	private static final int ANCHO = 500;
 	private static final int ALTO = 550;
@@ -34,8 +35,10 @@ public class VCustomizacion extends JFrame {
 	private JButton btnGuardar;
 	private JButton btnSalir;
 	
+	private static VMenu vm;
+	
 	public VCustomizacion() {
-		super("Customizacion");
+		super(vm, "Customizacion", true);
 		configurarFrame();
 		
 		configurarComponentes();

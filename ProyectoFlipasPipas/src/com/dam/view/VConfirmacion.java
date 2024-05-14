@@ -9,8 +9,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
-public class VConfirmacion extends JFrame {
+public class VConfirmacion extends JDialog {
 	
 	public static final String ACT_COM_BTN_SI = "Si";
 	public static final String ACT_COM_BTN_NO = "No";
@@ -20,9 +21,11 @@ public class VConfirmacion extends JFrame {
 	private JButton btnRespSi;
 	private JButton btnRespNo;
 	
+	private static VMenu vm;
+	
 	public VConfirmacion() {
 		
-		super("Confirmacion");
+		super(vm, "Confirmacion", true);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(50, 50, 75));
 		
@@ -56,7 +59,7 @@ public class VConfirmacion extends JFrame {
 	private void configurarFrame() {
 		
 		setSize(ANCHO, ALTO);
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
 	}

@@ -9,8 +9,9 @@ import javax.swing.JPanel;
 import com.dam.control.ProjectListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
-public class VUsuario extends JFrame {
+public class VUsuario extends JDialog {
 	
 	public static final String ACT_COM_BTN_COINS = "1000 pipa coins";
 	public static final String ACT_COM_BTN_RACHA = "100 días de racha";
@@ -23,9 +24,10 @@ public class VUsuario extends JFrame {
 	private JLabel lblPipaCoins;
 	private JButton btnCerrarSesion;
 	private JButton btnCerrarVentana;
+	private static VMenu vm;
 
 	public VUsuario() {
-		super("Usuario");
+		super(vm, "Usuario", true);
 		configurarFrame();
 		componentes();
 	}
@@ -33,7 +35,7 @@ public class VUsuario extends JFrame {
 	private void componentes() {
 		
 		setSize(ANCHO, ALTO);
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
 	}
