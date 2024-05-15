@@ -51,16 +51,23 @@ public class Inicio {
 				VPreguntas vp = new VPreguntas();
 				
 				
-				ProjectListener listener = new ProjectListener(vr, vi, vm, pti, pr, pte, pc, va, vn, vu, vcu, vco, pl, vp, vd);
-				setListener(vr, vi, vm, pti, pr, pte, pc, va, vn, vu, vcu, vco, pl, vp, vd, listener);
-
+				ProjectListener listener = new ProjectListener(vi);
 				
-				vi.hacerVisible(); // Empezar en INICIAR SESIÓN
-			}
-
-			private void setListener(VRegistro vr, VInicioSesion vi, VMenu vm, PnlTienda pti, PnlRanking pr,
-					PnlTemario pte, PnlCursos pc, VAjustes va, VNotis vn, VUsuario vu, VCustomizacion vcu,
-					VConfirmacion vco, PnlLeciones pl, VPreguntas vp, Vdefiniciones vd, ProjectListener listener) {
+				listener.setVentana(vr);
+				listener.setVentana(vm);
+				listener.setPanel(pti);
+				listener.setPanel(pr);
+				listener.setPanel(pte);
+				listener.setPanel(pc);
+				listener.setVentana(va);
+				listener.setVentana(vn);
+				listener.setVentana(vu);
+				listener.setVentana(vcu);
+				listener.setVentana(vco);
+				listener.setVentana(vd);
+				listener.setPanel(pl);
+				listener.setVentana(vp);
+				
 				vr.setListener(listener);
 				vi.setListener(listener);
 				vm.setListener(listener);
@@ -76,7 +83,11 @@ public class Inicio {
 				pl.setListener(listener);
 				vp.setListener(listener);
 				vd.setListener(listener);
+				
+				vi.hacerVisible(); // Empezar en INICIAR SESIÓN
 			}
+
+		
 			
 		});
 	}

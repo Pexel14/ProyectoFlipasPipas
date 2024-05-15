@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.dam.view.PnlCursos;
@@ -47,25 +48,12 @@ public class ProjectListener implements ActionListener {
 	private PnlLeciones pl;
 	private VPreguntas vp;
 	
+//	public ProjectListener() {
+//		
+//	}
 	
-	public ProjectListener(VRegistro vr, VInicioSesion vi, VMenu vm, PnlTienda pti, PnlRanking pr, PnlTemario pte,
-			PnlCursos pc, VAjustes va, VNotis vn, VUsuario vu, VCustomizacion vcu, VConfirmacion vco,
-			PnlLeciones pl, VPreguntas vp, Vdefiniciones vd) {
-		this.vr = vr;
+	public ProjectListener(VInicioSesion vi) {
 		this.vi = vi;
-		this.vm = vm;
-		this.pti = pti;
-		this.pr = pr;
-		this.pte = pte;
-		this.pc = pc;
-		this.va = va;
-		this.vn = vn;
-		this.vu = vu;
-		this.vcu = vcu;
-		this.vco = vco;
-		this.pl = pl;
-		this.vp = vp;
-		this.vd = vd;
 	}
 
 
@@ -225,4 +213,59 @@ public class ProjectListener implements ActionListener {
 		
 	}
 
+	public void setPanel(PnlTienda tienda) {
+		this.pti = tienda;
+	}
+	
+	public void setPanel(PnlLeciones lecciones) {
+		this.pl = lecciones;
+	}
+	
+	public void setPanel(PnlCursos cursos) {
+		this.pc = cursos;
+	}
+	
+	public void setPanel(PnlRanking ranking) {
+		this.pr = ranking;
+	}
+	
+	public void setPanel(PnlTemario temario) {
+		this.pte = temario;
+	}
+	
+	public void setVentana(Vdefiniciones definiciones) {
+		this.vd = definiciones;
+	}
+	
+	public void setVentana(VAjustes ajustes) {
+		this.va = ajustes;
+	}
+	
+	public void setVentana(VConfirmacion confirmacion) {
+		this.vco = confirmacion;
+	}
+	
+	public void setVentana(VCustomizacion customizacion) {
+		this.vcu = customizacion;
+	}
+	
+	public void setVentana(VNotis notificaciones) {
+		this.vn = notificaciones;
+	}
+	
+	public void setVentana(VPreguntas preguntas) {
+		this.vp = preguntas;
+	}
+	
+	public void setVentana(VUsuario usuario) {
+		this.vu = usuario;
+	}
+	
+	public void setVentana(VRegistro registro) {
+		this.vr = registro;
+	}
+	
+	public void setVentana(VMenu menu) {
+		this.vm = menu;
+	}
 }
