@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JTextField;
-
 import com.dam.view.PnlCursos;
 import com.dam.view.PnlLeciones;
 import com.dam.view.PnlRanking;
@@ -159,8 +157,28 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			//BOTONES DEFINICION
-			else if(e.getSource() == pc.getBtnInterrogante1() || e.getSource() == pc.getBtnInterrogante2() || e.getSource() == pc.getBtnInterrogante3() || e.getSource() == pc.getBtnInterrogante4()) {
+			else if(e.getSource().equals(pc.getBtnInterrogante1())) {
 				vd.hacerVisible();
+				vd.mostrarDefinicion(0);
+			}
+			
+			else if (e.getSource().equals(pc.getBtnInterrogante2())) {
+				vd.hacerVisible();
+				vd.mostrarDefinicion(1);
+			}
+			
+			else if (e.getSource().equals(pc.getBtnInterrogante3())) {
+				vd.hacerVisible();
+				vd.mostrarDefinicion(2);
+			}
+			
+			else if (e.getSource().equals(pc.getBtnInterrogante4())) {
+				vd.hacerVisible();
+				vd.mostrarDefinicion(3);
+			}
+			
+			else if (e.getSource().equals(vd.getBtnSalirDef())) {
+				vd.dispose();;
 			}
 			
 			
@@ -180,7 +198,10 @@ public class ProjectListener implements ActionListener {
 			//JUNTAR TODOS
 			else if(e.getSource().equals(pl.getBtnDfn_1()) || e.getSource().equals(pl.getBtnDfn_2()) || e.getSource().equals(pl.getBtnDfn_3()) || e.getSource().equals(pl.getBtnDfn_4())) {
 				vd.hacerVisible();
+				
 			}
+			
+			
 			
 			
 			//BOTONES USUARIO
