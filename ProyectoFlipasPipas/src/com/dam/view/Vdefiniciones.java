@@ -7,12 +7,15 @@ import java.awt.Color;
 import javax.swing.JTextArea;
 
 import com.dam.control.ProjectListener;
+import javax.swing.JButton;
+import java.awt.Font;
 
 public class Vdefiniciones extends JFrame {
 	
 	private static final int ANCHO = 265;
 	private static final int ALTO = 270;
 	private JTextArea txtInfo;
+	private JButton btnSalirDef;
 	public Vdefiniciones() {
 		super("definición");
 				
@@ -31,25 +34,32 @@ public class Vdefiniciones extends JFrame {
 	}
 
 	private void componentes() {
-		
-		getContentPane().setLayout(new BorderLayout(0, 0));
+		getContentPane().setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		scrollPane.setBounds(0, 38, 251, 195);
+		getContentPane().add(scrollPane);
 		txtInfo = new JTextArea();
+		scrollPane.setViewportView(txtInfo);
 		txtInfo.setBackground(new Color(50, 50, 75));
 		txtInfo.setForeground(new Color(255, 255, 255));
 		txtInfo.setEditable(false);
-		scrollPane.setViewportView(txtInfo);
 		
-	}
+		btnSalirDef = new JButton("X");
+		btnSalirDef.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnSalirDef.setBounds(181, 0, 60, 34);
+		getContentPane().add(btnSalirDef);
+	} 
 	
 	public void hacerVisible() {
 		setVisible(true);
+	}
+	
+	public JButton getBtnSalirDef() {
+		return btnSalirDef;
 	}
 
 	public void setListener(ProjectListener listener) {
 		// TODO Auto-generated method stub
 		
 	}
-
 }
