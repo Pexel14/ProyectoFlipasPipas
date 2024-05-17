@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.dam.control.ProjectListener;
+import javax.swing.ImageIcon;
 
 public class VCustomizacion extends JDialog {
 	
@@ -97,8 +98,11 @@ public class VCustomizacion extends JDialog {
 		lblFotoDePerfil.setBounds(58, 209, 150, 30);
 		getContentPane().add(lblFotoDePerfil);
 		
-		btnSalir = new JButton(ACT_CMD_BTN_SALIRCUSTOM);
-		btnSalir.setBounds(401, 11, 48, 41);
+		btnSalir = new JButton("");
+		btnSalir.setIcon(new ImageIcon(VCustomizacion.class.getResource("/img/salir.png")));
+		btnSalir.setBorderPainted(false);
+		btnSalir.setContentAreaFilled(false);
+		btnSalir.setBounds(401, 11, 50, 50);
 		getContentPane().add(btnSalir);
 		
 		btnFP1 = new JButton(ACT_COM_BTN_FP1);

@@ -10,6 +10,7 @@ import com.dam.control.ProjectListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.ImageIcon;
 
 public class VUsuario extends JDialog {
 	
@@ -87,9 +88,12 @@ public class VUsuario extends JDialog {
 		btnCerrarSesion.setBounds(175, 332, 235, 20);
 		getContentPane().add(btnCerrarSesion);
 		
-		btnCerrarVentana = new JButton("X");
+		btnCerrarVentana = new JButton("");
+		btnCerrarVentana.setIcon(new ImageIcon(VUsuario.class.getResource("/img/salir.png")));
+		btnCerrarVentana.setBorderPainted(false);
+		btnCerrarVentana.setContentAreaFilled(false);
 		btnCerrarVentana.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnCerrarVentana.setBounds(503, 10, 47, 25);
+		btnCerrarVentana.setBounds(536, 1, 50, 50);
 		getContentPane().add(btnCerrarVentana);
 	}
 	

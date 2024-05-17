@@ -4,8 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import com.dam.db.persistencias.UsuariosPer;
+import com.dam.model.pojos.Usuarios;
 import com.dam.view.PnlCursos;
 import com.dam.view.PnlLeciones;
 import com.dam.view.PnlRanking;
@@ -46,6 +49,12 @@ public class ProjectListener implements ActionListener {
 	//CLASES NIVELES
 	private PnlLeciones pl;
 	private VPreguntas vp;
+	
+	// CLASES PERSISTENCIAS
+	private UsuariosPer usuper = new UsuariosPer();
+	
+	// CLASES POJOS
+	private Usuarios usuario;
 	
 	
 	public ProjectListener(VRegistro vr, VInicioSesion vi, VMenu vm, PnlTienda pti, PnlRanking pr, PnlTemario pte,
@@ -91,9 +100,42 @@ public class ProjectListener implements ActionListener {
 			//BOTONES INICIO/REGISTRO
 			// Regístrate (REGISTRO)
 			if (e.getSource().equals(vr.getBtnRegistrar())) {
-				vr.dispose();
-				vm.cargarPanel(pc);
-				vm.hacerVisible();
+				
+				String nombre = vr.getTxtNombre();
+				String correo = vr.getTxtCorreo();
+				String passw = vr.getTxtContrasenia();
+				String confPasswd = vr.getTxtConfirmarContrasenia();
+				
+				if (nombre.isBlank() || nombre.equals("Nombre")) {
+					JOptionPane.showMessageDialog(vr, "Introduce un nombre", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (correo.isBlank() || correo.equals("Correo")) {
+					JOptionPane.showMessageDialog(vr, "Introduce un correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (usuper.correoRepetido(correo)) {
+					JOptionPane.showMessageDialog(vr, "El correo introducido ya existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (passw.isBlank() || passw.equals("Contraseña")) {
+					JOptionPane.showMessageDialog(vr, "Introduzca una contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (confPasswd.isBlank() || confPasswd.equals("Confirmar contraseña")) {
+					JOptionPane.showMessageDialog(vr, "Introduzca la confirmación de contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (!passw.equals(confPasswd)) {
+					JOptionPane.showMessageDialog(vr, "Las contraseñas no coinciden", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else {
+					
+					boolean correoYaExiste = usuper.correoRepetido(correo);
+					boolean nombreYaExiste = usuper.nombreRepetido(nombre);
+					
+					if (correoYaExiste) {
+						JOptionPane.showMessageDialog(vr, "El correo ya está registrado", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					} else {
+						usuario = new Usuarios(0, nombre, correo, "Foto 1", 0, passw);
+						usuper.registrarUsuario(usuario);
+						JOptionPane.showMessageDialog(vr, "Usuario creado con éxito", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
+						
+						vr.dispose();
+						vi.hacerVisible();
+					}
+					
+				}
+				
 			}
 			
 			else if(e.getSource() == vu.getBtnCerrarVentana()) {
@@ -108,9 +150,36 @@ public class ProjectListener implements ActionListener {
 			
 			// Iniciar sesión (INICIAR SESIÓN)
 			else if (e.getSource().equals(vi.getBtnIniciarSesion())) {
-				vi.dispose();
-				vm.cargarPanel(pc);
-				vm.hacerVisible();
+				
+				String correo = vi.getTxtCorreo();
+				String passw = vi.getTxtPassw();
+				
+				if (correo.isBlank() || correo.equals("Correo")) {
+					JOptionPane.showMessageDialog(vi, "Introduzca el nombre de usuario", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (passw.isBlank()) {
+					JOptionPane.showMessageDialog(vi, "Introduzca la contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else {
+					 
+					boolean correoCorrecto = usuper.existeUsuario(correo);
+					 
+					 if (!correoCorrecto) {
+						 JOptionPane.showMessageDialog(vi, "El usuario no existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					 } else {
+						 
+						 boolean contraCorrecta = usuper.contraCorrecta(correo, passw);
+						 
+						 if (!contraCorrecta) {
+							 JOptionPane.showMessageDialog(vi, "Contraseña incorrecta", "Error de datos", JOptionPane.ERROR_MESSAGE);
+						 } else {
+							 vi.dispose();
+							 vm.cargarPanel(pc);
+							 vm.hacerVisible();
+						 }
+						 
+					 }
+					 
+				}
+				
 			}
 			
 			// Registrarse (INICIAR SESIÓN)

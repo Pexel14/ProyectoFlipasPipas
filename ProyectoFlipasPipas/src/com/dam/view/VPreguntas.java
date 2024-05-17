@@ -10,6 +10,7 @@ import com.dam.control.ProjectListener;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 /*
  * @author alejandro
@@ -68,7 +69,9 @@ public class VPreguntas extends JFrame {
 		getContentPane().add(btnD);
 		
 		btnSalir = new JButton(ACT_CMD_BTN_SALIRPREG);
-		btnSalir.setBounds(1350, 105, 85, 70);
+		btnSalir.setIcon(new ImageIcon("C:\\eclipse\\eclipse-workspace\\UEM\\ProyectoFlipasPipas\\ProyectoFlipasPipas\\img\\salir.png"));
+		btnSalir.setContentAreaFilled(false);
+		btnSalir.setBounds(1350, 105, 50, 50);
 		getContentPane().add(btnSalir);
 		
 	}

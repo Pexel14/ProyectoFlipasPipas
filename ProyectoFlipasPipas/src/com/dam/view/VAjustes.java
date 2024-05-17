@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JSlider;
+import javax.swing.RootPaneContainer;
 
 import com.dam.control.ProjectListener;
 
@@ -14,6 +15,7 @@ import javax.swing.JFrame;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.ImageIcon;
 
 public class VAjustes extends JDialog {
 	
@@ -86,8 +88,11 @@ public class VAjustes extends JDialog {
 		lblInstagram.setBounds(106, 382, 251, 43);
 		getContentPane().add(lblInstagram);
 		
-		btnSalir = new JButton("x");
-		btnSalir.setBounds(394, 10, 46, 43);
+		btnSalir = new JButton("");
+		btnSalir.setIcon(new ImageIcon(VAjustes.class.getResource("/img/salir.png")));
+		btnSalir.setBorderPainted(false);
+		btnSalir.setContentAreaFilled(false);
+		btnSalir.setBounds(394, 10, 50, 50);
 		getContentPane().add(btnSalir);
 	}
 	

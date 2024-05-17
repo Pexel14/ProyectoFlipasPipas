@@ -17,8 +17,8 @@ public class VInicioSesion extends JFrame {
 	public static final String ACT_COM_BTN_REGISTRO = "¿Aún no tienes cuenta?";
 	private static final int ANCHO = 1920;
 	private static final int ALTO = 1080;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtCorreo;
+	private JTextField txtPassw;
 	private JButton btnRegistrarse;
 	private JButton btnIniciarSesion;
 
@@ -47,19 +47,19 @@ public class VInicioSesion extends JFrame {
 		lblIniciarSesin.setBounds(565, 25, 410, 75);
 		getContentPane().add(lblIniciarSesin);
 		
-		textField_1 = new JTextField();
-		textField_1.setText("Correo");
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		textField_1.setColumns(10);
-		textField_1.setBounds(420, 167, 700, 50);
-		getContentPane().add(textField_1);
+		txtCorreo = new JTextField();
+		txtCorreo.setText("Correo");
+		txtCorreo.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		txtCorreo.setColumns(10);
+		txtCorreo.setBounds(420, 167, 700, 50);
+		getContentPane().add(txtCorreo);
 		
-		textField_2 = new JTextField();
-		textField_2.setText("Contraseña");
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		textField_2.setColumns(10);
-		textField_2.setBounds(420, 284, 700, 50);
-		getContentPane().add(textField_2);
+		txtPassw = new JTextField();
+		txtPassw.setText("Contraseña");
+		txtPassw.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		txtPassw.setColumns(10);
+		txtPassw.setBounds(420, 284, 700, 50);
+		getContentPane().add(txtPassw);
 		
 		btnIniciarSesion = new JButton(ACT_COM_BTN_INICIO_SESION);
 		btnIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -90,6 +90,22 @@ public class VInicioSesion extends JFrame {
 		btnIniciarSesion.addActionListener(listener);
 		btnRegistrarse.addActionListener(listener);
 		
+	}
+
+	public String getTxtCorreo() {
+		return txtCorreo.getText();
+	}
+
+	public void setTxtCorreo(String texto) {
+		txtCorreo.setText(texto);
+	}
+
+	public String getTxtPassw() {
+		return txtPassw.getText();
+	}
+
+	public void setTxtPassw(String texto) {
+		txtPassw.setText(texto);
 	}
 
 //	public JButton getBtn(int i) {

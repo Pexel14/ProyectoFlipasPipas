@@ -126,6 +126,38 @@ public class VRegistro extends JFrame {
 		return btnVolver;
 	}
 	
+	public String getTxtNombre() {
+		return txtNombre.getText();
+	}
+
+	public void setTxtNombre(String texto) {
+		txtNombre.setText(texto);
+	}
+
+	public String getTxtCorreo() {
+		return txtCorreo.getText();
+	}
+
+	public void setTxtCorreo(String texto) {
+		txtCorreo.setText(texto);
+	}
+
+	public String getTxtContrasenia() {
+		return txtContrasenia.getText();
+	}
+
+	public void setTxtContrasenia(String texto) {
+		txtContrasenia.setText(texto);
+	}
+
+	public String getTxtConfirmarContrasenia() {
+		return txtConfirmarContrasenia.getText();
+	}
+
+	public void setTxtConfirmarContrasenia(String texto) {
+		txtConfirmarContrasenia.setText(texto);
+	}
+
 	public void establecerTexto (int i, String s) {
 		
 		switch (i) {

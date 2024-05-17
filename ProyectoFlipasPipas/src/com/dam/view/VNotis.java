@@ -16,11 +16,12 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class VNotis extends JDialog {
 	
 	private static final int ALTO_TOTAL = 655;
-	private static final int ANCHO = 400;
+	private static final int ANCHO = 430;
 	private static final int ALTO = 600;
 	private JLabel lblNoti1;
 	private JButton btnSalir;
@@ -85,8 +86,11 @@ public class VNotis extends JDialog {
 		lblNoti4.setBounds(35, 530, 300, 100);
 		panel.add(lblNoti4);
 		
-		btnSalir = new JButton("x");
-		btnSalir.setBounds(306, 11, 48, 23);
+		btnSalir = new JButton("");
+		btnSalir.setIcon(new ImageIcon(VNotis.class.getResource("/img/salir.png")));
+		btnSalir.setBorderPainted(false);
+		btnSalir.setContentAreaFilled(false);
+		btnSalir.setBounds(340, 10, 50, 50);
 		panel.add(btnSalir);
 	}
 
