@@ -1,12 +1,16 @@
 package com.dam.control;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.dam.db.persistencias.TiendaPer;
+import com.dam.db.persistencias.UsuariosPer;
 import com.dam.view.PnlCursos;
 import com.dam.view.PnlLeciones;
 import com.dam.view.PnlRanking;
@@ -30,7 +34,7 @@ public class ProjectListener implements ActionListener {
 	
 	//CLASES MENU
 	private VMenu vm;
-	
+	private String img;
 	private PnlTienda pti;
 	private PnlRanking pr;
 	private PnlTemario pte;
@@ -48,15 +52,21 @@ public class ProjectListener implements ActionListener {
 	private PnlLeciones pl;
 	private VPreguntas vp;
 	
+	//PERSISTENCIAS
+	private UsuariosPer up;
+	private TiendaPer tp;
+	
 //	public ProjectListener() {
 //		
 //	}
 	
 	public ProjectListener(VInicioSesion vi) {
 		this.vi = vi;
+		up = new UsuariosPer();
+		tp = new TiendaPer();
 	}
 
-
+	
 	public void actionPerformed(ActionEvent e) {
 		
 //		String s = e.getActionCommand();
@@ -115,6 +125,7 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTienda())){
+				pti.cargarObjetos(tp.cargarBotones());
 				vm.cargarPanel(pti);
 			}
 			
@@ -136,6 +147,7 @@ public class ProjectListener implements ActionListener {
 			
 			else if(e.getSource().equals(vm.getBtnPerfil())){
 				vu.hacerVisible();
+				up.cargarDatosUsuario();
 			}
 			
 			
@@ -175,15 +187,34 @@ public class ProjectListener implements ActionListener {
 			//USUARIO
 			else if(e.getSource().equals(vu.getBtnEditarPerfil())) {
 				vu.dispose();
+				vcu.cargarObjetos(tp.cargarBotones());
 				vcu.hacerVisible();
 			}
 			
 			
 			//BOTONES CONFIRMACION
 			else if(e.getSource() == vu.getBtnCerrarSesion() || e.getSource() == va.getBtnBorrarCuenta()) {
-				vco.hacerVisible();
+				String texto = e.getActionCommand();
+				Object ventana = e.getSource();
+//				vco.hacerVisible();
+				
+				int res = JOptionPane.showConfirmDialog((Component) ventana,"¿Estás seguro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+				
+				if(res == JOptionPane.YES_OPTION) {
+					switch (texto) {
+					case VUsuario.ACT_COM_BTN_CERRARSESION:
+						vu.dispose();
+						vm.dispose();
+						vi.hacerVisible();
+						break;
+					case VAjustes.ACT_CMD_BTN_BORRAR_CUENTA:
+						
+						break;
+					}
+				}
+				
 			}
-
+			
 			
 			//BOTONES SALIR
 			else if(e.getSource().equals(va.getBtnSalir())) {
@@ -209,12 +240,104 @@ public class ProjectListener implements ActionListener {
 				vco.dispose();
 			}
 			
+			else if(e.getSource() == vcu.getBtnFP1() 
+					|| e.getSource() == vcu.getBtnFP2() 
+					|| e.getSource() == vcu.getBtnFP3()
+					|| e.getSource() == vcu.getBtnFP4() 
+					|| e.getSource() == vcu.getBtnFP5() 
+					|| e.getSource() == vcu.getBtnFP6()) {
+				String boton = e.getActionCommand();
+				switch (boton) {
+					case "imagen1":
+						img = vcu.getBtnFP1().getIcon().toString();
+						break;
+						
+					case "imagen2":
+						img = vcu.getBtnFP2().getIcon().toString();
+						break;
+						
+					case "imagen3":
+						img = vcu.getBtnFP3().getIcon().toString();
+						break;
+						
+					case "imagen4":
+						img = vcu.getBtnFP4().getIcon().toString();
+						break;
+						
+					case "imagen5":
+						img = vcu.getBtnFP5().getIcon().toString();
+						break;
+						
+					case "imagen6":
+						img = vcu.getBtnFP6().getIcon().toString();
+						break;
+				}
+			}
+			
+			else if(e.getSource() == vcu.getBtnGuardar()) {
+				int res = up.customizarPerfil(img);
+				
+				if(res != 0) {
+					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+			
+			else if(e.getSource() == pti.getBtnObj1() 
+					|| e.getSource() == pti.getBtnObj2() 
+					|| e.getSource() == pti.getBtnObj3() 
+					|| e.getSource() == pti.getBtnObj4() 
+					|| e.getSource() == pti.getBtnObj5() 
+					|| e.getSource() == pti.getBtnObj6()) {
+				String boton = e.getActionCommand();
+				int res = JOptionPane.showConfirmDialog(pti, "¿Estás seguro?", "Confirmacion Compra", JOptionPane.YES_NO_CANCEL_OPTION);
+				int id = 0;
+				if(res == JOptionPane.YES_OPTION) {
+					switch (boton) {
+					case "Objeto1":
+						id = tp.comprobarObjeto(pti.getBtnObj1().getText());
+						break;
+					case "Objeto2":
+						
+						break;
+					case "Objeto3":
+						
+						break;
+					case "Objeto4":
+						
+						break;
+					case "Objeto5":
+						
+						break;
+					case "Objeto6":
+						
+						break;
+					}
+
+				}
+				
+				if(id != 0) {
+					int realizado = tp.comprarObjeto(id);
+					
+					if(realizado != 0) {
+						JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				}
+				
+			}
+				
 		}
 		
 	}
 
 	public void setPanel(PnlTienda tienda) {
 		this.pti = tienda;
+		tp.setVentana(tienda);
 	}
 	
 	public void setPanel(PnlLeciones lecciones) {
@@ -259,6 +382,7 @@ public class ProjectListener implements ActionListener {
 	
 	public void setVentana(VUsuario usuario) {
 		this.vu = usuario;
+		up.setVentana(vu);
 	}
 	
 	public void setVentana(VRegistro registro) {

@@ -2,12 +2,13 @@ package com.dam.db.constants;
 
 public class TablaUsuariosConst {
 
-	public static final String NOM_TABLA = "TABLA_USUARIOS";
+	public static final String NOM_TABLA = "USUARIOS";
 	
-	public static final String NOM_COL_COLUMNA1 = "ID_USUARIO";
-	public static final String NOM_COL_COLUMNA2 = "NICK";
-	public static final String NOM_COL_COLUMNA3 = "FOTOPERFIL";
-	public static final String NOM_COL_COLUMNA4 = "MONEDAS";
-	public static final String NOM_COL_COLUMNA5 = "CONTRASEÑA";
+	public static final String NOM_COL_ID = "ID_USUARIO";
+	public static final String NOM_COL_NICK = "NICK";
+	public static final String NOM_COL_EMAIL = "EMAIL";
+	public static final String NOM_COL_FOTOPERFIL = "FOTOPERFIL";
+	public static final String NOM_COL_MONEDAS = "MONEDAS";
+	public static final String NOM_COL_CONTRASENIA = "CONTRASEÑA";
 	
 }
