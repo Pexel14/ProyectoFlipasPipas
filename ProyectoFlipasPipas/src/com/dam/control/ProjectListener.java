@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import com.dam.db.persistencias.TiendaPer;
 import com.dam.db.persistencias.UsuariosPer;
+import com.dam.model.pojos.Tienda;
 import com.dam.view.PnlCursos;
 import com.dam.view.PnlLeciones;
 import com.dam.view.PnlRanking;
@@ -125,7 +126,7 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTienda())){
-				pti.cargarObjetos(tp.cargarBotones());
+//				pti.cargarObjetos(tp.cargarBotones());
 				vm.cargarPanel(pti);
 			}
 			
@@ -292,43 +293,55 @@ public class ProjectListener implements ActionListener {
 					|| e.getSource() == pti.getBtnObj5() 
 					|| e.getSource() == pti.getBtnObj6()) {
 				String boton = e.getActionCommand();
-				int res = JOptionPane.showConfirmDialog(pti, "¿Estás seguro?", "Confirmacion Compra", JOptionPane.YES_NO_CANCEL_OPTION);
-				int id = 0;
+				int res = JOptionPane.showConfirmDialog(pti, "¿Estás seguro?", "Confirmacion Compra", JOptionPane.YES_NO_OPTION);
+				Tienda id = null;
 				if(res == JOptionPane.YES_OPTION) {
 					switch (boton) {
 					case "Objeto1":
 						id = tp.comprobarObjeto(pti.getBtnObj1().getText());
 						break;
 					case "Objeto2":
-						
+						id = tp.comprobarObjeto(pti.getBtnObj2().getText());
 						break;
 					case "Objeto3":
-						
+						id = tp.comprobarObjeto(pti.getBtnObj3().getText());
 						break;
 					case "Objeto4":
-						
+						id = tp.comprobarObjeto(pti.getBtnObj4().getText());
 						break;
 					case "Objeto5":
-						
+						id = tp.comprobarObjeto(pti.getBtnObj5().getText());
 						break;
 					case "Objeto6":
-						
+						id = tp.comprobarObjeto(pti.getBtnObj6().getText());
 						break;
 					}
+					
+					
 
 				}
 				
-				if(id != 0) {
-					int realizado = tp.comprarObjeto(id);
-					
-					if(realizado != 0) {
-						JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.PLAIN_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);
-					}
-					
-				}
+				boolean comprado = false;
 				
+				if(id != null) {
+					int saldo = up.comprobarSaldo(id.getPrecio());
+					
+					if(saldo > 0) {
+						int realizado = tp.comprarObjeto(id);
+						
+						if(realizado != 0) {
+							int actualizado = up.compradoObjeto(saldo);
+							
+							if(actualizado != 0) {
+								comprado = true;
+								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.PLAIN_MESSAGE);								
+							}
+						} 
+					}
+				}
+				if(!comprado) {
+					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);					
+				}
 			}
 				
 		}

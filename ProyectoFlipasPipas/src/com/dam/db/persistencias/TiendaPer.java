@@ -68,13 +68,13 @@ public class TiendaPer {
 		
 	}
 	
-	public int comprobarObjeto(String objeto) {
-		String query = "SELECT " + TablaTiendaConst.NOM_COL_ID + " FROM " + TablaTiendaConst.NOM_TABLA + " WHERE " + TablaTiendaConst.NOM_COL_OBJETO + " = ?";
+	public Tienda comprobarObjeto(String objeto) {
+		String query = "SELECT * FROM " + TablaTiendaConst.NOM_TABLA + " WHERE " + TablaTiendaConst.NOM_COL_OBJETO + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rlst = null;
-		int id = 0;
+		Tienda id = null;
 		
 		try {
 			con = acceso.getConexion();
@@ -85,7 +85,7 @@ public class TiendaPer {
 			rlst = stmt.executeQuery();
 			
 			if(rlst.next()) {
-				id = rlst.getInt(2);
+				id = new Tienda(rlst.getInt(1), rlst.getString(2), rlst.getInt(3), rlst.getString(4), rlst.getBoolean(5));
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -112,7 +112,7 @@ public class TiendaPer {
 		return id;
 	}
 	
-	public int comprarObjeto(int id) {
+	public int comprarObjeto(Tienda id) {
 		String update = "UPDATE " + TablaTiendaConst.NOM_TABLA + " SET " + TablaTiendaConst.NOM_COL_COMPRADA + " = true " + " WHERE " + TablaTiendaConst.NOM_COL_ID + " = ?";
 		int res = 0;
 		
@@ -123,7 +123,7 @@ public class TiendaPer {
 			con = acceso.getConexion();
 			
 			stmt = con.prepareStatement(update);
-			stmt.setInt(1, id);
+			stmt.setInt(1, id.getId_objeto());
 			
 			res = stmt.executeUpdate();
 			

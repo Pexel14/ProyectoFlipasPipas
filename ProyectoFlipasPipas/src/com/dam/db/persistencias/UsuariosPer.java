@@ -126,4 +126,91 @@ public class UsuariosPer {
 		}
 		return res;
 	}
+	
+	public int comprobarSaldo(int precio) {
+		String query = "SELECT " + TablaUsuariosConst.NOM_COL_MONEDAS + " FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
+		
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rlst = null;
+		
+		int saldo = 0;
+		
+		try {
+			con = acceso.getConexion();
+			
+			stmt = con.prepareStatement(query);
+			
+//			stmt.setString(1, id);
+			
+			rlst = stmt.executeQuery();
+			
+			if(rlst.next()) {
+				saldo = rlst.getInt(1);
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rlst != null) {
+					rlst.close();
+				}
+				
+				if(stmt != null) {
+					stmt.close();
+				}
+				
+				if(con != null) {
+					con.close();
+				}
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return saldo - precio;
+	}
+	
+	public int compradoObjeto(int saldo) {
+		String update = "UPDATE " + TablaUsuariosConst.NOM_TABLA + " SET " + TablaUsuariosConst.NOM_COL_MONEDAS + " = ? WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
+		
+		Connection con = null;
+		PreparedStatement stmt = null;
+		int res = 0;
+		
+		if(saldo > 0) {
+			try {
+				con = acceso.getConexion();
+				
+				stmt = con.prepareStatement(update);
+				
+//				stmt.setString(1, img);
+//				stmt.setString(2, nombre);
+//				stmt.setString(3, id);
+				
+				res = stmt.executeUpdate();
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					if(stmt != null) {
+						stmt.close();
+					}
+					
+					if(con != null) {
+						con.close();
+					}
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
+		
+		
+		return res;
+	}
+	
 }

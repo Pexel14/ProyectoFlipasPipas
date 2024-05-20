@@ -65,43 +65,42 @@ public class PnlTienda extends JPanel {
 		btnObj1 = new JButton(ACT_COM_BTN_OBJ1);
 		btnObj1.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen1Tienda.jpeg")));
 		btnObj1.setFont(new Font("Tahoma", Font.BOLD, 25));
-		btnObj1.setVerticalAlignment(SwingConstants.BOTTOM);
-		btnObj1.setBounds(116, 272, 275, 175);
+		btnObj1.setBounds(116, 272, 267, 169);
 		add(btnObj1);
 		
 		btnObj2 = new JButton(ACT_COM_BTN_OBJ2);
 		btnObj2.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen2Tienda.jpeg")));
 		btnObj2.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj2.setFont(new Font("Tahoma", Font.BOLD, 25));
-		btnObj2.setBounds(507, 272, 275, 175);
+		btnObj2.setBounds(507, 272, 267, 169);
 		add(btnObj2);
 		
 		btnObj3 = new JButton(ACT_COM_BTN_OBJ3);
 		btnObj3.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen3Tienda.jpeg")));
 		btnObj3.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj3.setFont(new Font("Tahoma", Font.BOLD, 25));
-		btnObj3.setBounds(898, 272, 275, 175);
+		btnObj3.setBounds(898, 272, 267, 169);
 		add(btnObj3);
 		
 		btnObj4 = new JButton(ACT_COM_BTN_OBJ4);
 		btnObj4.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen4Tienda.jpeg")));
 		btnObj4.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj4.setFont(new Font("Tahoma", Font.BOLD, 25));
-		btnObj4.setBounds(116, 558, 275, 175);
+		btnObj4.setBounds(116, 558, 267, 169);
 		add(btnObj4);
 		
 		btnObj5 = new JButton(ACT_COM_BTN_OBJ5);
 		btnObj5.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen5Tienda.jpeg")));
 		btnObj5.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj5.setFont(new Font("Tahoma", Font.BOLD, 25));
-		btnObj5.setBounds(507, 558, 275, 175);
+		btnObj5.setBounds(507, 558, 267, 169);
 		add(btnObj5);
 		
 		btnObj6 = new JButton(ACT_COM_BTN_OBJ6);
 		btnObj6.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen6Tienda.jpeg")));
 		btnObj6.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj6.setFont(new Font("Tahoma", Font.BOLD, 25));
-		btnObj6.setBounds(898, 558, 275, 175);
+		btnObj6.setBounds(898, 558, 267, 169);
 		add(btnObj6);
 		
 		lblCantPipas = new JLabel("0");
@@ -185,60 +184,60 @@ public class PnlTienda extends JPanel {
 		btnObj6.addActionListener(listener);
 	}
 
-	public void cargarObjetos(ArrayList<Tienda> cargarBotones) {
-		btnObj1.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(1).getImagen())));
-		btnObj2.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(2).getImagen())));
-		btnObj3.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(3).getImagen())));
-		btnObj4.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(4).getImagen())));
-		btnObj5.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(5).getImagen())));
-		btnObj6.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(6).getImagen())));
-		
-		if(cargarBotones.get(1).isComprada()) {
-			btnObj1.setEnabled(false);
-			lblPrecioObj1.setText("COMPRADO");
-			
-		} else {
-			lblPrecioObj1.setText(cargarBotones.get(1).getPrecio() + " Pipa Coins");
-		}
-		
-		if(cargarBotones.get(2).isComprada()) {
-			btnObj2.setEnabled(false);
-			lblPrecioObj2.setText("COMPRADO");
-			
-		} else {
-			lblPrecioObj2.setText(cargarBotones.get(2).getPrecio() + " Pipa Coins");
-		}
-		
-		if(cargarBotones.get(3).isComprada()) {
-			btnObj3.setEnabled(false);
-			lblPrecioObj3.setText("COMPRADO");
-			
-		} else {
-			lblPrecioObj3.setText(cargarBotones.get(3).getPrecio() + " Pipa Coins");
-		}
-		
-		if(cargarBotones.get(4).isComprada()) {
-			btnObj4.setEnabled(false);
-			lblPrecioObj4.setText("COMPRADO");
-			
-		} else {
-			lblPrecioObj4.setText(cargarBotones.get(4).getPrecio() + " Pipa Coins");
-		}
-		
-		if(cargarBotones.get(5).isComprada()) {
-			btnObj5.setEnabled(false);
-			lblPrecioObj5.setText("COMPRADO");
-			
-		} else {
-			lblPrecioObj5.setText(cargarBotones.get(5).getPrecio() + " Pipa Coins");
-		}
-		
-		if(cargarBotones.get(6).isComprada()) {
-			btnObj6.setEnabled(false);
-			lblPrecioObj6.setText("COMPRADO");
-			
-		} else {
-			lblPrecioObj6.setText(cargarBotones.get(6).getPrecio() + " Pipa Coins");
-		}
-	}
+//	public void cargarObjetos(ArrayList<Tienda> cargarBotones) {
+//		btnObj1.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(1).getImagen())));
+//		btnObj2.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(2).getImagen())));
+//		btnObj3.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(3).getImagen())));
+//		btnObj4.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(4).getImagen())));
+//		btnObj5.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(5).getImagen())));
+//		btnObj6.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(6).getImagen())));
+//		
+//		if(cargarBotones.get(1).isComprada()) {
+//			btnObj1.setEnabled(false);
+//			lblPrecioObj1.setText("COMPRADO");
+//			
+//		} else {
+//			lblPrecioObj1.setText(cargarBotones.get(1).getPrecio() + " Pipa Coins");
+//		}
+//		
+//		if(cargarBotones.get(2).isComprada()) {
+//			btnObj2.setEnabled(false);
+//			lblPrecioObj2.setText("COMPRADO");
+//			
+//		} else {
+//			lblPrecioObj2.setText(cargarBotones.get(2).getPrecio() + " Pipa Coins");
+//		}
+//		
+//		if(cargarBotones.get(3).isComprada()) {
+//			btnObj3.setEnabled(false);
+//			lblPrecioObj3.setText("COMPRADO");
+//			
+//		} else {
+//			lblPrecioObj3.setText(cargarBotones.get(3).getPrecio() + " Pipa Coins");
+//		}
+//		
+//		if(cargarBotones.get(4).isComprada()) {
+//			btnObj4.setEnabled(false);
+//			lblPrecioObj4.setText("COMPRADO");
+//			
+//		} else {
+//			lblPrecioObj4.setText(cargarBotones.get(4).getPrecio() + " Pipa Coins");
+//		}
+//		
+//		if(cargarBotones.get(5).isComprada()) {
+//			btnObj5.setEnabled(false);
+//			lblPrecioObj5.setText("COMPRADO");
+//			
+//		} else {
+//			lblPrecioObj5.setText(cargarBotones.get(5).getPrecio() + " Pipa Coins");
+//		}
+//		
+//		if(cargarBotones.get(6).isComprada()) {
+//			btnObj6.setEnabled(false);
+//			lblPrecioObj6.setText("COMPRADO");
+//			
+//		} else {
+//			lblPrecioObj6.setText(cargarBotones.get(6).getPrecio() + " Pipa Coins");
+//		}
+//	}
 }
