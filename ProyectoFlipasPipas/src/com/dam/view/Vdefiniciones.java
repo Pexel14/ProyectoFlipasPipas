@@ -50,11 +50,12 @@ public class Vdefiniciones extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		txtInfo = new JTextArea();
-		txtInfo.setLineWrap(true);
+		
 		txtInfo.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		scrollPane.setViewportView(txtInfo);
 		txtInfo.setBackground(new Color(50, 50, 75));
 		txtInfo.setForeground(new Color(255, 255, 255));
+		txtInfo.setLineWrap(true);
 		txtInfo.setWrapStyleWord(true); // Asegura que las líneas se corten entre palabras, no en medio
 		txtInfo.setEditable(false);
 		

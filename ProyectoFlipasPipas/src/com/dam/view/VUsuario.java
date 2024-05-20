@@ -12,6 +12,7 @@ import javax.swing.JButton;
 
 public class VUsuario extends JFrame {
 	
+	public static final String ACT_COM_BTN_CERRARSESION = "Cerrar Sesión";
 	public static final String ACT_COM_BTN_COINS = "1000 pipa coins";
 	public static final String ACT_COM_BTN_RACHA = "100 días de racha";
 	public static final String ACT_COM_BTN_EDITAR = "Editar";
@@ -80,7 +81,7 @@ public class VUsuario extends JFrame {
 		lblPipaCoins.setBounds(175, 212, 250, 20);
 		getContentPane().add(lblPipaCoins);
 		
-		btnCerrarSesion = new JButton("Cerrar Sesión");
+		btnCerrarSesion = new JButton(ACT_COM_BTN_CERRARSESION);
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnCerrarSesion.setBounds(175, 332, 235, 20);
 		getContentPane().add(btnCerrarSesion);

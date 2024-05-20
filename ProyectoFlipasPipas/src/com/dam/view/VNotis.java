@@ -2,27 +2,28 @@ package com.dam.view;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.WindowConstants;
-
 import com.dam.control.ProjectListener;
-
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.JTextArea;
 
 public class VNotis extends JFrame {
 	
 	private static final int ALTO_TOTAL = 655;
 	private static final int ANCHO = 400;
 	private static final int ALTO = 600;
-	private JLabel lblNoti1;
 	private JButton btnSalir;
+	private JTextArea textArea;
+	private JTextArea textArea_1;
+	private JTextArea textArea_2;
+	private JTextArea textArea_3;
 	
 	public VNotis() {
 		
@@ -47,45 +48,66 @@ public class VNotis extends JFrame {
 		scrp.setViewportView(panel);
 		panel.setLayout(null);
 		
-		lblNoti1 = new JLabel("<HTML>\r\nNoti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 \r\nNoti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 Noti 1 \r\n</HTML>");
-		lblNoti1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNoti1.setBounds(30, 50, 300, 100);
-		panel.add(lblNoti1);
-		
 		
 		JPanel pnlDecoracion1 = new JPanel();
 		pnlDecoracion1.setBackground(new Color(50, 50, 75));
 		pnlDecoracion1.setBounds(35, 175, 300, 10);
 		panel.add(pnlDecoracion1);
 		
-		JLabel lblNoti2 = new JLabel("<HTML>\r\nNoti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2 Noti 2\r\n</HTML>");
-		lblNoti2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNoti2.setBounds(35, 210, 300, 100);
-		panel.add(lblNoti2);
-		
 		JPanel pnlDecoracion2 = new JPanel();
 		pnlDecoracion2.setBackground(new Color(50, 50, 75));
 		pnlDecoracion2.setBounds(35, 335, 300, 10);
 		panel.add(pnlDecoracion2);
-		
-		JLabel lblNoti3 = new JLabel("<HTML>\r\nNoti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 Noti 3 \r\n</HTML>");
-		lblNoti3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNoti3.setBounds(35, 370, 300, 100);
-		panel.add(lblNoti3);
 		
 		JPanel pnlDecoracion3 = new JPanel();
 		pnlDecoracion3.setBackground(new Color(50, 50, 75));
 		pnlDecoracion3.setBounds(35, 495, 300, 10);
 		panel.add(pnlDecoracion3);
 		
-		JLabel lblNoti4 = new JLabel("<HTML>\r\nNoti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 \r\n</HTML>");
-		lblNoti4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNoti4.setBounds(35, 530, 300, 100);
-		panel.add(lblNoti4);
-		
 		btnSalir = new JButton("x");
 		btnSalir.setBounds(306, 11, 48, 23);
 		panel.add(btnSalir);
+		
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setForeground(Color.WHITE);
+		textArea.setFont(new Font("Monospaced", Font.BOLD, 13));
+		textArea.setBackground(new Color(79, 79, 117));
+		textArea.setBounds(35, 33, 300, 118);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		panel.add(textArea);
+		
+		textArea_1 = new JTextArea();
+		textArea_1.setEditable(false);
+		textArea_1.setForeground(Color.WHITE);
+		textArea_1.setFont(new Font("Monospaced", Font.BOLD, 13));
+		textArea_1.setBackground(new Color(79, 79, 117));
+		textArea_1.setBounds(35, 195, 300, 118);
+		textArea_1.setLineWrap(true);
+		textArea_1.setLineWrap(true);
+		textArea_1.setWrapStyleWord(true);
+		panel.add(textArea_1);
+		
+		textArea_2 = new JTextArea();
+		textArea_2.setEditable(false);
+		textArea_2.setForeground(Color.WHITE);
+		textArea_2.setFont(new Font("Monospaced", Font.BOLD, 13));
+		textArea_2.setBackground(new Color(79, 79, 117));
+		textArea_2.setBounds(35, 355, 300, 118);
+		textArea_2.setLineWrap(true);
+		textArea_2.setWrapStyleWord(true);
+		panel.add(textArea_2);
+		
+		textArea_3 = new JTextArea();
+		textArea_3.setEditable(false);
+		textArea_3.setForeground(Color.WHITE);
+		textArea_3.setFont(new Font("Monospaced", Font.BOLD, 13));
+		textArea_3.setBackground(new Color(79, 79, 117));
+		textArea_3.setBounds(35, 515, 300, 118);
+		textArea_3.setLineWrap(true);
+		textArea_3.setWrapStyleWord(true);
+		panel.add(textArea_3);
 	}
 
 	public JButton getBtnSalir() {
@@ -104,5 +126,14 @@ public class VNotis extends JFrame {
 
 	public void setListener(ProjectListener l) {
 		btnSalir.addActionListener(l);
+	}
+
+	public void setNotis(ArrayList<String> listNotis) {
+		
+		// TODO inserta las notificaciones del array en los lbls correspondientes
+		textArea.setText(listNotis.get(0));
+		textArea_1.setText(listNotis.get(1));
+		textArea_2.setText(listNotis.get(2));
+		textArea_3.setText(listNotis.get(3));
 	}
 }
