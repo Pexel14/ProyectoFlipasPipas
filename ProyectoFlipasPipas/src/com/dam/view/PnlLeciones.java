@@ -10,6 +10,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 
 public class PnlLeciones extends JPanel {
@@ -31,6 +33,13 @@ public class PnlLeciones extends JPanel {
 	private JButton btnDfn_2;
 	private JButton btnDfn_3;
 	private JButton btnDfn_4;
+	
+	private JLabel lblTitulo;
+	private JLabel lblTitulo_1;
+	private JLabel lblTitulo_2;
+	private JLabel lblTitulo_3;
+	private JLabel lblTitulo_Rep2;
+	private JLabel lblTitulo_Rep1;
 
 	public PnlLeciones() {
 		setSize(VMenu.ANCHO_PANEL, VMenu.ALTO_PANEL); //Para que no ocurran errores
@@ -88,33 +97,47 @@ public class PnlLeciones extends JPanel {
 		btnDfn_4.setBounds(975, 418, 45, 38);
 		add(btnDfn_4);
 		
-		JLabel lblTitulo_1 = new JLabel("Titulo");
+		lblTitulo = new JLabel("");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblTitulo.setBackground(Color.BLACK);
+		lblTitulo.setBounds(24, 450, 150, 28);
+		add(lblTitulo);
+		
+		lblTitulo_1 = new JLabel("");
 		lblTitulo_1.setForeground(Color.WHITE);
 		lblTitulo_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblTitulo_1.setBackground(Color.BLACK);
-		lblTitulo_1.setBounds(59, 450, 96, 28);
+		lblTitulo_1.setBounds(232, 211, 150, 28);
 		add(lblTitulo_1);
 		
-		JLabel lblTitulo_2 = new JLabel("Titulo");
+		lblTitulo_2 = new JLabel("");
 		lblTitulo_2.setForeground(Color.WHITE);
 		lblTitulo_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblTitulo_2.setBackground(Color.BLACK);
-		lblTitulo_2.setBounds(268, 211, 96, 28);
+		lblTitulo_2.setBounds(620, 211, 150, 28);
 		add(lblTitulo_2);
 		
-		JLabel lblTitulo_3 = new JLabel("Titulo");
+		lblTitulo_3 = new JLabel("");
 		lblTitulo_3.setForeground(Color.WHITE);
 		lblTitulo_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblTitulo_3.setBackground(Color.BLACK);
-		lblTitulo_3.setBounds(656, 211, 96, 28);
+		lblTitulo_3.setBounds(847, 462, 150, 28);
 		add(lblTitulo_3);
 		
-		JLabel lblTitulo_4 = new JLabel("Titulo");
-		lblTitulo_4.setForeground(Color.WHITE);
-		lblTitulo_4.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblTitulo_4.setBackground(Color.BLACK);
-		lblTitulo_4.setBounds(882, 462, 96, 28);
-		add(lblTitulo_4);
+		lblTitulo_Rep1 = new JLabel("");
+		lblTitulo_Rep1.setForeground(Color.WHITE);
+		lblTitulo_Rep1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblTitulo_Rep1.setBackground(Color.BLACK);
+		lblTitulo_Rep1.setBounds(437, 461, 150, 28);
+		add(lblTitulo_Rep1);
+		
+		lblTitulo_Rep2 = new JLabel("");
+		lblTitulo_Rep2.setForeground(Color.WHITE);
+		lblTitulo_Rep2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblTitulo_Rep2.setBackground(Color.BLACK);
+		lblTitulo_Rep2.setBounds(1046, 210, 150, 28);
+		add(lblTitulo_Rep2);
 
 	}
 	
@@ -180,5 +203,15 @@ public class PnlLeciones extends JPanel {
 		btnDfn_3.addActionListener(listener);
 		btnDfn_4.addActionListener(listener);
 	}
-	
+
+
+	public void cargarLec(ArrayList<String> nomLec) {
+		lblTitulo.setText(nomLec.get(0));
+		lblTitulo_1.setText(nomLec.get(1));
+		lblTitulo_Rep1.setText(nomLec.get(2));
+		lblTitulo_2.setText(nomLec.get(3));
+		lblTitulo_3.setText(nomLec.get(4));
+		lblTitulo_Rep2.setText(nomLec.get(5));
+		
+	}
 }

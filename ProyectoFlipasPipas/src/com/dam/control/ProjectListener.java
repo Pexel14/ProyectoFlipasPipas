@@ -2,10 +2,15 @@ package com.dam.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
+import com.dam.db.persistencias.LeccionesPer;
+import com.dam.db.persistencias.UsuPregPer;
+import com.dam.model.pojos.Lecciones;
 import com.dam.view.PnlCursos;
 import com.dam.view.PnlLeciones;
 import com.dam.view.PnlRanking;
@@ -47,6 +52,10 @@ public class ProjectListener implements ActionListener {
 	private PnlLeciones pl;
 	private VPreguntas vp;
 	
+	// PERSISTENCIAS
+	private UsuPregPer upp;
+	private LeccionesPer lp;
+	
 	
 	public ProjectListener(VRegistro vr, VInicioSesion vi, VMenu vm, PnlTienda pti, PnlRanking pr, PnlTemario pte,
 			PnlCursos pc, VAjustes va, VNotis vn, VUsuario vu, VCustomizacion vcu, VConfirmacion vco,
@@ -66,6 +75,8 @@ public class ProjectListener implements ActionListener {
 		this.pl = pl;
 		this.vp = vp;
 		this.vd = vd;
+		upp = new UsuPregPer();
+		lp = new LeccionesPer();
 	}
 
 
@@ -132,6 +143,11 @@ public class ProjectListener implements ActionListener {
 			
 			else if(e.getSource().equals(vm.getBtnRanking())){
 				vm.cargarPanel(pr);
+				// Guardo nombre y puntos de usuario en un HashMap
+				HashMap<String, Integer> tablaUsuPnt = upp.nickPuntUsu();
+				// Esto lo uso para hacer un entry en un arraylist
+				ArrayList<Entry<String, Integer>> tablaRanking = new ArrayList<Entry<String,Integer>>(tablaUsuPnt.entrySet());
+				pr.mostrarRanking(tablaRanking);
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTemario())){
@@ -153,9 +169,15 @@ public class ProjectListener implements ActionListener {
 			
 			//BOTONES NIVELES
 			//CURSOS
-			else if(e.getSource().equals(pc.getBtnJava()) || e.getSource().equals(pc.getBtnHtml()) || e.getSource().equals(pc.getBtnCss()) || e.getSource().equals(pc.getBtnSql())) {
-//				cargarLecciones(); //Posible metodo para diferenciar lecciones segun el lenguaje
-				vm.cargarPanel(pl);
+			//Metodo en la persistencia de Lecciones pasándoles el id del curso
+			else if(e.getSource().equals(pc.getBtnJava())) {
+				cargarLecCur(1);
+			} else if (e.getSource().equals(pc.getBtnHtml())){
+				cargarLecCur(3);
+			} else if (e.getSource().equals(pc.getBtnCss())){
+				cargarLecCur(4);
+			} else if (e.getSource().equals(pc.getBtnSql())){
+				cargarLecCur(2);
 			}
 			
 			//BOTONES DEFINICION
@@ -223,6 +245,13 @@ public class ProjectListener implements ActionListener {
 			
 		}
 		
+	}
+
+
+	private void cargarLecCur(int id_curso) {
+		vm.cargarPanel(pl);
+		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
+		pl.cargarLec(nomLec);
 	}
 
 }

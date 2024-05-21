@@ -13,11 +13,4 @@ public class Lecciones {
 		this.leccion = leccion;
 		this.lecCompletada = lecCompletada;
 	}
-	
-	@Override
-	public String toString() {
-		return "Lecciones [idLeccion=" + idLeccion + ", idCurso=" + idCurso + ", leccion=" + leccion
-				+ ", lecCompletada=" + lecCompletada + "]";
-	}
-	
 }
