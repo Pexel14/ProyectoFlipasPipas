@@ -2,12 +2,15 @@ package com.dam.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import com.dam.db.persistencias.UsuPregPer;
 import com.dam.db.persistencias.UsuariosPer;
+import com.dam.model.pojos.Preguntas;
 import com.dam.model.pojos.Usuarios;
 import com.dam.view.PnlCursos;
 import com.dam.view.PnlLeciones;
@@ -32,7 +35,6 @@ public class ProjectListener implements ActionListener {
 	
 	//CLASES MENU
 	private VMenu vm;
-	
 	private PnlTienda pti;
 	private PnlRanking pr;
 	private PnlTemario pte;
@@ -52,10 +54,17 @@ public class ProjectListener implements ActionListener {
 	
 	// CLASES PERSISTENCIAS
 	private UsuariosPer usuper = new UsuariosPer();
+	private UsuPregPer usupregper = new UsuPregPer();
 	
 	// CLASES POJOS
 	private Usuarios usuario;
 	
+	// EN QUÉ VENTANA ESTÁ EL USUARIO
+	public String lenguaje;
+	
+	// PREGUNTAS
+	private int pregPos;
+	private ArrayList<Preguntas> preguntas;
 	
 	public ProjectListener(VRegistro vr, VInicioSesion vi, VMenu vm, PnlTienda pti, PnlRanking pr, PnlTemario pte,
 			PnlCursos pc, VAjustes va, VNotis vn, VUsuario vu, VCustomizacion vcu, VConfirmacion vco,
@@ -222,10 +231,10 @@ public class ProjectListener implements ActionListener {
 			
 			//BOTONES NIVELES
 			//CURSOS
-			else if(e.getSource().equals(pc.getBtnJava()) || e.getSource().equals(pc.getBtnHtml()) || e.getSource().equals(pc.getBtnCss()) || e.getSource().equals(pc.getBtnSql())) {
-//				cargarLecciones(); //Posible metodo para diferenciar lecciones segun el lenguaje
-				vm.cargarPanel(pl);
-			}
+//			else if(e.getSource().equals(pc.getBtnJava()) || e.getSource().equals(pc.getBtnHtml()) || e.getSource().equals(pc.getBtnCss()) || e.getSource().equals(pc.getBtnSql())) {
+////				cargarLecciones(); //Posible metodo para diferenciar lecciones segun el lenguaje
+//				vm.cargarPanel(pl);
+//			}
 			
 			//BOTONES DEFINICION
 			else if(e.getSource() == pc.getBtnInterrogante1() || e.getSource() == pc.getBtnInterrogante2() || e.getSource() == pc.getBtnInterrogante3() || e.getSource() == pc.getBtnInterrogante4()) {
@@ -235,15 +244,15 @@ public class ProjectListener implements ActionListener {
 			
 			//LECCIONES
 			//JUNTAR TODOS
-			else if(e.getSource().equals(pl.getBtnLec_1()) 
-					|| e.getSource().equals(pl.getBtnExamen()) 
-					|| e.getSource().equals(pl.getBtnRepaso()) 
-					|| e.getSource().equals(pl.getBtnLec_2()) 
-					|| e.getSource().equals(pl.getBtnLec_3()) 
-					|| e.getSource().equals(pl.getBtnLec_4())) {
-				vm.dispose();
-				vp.hacerVisible();
-			}
+//			else if(e.getSource().equals(pl.getBtnLec_1()) 
+//					|| e.getSource().equals(pl.getBtnExamen()) 
+//					|| e.getSource().equals(pl.getBtnRepaso()) 
+//					|| e.getSource().equals(pl.getBtnLec_2()) 
+//					|| e.getSource().equals(pl.getBtnLec_3()) 
+//					|| e.getSource().equals(pl.getBtnLec_4())) {
+//				vm.dispose();
+//				vp.hacerVisible();
+//			}
 			
 			//BOTONES DEFINICION
 			//JUNTAR TODOS
@@ -265,6 +274,73 @@ public class ProjectListener implements ActionListener {
 				vco.hacerVisible();
 			}
 
+			// CURSOS
+				// CSS
+			else if (e.getSource().equals(pc.getBtnCss())) {
+				lenguaje = "CSS";
+				vm.cargarPanel(pl);
+			}
+				// HTML
+			else if (e.getSource().equals(pc.getBtnHtml())) {
+				lenguaje = "HTML";
+				vm.cargarPanel(pl);
+			}
+				// JAVA
+			else if (e.getSource().equals(pc.getBtnJava())) {
+				lenguaje = "JAVA";
+				vm.cargarPanel(pl);
+			}
+				// SQL
+			else if (e.getSource().equals(pc.getBtnSql())) {
+				lenguaje = "SQL";
+				vm.cargarPanel(pl);
+			}
+			
+			// PREGUNTAS TODO
+				//Pregunta 1
+			else if (e.getSource().equals(pl.getBtnLec_1())) cargarPregunta(19, 13, 1, 7);
+				// Pregunta 2
+			else if (e.getSource().equals(pl.getBtnLec_2())) cargarPregunta(20, 14, 2, 8);
+				// Repaso
+			else if (e.getSource().equals(pl.getBtnRepaso())) cargarPregunta(21, 15, 3, 9);
+				// Pregunta 3
+			else if (e.getSource().equals(pl.getBtnLec_3())) cargarPregunta(22, 16, 4, 10);
+				// Pregunta 4
+			else if (e.getSource().equals(pl.getBtnLec_4())) cargarPregunta(23, 17, 5, 11);
+				// Examen
+			else if (e.getSource().equals(pl.getBtnExamen())) cargarPregunta(24, 18, 6, 12);
+			
+				// Botón A
+			else if (e.getSource().equals(vp.getBtnA())) {
+				// Si aciertas la pregunta
+				if (vp.getBtnA().getText().equals(preguntas.get(pregPos).getCorrecta())) preguntaAcertada();
+				// Si fallas
+				else preguntaFallada();
+			}
+				
+				// Botón B
+			else if (e.getSource().equals(vp.getBtnB())) {
+				// Si aciertas la pregunta
+				if (vp.getBtnB().getText().equals(preguntas.get(pregPos).getCorrecta())) preguntaAcertada();
+				// Si fallas
+				else preguntaFallada();
+			}
+				
+				// Botón C
+			else if (e.getSource().equals(vp.getBtnC())) {
+				// Si aciertas la pregunta
+				if (vp.getBtnC().getText().equals(preguntas.get(pregPos).getCorrecta())) preguntaAcertada();
+				// Si fallas
+				else preguntaFallada();
+			}
+				
+				// Botón D
+			else if (e.getSource().equals(vp.getBtnD())) {
+				// Si aciertas la pregunta
+				if (vp.getBtnD().getText().equals(preguntas.get(pregPos).getCorrecta())) preguntaAcertada();
+				// Si fallas
+				else preguntaFallada();
+			}
 			
 			//BOTONES SALIR
 			else if(e.getSource().equals(va.getBtnSalir())) {
@@ -290,8 +366,66 @@ public class ProjectListener implements ActionListener {
 				vco.dispose();
 			}
 			
+			
 		}
 		
+	}
+
+
+	private void cargarPregunta(int css, int html, int java, int sql) {
+		preguntas = null;
+		pregPos = 0;
+		
+		if (lenguaje.equals("CSS")) obtenerEstablecerPregunta(css);
+		else if (lenguaje.equals("HTML")) obtenerEstablecerPregunta(html);
+		else if (lenguaje.equals("JAVA")) obtenerEstablecerPregunta(java);
+		else if (lenguaje.equals("SQL")) obtenerEstablecerPregunta(sql);
+	}
+
+
+	private void obtenerEstablecerPregunta(int num) {
+		preguntas = usupregper.getPreg(num);
+		vm.dispose();
+		vp.hacerVisible();
+		vp.setPregunta(preguntas.get(pregPos));
+	}
+
+
+	private void preguntaFallada() {
+		JOptionPane.showMessageDialog(vp, "Has fallado!", "" , JOptionPane.ERROR_MESSAGE);
+		
+		// Mueve la pregunta fallida al final del ArrayList
+		preguntas.add(preguntas.get(pregPos));
+		
+		// Si aún quedan preguntas, pasa a la siguiente
+		if (pregPos < preguntas.size() - 1) {
+		    pregPos += 1;
+		} else {
+		    pregPos = 0;
+		}
+		
+		vp.setPregunta(preguntas.get(pregPos));
+	}
+
+
+	private void preguntaAcertada() {
+			
+		if (pregPos < preguntas.size()) {
+			pregPos += 1;
+		}
+		
+		// Si has acertado la última pregunta
+		if (pregPos == preguntas.size()) {
+			JOptionPane.showMessageDialog(vp, "¡Has acabado la lección!", "¡Enhorabuena!", JOptionPane.INFORMATION_MESSAGE);
+			vp.dispose();
+			vm.cargarPanel(pl);
+			vm.hacerVisible();
+		}
+		// Si no
+		else {
+			vp.setPregunta(preguntas.get(pregPos));
+
+		}
 	}
 
 }

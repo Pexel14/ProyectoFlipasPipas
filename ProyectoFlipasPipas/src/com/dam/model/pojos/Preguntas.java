@@ -29,5 +29,37 @@ public class Preguntas {
 				+ ", resp1=" + resp1 + ", resp2=" + resp2 + ", resp3=" + resp3 + ", resp4=" + resp4 + ", correcta="
 				+ correcta + "]";
 	}
+
+	public int getIdPregunta() {
+		return idPregunta;
+	}
+
+	public int getIdLeccion() {
+		return idLeccion;
+	}
+
+	public String getPregunta() {
+		return pregunta;
+	}
+
+	public String getResp1() {
+		return resp1;
+	}
+
+	public String getResp2() {
+		return resp2;
+	}
+
+	public String getResp3() {
+		return resp3;
+	}
+
+	public String getResp4() {
+		return resp4;
+	}
+
+	public String getCorrecta() {
+		return correcta;
+	}
 	
 }

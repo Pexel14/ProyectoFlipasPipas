@@ -151,5 +151,4 @@ public class PnlRanking extends JPanel {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

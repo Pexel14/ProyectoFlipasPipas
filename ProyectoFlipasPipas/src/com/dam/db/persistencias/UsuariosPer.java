@@ -20,6 +20,13 @@ public class UsuariosPer {
 	
 	private AccesoDB accesoBD;
 	
+	private static int id_usuario;
+	private static String nick;
+	
+	public static int getId_usuario() {
+		return id_usuario;
+	}
+
 	public UsuariosPer() {
 		accesoBD = new AccesoDB();
 	}
@@ -28,7 +35,7 @@ public class UsuariosPer {
 		
 		boolean existe = false;
 		
-		String query = "SELECT " + COL_NICK + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?;";
+		String query = "SELECT " + COL_ID + ", " + COL_NICK + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?;";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -43,7 +50,12 @@ public class UsuariosPer {
 			
 			rslt = stmt.executeQuery();
 			
-			existe = rslt.next();
+			if(rslt.next()) {
+				existe = true;
+				id_usuario = rslt.getInt(1);
+				nick = rslt.getString(2);	
+			}
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

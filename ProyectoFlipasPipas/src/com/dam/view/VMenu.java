@@ -88,7 +88,8 @@ public class VMenu extends JFrame {
 		getContentPane().add(btnNotis);
 		
 		btnVidas = new JButton("");
-		btnVidas.setIcon(new ImageIcon(VMenu.class.getResource("/img/vidas.png")));
+		btnVidas.setIcon(new ImageIcon(VMenu.class.getResource("/img/6 vidas.png")));
+//		btnVidas.setIcon(new ImageIcon(VMenu.class.getResource("/img/vidas.png")));
 		btnVidas.setBorderPainted(false);
 		btnVidas.setContentAreaFilled(false);
 		btnVidas.setEnabled(false);
