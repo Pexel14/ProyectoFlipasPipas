@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JButton;
 
+import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.persistencias.LeccionesPer;
 import com.dam.db.persistencias.UsuPregPer;
 import com.dam.model.pojos.Lecciones;
@@ -171,13 +172,13 @@ public class ProjectListener implements ActionListener {
 			//CURSOS
 			//Metodo en la persistencia de Lecciones pasándoles el id del curso
 			else if(e.getSource().equals(pc.getBtnJava())) {
-				cargarLecCur(1);
+				cargarLecCur(FlipasPipasConst.ID_CURSO_JAVA);
 			} else if (e.getSource().equals(pc.getBtnHtml())){
-				cargarLecCur(3);
+				cargarLecCur(FlipasPipasConst.ID_CURSO_HTML);
 			} else if (e.getSource().equals(pc.getBtnCss())){
-				cargarLecCur(4);
+				cargarLecCur(FlipasPipasConst.ID_CURSO_CSS);
 			} else if (e.getSource().equals(pc.getBtnSql())){
-				cargarLecCur(2);
+				cargarLecCur(FlipasPipasConst.ID_CURSO_SQL);
 			}
 			
 			//BOTONES DEFINICION
@@ -250,8 +251,18 @@ public class ProjectListener implements ActionListener {
 
 	private void cargarLecCur(int id_curso) {
 		vm.cargarPanel(pl);
+		
+		String nomCur = "";
+		
+		switch (id_curso) {
+		case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
+		case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
+		case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
+		case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
+		}
+		
 		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
-		pl.cargarLec(nomLec);
+		pl.cargarLec(nomLec, nomCur);
 	}
 
 }

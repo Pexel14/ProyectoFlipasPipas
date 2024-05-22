@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 
 public class PnlLeciones extends JPanel {
 	
+	/*TODO: --------------------- - - - - - - PONER TÍTULO DEL CURSO ARRIBA DEL TODO EN LA LECCIÓN - - - - - - ------------------------------------*/
+	
 	public static final String ACT_COM_BTN_1 = "1";
 	public static final String ACT_COM_BTN_2 = "2";
 	public static final String ACT_COM_BTN_3 = "3";
@@ -40,6 +42,7 @@ public class PnlLeciones extends JPanel {
 	private JLabel lblTitulo_3;
 	private JLabel lblTitulo_Rep2;
 	private JLabel lblTitulo_Rep1;
+	private JLabel lblCurso;
 
 	public PnlLeciones() {
 		setSize(VMenu.ANCHO_PANEL, VMenu.ALTO_PANEL); //Para que no ocurran errores
@@ -138,6 +141,13 @@ public class PnlLeciones extends JPanel {
 		lblTitulo_Rep2.setBackground(Color.BLACK);
 		lblTitulo_Rep2.setBounds(1046, 210, 150, 28);
 		add(lblTitulo_Rep2);
+		
+		lblCurso = new JLabel("");
+		lblCurso.setForeground(Color.WHITE);
+		lblCurso.setFont(new Font("Tahoma", Font.BOLD, 40));
+		lblCurso.setBackground(Color.BLACK);
+		lblCurso.setBounds(496, 26, 300, 50);
+		add(lblCurso);
 
 	}
 	
@@ -205,13 +215,15 @@ public class PnlLeciones extends JPanel {
 	}
 
 
-	public void cargarLec(ArrayList<String> nomLec) {
+	public void cargarLec(ArrayList<String> nomLec, String nomCur) {
 		lblTitulo.setText(nomLec.get(0));
 		lblTitulo_1.setText(nomLec.get(1));
 		lblTitulo_Rep1.setText(nomLec.get(2));
 		lblTitulo_2.setText(nomLec.get(3));
 		lblTitulo_3.setText(nomLec.get(4));
 		lblTitulo_Rep2.setText(nomLec.get(5));
+		
+		lblCurso.setText(nomCur);
 		
 	}
 }

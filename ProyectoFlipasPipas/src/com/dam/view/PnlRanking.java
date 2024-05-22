@@ -15,7 +15,14 @@ public class PnlRanking extends JPanel {
 	private static final int CANT_USU_RNKG = 4;
 	private JLabel[] lblNomUsuarios = new JLabel[CANT_USU_RNKG];
     private JLabel[] lblPuntosUsuarios = new JLabel[CANT_USU_RNKG];
-    //private JButton[] btnImgUsu = new JButton[CANT_USU_RNKG];
+    private JLabel[] lblImgUsuarios = new JLabel[CANT_USU_RNKG];
+    
+    /*
+	private JLabel lblImg1;
+	private JLabel lblImg4;
+	private JLabel lblImg3;
+	private JLabel lblImg2;	
+    */
 
 	public PnlRanking() {
 		
@@ -49,8 +56,6 @@ public class PnlRanking extends JPanel {
 			add(pnlUsuario);
 			pnlUsuario.setLayout(null);
 			
-			//btnImgUsu[i] = new JButton("");
-			
 			lblNomUsuarios[i] = new JLabel("");
 			lblNomUsuarios[i].setFont(new Font("Tahoma", Font.BOLD, 40));
 			lblNomUsuarios[i].setForeground(new Color(240, 240, 240));
@@ -62,6 +67,25 @@ public class PnlRanking extends JPanel {
 			lblPuntosUsuarios[i].setFont(new Font("Tahoma", Font.BOLD, 30));
 			lblPuntosUsuarios[i].setBounds(486, 0, 135, 100);
 			pnlUsuario.add(lblPuntosUsuarios[i]);
+			
+			lblImgUsuarios[i] = new JLabel("");
+			// TODO: Añadir Icon
+			lblImgUsuarios[i].setBounds(25, 10, 80, 80);
+			pnlUsuario.add(lblImgUsuarios[i]);
+
+			/*
+			lblImg2 = new JLabel("");
+			lblImg2.setBounds(25, 10, 80, 80);
+			pnlUsuario.add(lblImg2);
+
+			lblImg3 = new JLabel("");
+			lblImg3.setBounds(25, 10, 80, 80);
+			pnlUsuario.add(lblImg3);
+
+			lblImg4 = new JLabel("");
+			lblImg4.setBounds(25, 10, 80, 80);
+			pnlUsuario.add(lblImg4);
+			*/
 			
 			//PUESTOS
 			pnlPuesto = new JPanel();
