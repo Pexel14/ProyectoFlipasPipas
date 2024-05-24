@@ -22,8 +22,8 @@ public class Vdefiniciones extends JDialog {
 		"SQL, es un lenguaje utilizado para gestionar y manipular bases de datos relacionales, permitiendo realizar consultas para recuperar o modificar información de manera eficiente",
 		"Css es un lenguaje de diseño gráfico para definir la presentación de documentos escritos en un lenguaje de marcado, como HTML. Se utiliza principalmente para establecer el estilo visual de las páginas web",
 	};
-	private static final int ANCHO = 265;
-	private static final int ALTO = 270;
+	private static final int ANCHO = 600;
+	private static final int ALTO = 170;
 	private JTextArea txtInfo;
 	private static VMenu vm;
 	
@@ -49,7 +49,7 @@ public class Vdefiniciones extends JDialog {
 		getContentPane().setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(0, 38, 251, 195);
+		scrollPane.setBounds(10, 38, 564, 82);
 		getContentPane().add(scrollPane);
 		
 		txtInfo = new JTextArea();
@@ -64,7 +64,7 @@ public class Vdefiniciones extends JDialog {
 		
 		btnSalirDef = new JButton("X");
 		btnSalirDef.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnSalirDef.setBounds(181, 0, 60, 34);
+		btnSalirDef.setBounds(514, 0, 60, 34);
 		getContentPane().add(btnSalirDef);
 	} 
 	

@@ -184,60 +184,68 @@ public class PnlTienda extends JPanel {
 		btnObj6.addActionListener(listener);
 	}
 
-//	public void cargarObjetos(ArrayList<Tienda> cargarBotones) {
-//		btnObj1.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(1).getImagen())));
-//		btnObj2.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(2).getImagen())));
-//		btnObj3.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(3).getImagen())));
-//		btnObj4.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(4).getImagen())));
-//		btnObj5.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(5).getImagen())));
-//		btnObj6.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(6).getImagen())));
-//		
-//		if(cargarBotones.get(1).isComprada()) {
-//			btnObj1.setEnabled(false);
-//			lblPrecioObj1.setText("COMPRADO");
-//			
-//		} else {
-//			lblPrecioObj1.setText(cargarBotones.get(1).getPrecio() + " Pipa Coins");
-//		}
-//		
-//		if(cargarBotones.get(2).isComprada()) {
-//			btnObj2.setEnabled(false);
-//			lblPrecioObj2.setText("COMPRADO");
-//			
-//		} else {
-//			lblPrecioObj2.setText(cargarBotones.get(2).getPrecio() + " Pipa Coins");
-//		}
-//		
-//		if(cargarBotones.get(3).isComprada()) {
-//			btnObj3.setEnabled(false);
-//			lblPrecioObj3.setText("COMPRADO");
-//			
-//		} else {
-//			lblPrecioObj3.setText(cargarBotones.get(3).getPrecio() + " Pipa Coins");
-//		}
-//		
-//		if(cargarBotones.get(4).isComprada()) {
-//			btnObj4.setEnabled(false);
-//			lblPrecioObj4.setText("COMPRADO");
-//			
-//		} else {
-//			lblPrecioObj4.setText(cargarBotones.get(4).getPrecio() + " Pipa Coins");
-//		}
-//		
-//		if(cargarBotones.get(5).isComprada()) {
-//			btnObj5.setEnabled(false);
-//			lblPrecioObj5.setText("COMPRADO");
-//			
-//		} else {
-//			lblPrecioObj5.setText(cargarBotones.get(5).getPrecio() + " Pipa Coins");
-//		}
-//		
-//		if(cargarBotones.get(6).isComprada()) {
-//			btnObj6.setEnabled(false);
-//			lblPrecioObj6.setText("COMPRADO");
-//			
-//		} else {
-//			lblPrecioObj6.setText(cargarBotones.get(6).getPrecio() + " Pipa Coins");
-//		}
-//	}
+	public void cargarSaldo(int saldo) {
+		lblCantPipas.setText(String.valueOf(saldo));
+	}
+
+	public void cargarObjetos(ArrayList<Tienda> cargarBotones) {
+		btnObj1.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(0).getImagen())));
+		btnObj2.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(1).getImagen())));
+		btnObj3.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(2).getImagen())));
+		btnObj4.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(3).getImagen())));
+		btnObj5.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(4).getImagen())));
+		btnObj6.setIcon(new ImageIcon(PnlTienda.class.getResource(cargarBotones.get(5).getImagen())));
+		
+		if(cargarBotones.get(0).isComprada()) {
+			btnObj1.setEnabled(false);
+			lblPrecioObj1.setText("COMPRADO");
+			
+		} else {
+			lblPrecioObj1.setText(cargarBotones.get(0).getPrecio() + " Pipa Coins");
+		}
+		
+		if(cargarBotones.get(1).isComprada()) {
+			btnObj2.setEnabled(false);
+			lblPrecioObj2.setText("COMPRADO");
+			
+		} else {
+			lblPrecioObj2.setText(cargarBotones.get(1).getPrecio() + " Pipa Coins");
+		}
+		
+		if(cargarBotones.get(2).isComprada()) {
+			btnObj3.setEnabled(false);
+			lblPrecioObj3.setText("COMPRADO");
+			
+		} else {
+			lblPrecioObj3.setText(cargarBotones.get(2).getPrecio() + " Pipa Coins");
+		}
+		
+		if(cargarBotones.get(3).isComprada()) {
+			btnObj4.setEnabled(false);
+			lblPrecioObj4.setText("COMPRADO");
+			
+		} else {
+			lblPrecioObj4.setText(cargarBotones.get(3).getPrecio() + " Pipa Coins");
+		}
+		
+		if(cargarBotones.get(4).isComprada()) {
+			btnObj5.setEnabled(false);
+			lblPrecioObj5.setText("COMPRADO");
+			
+		} else {
+			lblPrecioObj5.setText(cargarBotones.get(4).getPrecio() + " Pipa Coins");
+		}
+		
+		if(cargarBotones.get(5).isComprada()) {
+			btnObj6.setEnabled(false);
+			lblPrecioObj6.setText("COMPRADO");
+			
+		} else {
+			lblPrecioObj6.setText(cargarBotones.get(5).getPrecio() + " Pipa Coins");
+		}
+	}
+
+	public int getSaldo() {
+		return Integer.parseInt(lblCantPipas.getText());
+	}
 }

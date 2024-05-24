@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 import com.dam.control.ProjectListener;
+import javax.swing.ScrollPaneConstants;
 
 public class PnlTemario extends JPanel {
 	
@@ -59,6 +60,7 @@ public class PnlTemario extends JPanel {
 		pnlIndice.add(lblIndice);
 		
 		JScrollPane scrp = new JScrollPane(pnlPantalla);
+		scrp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrp.getVerticalScrollBar().setUnitIncrement(20); // Para que la barra lateral se desplace más rápido
 		pnlPantalla.setLayout(null);
 		//scrp.setBounds(0, 0, ANCHO_TOTAL, ALTO_TOTAL); // PARA EL DESIGN

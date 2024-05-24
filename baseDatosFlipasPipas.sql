@@ -548,3 +548,63 @@ INSERT INTO PREGUNTAS VALUES(69,23,'¿Dónde se puede usar width y height?','En 
 INSERT INTO PREGUNTAS VALUES(70,24,'¿Cual NO es una medida absoluta de longitud en CSS?','cm','qx','pt','px','cm');
 INSERT INTO PREGUNTAS VALUES(71,24,'¿En qué formato se expresa un color en CSS?','Hexadecimal','RGB','Todas son correctas','Nombre del color','Todas son correctas');
 INSERT INTO PREGUNTAS VALUES(72,24,'¿Para qué sirve esta propiedad “color”?','Saber qué color tiene el fondo','Establece un color seleccionado a la fuente','Para cambiar el color del fondo','Te colorea la página web','Establece un color seleccionado a la fuente');
+
+
+INSERT INTO NOTIFICACIONES VALUES();
+
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Paco', 'paco@prueba.com','img/Imagen5CustomButton.png',1000,'pacopaco');
+
+UPDATE USUARIOS SET MONEDAS = 700 WHERE EMAIL = 'paco@prueba.com';
+
+DELETE FROM USUARIOS WHERE EMAIL = 'paco@prueba.com';
+
+DROP TABLE TIENDA;
+
+CREATE TABLE TIENDA(
+    ID_OBJETO NUMBER(2) CONSTRAINT PK_TIENDA_IDOBJ PRIMARY KEY,
+    NOM_OBJETO VARCHAR2(20),
+    ICONO VARCHAR2(50)
+);
+
+
+INSERT INTO TIENDA VALUES(1,'Objeto1','/img/Imagen1Tienda.jpeg');
+INSERT INTO TIENDA VALUES(2,'Objeto2','/img/Imagen2Tienda.jpeg');
+INSERT INTO TIENDA VALUES(3,'Objeto3','/img/Imagen3Tienda.jpeg');
+INSERT INTO TIENDA VALUES(4,'Objeto4','/img/Imagen4Tienda.jpeg');
+INSERT INTO TIENDA VALUES(5,'Objeto5','/img/Imagen5Tienda.jpeg');
+INSERT INTO TIENDA VALUES(6,'Objeto6','/img/Imagen6Tienda.jpeg');
+
+
+CREATE TABLE USUARIOS_TIENDA(
+    ID_OBJETO NUMBER(2) CONSTRAINT FK_USERTIENDA_IDOBJ REFERENCES TIENDA(ID_OBJETO),
+    ID_USUARIO NUMBER(2) CONSTRAINT FK_USERTIENDA_IDUSER REFERENCES USUARIOS(ID_USUARIO),
+    PRECIO NUMBER(3),
+    COMPRADA BOOLEAN,
+    CONSTRAINT PK_USERTIENDA_IDOBJIDUSER PRIMARY KEY (ID_OBJETO, ID_USUARIO)
+);
+
+DROP TABLE TIENDA;
+
+CREATE TABLE TIENDA(
+    ID_OBJETO NUMBER(2) CONSTRAINT PK_TIENDA_IDOBJ PRIMARY KEY,
+    NOM_OBJETO VARCHAR2(20),
+    PRECIO NUMBER(4),
+    ICONO VARCHAR2(50)
+);
+
+
+INSERT INTO TIENDA VALUES(1,'Objeto1',500,'/img/Imagen1Tienda.jpeg');
+INSERT INTO TIENDA VALUES(2,'Objeto2',600,'/img/Imagen2Tienda.jpeg');
+INSERT INTO TIENDA VALUES(3,'Objeto3',500,'/img/Imagen3Tienda.jpeg');
+INSERT INTO TIENDA VALUES(4,'Objeto4',500,'/img/Imagen4Tienda.jpeg');
+INSERT INTO TIENDA VALUES(5,'Objeto5',1000,'/img/Imagen5Tienda.jpeg');
+INSERT INTO TIENDA VALUES(6,'Objeto6',700,'/img/Imagen6Tienda.jpeg');
+
+DROP TABLE USUARIOS_TIENDA;
+
+CREATE TABLE USUARIOS_TIENDA(
+    ID_OBJETO NUMBER(2) CONSTRAINT FK_USERTIENDA_IDOBJ REFERENCES TIENDA(ID_OBJETO),
+    ID_USUARIO NUMBER(2) CONSTRAINT FK_USERTIENDA_IDUSER REFERENCES USUARIOS(ID_USUARIO),
+    COMPRADA BOOLEAN,
+    CONSTRAINT PK_USERTIENDA_IDOBJIDUSER PRIMARY KEY (ID_OBJETO, ID_USUARIO)
+);

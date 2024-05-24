@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 
 import com.dam.db.persistencias.UsuPregPer;
+import com.dam.db.persistencias.UsuTienda;
 import com.dam.db.persistencias.UsuariosPer;
 import com.dam.model.pojos.Preguntas;
 import com.dam.model.pojos.Usuarios;
@@ -20,6 +21,7 @@ import com.dam.db.persistencias.NotificacionesPer;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
+
 
 
 import com.dam.db.constants.FlipasPipasConst;
@@ -50,7 +52,6 @@ public class ProjectListener implements ActionListener {
 	private VCustomizacion vcu;
 	
 	//CLASES GENERALES
-	private VConfirmacion vco;
 	private Vdefiniciones vd;
 	
 	//CLASES NIVELES
@@ -60,8 +61,8 @@ public class ProjectListener implements ActionListener {
 
 
 	// CLASES PERSISTENCIAS
-	private UsuariosPer usuper;
-	private UsuPregPer usupregper;
+	private UsuariosPer up;
+	private UsuPregPer upp;
 	
 	// CLASES POJOS
 	private Usuarios usuario;
@@ -74,17 +75,14 @@ public class ProjectListener implements ActionListener {
 	private ArrayList<Preguntas> preguntas;
 
 	//PERSISTENCIAS
-	private UsuariosPer pu;
 	private NotificacionesPer pn;
 
 	// PERSISTENCIAS
-	private UsuPregPer upp;
 	private LeccionesPer lp;
 	
 	//PERSISTENCIAS
-	private UsuariosPer up;
 	private TiendaPer tp;
-	
+	private UsuTienda ut;
 //	public ProjectListener() {
 //		
 //	}
@@ -92,7 +90,7 @@ public class ProjectListener implements ActionListener {
 	public ProjectListener(VInicioSesion vi) {
 		this.vi = vi;
 
-		pu = new UsuariosPer();
+
 		pn = new NotificacionesPer();
 
 		upp = new UsuPregPer();
@@ -100,6 +98,8 @@ public class ProjectListener implements ActionListener {
 
 		up = new UsuariosPer();
 		tp = new TiendaPer();
+		
+		ut = new UsuTienda();
 	}
 
 	
@@ -135,7 +135,7 @@ public class ProjectListener implements ActionListener {
 					JOptionPane.showMessageDialog(vr, "Introduce un nombre", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (correo.isBlank() || correo.equals("Correo")) {
 					JOptionPane.showMessageDialog(vr, "Introduce un correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
-				} else if (usuper.correoRepetido(correo)) {
+				} else if (up.correoRepetido(correo)) {
 					JOptionPane.showMessageDialog(vr, "El correo introducido ya existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (passw.isBlank() || passw.equals("Contraseña")) {
 					JOptionPane.showMessageDialog(vr, "Introduzca una contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
@@ -145,16 +145,16 @@ public class ProjectListener implements ActionListener {
 					JOptionPane.showMessageDialog(vr, "Las contraseñas no coinciden", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else {
 					
-					boolean correoYaExiste = usuper.correoRepetido(correo);
-					boolean nombreYaExiste = usuper.nombreRepetido(nombre);
+					boolean correoYaExiste = up.correoRepetido(correo);
+					boolean nombreYaExiste = up.nombreRepetido(nombre);
 					
 					if (correoYaExiste) {
 						JOptionPane.showMessageDialog(vr, "El correo ya está registrado", "Error de datos", JOptionPane.ERROR_MESSAGE);
 					} else {
 						usuario = new Usuarios(0, nombre, correo, "Foto 1", 0, passw);
-						usuper.registrarUsuario(usuario);
+						up.registrarUsuario(usuario);
 						JOptionPane.showMessageDialog(vr, "Usuario creado con éxito", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
-						
+						ut.crearTienda(up.getId_usuario());
 						vr.dispose();
 						vi.hacerVisible();
 					}
@@ -185,13 +185,13 @@ public class ProjectListener implements ActionListener {
 					JOptionPane.showMessageDialog(vi, "Introduzca la contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else {
 					 
-					boolean correoCorrecto = usuper.existeUsuario(correo);
+					boolean correoCorrecto = up.existeUsuario(correo);
 					 
 					 if (!correoCorrecto) {
 						 JOptionPane.showMessageDialog(vi, "El usuario no existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
 					 } else {
 						 
-						 boolean contraCorrecta = usuper.contraCorrecta(correo, passw);
+						 boolean contraCorrecta = up.contraCorrecta(correo, passw);
 						 
 						 if (!contraCorrecta) {
 							 JOptionPane.showMessageDialog(vi, "Contraseña incorrecta", "Error de datos", JOptionPane.ERROR_MESSAGE);
@@ -221,7 +221,11 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTienda())){
-//				pti.cargarObjetos(tp.cargarBotones());
+				pti.cargarObjetos(tp.cargarBotones());
+				
+				int saldo = up.comprobarSaldo();
+				pti.cargarSaldo(saldo);
+				
 				vm.cargarPanel(pti);
 			}
 			
@@ -261,35 +265,35 @@ public class ProjectListener implements ActionListener {
 //			}
 
 			//Metodo en la persistencia de Lecciones pasándoles el id del curso
-			else if(e.getSource().equals(pc.getBtnJava())) {
-				cargarLecCur(FlipasPipasConst.ID_CURSO_JAVA);
-			} else if (e.getSource().equals(pc.getBtnHtml())){
-				cargarLecCur(FlipasPipasConst.ID_CURSO_HTML);
-			} else if (e.getSource().equals(pc.getBtnCss())){
-				cargarLecCur(FlipasPipasConst.ID_CURSO_CSS);
-			} else if (e.getSource().equals(pc.getBtnSql())){
-				cargarLecCur(FlipasPipasConst.ID_CURSO_SQL);
-			}
+//			else if(e.getSource().equals(pc.getBtnJava())) {
+//				cargarLecCur(FlipasPipasConst.ID_CURSO_JAVA);
+//			} else if (e.getSource().equals(pc.getBtnHtml())){
+//				cargarLecCur(FlipasPipasConst.ID_CURSO_HTML);
+//			} else if (e.getSource().equals(pc.getBtnCss())){
+//				cargarLecCur(FlipasPipasConst.ID_CURSO_CSS);
+//			} else if (e.getSource().equals(pc.getBtnSql())){
+//				cargarLecCur(FlipasPipasConst.ID_CURSO_SQL);
+//			}
 			
 			//BOTONES DEFINICION
 			else if(e.getSource().equals(pc.getBtnInterrogante1())) {
-				vd.hacerVisible();
 				vd.mostrarDefinicion(0);
+				vd.hacerVisible();
 			}
 			
 			else if (e.getSource().equals(pc.getBtnInterrogante2())) {
-				vd.hacerVisible();
 				vd.mostrarDefinicion(1);
+				vd.hacerVisible();
 			}
 			
 			else if (e.getSource().equals(pc.getBtnInterrogante3())) {
-				vd.hacerVisible();
 				vd.mostrarDefinicion(2);
+				vd.hacerVisible();
 			}
 			
 			else if (e.getSource().equals(pc.getBtnInterrogante4())) {
-				vd.hacerVisible();
 				vd.mostrarDefinicion(3);
+				vd.hacerVisible();
 			}
 			
 			//LECCIONES
@@ -322,14 +326,9 @@ public class ProjectListener implements ActionListener {
 			//BOTONES CONFIRMACION
 			else if(e.getSource() == vu.getBtnCerrarSesion() || e.getSource() == va.getBtnBorrarCuenta()) {
 				String texto = e.getActionCommand();
-				Object ventana = e.getSource();
-
-				vco.hacerVisible();
-
-//				vco.hacerVisible();
 
 				
-				int res = JOptionPane.showConfirmDialog((Component) ventana,"¿Estás seguro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+				int res = JOptionPane.showConfirmDialog( vp,"¿Estás seguro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
 				
 				if(res == JOptionPane.YES_OPTION) {
 					switch (texto) {
@@ -438,10 +437,6 @@ public class ProjectListener implements ActionListener {
 				vu.hacerVisible();
 			}
 			
-			else if(e.getSource() == vco.getBtnRespNo()) {
-				vco.dispose();
-			}
-			
 
 			else if (e.getSource().equals(vd.getBtnSalirDef())) {
 				vd.dispose();;
@@ -501,8 +496,10 @@ public class ProjectListener implements ActionListener {
 					|| e.getSource() == pti.getBtnObj5() 
 					|| e.getSource() == pti.getBtnObj6()) {
 				String boton = e.getActionCommand();
+				
 				int res = JOptionPane.showConfirmDialog(pti, "¿Estás seguro?", "Confirmacion Compra", JOptionPane.YES_NO_OPTION);
 				Tienda id = null;
+				
 				if(res == JOptionPane.YES_OPTION) {
 					switch (boton) {
 					case "Objeto1":
@@ -529,26 +526,28 @@ public class ProjectListener implements ActionListener {
 
 				}
 				
+
+				
 				boolean comprado = false;
 				
 				if(id != null) {
-					int saldo = up.comprobarSaldo(id.getPrecio());
-					
+					int saldo = pti.getSaldo();
 					if(saldo > 0) {
 						int realizado = tp.comprarObjeto(id);
 						
 						if(realizado != 0) {
-							int actualizado = up.compradoObjeto(saldo);
+							int actualizado = up.compradoObjeto(saldo - id.getPrecio());
 							
 							if(actualizado != 0) {
 								comprado = true;
+								pti.cargarObjetos(tp.cargarBotones());
 								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.PLAIN_MESSAGE);								
 							}
 						} 
 					}
 				}
 				if(!comprado) {
-					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);					
+					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 				
@@ -569,7 +568,7 @@ public class ProjectListener implements ActionListener {
 
 
 	private void obtenerEstablecerPregunta(int num) {
-		preguntas = usupregper.getPreg(num);
+		preguntas = upp.getPreg(num);
 		vm.dispose();
 		vp.hacerVisible();
 		vp.setPregunta(preguntas.get(pregPos));
@@ -613,22 +612,24 @@ public class ProjectListener implements ActionListener {
 		}
 	}
 	
-	private void cargarLecCur(int id_curso) {
-		vm.cargarPanel(pl);
-		
-		String nomCur = "";
-		
-		switch (id_curso) {
-		case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
-		case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
-		case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
-		case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
-		}
-		
-		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
-		pl.cargarLec(nomLec, nomCur);
-
-	}
+//	private void cargarLecCur(int id_curso) {
+//		vm.cargarPanel(pl);
+//		
+//		String nomCur = "";
+//		
+//		switch (id_curso) {
+//		case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
+//		case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
+//		case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
+//		case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
+//		}
+//		
+//		
+//		
+//		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
+//		pl.cargarLec(nomLec, nomCur);
+//
+//	}
 
 
 	public void setPanel(PnlTienda tienda) {
@@ -660,9 +661,7 @@ public class ProjectListener implements ActionListener {
 		this.va = ajustes;
 	}
 	
-	public void setVentana(VConfirmacion confirmacion) {
-		this.vco = confirmacion;
-	}
+
 	
 	public void setVentana(VCustomizacion customizacion) {
 		this.vcu = customizacion;

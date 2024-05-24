@@ -28,7 +28,7 @@ public class UsuariosPer {
 	private static int id_usuario;
 	private static String nick;
 	
-	public static int getId_usuario() {
+	public int getId_usuario() {
 		return id_usuario;
 	}
 
@@ -358,7 +358,7 @@ public class UsuariosPer {
 		return res;
 	}
 	
-	public int comprobarSaldo(int precio) {
+	public int comprobarSaldo() {
 		String query = "SELECT " + TablaUsuariosConst.NOM_COL_MONEDAS + " FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
 		
 		Connection con = null;
@@ -372,7 +372,7 @@ public class UsuariosPer {
 			
 			stmt = con.prepareStatement(query);
 			
-//			stmt.setString(1, id);
+			stmt.setInt(1, id_usuario);
 			
 			rlst = stmt.executeQuery();
 			
@@ -400,7 +400,7 @@ public class UsuariosPer {
 				e2.printStackTrace();
 			}
 		}
-		return saldo - precio;
+		return saldo;
 	}
 	
 	public int compradoObjeto(int saldo) {
@@ -410,15 +410,14 @@ public class UsuariosPer {
 		PreparedStatement stmt = null;
 		int res = 0;
 		
-		if(saldo > 0) {
+		if(saldo >= 0) {
 			try {
 				con = accesoBD.getConexion();
 				
 				stmt = con.prepareStatement(update);
 				
-//				stmt.setString(1, img);
-//				stmt.setString(2, nombre);
-//				stmt.setString(3, id);
+				stmt.setInt(1, saldo);
+				stmt.setInt(2, id_usuario);
 				
 				res = stmt.executeUpdate();
 				

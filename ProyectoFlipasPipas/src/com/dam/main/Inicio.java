@@ -8,7 +8,6 @@ import com.dam.view.PnlRanking;
 import com.dam.view.PnlTemario;
 import com.dam.view.PnlTienda;
 import com.dam.view.VAjustes;
-import com.dam.view.VConfirmacion;
 import com.dam.view.VCustomizacion;
 import com.dam.view.VInicioSesion;
 import com.dam.view.VMenu;
@@ -43,7 +42,6 @@ public class Inicio {
 				VCustomizacion vcu = new VCustomizacion();
 				
 				//CLASES GENERALES
-				VConfirmacion vco = new VConfirmacion();
 				Vdefiniciones vd = new Vdefiniciones();
 				
 				//CLASES NIVELES
@@ -63,7 +61,6 @@ public class Inicio {
 				listener.setVentana(vn);
 				listener.setVentana(vu);
 				listener.setVentana(vcu);
-				listener.setVentana(vco);
 				listener.setVentana(vd);
 				listener.setPanel(pl);
 				listener.setVentana(vp);
@@ -78,7 +75,6 @@ public class Inicio {
 				vn.setListener(listener);
 				vu.setListener(listener);
 				vcu.setListener(listener);
-				vco.setListener(listener);
 				pl.setListener(listener);
 				vp.setListener(listener);
 				vd.setListener(listener);

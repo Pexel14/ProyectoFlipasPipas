@@ -185,42 +185,42 @@ public class VCustomizacion extends JDialog {
 	}
 
 	public void cargarObjetos(ArrayList<Tienda> cargarBotones) {
-		if(cargarBotones.get(1).isComprada()) {
+		if(cargarBotones.get(0).isComprada()) {
 			btnFP1.setEnabled(true);
 			
 		} else {
 			btnFP1.setEnabled(false);
 		}
 		
-		if(cargarBotones.get(2).isComprada()) {
+		if(cargarBotones.get(1).isComprada()) {
 			btnFP2.setEnabled(true);
 			
 		} else {
 			btnFP2.setEnabled(false);
 		}
 		
-		if(cargarBotones.get(3).isComprada()) {
+		if(cargarBotones.get(2).isComprada()) {
 			btnFP3.setEnabled(true);
 			
 		} else {
 			btnFP3.setEnabled(false);
 		}
 		
-		if(cargarBotones.get(4).isComprada()) {
+		if(cargarBotones.get(3).isComprada()) {
 			btnFP4.setEnabled(true);
 			
 		} else {
 			btnFP4.setEnabled(false);
 		}
 		
-		if(cargarBotones.get(5).isComprada()) {
+		if(cargarBotones.get(4).isComprada()) {
 			btnFP5.setEnabled(true);
 			
 		} else {
 			btnFP5.setEnabled(false);
 		}
 		
-		if(cargarBotones.get(6).isComprada()) {
+		if(cargarBotones.get(5).isComprada()) {
 			btnFP6.setEnabled(true);
 			
 		} else {

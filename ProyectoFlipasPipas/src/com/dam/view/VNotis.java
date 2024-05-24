@@ -73,7 +73,7 @@ public class VNotis extends JDialog {
 		panel.add(pnlDecoracion3);
 		
 
-		JLabel lblNoti4 = new JLabel("<HTML>\r\nNoti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 Noti 4 \r\n</HTML>");
+		JLabel lblNoti4 = new JLabel();
 		lblNoti4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNoti4.setBounds(35, 530, 300, 100);
 		panel.add(lblNoti4);

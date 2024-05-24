@@ -67,7 +67,21 @@ public class UsuPregPer {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		
 		return preguntas;
 	}
