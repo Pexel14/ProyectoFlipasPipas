@@ -115,5 +115,9 @@ public class PnlCursos extends JPanel {
 		btnHtml.addActionListener(listener);
 		btnJava.addActionListener(listener);
 		btnSql.addActionListener(listener);
+		btnInterrogante1.addActionListener(listener);
+		btnInterrogante2.addActionListener(listener);
+		btnInterrogante3.addActionListener(listener);
+		btnInterrogante4.addActionListener(listener);
 	}
 }

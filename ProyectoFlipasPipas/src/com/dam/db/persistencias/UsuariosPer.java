@@ -1,9 +1,9 @@
 package com.dam.db.persistencias;
 
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.dam.db.AccesoDB;
 import com.dam.model.pojos.Usuarios;
@@ -221,7 +221,32 @@ public class UsuariosPer {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	public void borrarcuenta() {	//TODO Aun no se pueden iniciar las pruebas 
+		String deletStm = "DELETE FROM " + NOM_TABLA + " WHERE " + COL_ID
+				+ " = ?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+	
+		try {
+			con = accesoBD.getConexion();
+			pstmt = con.prepareStatement(deletStm);
+			pstmt.setInt(1, id_usuario);
+			pstmt.executeUpdate();
 			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) pstmt.close();
+				if (con != null) con.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+
 		}
 		
 	}

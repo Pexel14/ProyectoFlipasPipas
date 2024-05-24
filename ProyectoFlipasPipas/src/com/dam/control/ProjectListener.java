@@ -1,17 +1,23 @@
 package com.dam.control;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
 import javax.swing.JTextField;
 
 import com.dam.db.persistencias.UsuPregPer;
 import com.dam.db.persistencias.UsuariosPer;
 import com.dam.model.pojos.Preguntas;
 import com.dam.model.pojos.Usuarios;
+
+
+import com.dam.db.persistencias.NotificacionesPer;
+import com.dam.db.persistencias.UsuariosPer;
 import com.dam.view.PnlCursos;
 import com.dam.view.PnlLeciones;
 import com.dam.view.PnlRanking;
@@ -52,19 +58,24 @@ public class ProjectListener implements ActionListener {
 	private PnlLeciones pl;
 	private VPreguntas vp;
 	
+
 	// CLASES PERSISTENCIAS
-	private UsuariosPer usuper = new UsuariosPer();
-	private UsuPregPer usupregper = new UsuPregPer();
+	private UsuariosPer usuper;
+	private UsuPregPer usupregper;
 	
 	// CLASES POJOS
 	private Usuarios usuario;
 	
 	// EN QUÉ VENTANA ESTÁ EL USUARIO
-	public String lenguaje;
+	private String lenguaje;
 	
 	// PREGUNTAS
 	private int pregPos;
 	private ArrayList<Preguntas> preguntas;
+
+	//PERSISTENCIAS
+	private UsuariosPer pu;
+	private NotificacionesPer pn;
 	
 	public ProjectListener(VRegistro vr, VInicioSesion vi, VMenu vm, PnlTienda pti, PnlRanking pr, PnlTemario pte,
 			PnlCursos pc, VAjustes va, VNotis vn, VUsuario vu, VCustomizacion vcu, VConfirmacion vco,
@@ -84,6 +95,8 @@ public class ProjectListener implements ActionListener {
 		this.pl = pl;
 		this.vp = vp;
 		this.vd = vd;
+		pu = new UsuariosPer();
+		pn = new NotificacionesPer();
 	}
 
 
@@ -222,13 +235,13 @@ public class ProjectListener implements ActionListener {
 			
 			else if(e.getSource().equals(vm.getBtnNotis())){
 				vn.hacerVisible();
+				vn.setNotis(pn.selectNotificaciones());
 			}
 			
 			else if(e.getSource().equals(vm.getBtnPerfil())){
 				vu.hacerVisible();
 			}
-			
-			
+						
 			//BOTONES NIVELES
 			//CURSOS
 //			else if(e.getSource().equals(pc.getBtnJava()) || e.getSource().equals(pc.getBtnHtml()) || e.getSource().equals(pc.getBtnCss()) || e.getSource().equals(pc.getBtnSql())) {
@@ -237,10 +250,25 @@ public class ProjectListener implements ActionListener {
 //			}
 			
 			//BOTONES DEFINICION
-			else if(e.getSource() == pc.getBtnInterrogante1() || e.getSource() == pc.getBtnInterrogante2() || e.getSource() == pc.getBtnInterrogante3() || e.getSource() == pc.getBtnInterrogante4()) {
+			else if(e.getSource().equals(pc.getBtnInterrogante1())) {
 				vd.hacerVisible();
+				vd.mostrarDefinicion(0);
 			}
 			
+			else if (e.getSource().equals(pc.getBtnInterrogante2())) {
+				vd.hacerVisible();
+				vd.mostrarDefinicion(1);
+			}
+			
+			else if (e.getSource().equals(pc.getBtnInterrogante3())) {
+				vd.hacerVisible();
+				vd.mostrarDefinicion(2);
+			}
+			
+			else if (e.getSource().equals(pc.getBtnInterrogante4())) {
+				vd.hacerVisible();
+				vd.mostrarDefinicion(3);
+			}
 			
 			//LECCIONES
 			//JUNTAR TODOS
@@ -258,9 +286,9 @@ public class ProjectListener implements ActionListener {
 			//JUNTAR TODOS
 			else if(e.getSource().equals(pl.getBtnDfn_1()) || e.getSource().equals(pl.getBtnDfn_2()) || e.getSource().equals(pl.getBtnDfn_3()) || e.getSource().equals(pl.getBtnDfn_4())) {
 				vd.hacerVisible();
+				
 			}
-			
-			
+					
 			//BOTONES USUARIO
 			//USUARIO
 			else if(e.getSource().equals(vu.getBtnEditarPerfil())) {
@@ -268,10 +296,27 @@ public class ProjectListener implements ActionListener {
 				vcu.hacerVisible();
 			}
 			
-			
 			//BOTONES CONFIRMACION
 			else if(e.getSource() == vu.getBtnCerrarSesion() || e.getSource() == va.getBtnBorrarCuenta()) {
+				String texto = e.getActionCommand();
+				Object ventana = e.getSource();
 				vco.hacerVisible();
+				
+				int res = JOptionPane.showConfirmDialog((Component) ventana,"¿Estás seguro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+				
+				if(res == JOptionPane.YES_OPTION) {
+					switch (texto) {
+					case VUsuario.ACT_COM_BTN_CERRARSESION:
+						vu.dispose();
+						vm.dispose();
+						vi.hacerVisible();
+						break;
+					case VAjustes.ACT_CMD_BTN_BORRAR_CUENTA:
+						//TODO poner metodo borrarcuenta() persistencia Usuarios
+						break;
+					}
+				}
+				
 			}
 
 			// CURSOS
@@ -366,6 +411,10 @@ public class ProjectListener implements ActionListener {
 				vco.dispose();
 			}
 			
+			else if (e.getSource().equals(vd.getBtnSalirDef())) {
+				vd.dispose();;
+			}
+
 			
 		}
 		

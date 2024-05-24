@@ -109,9 +109,9 @@ public class VAjustes extends JDialog {
 		btnBorrarCuenta.addActionListener(listener);
 	}
 	
-//	public void setLisener(Lissener l) {
-		// TODO
-//		btnBorrarCuenta.addActionListener(l);
-//	}
+	public void setLisener(ProjectListener lissener) {
+		btnBorrarCuenta.addActionListener(lissener);
+		btnSalir.addActionListener(lissener);//TODO
+	}
 	
 }
