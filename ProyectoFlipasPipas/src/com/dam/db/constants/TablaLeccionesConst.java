@@ -1,10 +1,10 @@
 package com.dam.db.constants;
 
 public class TablaLeccionesConst {
-	public static final String NOM_TABLA = "TABLA_LECCIONES";
+	public static final String NOM_TABLA = "LECCIONES";
 	
-	public static final String NOM_COL_COLUMNA1 = "ID_LECCION";
-	public static final String NOM_COL_COLUMNA2 = "ID_CURSO";
-	public static final String NOM_COL_COLUMNA3 = "LECCION";
-	public static final String NOM_COL_COLUMNA4 = "LEC_COMPLETADA";
+	public static final String NOM_COL_ID_LECCION = "ID_LECCION";
+	public static final String NOM_COL_ID_CURSO = "ID_CURSO";
+	public static final String NOM_COL_LECCION = "LECCION";
+	public static final String NOM_COL_COMPLETADA = "COMPLETADA";
 }

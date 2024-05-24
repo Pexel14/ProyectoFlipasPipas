@@ -65,7 +65,6 @@ public class Inicio {
 				vi.setListener(listener);
 				vm.setListener(listener);
 				pti.setListener(listener);
-				pr.setListener(listener);
 				pte.setListener(listener);
 				pc.setListener(listener);
 				va.setListener(listener);
