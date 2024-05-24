@@ -1,6 +1,5 @@
 package com.dam.view;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
@@ -27,6 +26,7 @@ public class VUsuario extends JDialog {
 	private JButton btnCerrarSesion;
 	private JButton btnCerrarVentana;
 	private static VMenu vm;
+	private JLabel lblEmailUsuario;
 
 	public VUsuario() {
 		super(vm, "Usuario", true);
@@ -63,7 +63,7 @@ public class VUsuario extends JDialog {
 		lblNomUsuario.setBounds(175, 65, 235, 30);
 		getContentPane().add(lblNomUsuario);
 		
-		JLabel lblEmailUsuario = new JLabel("emaildelusuario@mail.com");
+		lblEmailUsuario = new JLabel("emaildelusuario@mail.com");
 		lblEmailUsuario.setForeground(new Color(240, 240, 240));
 		lblEmailUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblEmailUsuario.setBounds(175, 105, 180, 15);
@@ -74,12 +74,12 @@ public class VUsuario extends JDialog {
 		btnEditarPerfil.setBounds(465, 65, 85, 30);
 		getContentPane().add(btnEditarPerfil);
 		
-		lblRacha = new JLabel(ACT_COM_BTN_RACHA);
+		lblRacha = new JLabel(" dias de racha");
 		lblRacha.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblRacha.setBounds(175, 182, 250, 20);
 		getContentPane().add(lblRacha);
 		
-		lblPipaCoins = new JLabel(ACT_COM_BTN_COINS);
+		lblPipaCoins = new JLabel(" pipa coins");
 		lblPipaCoins.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPipaCoins.setBounds(175, 212, 250, 20);
 		getContentPane().add(lblPipaCoins);
@@ -110,6 +110,22 @@ public class VUsuario extends JDialog {
 		return btnCerrarVentana;
 	}
 	
+	public JLabel getLblNomUsuario() {
+		return lblNomUsuario;
+	}
+
+	public JLabel getLblRacha() {
+		return lblRacha;
+	}
+
+	public JLabel getLblPipaCoins() {
+		return lblPipaCoins;
+	}
+
+	public JLabel getLblEmailUsuario() {
+		return lblEmailUsuario;
+	}
+
 	public void hacerVisible() {
 		setVisible(true);
 	}

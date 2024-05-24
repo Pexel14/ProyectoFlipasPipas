@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import javax.swing.JTextField;
 
 import com.dam.db.persistencias.UsuPregPer;
 import com.dam.db.persistencias.UsuariosPer;
@@ -18,34 +17,20 @@ import com.dam.model.pojos.Usuarios;
 
 
 import com.dam.db.persistencias.NotificacionesPer;
-import com.dam.db.persistencias.UsuariosPer;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import javax.swing.JButton;
 
 import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.persistencias.LeccionesPer;
-import com.dam.db.persistencias.UsuPregPer;
-import com.dam.model.pojos.Lecciones;
 
 
-import com.dam.view.PnlCursos;
-import com.dam.view.PnlLeciones;
-import com.dam.view.PnlRanking;
-import com.dam.view.PnlTemario;
-import com.dam.view.PnlTienda;
-import com.dam.view.VAjustes;
-import com.dam.view.VConfirmacion;
-import com.dam.view.VCustomizacion;
-import com.dam.view.VInicioSesion;
-import com.dam.view.VMenu;
-import com.dam.view.VNotis;
-import com.dam.view.VPreguntas;
-import com.dam.view.VRegistro;
-import com.dam.view.VUsuario;
-import com.dam.view.Vdefiniciones;
+import com.dam.db.persistencias.TiendaPer;
+import com.dam.model.pojos.Tienda;
+
+import com.dam.view.*;
+
 
 public class ProjectListener implements ActionListener {
 	//CLASES REGISTRO/INICIO
@@ -54,6 +39,7 @@ public class ProjectListener implements ActionListener {
 	
 	//CLASES MENU
 	private VMenu vm;
+	private String img;
 	private PnlTienda pti;
 	private PnlRanking pr;
 	private PnlTemario pte;
@@ -95,26 +81,16 @@ public class ProjectListener implements ActionListener {
 	private UsuPregPer upp;
 	private LeccionesPer lp;
 	
-
+	//PERSISTENCIAS
+	private UsuariosPer up;
+	private TiendaPer tp;
 	
-	public ProjectListener(VRegistro vr, VInicioSesion vi, VMenu vm, PnlTienda pti, PnlRanking pr, PnlTemario pte,
-			PnlCursos pc, VAjustes va, VNotis vn, VUsuario vu, VCustomizacion vcu, VConfirmacion vco,
-			PnlLeciones pl, VPreguntas vp, Vdefiniciones vd) {
-		this.vr = vr;
+//	public ProjectListener() {
+//		
+//	}
+	
+	public ProjectListener(VInicioSesion vi) {
 		this.vi = vi;
-		this.vm = vm;
-		this.pti = pti;
-		this.pr = pr;
-		this.pte = pte;
-		this.pc = pc;
-		this.va = va;
-		this.vn = vn;
-		this.vu = vu;
-		this.vcu = vcu;
-		this.vco = vco;
-		this.pl = pl;
-		this.vp = vp;
-		this.vd = vd;
 
 		pu = new UsuariosPer();
 		pn = new NotificacionesPer();
@@ -122,9 +98,11 @@ public class ProjectListener implements ActionListener {
 		upp = new UsuPregPer();
 		lp = new LeccionesPer();
 
+		up = new UsuariosPer();
+		tp = new TiendaPer();
 	}
 
-
+	
 	public void actionPerformed(ActionEvent e) {
 		
 //		String s = e.getActionCommand();
@@ -243,6 +221,7 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTienda())){
+//				pti.cargarObjetos(tp.cargarBotones());
 				vm.cargarPanel(pti);
 			}
 			
@@ -270,6 +249,7 @@ public class ProjectListener implements ActionListener {
 			
 			else if(e.getSource().equals(vm.getBtnPerfil())){
 				vu.hacerVisible();
+				up.cargarDatosUsuario();
 			}
 						
 			//BOTONES NIVELES
@@ -335,6 +315,7 @@ public class ProjectListener implements ActionListener {
 			//USUARIO
 			else if(e.getSource().equals(vu.getBtnEditarPerfil())) {
 				vu.dispose();
+				vcu.cargarObjetos(tp.cargarBotones());
 				vcu.hacerVisible();
 			}
 			
@@ -342,7 +323,11 @@ public class ProjectListener implements ActionListener {
 			else if(e.getSource() == vu.getBtnCerrarSesion() || e.getSource() == va.getBtnBorrarCuenta()) {
 				String texto = e.getActionCommand();
 				Object ventana = e.getSource();
+
 				vco.hacerVisible();
+
+//				vco.hacerVisible();
+
 				
 				int res = JOptionPane.showConfirmDialog((Component) ventana,"¿Estás seguro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
 				
@@ -354,12 +339,15 @@ public class ProjectListener implements ActionListener {
 						vi.hacerVisible();
 						break;
 					case VAjustes.ACT_CMD_BTN_BORRAR_CUENTA:
+
 						//TODO poner metodo borrarcuenta() persistencia Usuarios
+
 						break;
 					}
 				}
 				
 			}
+
 
 			// CURSOS
 				// CSS
@@ -428,6 +416,7 @@ public class ProjectListener implements ActionListener {
 				// Si fallas
 				else preguntaFallada();
 			}
+
 			
 			//BOTONES SALIR
 			else if(e.getSource().equals(va.getBtnSalir())) {
@@ -453,11 +442,116 @@ public class ProjectListener implements ActionListener {
 				vco.dispose();
 			}
 			
+
 			else if (e.getSource().equals(vd.getBtnSalirDef())) {
 				vd.dispose();;
 			}
 
 			
+
+			else if(e.getSource() == vcu.getBtnFP1() 
+					|| e.getSource() == vcu.getBtnFP2() 
+					|| e.getSource() == vcu.getBtnFP3()
+					|| e.getSource() == vcu.getBtnFP4() 
+					|| e.getSource() == vcu.getBtnFP5() 
+					|| e.getSource() == vcu.getBtnFP6()) {
+				String boton = e.getActionCommand();
+				switch (boton) {
+					case "imagen1":
+						img = vcu.getBtnFP1().getIcon().toString();
+						break;
+						
+					case "imagen2":
+						img = vcu.getBtnFP2().getIcon().toString();
+						break;
+						
+					case "imagen3":
+						img = vcu.getBtnFP3().getIcon().toString();
+						break;
+						
+					case "imagen4":
+						img = vcu.getBtnFP4().getIcon().toString();
+						break;
+						
+					case "imagen5":
+						img = vcu.getBtnFP5().getIcon().toString();
+						break;
+						
+					case "imagen6":
+						img = vcu.getBtnFP6().getIcon().toString();
+						break;
+				}
+			}
+			
+			else if(e.getSource() == vcu.getBtnGuardar()) {
+				int res = up.customizarPerfil(img);
+				
+				if(res != 0) {
+					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+			
+			else if(e.getSource() == pti.getBtnObj1() 
+					|| e.getSource() == pti.getBtnObj2() 
+					|| e.getSource() == pti.getBtnObj3() 
+					|| e.getSource() == pti.getBtnObj4() 
+					|| e.getSource() == pti.getBtnObj5() 
+					|| e.getSource() == pti.getBtnObj6()) {
+				String boton = e.getActionCommand();
+				int res = JOptionPane.showConfirmDialog(pti, "¿Estás seguro?", "Confirmacion Compra", JOptionPane.YES_NO_OPTION);
+				Tienda id = null;
+				if(res == JOptionPane.YES_OPTION) {
+					switch (boton) {
+					case "Objeto1":
+						id = tp.comprobarObjeto(pti.getBtnObj1().getText());
+						break;
+					case "Objeto2":
+						id = tp.comprobarObjeto(pti.getBtnObj2().getText());
+						break;
+					case "Objeto3":
+						id = tp.comprobarObjeto(pti.getBtnObj3().getText());
+						break;
+					case "Objeto4":
+						id = tp.comprobarObjeto(pti.getBtnObj4().getText());
+						break;
+					case "Objeto5":
+						id = tp.comprobarObjeto(pti.getBtnObj5().getText());
+						break;
+					case "Objeto6":
+						id = tp.comprobarObjeto(pti.getBtnObj6().getText());
+						break;
+					}
+					
+					
+
+				}
+				
+				boolean comprado = false;
+				
+				if(id != null) {
+					int saldo = up.comprobarSaldo(id.getPrecio());
+					
+					if(saldo > 0) {
+						int realizado = tp.comprarObjeto(id);
+						
+						if(realizado != 0) {
+							int actualizado = up.compradoObjeto(saldo);
+							
+							if(actualizado != 0) {
+								comprado = true;
+								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.PLAIN_MESSAGE);								
+							}
+						} 
+					}
+				}
+				if(!comprado) {
+					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);					
+				}
+			}
+				
 		}
 		
 	}
@@ -534,6 +628,64 @@ public class ProjectListener implements ActionListener {
 		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
 		pl.cargarLec(nomLec, nomCur);
 
+	}
+
+
+	public void setPanel(PnlTienda tienda) {
+		this.pti = tienda;
+		tp.setVentana(tienda);
+	}
+	
+	public void setPanel(PnlLeciones lecciones) {
+		this.pl = lecciones;
+	}
+	
+	public void setPanel(PnlCursos cursos) {
+		this.pc = cursos;
+	}
+	
+	public void setPanel(PnlRanking ranking) {
+		this.pr = ranking;
+	}
+	
+	public void setPanel(PnlTemario temario) {
+		this.pte = temario;
+	}
+	
+	public void setVentana(Vdefiniciones definiciones) {
+		this.vd = definiciones;
+	}
+	
+	public void setVentana(VAjustes ajustes) {
+		this.va = ajustes;
+	}
+	
+	public void setVentana(VConfirmacion confirmacion) {
+		this.vco = confirmacion;
+	}
+	
+	public void setVentana(VCustomizacion customizacion) {
+		this.vcu = customizacion;
+	}
+	
+	public void setVentana(VNotis notificaciones) {
+		this.vn = notificaciones;
+	}
+	
+	public void setVentana(VPreguntas preguntas) {
+		this.vp = preguntas;
+	}
+	
+	public void setVentana(VUsuario usuario) {
+		this.vu = usuario;
+	}
+	
+	public void setVentana(VRegistro registro) {
+		this.vr = registro;
+	}
+	
+	public void setVentana(VMenu menu) {
+		this.vm = menu;
 	}
 
 }

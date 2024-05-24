@@ -4,14 +4,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.dam.control.ProjectListener;
+import com.dam.model.pojos.Tienda;
+
 import javax.swing.ImageIcon;
 
 public class VCustomizacion extends JDialog {
@@ -19,12 +21,12 @@ public class VCustomizacion extends JDialog {
 	private static final int ANCHO = 500;
 	private static final int ALTO = 550;
 	private static final String ACT_CMD_BTN_SALIRCUSTOM = "X";
-	public static final String ACT_COM_BTN_FP1 = "";
-	public static final String ACT_COM_BTN_FP2 = "";
-	public static final String ACT_COM_BTN_FP3 = "";
-	public static final String ACT_COM_BTN_FP4 = "";
-	public static final String ACT_COM_BTN_FP5 = "";
-	public static final String ACT_COM_BTN_FP6 = "";
+	public static final String ACT_COM_BTN_FP1 = "imagen1";
+	public static final String ACT_COM_BTN_FP2 = "imagen2";
+	public static final String ACT_COM_BTN_FP3 = "imagen3";
+	public static final String ACT_COM_BTN_FP4 = "imagen4";
+	public static final String ACT_COM_BTN_FP5 = "imagen5";
+	public static final String ACT_COM_BTN_FP6 = "imagen6";
 	
 	private JTextField txtNombre;
 	private JButton btnFP2;
@@ -106,26 +108,32 @@ public class VCustomizacion extends JDialog {
 		getContentPane().add(btnSalir);
 		
 		btnFP1 = new JButton(ACT_COM_BTN_FP1);
+		btnFP1.setIcon(new ImageIcon(VCustomizacion.class.getResource("/img/Imagen1CustomButton.png")));
 		btnFP1.setBounds(54, 260, 89, 76);
 		getContentPane().add(btnFP1);
 
 		btnFP2 = new JButton(ACT_COM_BTN_FP2);
+		btnFP2.setIcon(new ImageIcon(VCustomizacion.class.getResource("/img/Imagen2CustomButton.png")));
 		btnFP2.setBounds(54, 355, 89, 76);
 		getContentPane().add(btnFP2);
 		
 		btnFP3 = new JButton(ACT_COM_BTN_FP3);
+		btnFP3.setIcon(new ImageIcon(VCustomizacion.class.getResource("/img/Imagen3CustomButton.png")));
 		btnFP3.setBounds(202, 260, 89, 76);
 		getContentPane().add(btnFP3);
 
 		btnFP4 = new JButton(ACT_COM_BTN_FP4);
+		btnFP4.setIcon(new ImageIcon(VCustomizacion.class.getResource("/img/Imagen4CustomButton.png")));
 		btnFP4.setBounds(202, 355, 89, 76);
 		getContentPane().add(btnFP4);
 		
 		btnFP5 = new JButton(ACT_COM_BTN_FP5);
+		btnFP5.setIcon(new ImageIcon(VCustomizacion.class.getResource("/img/Imagen5CustomButton.png")));
 		btnFP5.setBounds(350, 260, 89, 76);
 		getContentPane().add(btnFP5);
 		
 		btnFP6 = new JButton(ACT_COM_BTN_FP6);
+		btnFP6.setIcon(new ImageIcon(VCustomizacion.class.getResource("/img/Imagen6CustomButton.png")));
 		btnFP6.setBounds(350, 355, 89, 76);
 		getContentPane().add(btnFP6);
 		
@@ -135,12 +143,89 @@ public class VCustomizacion extends JDialog {
 		
 	}
 	
+	
 	public JButton getBtnSalir() {
 		return btnSalir;
 	}
 	
+	public JButton getBtnFP2() {
+		return btnFP2;
+	}
+
+	public JButton getBtnFP1() {
+		return btnFP1;
+	}
+
+	public JButton getBtnFP3() {
+		return btnFP3;
+	}
+
+	public JButton getBtnFP4() {
+		return btnFP4;
+	}
+
+	public JButton getBtnFP6() {
+		return btnFP6;
+	}
+
+	public JButton getBtnFP5() {
+		return btnFP5;
+	}
+
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+	
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+	
 	public void setListener(ProjectListener listener) {
 		btnSalir.addActionListener(listener);
+	}
+
+	public void cargarObjetos(ArrayList<Tienda> cargarBotones) {
+		if(cargarBotones.get(1).isComprada()) {
+			btnFP1.setEnabled(true);
+			
+		} else {
+			btnFP1.setEnabled(false);
+		}
+		
+		if(cargarBotones.get(2).isComprada()) {
+			btnFP2.setEnabled(true);
+			
+		} else {
+			btnFP2.setEnabled(false);
+		}
+		
+		if(cargarBotones.get(3).isComprada()) {
+			btnFP3.setEnabled(true);
+			
+		} else {
+			btnFP3.setEnabled(false);
+		}
+		
+		if(cargarBotones.get(4).isComprada()) {
+			btnFP4.setEnabled(true);
+			
+		} else {
+			btnFP4.setEnabled(false);
+		}
+		
+		if(cargarBotones.get(5).isComprada()) {
+			btnFP5.setEnabled(true);
+			
+		} else {
+			btnFP5.setEnabled(false);
+		}
+		
+		if(cargarBotones.get(6).isComprada()) {
+			btnFP6.setEnabled(true);
+			
+		} else {
+			btnFP6.setEnabled(false);
+		}
 	}
 	
 }

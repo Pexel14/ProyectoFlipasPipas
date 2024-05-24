@@ -297,14 +297,254 @@ INSERT INTO PREGUNTAS VALUES(71,24,'¿En qué formato se expresa un color en CSS
 INSERT INTO PREGUNTAS VALUES(72,24,'¿Para qué sirve esta propiedad “color”?','Saber qué color tiene el fondo','Establece un color seleccionado a la fuente','Para cambiar el color del fondo','Te colorea la página web','resp2');
 
 
--- --Insert tienda
--- INSERT INTO TIENDA VALUES(1,'',300,'');
--- INSERT INTO TIENDA VALUES(2,'',300,'');
--- INSERT INTO TIENDA VALUES(3,'',300,'');
--- INSERT INTO TIENDA VALUES(4,'',300,'');
--- INSERT INTO TIENDA VALUES(5,'',300,'');
--- INSERT INTO TIENDA VALUES(6,'',300,'');
-
-
 --ARREGLOS BBDD
 UPDATE PREGUNTAS SET CORRECTA = 'resp2' WHERE id_pregunta = 67;
+
+DROP TABLE USUARIOS;
+
+CREATE TABLE USUARIOS(
+    ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,
+    NICK VARCHAR2(30) CONSTRAINT UQ_USUARIOS_NICK UNIQUE,
+    EMAIL VARCHAR2(40) CONSTRAINT UQ_USUARIOS_EMAIL UNIQUE,
+    FOTO_PERFIL VARCHAR2(50),
+    MONEDAS INT(6),
+    CONTRASENIA VARCHAR2(20)
+);
+
+DROP TABLE USUARIOS;
+
+CREATE TABLE USUARIOS(
+    ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,
+    NICK VARCHAR2(30),
+    EMAIL VARCHAR2(40) CONSTRAINT UQ_USUARIOS_EMAIL UNIQUE,
+    FOTO_PERFIL VARCHAR2(50),
+    MONEDAS INT(6),
+    CONTRASENIA VARCHAR2(20)
+);
+
+DROP TABLE TIENDA;
+
+CREATE TABLE TIENDA(
+    ID_OBJETO NUMBER(2) CONSTRAINT PK_TIENDA_IDOBJ PRIMARY KEY,
+    NOM_OBJETO VARCHAR2(20),
+    PRECIO NUMBER(3),
+    ICONO VARCHAR2(50),
+    COMPRADA BOOLEAN
+);
+
+-- --Insert tienda
+INSERT INTO TIENDA VALUES(1,'Objeto1',500,'', false);
+INSERT INTO TIENDA VALUES(2,'Objeto2',600,'', false);
+INSERT INTO TIENDA VALUES(3,'Objeto3',500,'', false);
+INSERT INTO TIENDA VALUES(4,'Objeto4',500,'', false);
+INSERT INTO TIENDA VALUES(5,'Objeto5',1000,'', false);
+INSERT INTO TIENDA VALUES(6,'Objeto6',700,'', false);
+
+DROP TABLE USUARIOS_PREGUNTAS;
+
+CREATE TABLE USUARIOS_PREGUNTAS(
+    ID_USUARIO NUMBER(3),
+    ID_PREGUNTA NUMBER(3),
+    PUNTOS NUMBER(3),
+    ACERTADO BOOLEAN,
+    CONSTRAINT PK_USERPREG_IDUSERIDPREG PRIMARY KEY (ID_USUARIO, ID_PREGUNTA),
+    CONSTRAINT FK_USERPREG_IDUSER FOREIGN KEY (ID_USUARIO) REFERENCES USUARIOS(ID_USUARIO),
+    CONSTRAINT FK_USERPREG_IDPREG FOREIGN KEY (ID_PREGUNTA) REFERENCES USUARIOS(ID_PREGUNTA)
+);
+
+DROP TABLE USUARIOS_PREGUNTAS;
+
+CREATE TABLE USUARIOS_PREGUNTAS(
+    ID_USUARIO INTEGER,
+    ID_PREGUNTA NUMBER(3),
+    PUNTOS NUMBER(3),
+    ACERTADO BOOLEAN,
+    CONSTRAINT PK_USERPREG_IDUSERIDPREG PRIMARY KEY (ID_USUARIO, ID_PREGUNTA),
+    CONSTRAINT FK_USERPREG_IDUSER FOREIGN KEY (ID_USUARIO) REFERENCES USUARIOS(ID_USUARIO),
+    CONSTRAINT FK_USERPREG_IDPREG FOREIGN KEY (ID_PREGUNTA) REFERENCES USUARIOS(ID_PREGUNTA)
+);
+
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Fernando', 'usuario1@prueba.com','img/Imagen5CustomButton.png',100,'usuarioprueba1');
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Pepe', 'usuario2@prueba.com','img/Imagen5CustomButton.png',200,'usuarioprueba2');
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Sara', 'usuario3@prueba.com','img/Imagen5CustomButton.png',300,'usuarioprueba2');
+
+DROP TABLE USUARIOS_PREGUNTAS;
+
+CREATE TABLE USUARIOS_PREGUNTAS(
+    ID_USUARIO INTEGER,
+    ID_PREGUNTA NUMBER(3),
+    PUNTOS NUMBER(3),
+    NUM_INTENTOS INTEGER,
+    TIPO_TEST TEXT,
+    CONSTRAINT PK_USERPREG_IDUSERIDPREG PRIMARY KEY (ID_USUARIO, ID_PREGUNTA),
+    CONSTRAINT FK_USERPREG_IDUSER FOREIGN KEY (ID_USUARIO) REFERENCES USUARIOS(ID_USUARIO),
+    CONSTRAINT FK_USERPREG_IDPREG FOREIGN KEY (ID_PREGUNTA) REFERENCES PREGUNTAS(ID_PREGUNTA)
+);
+
+UPDATE TIENDA SET ICONO = '/img/Imagen1Tienda.jpeg' WHERE ID_OBJETO = 1;
+UPDATE TIENDA SET ICONO = '/img/Imagen2Tienda.jpeg' WHERE ID_OBJETO = 2;
+UPDATE TIENDA SET ICONO = '/img/Imagen3Tienda.jpeg' WHERE ID_OBJETO = 3;
+UPDATE TIENDA SET ICONO = '/img/Imagen4Tienda.jpeg' WHERE ID_OBJETO = 4;
+UPDATE TIENDA SET ICONO = '/img/Imagen5Tienda.jpeg' WHERE ID_OBJETO = 5;
+UPDATE TIENDA SET ICONO = '/img/Imagen6Tienda.jpeg' WHERE ID_OBJETO = 6;
+
+DROP TABLE PREGUNTAS;
+
+CREATE TABLE PREGUNTAS(
+    ID_PREGUNTA NUMBER(3) CONSTRAINT PK_PREGUNTAS_IDPREG PRIMARY KEY,
+    ID_LECCION NUMBER(2) CONSTRAINT FK_PREGUNTAS_IDLEC REFERENCES PREGUNTAS(ID_LECCION),
+    PREGUNTA VARCHAR2(200),
+    RESP1 VARCHAR2(100),
+    RESP2 VARCHAR2(100),
+    RESP3 VARCHAR2(100),
+    RESP4 VARCHAR2(100),
+    CORRECTA VARCHAR2(100)
+);
+
+
+--Insert preguntas leccion 1 java
+INSERT INTO PREGUNTAS VALUES(1,1,'¿Cómo se declara una variable de tipo entero?','int num;','num int;','float num;','num = 12;','int num;'); 
+INSERT INTO PREGUNTAS VALUES(2,1,'¿Cómo se declara una cadena de caracteres?','String cadena;','string cadena','char cadena;','Character cadena;','String cadena;');
+INSERT INTO PREGUNTAS VALUES(3,1,'¿Cuál de estas variables son de referencia?','int num;','float num;','String cadena;','double num;','String cadena;');
+
+--Insert preguntas leccion 2 java
+INSERT INTO PREGUNTAS VALUES(4,2,'¿Cómo se suma un número?','num =+ 12;','num + 6;','num = num + 3','num == 21','num = num + 3');
+INSERT INTO PREGUNTAS VALUES(5,2,'¿Cómo se saca el resto de una división?','int num = 11/2;','int num /= 2;','int num =% 3;','int num = 4 % 0;','int num = 4 % 0;');
+INSERT INTO PREGUNTAS VALUES(6,2,'¿Cómo multiplicamos?','num = num * 1.24;','num *- 2;','num = num','num ^ 2;','num = num * 1.24;');
+
+--Insert preguntas leccion 3 java
+INSERT INTO PREGUNTAS VALUES(7,3,'¿Cómo se saca el resto de una división?','int num = 11/2;','int num /= 2;','int num =% 3;','int num = 4 % 0;','int num = 4 % 0;');
+INSERT INTO PREGUNTAS VALUES(8,3,'¿Cuál de estas variables son de referencia?','int num;','float num;','String cadena;','double num;','String cadena;');
+INSERT INTO PREGUNTAS VALUES(9,3,'¿Cómo multiplicamos?','num = num * 1.24;','num *- 2;','num = num','num ^ 2;','num = num * 1.24;');
+
+--Insert preguntas leccion 4 java
+INSERT INTO PREGUNTAS VALUES(10,4,'¿Cómo indicamos que num es mayor que num2?','num > num2','num = num2','num <= num2','num != num2','num > num2');
+INSERT INTO PREGUNTAS VALUES(11,4,'¿Cómo comprobamos que num es igual a num2?','num = num2','num >= num2','num == num2','num += num2','num == num2');
+INSERT INTO PREGUNTAS VALUES(12,4,'¿Cómo se niega?','num == 0','num =! 0','num != 0','num = 0','num != 0');
+
+--Insert preguntas leccion 5 java
+INSERT INTO PREGUNTAS VALUES(13,5,'¿Cómo escribimos un bucle while?','while(int i = 0; i < 10; i++)','while(x < 10)','while(x > 10; x--)','while(x =!= 10)','while(x > 10; x--)');
+INSERT INTO PREGUNTAS VALUES(14,5,'¿Deberíamos declarar variables en bucles?','Si, es lo correcto','No, no queremos llenar la memoria','Depende del caso','Todas son correctas','No, no queremos llenar la memoria');
+INSERT INTO PREGUNTAS VALUES(15,5,'¿Cómo escribimos un bucle for?','for(int i = 0; 0 < 10; i++)','for(int i; i < 10; i++)','for(int i = 0; i < 10; i--)','for(int i = 0; i < 10; i++)','for(int i = 0; i < 10; i++)');
+
+--Insert preguntas leccion 6 java
+INSERT INTO PREGUNTAS VALUES(16,6,'¿Cómo comprobamos que num es igual a num2?','num = num2','num >= num2','num == num2','num += num2','num == num2');
+INSERT INTO PREGUNTAS VALUES(17,6,'¿Cómo escribimos un bucle for?','for(int i = 0; 0 < 10; i++)','for(int i; i < 10; i++)','for(int i = 0; i < 10; i--)','for(int i = 0; i < 10; i++)','for(int i = 0; i < 10; i++)');
+INSERT INTO PREGUNTAS VALUES(18,6,'¿Cómo se niega?','num == 0','num =! 0','num != 0','num = 0','num != 0');
+
+
+
+
+
+
+--Insert preguntas leccion 1 sql
+INSERT INTO PREGUNTAS VALUES(19,7,'¿Qué comando se utiliza para crear una nueva tabla en SQL?','INSERT INTO','UPDATE','CREATE TABLE','ALTER TABLE','CREATE TABLE');
+INSERT INTO PREGUNTAS VALUES(20,7,'¿Cuál de los siguientes tipos de datos se pueden utilizar al definir columnas en una tabla?','VARCHAR2','BOOLEAN','NUMBER','Todos son correctos','Todos son correctos');
+INSERT INTO PREGUNTAS VALUES(21,7,'¿Con qué comando se elimina una tabla?','DROP TABLE','REMOVE TABLE','DELETE TABLE','TRUNCATE TABLE','DROP TABLE');
+
+--Insert preguntas leccion 2 sql
+INSERT INTO PREGUNTAS VALUES(22,8,'¿Cuál de los siguientes constraints garantiza que los valores en una columna sean diferentes entre sí?','NOT NULL','UNIQUE','CHECK','FOREIGN KEY','UNIQUE');
+INSERT INTO PREGUNTAS VALUES(23,8,'¿Qué constraint se utiliza para asegurar que una columna no pueda NO tener un valor?','CHECK','DEFAULT','NOT NULL','Todas son correctas','NOT NULL');
+INSERT INTO PREGUNTAS VALUES(24,8,'¿Cuál de las siguientes restricciones se aplica a toda la tabla, y no sólo a una columna específica?','NOT NULL','UNIQUE','PRIMARY KEY','CHECK','PRIMARY KEY');
+
+--Insert preguntas leccion 3 sql
+INSERT INTO PREGUNTAS VALUES(25,9,'¿Cuál de las siguientes restricciones se aplica a toda la tabla, y no sólo a una columna específica?','NOT NULL','UNIQUE','PRIMARY KEY','CHECK','PRIMARY KEY');
+INSERT INTO PREGUNTAS VALUES(26,9,'¿Con qué comando se elimina una tabla?','DROP TABLE','REMOVE TABLE','DELETE TABLE','TRUNCATE TABLE','DROP TABLE');
+INSERT INTO PREGUNTAS VALUES(27,9,'¿Cuál de los siguientes tipos de datos se pueden utilizar al definir columnas en una tabla?','VARCHAR2','BOOLEAN','NUMBER','Todos son correctos','Todos son correctos');
+
+--Insert preguntas leccion 4 sql
+INSERT INTO PREGUNTAS VALUES(28,10,'¿Qué hace el siguiente código? : ALTER TABLE Clientes ADD Email VARCHAR2(255);','Elimina la columna "Email" de la tabla "Clientes"','Agrega la columna "Clientes" a la tabla "Email"','Elimina la columna "Clientes" de la tabla "Email"','Agrega la columna "Email" a la tabla "Clientes"','Agrega la columna "Email" a la tabla "Clientes"');
+INSERT INTO PREGUNTAS VALUES(29,10,'¿Cómo insertamos el siguiente registro a la tabla "Orders"? : ID = 101, CustomerID = 5, OrderDate = "2024-04-15", TotalAmount = 150.50','INSERT INTO Orders (ID, CustomerID, OrderDate, TotalAmount) VALUES (101, 5, "2024-04-15", 150.50);','INSERT INTO Orders (CustomerID, OrderDate, TotalAmount) VALUES (5, "2024-04-15", 150.50);','INSERT INTO Orders (ID, CustomerID, OrderDate, TotalAmount) SELECT 101, 5, "2024-04-15", 150.50;','INSERT INTO Orders (CustomerID, ID, OrderDate, TotalAmount) VALUES (101, 5, "2024-04-15", 150.50);','INSERT INTO Orders (ID, CustomerID, OrderDate, TotalAmount) VALUES (101, 5, "2024-04-15", 150.50);');
+INSERT INTO PREGUNTAS VALUES(30,10,'¿Qué hace este código? : ALTER TABLE Paquete MODIFY Matricula VARCHAR2(7);','Crea una columna "Matrícula" de tipo VARCHAR2(7)','Cambia el nombre de la tabla a "Matrícula"','Modifica el tipo de datos de "Matrícula" a VARCHAR2(7)','No hace nada, el código es erróneo','Modifica el tipo de datos de "Matrícula" a VARCHAR2(7)');
+
+
+--Insert preguntas leccion 5 sql
+INSERT INTO PREGUNTAS VALUES(31,11,'¿Cuál es la sintaxis correcta para actualizar la edad de un usuario llamado “Juan” en una tabla llamada “Usuarios”?','UPDATE Usuarios SET edad = 30 WHERE nombre = ”Juan”;','DELETE From Usuarios SET edad = 30 WHERE nombre = “Juan”;','UPDATE Usuarios SET edad = 30 IF nombre = “Juan”;','MODIFY Usuarios SET edad = 30 WHERE nombre = “Juan”;','UPDATE Usuarios SET edad = 30 WHERE nombre = ”Juan”;');
+INSERT INTO PREGUNTAS VALUES(32,11,'¿Qué pasa si te olvidas el “WHERE” al poner una instrucción DELETE?','La instrucción fallará y no se eliminará ninguna fila','Solo se eliminará la primera fila de la tabla','Se eliminará la última fila de la tabla','Se eliminarán todas las filas de la tabla','La instrucción fallará y no se eliminará ninguna fila');
+INSERT INTO PREGUNTAS VALUES(33,11,'¿Qué resultado obtendrás al ejecutar la siguiente instrucción DELETE? UPDATE Empleados SET salario = salario * 1.10 WHERE departamento_id = 3 AND salario < 3000;','Aumenta el salario de todos los empleados en un 10%.','Aumenta el salario en un 10% solo para los empleados del departamento con id 3 que ganen menos de 3000.','Aumenta el salario en un 10% a los empleados que ganen menos de 3000','Establece el salario de todos los empleados a 3000.','Aumenta el salario en un 10% solo para los empleados del departamento con id 3 que ganen menos de 3000.');
+
+
+--Insert preguntas leccion 6 sql
+INSERT INTO PREGUNTAS VALUES(34,12,'¿Qué hace el siguiente código? : ALTER TABLE Clientes ADD Email VARCHAR2(255);','Elimina la columna "Email" de la tabla "Clientes"','Agrega la columna "Clientes" a la tabla "Email"','Elimina la columna "Clientes" de la tabla "Email"','Agrega la columna "Email" a la tabla "Clientes"','Agrega la columna "Email" a la tabla "Clientes"');
+INSERT INTO PREGUNTAS VALUES(35,12,'¿Qué resultado obtendrás al ejecutar la siguiente instrucción DELETE? UPDATE Empleados SET salario = salario * 1.10 WHERE departamento_id = 3 AND salario < 3000;','Aumenta el salario de todos los empleados en un 10%.','Aumenta el salario en un 10% solo para los empleados del departamento con id 3 que ganen menos de 3000.','Aumenta el salario en un 10% a los empleados que ganen menos de 3000','Establece el salario de todos los empleados a 3000.','Aumenta el salario en un 10% solo para los empleados del departamento con id 3 que ganen menos de 3000.');
+INSERT INTO PREGUNTAS VALUES(36,12,'¿Cómo insertamos el siguiente registro a la tabla "Orders"? : ID = 101, CustomerID = 5, OrderDate = "2024-04-15", TotalAmount = 150.50','INSERT INTO Orders (ID, CustomerID, OrderDate, TotalAmount) VALUES (101, 5, "2024-04-15", 150.50);','INSERT INTO Orders (CustomerID, OrderDate, TotalAmount) VALUES (5, "2024-04-15", 150.50);','INSERT INTO Orders (ID, CustomerID, OrderDate, TotalAmount) SELECT 101, 5, "2024-04-15", 150.50;','INSERT INTO Orders (CustomerID, ID, OrderDate, TotalAmount) VALUES (101, 5, "2024-04-15", 150.50);','INSERT INTO Orders (ID, CustomerID, OrderDate, TotalAmount) VALUES (101, 5, "2024-04-15", 150.50);');
+
+
+
+
+
+
+--Insert preguntas leccion 1 html
+INSERT INTO PREGUNTAS VALUES(37,13,'¿Cuál de estas etiquetas HTML no tiene cierre?','<body>','<a>','<br>','<strong>','<br>');
+INSERT INTO PREGUNTAS VALUES(38,13,'¿Cuál de estas etiquetas sirve para insertar una imagen?','<a>','<Photo>','<png>','<img>','<img>');
+INSERT INTO PREGUNTAS VALUES(39,13,'¿Html es considerado como?','Un lenguaje de programación','Lenguaje de marcado de hipertexto','Un framework','Una extensión de java Script','Lenguaje de marcado de hipertexto');
+
+
+--Insert preguntas leccion 2 html
+INSERT INTO PREGUNTAS VALUES(40,14,'¿Cuál de estas etiquetas HTML se utiliza para crear una lista desordenada?','<ol>','<ul>','<li>','<dl>','<ul>');
+INSERT INTO PREGUNTAS VALUES(41,14,'¿Cuál de estas etiquetas HTML se utiliza para crear un elemento de lista?','<ul>','<ol>','<li>','<dl>','<li>');
+INSERT INTO PREGUNTAS VALUES(42,14,'¿Cuál de estas etiquetas HTML se utiliza para crear una fila de tabla?','<table>','<tr>','<td>','<th>','<tr>');
+
+
+--Insert preguntas leccion 3 html
+INSERT INTO PREGUNTAS VALUES(43,15,'¿Cuál de estas etiquetas HTML no tiene cierre?','<body>','<a>','<br>','<strong>','<br>');
+INSERT INTO PREGUNTAS VALUES(44,15,'¿Cuál de estas etiquetas HTML se utiliza para crear una lista desordenada?','<ol>','<ul>','<li>','<dl>','<ul>');
+INSERT INTO PREGUNTAS VALUES(45,15,'¿Html es considerado como?','Un lenguaje de programación','Lenguaje de marcado de hipertexto','Un framework','Una extensión de java Script','Lenguaje de marcado de hipertexto');
+
+
+--Insert preguntas leccion 4 html
+INSERT INTO PREGUNTAS VALUES(46,16,'¿Se puede abrir un enlace en una nueva pestaña del navegador en HTML?','Usando el atributo "new" en la etiqueta <a>','Usando el atributo "blank" en la etiqueta <a>','Usando el atributo "tab" en la etiqueta <a>','Usando el atributo "target" con el valor "_blank" en la etiqueta <a>','Usando el atributo "target" con el valor "_blank" en la etiqueta <a>');
+INSERT INTO PREGUNTAS VALUES(47,16,'¿Cómo harías que un enlace descargue un archivo en lugar de abrirlo en el navegador en HTML?','Usando el atributo "download" en la etiqueta <a>','Usando el atributo "href" con el valor "download" en la etiqueta <a>','Usando el atributo "target" con el valor "_download" en la etiqueta <a>','Usando el atributo "rel" con el valor "download" en la etiqueta <a>','Usando el atributo "download" en la etiqueta <a>');
+INSERT INTO PREGUNTAS VALUES(48,16,'¿Sabes cómo se puede hacer que un enlace sea no seguido por los motores de búsqueda en HTML?','Usando el atributo "nofollow" en la etiqueta <a>','Usando el atributo "noindex" en la etiqueta <a>','Usando el atributo "rel" con el valor "nofollow" en la etiqueta <a>','Usando el atributo "rel" con el valor "noindex" en la etiqueta <a>','Usando el atributo "rel" con el valor "nofollow" en la etiqueta <a>');
+
+
+--Insert preguntas leccion 5 html
+INSERT INTO PREGUNTAS VALUES(49,17,'¿Qué atributo de la etiqueta <form> especifica dónde enviar los datos del formulario cuando se envía?','method','action','target','enctype','action');
+INSERT INTO PREGUNTAS VALUES(50,17,'¿Qué valor del atributo "type" en la etiqueta <input> se usa para campos de entrada ocultos?','hidden','password','submit','reset','hidden');
+INSERT INTO PREGUNTAS VALUES(51,17,'¿Qué etiqueta se usa para crear una lista desplegable en un formulario?','<input>','<select>','<option>','<list>','<select>');
+
+
+--Insert preguntas leccion 6 html
+INSERT INTO PREGUNTAS VALUES(52,18,'¿Qué valor del atributo "type" en la etiqueta <input> se usa para campos de entrada ocultos?','hidden','password','submit','reset','hidden');
+INSERT INTO PREGUNTAS VALUES(53,18,'¿Cómo harías que un enlace descargue un archivo en lugar de abrirlo en el navegador en HTML?','Usando el atributo "download" en la etiqueta <a>','Usando el atributo "href" con el valor "download" en la etiqueta <a>','Usando el atributo "target" con el valor "_download" en la etiqueta <a>','Usando el atributo "rel" con el valor "download" en la etiqueta <a>','Usando el atributo "download" en la etiqueta <a>');
+INSERT INTO PREGUNTAS VALUES(54,18,'¿Qué etiqueta se usa para crear una lista desplegable en un formulario?','<input>','<select>','<option>','<list>','<select>');
+
+
+
+
+
+
+--Insert preguntas leccion 1 css
+INSERT INTO PREGUNTAS VALUES(55,19,'¿Qué es CSS?','Un lenguaje de programación utilizado para crear páginas web interactivas.','Un protocolo de comunicación utilizado para transferir datos entre servidores y clientes.','Un conjunto de reglas y estilos utilizados para definir el aspecto y el diseño de páginas web','Un estándar de codificación utilizado para escribir aplicaciones móviles nativas','Un conjunto de reglas y estilos utilizados para definir el aspecto y el diseño de páginas web');
+INSERT INTO PREGUNTAS VALUES(56,19,'¿Cómo se llama lo que se encuentra dentro de “{}” ? h1 {color: #FF0000; background: #00FF00}','Propiedades','Selector','Valores','Declaración','Declaración');
+INSERT INTO PREGUNTAS VALUES(57,19,'¿Qué tipo de hoja de estilo es CSS?','Cascada ','XSL','LESS','SASS','Cascada');
+
+
+--Insert preguntas leccion 2 css
+INSERT INTO PREGUNTAS VALUES(58,20,'¿Para qué sirve este código: <head> <link rel="stylesheet" type="text/css" href="estilos.css" /> </head>?','Para insertar un script JavaScript en el encabezado de la página.','Para agregar una imagen de fondo a la página web.','Para vincular una hoja de estilos externa a la página HTML','Para cargar una fuente personalizada en la página web','Para vincular una hoja de estilos externa a la página HTML');
+INSERT INTO PREGUNTAS VALUES(59,20,'¿A qué referencio poniendo “.” antes que un selector?','A un elemento HTML',' A una clase CSS','A un identificador único','A un selector de atributo',' A una clase CSS');
+INSERT INTO PREGUNTAS VALUES(60,20,'¿A qué referencio poniendo “#” antes que un selector?','A un elemento HTML','A una clase CSS','A un id','A un selector de atributo','A un id');
+
+
+--Insert preguntas leccion 3 css
+INSERT INTO PREGUNTAS VALUES(61,21,'¿A qué referencio poniendo “#” antes que un selector?','A un elemento HTML','A una clase CSS','A un id','A un selector de atributo','A un id');
+INSERT INTO PREGUNTAS VALUES(62,21,'¿Cómo se llama lo que se encuentra dentro de “{}” ? h1 {color: #FF0000; background: #00FF00}','Propiedades','Selector','Valores','Declaración','Declaración');
+INSERT INTO PREGUNTAS VALUES(63,21,'¿Qué tipo de hoja de estilo es CSS?','Cascada ','XSL','LESS','SASS','Cascada');
+
+
+--Insert preguntas leccion 4 css
+INSERT INTO PREGUNTAS VALUES(64,22,'¿Para qué sirve esta propiedad “color”?','Saber qué color tiene el fondo','Establece un color seleccionado a la fuente','Para cambiar el color del fondo','Te colorea la página web','Establece un color seleccionado a la fuente');
+INSERT INTO PREGUNTAS VALUES(65,22,'¿En qué formato se expresa un color en CSS?','Hexadecimal','RGB','Todas son correctas','Nombre del color','Todas son correctas');
+INSERT INTO PREGUNTAS VALUES(66,22,'¿Cuál de las siguientes propiedades CSS se utiliza para establecer el color de fondo de un elemento HTML?','color','font-family','background-color','text-decoration','background-color');
+
+
+--Insert preguntas leccion 5 css
+INSERT INTO PREGUNTAS VALUES(67,23,'¿Cual NO es una medida absoluta de longitud en CSS?','cm','qx','pt','px','cm');
+INSERT INTO PREGUNTAS VALUES(68,23,'¿Cual NO es una propiedad de dimensión?','min-size','max-high','width','height','min-size');
+INSERT INTO PREGUNTAS VALUES(69,23,'¿Dónde se puede usar width y height?','En un botón','En una imagen','En un div','Todas son correctas','Todas son correctas');
+
+
+--Insert preguntas leccion 6 css
+INSERT INTO PREGUNTAS VALUES(70,24,'¿Cual NO es una medida absoluta de longitud en CSS?','cm','qx','pt','px','cm');
+INSERT INTO PREGUNTAS VALUES(71,24,'¿En qué formato se expresa un color en CSS?','Hexadecimal','RGB','Todas son correctas','Nombre del color','Todas son correctas');
+INSERT INTO PREGUNTAS VALUES(72,24,'¿Para qué sirve esta propiedad “color”?','Saber qué color tiene el fondo','Establece un color seleccionado a la fuente','Para cambiar el color del fondo','Te colorea la página web','Establece un color seleccionado a la fuente');

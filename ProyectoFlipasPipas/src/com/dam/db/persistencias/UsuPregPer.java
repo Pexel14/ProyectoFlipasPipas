@@ -81,7 +81,7 @@ public class UsuPregPer {
 						+ ", UP." + TablaUsuPregConst.NOM_COL_PUNTOS
 						+ " FROM " + TablaUsuPregConst.NOM_TABLA + " UP"
 						+ " JOIN " + TablaUsuariosConst.NOM_TABLA + " U"
-						+ " ON U." + TablaUsuariosConst.NOM_COL_ID_USUARIO + " = UP." + TablaUsuPregConst.NOM_COL_ID_USUARIO;
+						+ " ON U." + TablaUsuariosConst.NOM_COL_ID + " = UP." + TablaUsuPregConst.NOM_COL_ID_USUARIO;
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rslt = null;

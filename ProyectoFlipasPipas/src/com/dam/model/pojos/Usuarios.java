@@ -18,6 +18,7 @@ public class Usuarios {
         this.contrasenia = contrasenia;
     }
 
+
 	@Override
 	public String toString() {
 		return "Usuarios [id_usuario=" + idUsuario + ", nick=" + nick + ", email=" + email + ", fotoPerfil=" + fotoPerfil + ", monedas=" + monedas + ", contraseña="
