@@ -9,9 +9,6 @@ import com.dam.db.AccesoDB;
 import com.dam.model.pojos.Usuarios;
 
 import com.dam.db.constants.TablaUsuariosConst;
-import com.dam.view.VCustomizacion;
-import com.dam.view.VInicioSesion;
-import com.dam.view.VUsuario;
 
 public class UsuariosPer {
 	
@@ -28,9 +25,6 @@ public class UsuariosPer {
 	private static int id_usuario;
 	private static String nick;
 	
-	public int getId_usuario() {
-		return id_usuario;
-	}
 
 	public UsuariosPer() {
 		accesoBD = new AccesoDB();
@@ -58,7 +52,7 @@ public class UsuariosPer {
 			if(rslt.next()) {
 				existe = true;
 				id_usuario = rslt.getInt(1);
-				nick = rslt.getString(2);	
+				nick = rslt.getString(2);
 			}
 			
 			
@@ -66,9 +60,9 @@ public class UsuariosPer {
 			e.printStackTrace();
 		} finally {
 			try {
-				rslt.close();
-				stmt.close();
-				con.close();
+				if(rslt != null) rslt.close();
+				if(stmt != null) stmt.close();
+				if(con != null) con.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -76,6 +70,10 @@ public class UsuariosPer {
 		
 		return existe;
 	}
+	
+	
+	
+	
 	
 	public boolean contraCorrecta(String correo, String passw) {
 		
@@ -215,14 +213,15 @@ public class UsuariosPer {
 			
 			stmt.executeUpdate();
 			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			
 			try {
-				stmt.close();
+				if(stmt != null) stmt.close();
 				
-				con.close();
+				if(con != null) con.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -255,8 +254,6 @@ public class UsuariosPer {
 		}
 		
 	}
-
-	private int id;
 
 
 	public void cargarDatosUsuario() {
@@ -309,9 +306,48 @@ public class UsuariosPer {
 		
 	}
 	
-
-	public int getId() {
-		return id;
+	
+	public void getID(String email) {
+		String select = "SELECT " + COL_ID + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?";
+		
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rlst = null;
+		
+		try {
+			con = accesoBD.getConexion();
+			
+			stmt = con.prepareStatement(select);
+			
+			stmt.setString(1, email);
+			
+			rlst = stmt.executeQuery();
+			
+			if(rlst.next()) {
+				id_usuario = rlst.getInt(1);
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rlst != null) {
+					rlst.close();
+				}
+				
+				if(stmt != null) {
+					stmt.close();
+				}
+				
+				if(con != null) {
+					con.close();
+				}
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		
 	}
 	
 
@@ -441,6 +477,10 @@ public class UsuariosPer {
 		
 		
 		return res;
+	}
+	
+	public int getId_usuario() {
+		return id_usuario;
 	}
 	
 }

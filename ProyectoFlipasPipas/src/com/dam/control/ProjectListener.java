@@ -28,7 +28,6 @@ import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.persistencias.LeccionesPer;
 
 
-import com.dam.db.persistencias.TiendaPer;
 import com.dam.model.pojos.Tienda;
 
 import com.dam.view.*;
@@ -81,7 +80,6 @@ public class ProjectListener implements ActionListener {
 	private LeccionesPer lp;
 	
 	//PERSISTENCIAS
-	private TiendaPer tp;
 	private UsuTienda ut;
 //	public ProjectListener() {
 //		
@@ -97,7 +95,6 @@ public class ProjectListener implements ActionListener {
 		lp = new LeccionesPer();
 
 		up = new UsuariosPer();
-		tp = new TiendaPer();
 		
 		ut = new UsuTienda();
 	}
@@ -153,8 +150,13 @@ public class ProjectListener implements ActionListener {
 					} else {
 						usuario = new Usuarios(0, nombre, correo, "Foto 1", 0, passw);
 						up.registrarUsuario(usuario);
+						
 						JOptionPane.showMessageDialog(vr, "Usuario creado con éxito", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
-						ut.crearTienda(up.getId_usuario());
+						
+						 up.getID(correo);
+						 ut.crearTienda(up.getId_usuario());
+						
+						
 						vr.dispose();
 						vi.hacerVisible();
 					}
@@ -221,7 +223,7 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTienda())){
-				pti.cargarObjetos(tp.cargarBotones());
+				pti.cargarObjetos(ut.cargarBotones());
 				
 				int saldo = up.comprobarSaldo();
 				pti.cargarSaldo(saldo);
@@ -319,7 +321,7 @@ public class ProjectListener implements ActionListener {
 			//USUARIO
 			else if(e.getSource().equals(vu.getBtnEditarPerfil())) {
 				vu.dispose();
-				vcu.cargarObjetos(tp.cargarBotones());
+				vcu.cargarObjetos(ut.cargarBotones());
 				vcu.hacerVisible();
 			}
 			
@@ -503,22 +505,22 @@ public class ProjectListener implements ActionListener {
 				if(res == JOptionPane.YES_OPTION) {
 					switch (boton) {
 					case "Objeto1":
-						id = tp.comprobarObjeto(pti.getBtnObj1().getText());
+						id = ut.comprobarObjeto(pti.getBtnObj1().getText());
 						break;
 					case "Objeto2":
-						id = tp.comprobarObjeto(pti.getBtnObj2().getText());
+						id = ut.comprobarObjeto(pti.getBtnObj2().getText());
 						break;
 					case "Objeto3":
-						id = tp.comprobarObjeto(pti.getBtnObj3().getText());
+						id = ut.comprobarObjeto(pti.getBtnObj3().getText());
 						break;
 					case "Objeto4":
-						id = tp.comprobarObjeto(pti.getBtnObj4().getText());
+						id = ut.comprobarObjeto(pti.getBtnObj4().getText());
 						break;
 					case "Objeto5":
-						id = tp.comprobarObjeto(pti.getBtnObj5().getText());
+						id = ut.comprobarObjeto(pti.getBtnObj5().getText());
 						break;
 					case "Objeto6":
-						id = tp.comprobarObjeto(pti.getBtnObj6().getText());
+						id = ut.comprobarObjeto(pti.getBtnObj6().getText());
 						break;
 					}
 					
@@ -533,14 +535,14 @@ public class ProjectListener implements ActionListener {
 				if(id != null) {
 					int saldo = pti.getSaldo();
 					if(saldo > 0) {
-						int realizado = tp.comprarObjeto(id);
+						int realizado = ut.comprarObjeto(id);
 						
 						if(realizado != 0) {
 							int actualizado = up.compradoObjeto(saldo - id.getPrecio());
 							
 							if(actualizado != 0) {
 								comprado = true;
-								pti.cargarObjetos(tp.cargarBotones());
+								pti.cargarObjetos(ut.cargarBotones());
 								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.PLAIN_MESSAGE);								
 							}
 						} 
@@ -634,7 +636,6 @@ public class ProjectListener implements ActionListener {
 
 	public void setPanel(PnlTienda tienda) {
 		this.pti = tienda;
-		tp.setVentana(tienda);
 	}
 	
 	public void setPanel(PnlLeciones lecciones) {
