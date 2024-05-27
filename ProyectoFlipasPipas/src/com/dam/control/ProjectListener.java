@@ -353,24 +353,28 @@ public class ProjectListener implements ActionListener {
 			// CURSOS
 				// CSS
 			else if (e.getSource().equals(pc.getBtnCss())) {
-				lenguaje = "CSS";
-				vm.cargarPanel(pl);
-			}
-				// HTML
-			else if (e.getSource().equals(pc.getBtnHtml())) {
-				lenguaje = "HTML";
-				vm.cargarPanel(pl);
-			}
-				// JAVA
-			else if (e.getSource().equals(pc.getBtnJava())) {
-				lenguaje = "JAVA";
-				vm.cargarPanel(pl);
-			}
-				// SQL
-			else if (e.getSource().equals(pc.getBtnSql())) {
-				lenguaje = "SQL";
-				vm.cargarPanel(pl);
-			}
+                lenguaje = "CSS";
+                cargarLecCur(FlipasPipasConst.ID_CURSO_CSS);
+                vm.cargarPanel(pl);
+            }
+                // HTML
+            else if (e.getSource().equals(pc.getBtnHtml())) {
+                lenguaje = "HTML";
+                cargarLecCur(FlipasPipasConst.ID_CURSO_HTML);
+                vm.cargarPanel(pl);
+            }
+                // JAVA
+            else if (e.getSource().equals(pc.getBtnJava())) {
+                lenguaje = "JAVA";
+                cargarLecCur(FlipasPipasConst.ID_CURSO_JAVA);
+                vm.cargarPanel(pl);
+            }
+                // SQL
+            else if (e.getSource().equals(pc.getBtnSql())) {
+                lenguaje = "SQL";
+                cargarLecCur(FlipasPipasConst.ID_CURSO_SQL);
+                vm.cargarPanel(pl);
+            }
 			
 			// PREGUNTAS TODO
 				//Pregunta 1
@@ -614,24 +618,24 @@ public class ProjectListener implements ActionListener {
 		}
 	}
 	
-//	private void cargarLecCur(int id_curso) {
-//		vm.cargarPanel(pl);
-//		
-//		String nomCur = "";
-//		
-//		switch (id_curso) {
-//		case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
-//		case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
-//		case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
-//		case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
-//		}
-//		
-//		
-//		
-//		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
-//		pl.cargarLec(nomLec, nomCur);
-//
-//	}
+	private void cargarLecCur(int id_curso) {
+        vm.cargarPanel(pl);
+
+//        String nomCur = "";
+
+//        switch (id_curso) {
+//        case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
+//        case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
+//        case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
+//        case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
+//        }
+
+
+        ArrayList<Boolean> nvlsOK = lp.nvlCompletados(id_curso);
+        ArrayList<String> nomLec = lp.datosLeccion(id_curso);
+        pl.cargarLec(nomLec, lenguaje, nvlsOK);
+
+    }
 
 
 	public void setPanel(PnlTienda tienda) {
