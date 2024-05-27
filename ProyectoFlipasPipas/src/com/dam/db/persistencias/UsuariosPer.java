@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.dam.db.AccesoDB;
 import com.dam.model.pojos.Usuarios;
+import com.dam.view.PnlRanking;
 import com.dam.db.constants.TablaUsuPregConst;
 import com.dam.db.constants.TablaUsuariosConst;
 
@@ -524,5 +526,46 @@ public class UsuariosPer {
 		
 		return tup;
 	}
+
+	public ArrayList<String> imgUsu() {
+		
+		ArrayList<String> imgs = new ArrayList<String>();
+	
+		String query = "SELECT " + TablaUsuariosConst.NOM_COL_FOTOPERFIL
+				+ " FROM " + TablaUsuariosConst.NOM_TABLA
+				+ " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
+				+ " FETCH NEXT " + PnlRanking.CANT_USU_RNKG + " ROWS";
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rslt = null;
+		
+		try {
+			con = accesoBD.getConexion();
+			stmt = con.createStatement();
+			rslt = stmt.executeQuery(query);
+			
+			while(rslt.next()) {
+				imgs.add(rslt.getString(1));
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}  finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return imgs;
+		}
 	
 }
