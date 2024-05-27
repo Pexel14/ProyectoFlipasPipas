@@ -312,10 +312,24 @@ public class ProjectListener implements ActionListener {
 			
 			//BOTONES DEFINICION
 			//JUNTAR TODOS
-			else if(e.getSource().equals(pl.getBtnDfn_1()) || e.getSource().equals(pl.getBtnDfn_2()) || e.getSource().equals(pl.getBtnDfn_3()) || e.getSource().equals(pl.getBtnDfn_4())) {
+			else if(e.getSource().equals(pl.getBtnDfn_1())) {
+				lp.getDef(); // TODO definir segun curso oh id de lecion interna oh externamente?
 				vd.hacerVisible();
-				
 			}
+			
+			else if(e.getSource().equals(pl.getBtnDfn_2())) {
+				vd.hacerVisible();
+			}
+			
+			else if(e.getSource().equals(pl.getBtnDfn_3())) {
+				vd.hacerVisible();
+			}
+			
+			else if(e.getSource().equals(pl.getBtnDfn_4())) {
+				vd.hacerVisible();
+			}
+			
+			
 					
 			//BOTONES USUARIO
 			//USUARIO
@@ -341,7 +355,9 @@ public class ProjectListener implements ActionListener {
 						break;
 					case VAjustes.ACT_CMD_BTN_BORRAR_CUENTA:
 
-						//TODO poner metodo borrarcuenta() persistencia Usuarios
+						up.borrarcuenta();
+						va.dispose();
+						vi.hacerVisible();
 
 						break;
 					}

@@ -34,22 +34,22 @@ public class PnlCursos extends JPanel {
 		
 		btnInterrogante4 = new JButton("?");
 		btnInterrogante4.setBackground(new Color(0, 0, 191));
-		btnInterrogante4.setBounds(1055, 491, 45, 38);
+		btnInterrogante4.setBounds(1114, 432, 45, 38);
 		add(btnInterrogante4);
 		
 		btnInterrogante3 = new JButton("?");
 		btnInterrogante3.setBackground(new Color(248, 194, 97));
-		btnInterrogante3.setBounds(1055, 124, 45, 38);
+		btnInterrogante3.setBounds(1114, 70, 45, 38);
 		add(btnInterrogante3);
 		
 		btnInterrogante2 = new JButton("?");
 		btnInterrogante2.setBackground(new Color(0, 132, 0));
-		btnInterrogante2.setBounds(501, 491, 45, 38);
+		btnInterrogante2.setBounds(557, 432, 45, 38);
 		add(btnInterrogante2);
 		
 		btnInterrogante1 = new JButton("?");
 		btnInterrogante1.setBackground(new Color(138, 0, 0));
-		btnInterrogante1.setBounds(501, 124, 45, 38);
+		btnInterrogante1.setBounds(557, 70, 45, 38);
 		add(btnInterrogante1);
 		
 		btnJava = new JButton(ACT_COM_BTN_JAVA);

@@ -228,7 +228,7 @@ public class UsuariosPer {
 		}
 	}
 	
-	public void borrarcuenta() {	//TODO Aun no se pueden iniciar las pruebas 
+	public void borrarcuenta() { 
 		String deletStm = "DELETE FROM " + NOM_TABLA + " WHERE " + COL_ID
 				+ " = ?";
 		

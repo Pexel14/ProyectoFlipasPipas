@@ -2,6 +2,7 @@ package com.dam.db.persistencias;
 
 import java.sql.Statement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,6 +58,25 @@ public class LeccionesPer {
 			}
 		
 		return nomLec;
+	}
+
+	public String getDef() { // TODO
+		String def = "";
+		
+		String query = ""; 
+		
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			con = acceso.getConexion();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return def;
+		
 	}
 
 }
