@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
 
 import com.dam.db.AccesoDB;
 import com.dam.model.pojos.Usuarios;
-
+import com.dam.db.constants.TablaUsuPregConst;
 import com.dam.db.constants.TablaUsuariosConst;
 
 public class UsuariosPer {
@@ -481,6 +483,46 @@ public class UsuariosPer {
 	
 	public int getId_usuario() {
 		return id_usuario;
+	}
+
+	public HashMap<String, Integer> nickPuntUsu() {
+		HashMap<String, Integer> tup = new HashMap<String, Integer>();
+		
+		String query = "SELECT " + TablaUsuariosConst.NOM_COL_NICK
+						+ ", " + TablaUsuariosConst.NOM_COL_PUNTOS
+						+ " FROM " + TablaUsuariosConst.NOM_TABLA;
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rslt = null;
+		
+		try {
+			con = accesoBD.getConexion();
+			stmt = con.createStatement();
+			rslt = stmt.executeQuery(query);
+			
+			while(rslt.next()) {
+				tup.put(rslt.getString(1), rslt.getInt(2));
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}  finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		
+		return tup;
 	}
 	
 }

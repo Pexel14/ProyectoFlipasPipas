@@ -234,7 +234,7 @@ public class ProjectListener implements ActionListener {
 			else if(e.getSource().equals(vm.getBtnRanking())){
 				vm.cargarPanel(pr);
 				// Guardo nombre y puntos de usuario en un HashMap
-				HashMap<String, Integer> tablaUsuPnt = upp.nickPuntUsu();
+				HashMap<String, Integer> tablaUsuPnt = up.nickPuntUsu();
 				// Esto lo uso para hacer un entry en un arraylist
 				ArrayList<Entry<String, Integer>> tablaRanking = new ArrayList<Entry<String,Integer>>(tablaUsuPnt.entrySet());
 				pr.mostrarRanking(tablaRanking);
