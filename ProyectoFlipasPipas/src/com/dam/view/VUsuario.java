@@ -14,8 +14,8 @@ import javax.swing.ImageIcon;
 public class VUsuario extends JDialog {
 	
 	public static final String ACT_COM_BTN_CERRARSESION = "Cerrar Sesión";
-	public static final String ACT_COM_BTN_COINS = "1000 pipa coins";
-	public static final String ACT_COM_BTN_RACHA = "100 días de racha";
+	public static final String ACT_COM_BTN_COINS = " pipa coins";
+	public static final String ACT_COM_BTN_RACHA = " días de racha";
 	public static final String ACT_COM_BTN_EDITAR = "Editar";
 	private static final int ANCHO = 600;
 	private static final int ALTO = 400;
@@ -57,13 +57,13 @@ public class VUsuario extends JDialog {
 		panel.setBounds(50, 45, 500, 10);
 		getContentPane().add(panel);
 		
-		lblNomUsuario = new JLabel("UsuarioDePrueba");
+		lblNomUsuario = new JLabel("");
 		lblNomUsuario.setForeground(new Color(240, 240, 240));
 		lblNomUsuario.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblNomUsuario.setBounds(175, 65, 235, 30);
 		getContentPane().add(lblNomUsuario);
 		
-		lblEmailUsuario = new JLabel("emaildelusuario@mail.com");
+		lblEmailUsuario = new JLabel("");
 		lblEmailUsuario.setForeground(new Color(240, 240, 240));
 		lblEmailUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblEmailUsuario.setBounds(175, 105, 180, 15);
@@ -74,10 +74,6 @@ public class VUsuario extends JDialog {
 		btnEditarPerfil.setBounds(465, 65, 85, 30);
 		getContentPane().add(btnEditarPerfil);
 		
-		lblRacha = new JLabel(" dias de racha");
-		lblRacha.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblRacha.setBounds(175, 182, 250, 20);
-		getContentPane().add(lblRacha);
 		
 		lblPipaCoins = new JLabel(" pipa coins");
 		lblPipaCoins.setFont(new Font("Tahoma", Font.PLAIN, 20));

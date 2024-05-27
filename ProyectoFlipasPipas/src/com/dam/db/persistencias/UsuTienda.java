@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.dam.db.AccesoDB;
@@ -19,22 +18,25 @@ public class UsuTienda {
 		acceso = new AccesoDB();
 	}
 	
-	public ArrayList<Tienda> cargarBotones() {
+	public ArrayList<Tienda> cargarBotones(int id_usuario) {
 		ArrayList<Tienda> listaTienda = new ArrayList<Tienda>(); 
 		
 		String query = "SELECT T.*, UT.* FROM " + TablaTiendaConst.NOM_TABLA 
-				+ " T JOIN " + TablaUsuarioTiendaConst.NOM_TABLA + " UT ON UT." + TablaUsuarioTiendaConst.COL_ID_OBJ + " = T." + TablaTiendaConst.NOM_COL_ID;
+				+ " T JOIN " + TablaUsuarioTiendaConst.NOM_TABLA + " UT ON UT." 
+				+ TablaUsuarioTiendaConst.COL_ID_OBJ + " = T." 
+				+ TablaTiendaConst.NOM_COL_ID + " WHERE " + TablaUsuarioTiendaConst.COL_ID_USUARIO + " = ?";
 		
 		Connection con = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rlst = null;
 		
 		try {
 			con = acceso.getConexion();
 			
-			stmt = con.createStatement();
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, id_usuario);
 			
-			rlst = stmt.executeQuery(query);
+			rlst = stmt.executeQuery();
 			
 			while(rlst.next()) {
 				listaTienda.add(new Tienda(rlst.getInt(1), rlst.getString(2), rlst.getInt(3), rlst.getString(4), rlst.getBoolean(7)));
@@ -64,8 +66,9 @@ public class UsuTienda {
 		
 	}
 
-	public int comprarObjeto(Tienda id) {
-		String update = "UPDATE " + TablaUsuarioTiendaConst.NOM_TABLA + " SET " + TablaUsuarioTiendaConst.COL_COMPRADA + " = true " + " WHERE " + TablaUsuarioTiendaConst.COL_ID_OBJ + " = ?";
+	public int comprarObjeto(Tienda id, int id_usuario) {
+		String update = "UPDATE " + TablaUsuarioTiendaConst.NOM_TABLA + " SET " 
+	+ TablaUsuarioTiendaConst.COL_COMPRADA + " = true " + " WHERE " + TablaUsuarioTiendaConst.COL_ID_OBJ + " = ? AND " + TablaUsuarioTiendaConst.COL_ID_USUARIO + " = ?";
 		int res = 0;
 		
 		Connection con = null;
@@ -75,7 +78,9 @@ public class UsuTienda {
 			con = acceso.getConexion();
 			
 			stmt = con.prepareStatement(update);
+			
 			stmt.setInt(1, id.getId_objeto());
+			stmt.setInt(2, id_usuario);
 			
 			res = stmt.executeUpdate();
 			

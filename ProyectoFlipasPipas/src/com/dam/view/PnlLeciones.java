@@ -10,13 +10,14 @@ import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 
 import java.awt.Font;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
 public class PnlLeciones extends JPanel {
-		
+	
+	/*TODO: --------------------- - - - - - - PONER TÍTULO DEL CURSO ARRIBA DEL TODO EN LA LECCIÓN - - - - - - ------------------------------------*/
+	
 	public static final String ACT_COM_BTN_1 = "1";
 	public static final String ACT_COM_BTN_2 = "2";
 	public static final String ACT_COM_BTN_3 = "3";
@@ -214,7 +215,7 @@ public class PnlLeciones extends JPanel {
 	}
 
 
-	public void cargarLec(ArrayList<String> nomLec, String nomCur, ArrayList<Boolean> nvlsOK) {
+	public void cargarLec(ArrayList<String> nomLec, String nomCur) {
 		lblTitulo.setText(nomLec.get(0));
 		lblTitulo_1.setText(nomLec.get(1));
 		lblTitulo_Rep1.setText(nomLec.get(2));
@@ -223,14 +224,6 @@ public class PnlLeciones extends JPanel {
 		lblTitulo_Rep2.setText(nomLec.get(5));
 		
 		lblCurso.setText(nomCur);
-		
-		btnLec_1.setEnabled(nvlsOK.get(0));;
-		btnLec_2.setEnabled(nvlsOK.get(1));;
-		btnRepaso.setEnabled(nvlsOK.get(2));;
-		btnLec_3.setEnabled(nvlsOK.get(3));;
-		btnLec_4.setEnabled(nvlsOK.get(4));;
-		btnExamen.setEnabled(nvlsOK.get(5));;
-		
 		
 	}
 }

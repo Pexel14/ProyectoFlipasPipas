@@ -20,7 +20,6 @@ public class VCustomizacion extends JDialog {
 	
 	private static final int ANCHO = 500;
 	private static final int ALTO = 550;
-	private static final String ACT_CMD_BTN_SALIRCUSTOM = "X";
 	public static final String ACT_COM_BTN_FP1 = "imagen1";
 	public static final String ACT_COM_BTN_FP2 = "imagen2";
 	public static final String ACT_COM_BTN_FP3 = "imagen3";
@@ -155,7 +154,7 @@ public class VCustomizacion extends JDialog {
 	public JButton getBtnFP1() {
 		return btnFP1;
 	}
-
+	
 	public JButton getBtnFP3() {
 		return btnFP3;
 	}
@@ -180,8 +179,40 @@ public class VCustomizacion extends JDialog {
 		return txtNombre;
 	}
 	
+	public String getTxtFP1() {
+		return "/img/Imagen1FotoPerfil.jpeg";
+	}
+	
+	public String getTxtFP2() {
+		return "/img/Imagen2FotoPerfil.jpeg";
+	}
+	
+	public String getTxtFP3() {
+		return "/img/Imagen3FotoPerfil.jpeg";
+	}
+	
+	public String getTxtFP4() {
+		return "/img/Imagen4FotoPerfil.jpeg";
+	}
+	
+	public String getTxtFP5() {
+		return "/img/Imagen5FotoPerfil.jpeg";
+	}
+	
+	public String getTxtFP6() {
+		return "/img/Imagen6FotoPerfil.jpeg";
+	}
+	
 	public void setListener(ProjectListener listener) {
 		btnSalir.addActionListener(listener);
+		btnGuardar.addActionListener(listener);
+		btnFP1.addActionListener(listener);
+		btnFP2.addActionListener(listener);
+		btnFP3.addActionListener(listener);
+		btnFP4.addActionListener(listener);
+		btnFP5.addActionListener(listener);
+		btnFP6.addActionListener(listener);
+		
 	}
 
 	public void cargarObjetos(ArrayList<Tienda> cargarBotones) {

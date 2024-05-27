@@ -9,7 +9,6 @@ public class TablaUsuariosConst {
 	public static final String NOM_COL_EMAIL = "EMAIL";
 	public static final String NOM_COL_FOTOPERFIL = "FOTO_PERFIL";
 	public static final String NOM_COL_MONEDAS = "MONEDAS";
-	public static final String NOM_COL_PUNTOS = "PUNTOS";
-	public static final String NOM_COL_CONTRASENIA = "CONTRASENIA";
+	public static final String NOM_COL_CONTRASENIA = "CONTRASEÑA";
 	
 }
