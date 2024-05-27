@@ -147,7 +147,7 @@ public class ProjectListener implements ActionListener {
 					if (correoYaExiste) {
 						JOptionPane.showMessageDialog(vr, "El correo ya está registrado", "Error de datos", JOptionPane.ERROR_MESSAGE);
 					} else {
-						usuario = new Usuarios(0, nombre, correo, "Foto 1", 0, passw);
+						usuario = new Usuarios(0, nombre, correo, "/img/usuario.png", 0, passw);
 						up.registrarUsuario(usuario);
 						
 						JOptionPane.showMessageDialog(vr, "Usuario creado con éxito", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
@@ -202,7 +202,7 @@ public class ProjectListener implements ActionListener {
 							 String foto = up.getFotoPerfil();
 							 
 							 if(foto != null) {
-								 vm.cambiarFotoPerfil(foto);								 
+								 vm.cambiarFotoPerfil(foto);
 							 }
 							 
 							 vm.cargarPanel(pc);
