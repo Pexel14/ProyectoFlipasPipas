@@ -405,10 +405,10 @@ public class ProjectListener implements ActionListener {
 						vm.dispose();
 						vi.hacerVisible();
 						break;
+						/* * * * NO ENTRA EN EL CASE * * * */
 					case VAjustes.ACT_CMD_BTN_BORRAR_CUENTA:
-
-						//TODO poner metodo borrarcuenta() persistencia Usuarios
-
+						up.borrarcuenta();
+						vi.hacerVisible();
 						break;
 					}
 				}
@@ -655,8 +655,9 @@ public class ProjectListener implements ActionListener {
 		
 		
 		
+		ArrayList<Boolean> nvlsOK = lp.nvlCompletados(id_curso);
 		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
-		pl.cargarLec(nomLec, lenguaje);
+		pl.cargarLec(nomLec, lenguaje, nvlsOK);
 
 	}
 

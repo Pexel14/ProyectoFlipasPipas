@@ -500,8 +500,9 @@ public class UsuariosPer {
 	
 		String query = "SELECT " + TablaUsuariosConst.NOM_COL_FOTOPERFIL
 				+ " FROM " + TablaUsuariosConst.NOM_TABLA
+				//+ " FETCH NEXT " + PnlRanking.CANT_USU_RNKG + " ROWS"G
 				+ " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
-				+ " FETCH NEXT " + PnlRanking.CANT_USU_RNKG + " ROWS";
+				+ " LIMIT " + PnlRanking.CANT_USU_RNKG;
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rslt = null;
