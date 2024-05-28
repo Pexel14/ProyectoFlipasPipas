@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.dam.view.PnlRanking;
+import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.constants.TablaUsuPregConst;
 
 import com.dam.db.constants.TablaUsuariosConst;
@@ -317,8 +318,8 @@ public class UsuariosPer {
 	}
 	
 	
-	public void getID(String email) {
-		String select = "SELECT " + COL_ID + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?";
+	public void getUser(String email) {
+		String select = "SELECT " + COL_ID + ", " + COL_NICK + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -335,6 +336,7 @@ public class UsuariosPer {
 			
 			if(rlst.next()) {
 				id_usuario = rlst.getInt(1);
+				nick = rlst.getString(2);
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -492,6 +494,10 @@ public class UsuariosPer {
 	
 	public String getFotoPerfil() {
 		return fotoPerfil;
+	}
+	
+	public String getNick() {
+		return nick;
 	}
 
 	public ArrayList<String> imgUsu() {
@@ -667,26 +673,26 @@ public class UsuariosPer {
 	        con = accesoBD.getConexion();
 	        
 	        // Bot 1
-	        String query1 = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
+	        String query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
 	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
-	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = 1";
-	        stmt = con.prepareStatement(query1);
+	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = " + FlipasPipasConst.ID_BOT1;
+	        stmt = con.prepareStatement(query);
 	        stmt.setInt(1, puntosBot1);
 	        stmt.executeUpdate();
 	        
 	        // Bot 2
-	        String query2 = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
+	        query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
 	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
-	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = 2";
-	        stmt = con.prepareStatement(query2);
+	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = " + FlipasPipasConst.ID_BOT2;
+	        stmt = con.prepareStatement(query);
 	        stmt.setInt(1, puntosBot2);
 	        stmt.executeUpdate();
 	        
 	        // Bot 3
-	        String query3 = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
+	        query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
 	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
-	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = 3";
-	        stmt = con.prepareStatement(query3);
+	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = " + FlipasPipasConst.ID_BOT3;
+	        stmt = con.prepareStatement(query);
 	        stmt.setInt(1, puntosBot3);
 	        stmt.executeUpdate();
 	        
