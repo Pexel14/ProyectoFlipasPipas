@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class PnlLeciones extends JPanel {
 	
@@ -40,8 +41,6 @@ public class PnlLeciones extends JPanel {
 	private JLabel lblTitulo_1;
 	private JLabel lblTitulo_2;
 	private JLabel lblTitulo_3;
-	private JLabel lblTitulo_Rep2;
-	private JLabel lblTitulo_Rep1;
 	private JLabel lblCurso;
 
 	public PnlLeciones() {
@@ -56,7 +55,7 @@ public class PnlLeciones extends JPanel {
 		
 		btnLec_1 = new JButton(ACT_COM_BTN_1);
 		btnLec_1.setFont(new Font("Tahoma", Font.PLAIN, 75));
-		btnLec_1.setBounds(44, 488, 111, 111);
+		btnLec_1.setBounds(44, 500, 111, 111);
 		add(btnLec_1);
 		
 		btnLec_2 = new JButton(ACT_COM_BTN_2);
@@ -74,13 +73,13 @@ public class PnlLeciones extends JPanel {
 		btnLec_4.setBounds(867, 500, 111, 111);
 		add(btnLec_4);
 		
-		btnRepaso = new JButton(ACT_COM_BTN_REPASO);
-		btnRepaso.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		btnRepaso = new JButton("Repaso");
+		btnRepaso.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnRepaso.setBounds(439, 500, 147, 111);
 		add(btnRepaso);
 		
-		btnExamen = new JButton(ACT_COM_BTN_EXAMEN);
-		btnExamen.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		btnExamen = new JButton("Examen");
+		btnExamen.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnExamen.setBounds(1048, 249, 147, 111);
 		add(btnExamen);
 		
@@ -101,52 +100,43 @@ public class PnlLeciones extends JPanel {
 		add(btnDfn_4);
 		
 		lblTitulo = new JLabel("");
+		lblTitulo.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblTitulo.setBackground(Color.BLACK);
-		lblTitulo.setBounds(24, 450, 150, 28);
+		lblTitulo.setBounds(30, 621, 300, 30);
 		add(lblTitulo);
 		
 		lblTitulo_1 = new JLabel("");
+		lblTitulo_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo_1.setForeground(Color.WHITE);
 		lblTitulo_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblTitulo_1.setBackground(Color.BLACK);
-		lblTitulo_1.setBounds(232, 211, 150, 28);
+		lblTitulo_1.setBounds(110, 370, 400, 30);
 		add(lblTitulo_1);
 		
 		lblTitulo_2 = new JLabel("");
+		lblTitulo_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo_2.setForeground(Color.WHITE);
 		lblTitulo_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblTitulo_2.setBackground(Color.BLACK);
-		lblTitulo_2.setBounds(620, 211, 150, 28);
+		lblTitulo_2.setBounds(545, 370, 300, 40);
 		add(lblTitulo_2);
 		
 		lblTitulo_3 = new JLabel("");
+		lblTitulo_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo_3.setForeground(Color.WHITE);
 		lblTitulo_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblTitulo_3.setBackground(Color.BLACK);
-		lblTitulo_3.setBounds(847, 462, 150, 28);
+		lblTitulo_3.setBounds(725, 621, 400, 30);
 		add(lblTitulo_3);
 		
-		lblTitulo_Rep1 = new JLabel("");
-		lblTitulo_Rep1.setForeground(Color.WHITE);
-		lblTitulo_Rep1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblTitulo_Rep1.setBackground(Color.BLACK);
-		lblTitulo_Rep1.setBounds(437, 461, 150, 28);
-		add(lblTitulo_Rep1);
-		
-		lblTitulo_Rep2 = new JLabel("");
-		lblTitulo_Rep2.setForeground(Color.WHITE);
-		lblTitulo_Rep2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblTitulo_Rep2.setBackground(Color.BLACK);
-		lblTitulo_Rep2.setBounds(1046, 210, 150, 28);
-		add(lblTitulo_Rep2);
-		
 		lblCurso = new JLabel("");
+		lblCurso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCurso.setForeground(Color.WHITE);
-		lblCurso.setFont(new Font("Tahoma", Font.BOLD, 40));
+		lblCurso.setFont(new Font("Tahoma", Font.BOLD, 70));
 		lblCurso.setBackground(Color.BLACK);
-		lblCurso.setBounds(496, 26, 300, 50);
+		lblCurso.setBounds(396, 26, 500, 100);
 		add(lblCurso);
 
 	}
@@ -218,10 +208,8 @@ public class PnlLeciones extends JPanel {
 	public void cargarLec(ArrayList<String> nomLec, String nomCur) {
 		lblTitulo.setText(nomLec.get(0));
 		lblTitulo_1.setText(nomLec.get(1));
-		lblTitulo_Rep1.setText(nomLec.get(2));
 		lblTitulo_2.setText(nomLec.get(3));
 		lblTitulo_3.setText(nomLec.get(4));
-		lblTitulo_Rep2.setText(nomLec.get(5));
 		
 		lblCurso.setText(nomCur);
 		
