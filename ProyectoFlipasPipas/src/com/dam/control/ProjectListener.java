@@ -382,6 +382,11 @@ public class ProjectListener implements ActionListener {
 				vd.hacerVisible();
 				
 			}
+			
+			// Botón atrás
+			else if (e.getSource().equals(pl.getBtnAtrasLecciones())) {
+				vm.cargarPanel(pc);
+			}
 					
 			//BOTONES USUARIO
 			//USUARIO

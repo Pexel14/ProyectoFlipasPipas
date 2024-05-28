@@ -42,6 +42,7 @@ public class PnlLeciones extends JPanel {
 	private JLabel lblTitulo_2;
 	private JLabel lblTitulo_3;
 	private JLabel lblCurso;
+	private JButton btnAtrasLecciones;
 
 	public PnlLeciones() {
 		setSize(VMenu.ANCHO_PANEL, VMenu.ALTO_PANEL); //Para que no ocurran errores
@@ -138,6 +139,11 @@ public class PnlLeciones extends JPanel {
 		lblCurso.setBackground(Color.BLACK);
 		lblCurso.setBounds(396, 26, 500, 100);
 		add(lblCurso);
+		
+		btnAtrasLecciones = new JButton("<-");
+		btnAtrasLecciones.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnAtrasLecciones.setBounds(50, 50, 83, 83);
+		add(btnAtrasLecciones);
 
 	}
 	
@@ -188,6 +194,9 @@ public class PnlLeciones extends JPanel {
 		return btnExamen;
 	}
 
+	public JButton getBtnAtrasLecciones() {
+		return btnAtrasLecciones;
+	}
 
 
 	public void setListener(ProjectListener listener) {
@@ -202,6 +211,7 @@ public class PnlLeciones extends JPanel {
 		btnDfn_2.addActionListener(listener);
 		btnDfn_3.addActionListener(listener);
 		btnDfn_4.addActionListener(listener);
+		btnAtrasLecciones.addActionListener(listener);
 	}
 
 
