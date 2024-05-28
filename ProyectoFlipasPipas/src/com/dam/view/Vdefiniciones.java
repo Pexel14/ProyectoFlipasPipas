@@ -82,10 +82,17 @@ public class Vdefiniciones extends JDialog {
 		
 	}
 	
-	public void mostrarDefinicion(int i) {
+	public void mostrarInterrogantes(int i) {
 		txtInfo.setText("");
 		txtInfo.setText(DEFINICIONES[i]);
 		
 	}
+
+	public void mostrarDef(String def) {
+		txtInfo.setText("");
+		txtInfo.setText(def);
+	}
+	
+	
 	
 }

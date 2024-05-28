@@ -279,22 +279,22 @@ public class ProjectListener implements ActionListener {
 			
 			//BOTONES DEFINICION
 			else if(e.getSource().equals(pc.getBtnInterrogante1())) {
-				vd.mostrarDefinicion(0);
+				vd.mostrarInterrogantes(0);
 				vd.hacerVisible();
 			}
 			
 			else if (e.getSource().equals(pc.getBtnInterrogante2())) {
-				vd.mostrarDefinicion(1);
+				vd.mostrarInterrogantes(1);
 				vd.hacerVisible();
 			}
 			
 			else if (e.getSource().equals(pc.getBtnInterrogante3())) {
-				vd.mostrarDefinicion(2);
+				vd.mostrarInterrogantes(2);
 				vd.hacerVisible();
 			}
 			
 			else if (e.getSource().equals(pc.getBtnInterrogante4())) {
-				vd.mostrarDefinicion(3);
+				vd.mostrarInterrogantes(3);
 				vd.hacerVisible();
 			}
 			
@@ -313,19 +313,26 @@ public class ProjectListener implements ActionListener {
 			//BOTONES DEFINICION
 			//JUNTAR TODOS
 			else if(e.getSource().equals(pl.getBtnDfn_1())) {
-				lp.getDef(); // TODO definir segun curso oh id de lecion interna oh externamente?
+				ArrayList<String> defList = lp.getDef(lenguaje);// TODO definir segun curso oh id de lecion interna oh externamente?
+				vd.mostrarDef(defList.get(0));
 				vd.hacerVisible();
 			}
 			
 			else if(e.getSource().equals(pl.getBtnDfn_2())) {
+				ArrayList<String> defList = lp.getDef(lenguaje);// TODO definir segun curso oh id de lecion interna oh externamente?
+				vd.mostrarDef(defList.get(1));
 				vd.hacerVisible();
 			}
 			
 			else if(e.getSource().equals(pl.getBtnDfn_3())) {
+				ArrayList<String> defList = lp.getDef(lenguaje);// TODO definir segun curso oh id de lecion interna oh externamente?
+				vd.mostrarDef(defList.get(2));
 				vd.hacerVisible();
 			}
 			
 			else if(e.getSource().equals(pl.getBtnDfn_4())) {
+				ArrayList<String> defList = lp.getDef(lenguaje);// TODO definir segun curso oh id de lecion interna oh externamente?
+				vd.mostrarDef(defList.get(3));
 				vd.hacerVisible();
 			}
 			
@@ -460,8 +467,6 @@ public class ProjectListener implements ActionListener {
 				vd.dispose();;
 			}
 
-			
-
 			else if(e.getSource() == vcu.getBtnFP1() 
 					|| e.getSource() == vcu.getBtnFP2() 
 					|| e.getSource() == vcu.getBtnFP3()
@@ -505,7 +510,7 @@ public class ProjectListener implements ActionListener {
 					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				
-			}
+			} // TODO
 			
 			else if(e.getSource() == pti.getBtnObj1() 
 					|| e.getSource() == pti.getBtnObj2() 

@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.dam.db.AccesoDB;
+import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.constants.TablaLeccionesConst;
+import com.dam.db.constants.TablaTemarioConst;
 
 
 public class LeccionesPer {
@@ -60,22 +62,57 @@ public class LeccionesPer {
 		return nomLec;
 	}
 
-	public String getDef() { // TODO
-		String def = "";
+	public ArrayList<String> getDef(String lenguaje) { // TODO
+		ArrayList<String> deflist = new ArrayList<String>();
 		
-		String query = ""; 
+		String query = "SELECT " + TablaTemarioConst.NOM_COL_COLUMNA3 + " FROM "  + TablaTemarioConst.NOM_TABLA;  
 		
-		Connection con = null;
-		PreparedStatement stmt = null;
-		
-		try {
-			con = acceso.getConexion();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+		if (lenguaje.equals("JAVA")) {
+			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_JAVA;
+		} else if (lenguaje.equals("SQL")) {
+			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_SQL;
+		} else if (lenguaje.equals("HTML")) {
+			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_HTML;
+		} else {
+			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_CSS;
 		}
 		
 		
-		return def;
+		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rslt = null;
+		
+		try {
+			con = acceso.getConexion();
+			stmt = con.createStatement();
+			rslt = stmt.executeQuery(query);
+			
+			while(rslt.next()) {
+				deflist.add(rslt.getString(1));
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println("No se encontraron los datos en la base verifique 'db/BaseDatos.db'");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		
+		
+		return deflist;
 		
 	}
 
