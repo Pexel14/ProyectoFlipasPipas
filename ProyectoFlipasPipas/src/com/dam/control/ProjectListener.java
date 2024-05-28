@@ -55,31 +55,25 @@ public class ProjectListener implements ActionListener {
 	//CLASES NIVELES
 	private PnlLeciones pl;
 	private VPreguntas vp;
-	
-
 
 	// CLASES PERSISTENCIAS
 	private UsuariosPer up;
 	private UsuPregPer upp;
+	private LeccionesPer lp;
+	private UsuTienda ut;
+	private NotificacionesPer pn;
 	
 	// CLASES POJOS
 	private Usuarios usuario;
 	
-	// EN QUÉ VENTANA ESTÁ EL USUARIO
-	private String lenguaje;
+	// EN QUÉ VENTANA Y NIVEL ESTÁ EL USUARIO
+	private int lenguaje;
+	private int nivActual;
 	
 	// PREGUNTAS
 	private int pregPos;
 	private ArrayList<Preguntas> preguntas;
-
-	//PERSISTENCIAS
-	private NotificacionesPer pn;
-
-	// PERSISTENCIAS
-	private LeccionesPer lp;
 	
-	//PERSISTENCIAS
-	private UsuTienda ut;
 //	public ProjectListener() {
 //		
 //	}
@@ -129,13 +123,15 @@ public class ProjectListener implements ActionListener {
 				
 				if (nombre.isBlank() || nombre.equals("Nombre")) {
 					JOptionPane.showMessageDialog(vr, "Introduce un nombre", "Error de datos", JOptionPane.ERROR_MESSAGE);
-				} else if (correo.isBlank() || correo.equals("Correo")) {
+				} else if (correo.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduce un correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (!correo.contains("@")) {
+					JOptionPane.showMessageDialog(vr, "El correo debe contener un arroba (@)", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (up.correoRepetido(correo)) {
 					JOptionPane.showMessageDialog(vr, "El correo introducido ya existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
-				} else if (passw.isBlank() || passw.equals("Contraseña")) {
+				} else if (passw.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduzca una contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
-				} else if (confPasswd.isBlank() || confPasswd.equals("Confirmar contraseña")) {
+				} else if (confPasswd.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduzca la confirmación de contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (!passw.equals(confPasswd)) {
 					JOptionPane.showMessageDialog(vr, "Las contraseñas no coinciden", "Error de datos", JOptionPane.ERROR_MESSAGE);
@@ -157,6 +153,7 @@ public class ProjectListener implements ActionListener {
 						
 						
 						vr.dispose();
+						vr.limpiarDatos();
 						vi.hacerVisible();
 					}
 					
@@ -171,6 +168,7 @@ public class ProjectListener implements ActionListener {
 			// Volver (REGISTRO)
 			else if (e.getSource().equals(vr.getBtnVolver())) {
 				vr.dispose();
+				vr.limpiarDatos();
 				vi.hacerVisible();
 			}
 			
@@ -198,6 +196,7 @@ public class ProjectListener implements ActionListener {
 							 JOptionPane.showMessageDialog(vi, "Contraseña incorrecta", "Error de datos", JOptionPane.ERROR_MESSAGE);
 						 } else {
 							 vi.dispose();
+							 vi.limpiarDatos();
 							 
 							 String foto = up.getFotoPerfil();
 							 
@@ -269,6 +268,7 @@ public class ProjectListener implements ActionListener {
 			// Registrarse (INICIAR SESIÓN)
 			else if (e.getSource().equals(vi.getBtnRegistrarse())) {
 				vi.dispose();
+				vi.limpiarDatos();
 				vr.hacerVisible();
 			}
 			
@@ -419,47 +419,68 @@ public class ProjectListener implements ActionListener {
 			// CURSOS
 				// CSS
 			else if (e.getSource().equals(pc.getBtnCss())) {
-				lenguaje = "CSS";
+				lenguaje = FlipasPipasConst.ID_CURSO_CSS;
 				cargarLecCur(FlipasPipasConst.ID_CURSO_CSS);
 				vm.cargarPanel(pl);
 			}
 				// HTML
 			else if (e.getSource().equals(pc.getBtnHtml())) {
-				lenguaje = "HTML";
+				lenguaje = FlipasPipasConst.ID_CURSO_HTML;
 				cargarLecCur(FlipasPipasConst.ID_CURSO_HTML);
 				vm.cargarPanel(pl);
 			}
 				// JAVA
 			else if (e.getSource().equals(pc.getBtnJava())) {
-				lenguaje = "JAVA";
+				lenguaje = FlipasPipasConst.ID_CURSO_JAVA;
 				cargarLecCur(FlipasPipasConst.ID_CURSO_JAVA);
 				vm.cargarPanel(pl);
 			}
 				// SQL
 			else if (e.getSource().equals(pc.getBtnSql())) {
-				lenguaje = "SQL";
+				lenguaje = FlipasPipasConst.ID_CURSO_SQL;
 				cargarLecCur(FlipasPipasConst.ID_CURSO_SQL);
 				vm.cargarPanel(pl);
 			}
 			
-			// PREGUNTAS TODO
+			// PREGUNTAS
 				//Pregunta 1
-			else if (e.getSource().equals(pl.getBtnLec_1())) cargarPregunta(19, 13, 1, 7);
+			else if (e.getSource().equals(pl.getBtnLec_1())) {
+				cargarPregunta(19, 13, 1, 7);
+				estabelcerNivelActual(1, 7, 13, 19);
+			}
 				// Pregunta 2
-			else if (e.getSource().equals(pl.getBtnLec_2())) cargarPregunta(20, 14, 2, 8);
+			else if (e.getSource().equals(pl.getBtnLec_2())) {
+				cargarPregunta(20, 14, 2, 8);
+				estabelcerNivelActual(2, 8, 14, 20);
+			}
 				// Repaso
-			else if (e.getSource().equals(pl.getBtnRepaso())) cargarPregunta(21, 15, 3, 9);
+			else if (e.getSource().equals(pl.getBtnRepaso())) {
+				cargarPregunta(21, 15, 3, 9);
+				estabelcerNivelActual(3, 9, 15, 21);
+			}
 				// Pregunta 3
-			else if (e.getSource().equals(pl.getBtnLec_3())) cargarPregunta(22, 16, 4, 10);
+			else if (e.getSource().equals(pl.getBtnLec_3())) {
+				cargarPregunta(22, 16, 4, 10);
+				estabelcerNivelActual(4, 10, 16, 22);
+			}
 				// Pregunta 4
-			else if (e.getSource().equals(pl.getBtnLec_4())) cargarPregunta(23, 17, 5, 11);
+			else if (e.getSource().equals(pl.getBtnLec_4())) {
+				cargarPregunta(23, 17, 5, 11);
+				estabelcerNivelActual(5, 11, 17, 23);
+			}
 				// Examen
-			else if (e.getSource().equals(pl.getBtnExamen())) cargarPregunta(24, 18, 6, 12);
+			else if (e.getSource().equals(pl.getBtnExamen())) {
+				cargarPregunta(24, 18, 6, 12);
+				estabelcerNivelActual(6, 12, 18, 25);
+			}
 			
 				// Botón A
 			else if (e.getSource().equals(vp.getBtnA())) {
 				// Si aciertas la pregunta
-				if (vp.getBtnA().getText().equals(preguntas.get(pregPos).getCorrecta())) preguntaAcertada();
+				if (vp.getBtnA().getText().equals(preguntas.get(pregPos).getCorrecta())) {
+					preguntaAcertada();
+					if (pregPos != preguntas.size()) JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+				}
 				// Si fallas
 				else preguntaFallada();
 			}
@@ -467,7 +488,10 @@ public class ProjectListener implements ActionListener {
 				// Botón B
 			else if (e.getSource().equals(vp.getBtnB())) {
 				// Si aciertas la pregunta
-				if (vp.getBtnB().getText().equals(preguntas.get(pregPos).getCorrecta())) preguntaAcertada();
+				if (vp.getBtnB().getText().equals(preguntas.get(pregPos).getCorrecta())) {
+					preguntaAcertada();
+					if (pregPos != preguntas.size()) JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+				}
 				// Si fallas
 				else preguntaFallada();
 			}
@@ -475,7 +499,10 @@ public class ProjectListener implements ActionListener {
 				// Botón C
 			else if (e.getSource().equals(vp.getBtnC())) {
 				// Si aciertas la pregunta
-				if (vp.getBtnC().getText().equals(preguntas.get(pregPos).getCorrecta())) preguntaAcertada();
+				if (vp.getBtnC().getText().equals(preguntas.get(pregPos).getCorrecta())) {
+					preguntaAcertada();
+					if (pregPos != preguntas.size()) JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+				}
 				// Si fallas
 				else preguntaFallada();
 			}
@@ -483,7 +510,11 @@ public class ProjectListener implements ActionListener {
 				// Botón D
 			else if (e.getSource().equals(vp.getBtnD())) {
 				// Si aciertas la pregunta
-				if (vp.getBtnD().getText().equals(preguntas.get(pregPos).getCorrecta())) preguntaAcertada();
+				if (vp.getBtnD().getText().equals(preguntas.get(pregPos).getCorrecta())) {
+					preguntaAcertada();
+					if (pregPos != preguntas.size()) JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!",
+							"Sigue así", JOptionPane.INFORMATION_MESSAGE);
+				}
 				// Si fallas
 				else preguntaFallada();
 			}
@@ -499,9 +530,13 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource().equals(vp.getBtnSalir())) {
-				vp.dispose();
-				vm.hacerVisible();
-				vm.cargarPanel(pl);
+				int opc = JOptionPane.showConfirmDialog(vp,"¿Estás segur@ de que quieres salir? Tu progreso no se guardará",
+						"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (opc == JOptionPane.YES_OPTION) {
+					vp.dispose();
+					vm.hacerVisible();
+					vm.cargarPanel(pl);
+				}
 			}
 			
 			else if(e.getSource() == vcu.getBtnSalir()) {
@@ -585,14 +620,22 @@ public class ProjectListener implements ActionListener {
 	}
 
 
+	private void estabelcerNivelActual(int i, int j, int k, int l) {
+		if(lenguaje == FlipasPipasConst.ID_CURSO_JAVA) nivActual = i;
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_SQL) nivActual = j;
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_HTML) nivActual = k;
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_CSS) nivActual = l;
+	}
+
+
 	private void cargarPregunta(int css, int html, int java, int sql) {
 		preguntas = null;
 		pregPos = 0;
 		
-		if (lenguaje.equals("CSS")) obtenerEstablecerPregunta(css);
-		else if (lenguaje.equals("HTML")) obtenerEstablecerPregunta(html);
-		else if (lenguaje.equals("JAVA")) obtenerEstablecerPregunta(java);
-		else if (lenguaje.equals("SQL")) obtenerEstablecerPregunta(sql);
+		if (lenguaje == FlipasPipasConst.ID_CURSO_CSS) obtenerEstablecerPregunta(css);
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_HTML) obtenerEstablecerPregunta(html);
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_JAVA) obtenerEstablecerPregunta(java);
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_SQL) obtenerEstablecerPregunta(sql);
 	}
 
 
@@ -630,6 +673,7 @@ public class ProjectListener implements ActionListener {
 		// Si has acertado la última pregunta
 		if (pregPos == preguntas.size()) {
 			JOptionPane.showMessageDialog(vp, "¡Has acabado la lección!", "¡Enhorabuena!", JOptionPane.INFORMATION_MESSAGE);
+			lp.leccionTerminada(nivActual);
 			vp.dispose();
 			vm.cargarPanel(pl);
 			vm.hacerVisible();
@@ -644,19 +688,19 @@ public class ProjectListener implements ActionListener {
 	private void cargarLecCur(int id_curso) {
 		vm.cargarPanel(pl);
 		
-//		String nomCur = "";
+		String nomCur = "";
 		
-//		switch (id_curso) {
-//		case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
-//		case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
-//		case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
-//		case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
-//		}
+		switch (id_curso) {
+		case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
+		case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
+		case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
+		case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
+		}
 		
 		
 		
 		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
-		pl.cargarLec(nomLec, lenguaje);
+		pl.cargarLec(nomLec, nomCur);
 
 	}
 

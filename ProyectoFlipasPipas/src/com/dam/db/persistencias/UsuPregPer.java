@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
+import com.dam.db.constants.TablaLeccionesConst;
 import com.dam.db.constants.TablaUsuPregConst;
 import com.dam.db.constants.TablaUsuariosConst;
 

@@ -2,6 +2,7 @@ package com.dam.db.persistencias;
 
 import java.sql.Statement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,6 +58,45 @@ public class LeccionesPer {
 			}
 		
 		return nomLec;
+	}
+	
+	public void leccionTerminada(int nivActual) {
+		
+		String query = "UPDATE " + TablaLeccionesConst.NOM_TABLA + " SET " + TablaLeccionesConst.NOM_COL_COMPLETADA + " = 1 WHERE "
+				+ TablaLeccionesConst.NOM_COL_ID_LECCION + " = ?;";
+		
+		Connection con = null;
+		
+		PreparedStatement stmt = null;
+		
+		ResultSet rslt = null;
+		
+		try {
+			
+			con = acceso.getConexion();
+			
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, nivActual);
+			
+			stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 	}
 
 }
