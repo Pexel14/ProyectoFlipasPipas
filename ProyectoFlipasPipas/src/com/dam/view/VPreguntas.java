@@ -16,6 +16,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.JPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /*
  * @author alejandro
@@ -54,19 +57,40 @@ public class VPreguntas extends JFrame {
 
 		getContentPane().setBackground(new Color(50, 50, 75));
 		
+		JScrollPane scrpTitulo = new JScrollPane();
+		scrpTitulo.setBorder(null);
+		scrpTitulo.setBackground(new Color(50, 50, 75));
+		scrpTitulo.setBounds(296, 125, 892, 200);
+		
+		txtaPregunta = new JTextArea();
+		txtaPregunta.setEditable(false);
+		txtaPregunta.setText("Esto es la pregunta");
+		txtaPregunta.setLineWrap(true);
+		txtaPregunta.setWrapStyleWord(true);
+		txtaPregunta.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		txtaPregunta.setBackground(new Color(50, 50, 75));
+		txtaPregunta.setForeground(new Color(240, 240, 240));
+		scrpTitulo.setViewportView(txtaPregunta);
+		
+		getContentPane().add(scrpTitulo);
+		
 		btnA = new JButton(ACT_CMD_BTN_A);
+		btnA.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnA.setBounds(296, 382, 348, 128);
 		getContentPane().add(btnA);
 		
 		btnB = new JButton(ACT_CMD_BTN_B);
+		btnB.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnB.setBounds(840, 382, 348, 128);
 		getContentPane().add(btnB);
 		
 		btnC = new JButton(ACT_CMD_BTN_C);
+		btnC.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnC.setBounds(296, 591, 348, 128);
 		getContentPane().add(btnC);
 		
 		btnD = new JButton(ACT_CMD_BTN_D);
+		btnD.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnD.setBounds(840, 591, 348, 128);
 		getContentPane().add(btnD);
 		
@@ -76,21 +100,7 @@ public class VPreguntas extends JFrame {
 		btnSalir.setBounds(1350, 105, 50, 50);
 		getContentPane().add(btnSalir);
 		
-		JScrollPane scrpTitulo = new JScrollPane();
-		scrpTitulo.setBorder(null);
-		scrpTitulo.setBackground(new Color(50, 50, 75));
-		scrpTitulo.setBounds(296, 44, 892, 300);
 		
-		txtaPregunta = new JTextArea();
-		txtaPregunta.setText("Esto es la pregunta");
-		txtaPregunta.setLineWrap(true);
-		txtaPregunta.setWrapStyleWord(true);
-		txtaPregunta.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		txtaPregunta.setBackground(new Color(50, 50, 75));
-		txtaPregunta.setForeground(new Color(240, 240, 240));
-		scrpTitulo.setViewportView(txtaPregunta);
-		
-		getContentPane().add(scrpTitulo);
 		
 	}
 
@@ -131,6 +141,7 @@ public class VPreguntas extends JFrame {
 		btnC.addActionListener(pl);
 		btnD.addActionListener(pl);
 		btnSalir.addActionListener(pl);
+//		txtaHola.addac
 	}
 
 	public void setPregunta(Preguntas pregunta) {
