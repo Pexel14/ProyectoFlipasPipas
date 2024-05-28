@@ -121,7 +121,7 @@ public class VUsuario extends JDialog {
 	public JLabel getLblEmailUsuario() {
 		return lblEmailUsuario;
 	}
-
+	
 	public void hacerVisible() {
 		setVisible(true);
 	}

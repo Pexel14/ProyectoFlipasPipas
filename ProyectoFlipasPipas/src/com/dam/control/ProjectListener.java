@@ -630,15 +630,15 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource() == vcu.getBtnGuardar()) {
-//				int res = up.customizarPerfil(img);
-//				
-//				if(res != 0) {
-//					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
-//				} else {
-//					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
-//				}
+				int res = up.customizarPerfil(img, vu.getLblNomUsuario().getText());
 				
-			} // TODO
+				if(res != 0) {
+					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			} 
 			
 
 			
@@ -796,10 +796,11 @@ public class ProjectListener implements ActionListener {
 			int puntosBot3 = rd.nextInt((int) Math.round(pipasUsuario*PIPAS_MIN_BOT), (int) Math.round(pipasUsuario*PIPAS_MAX_BOT));
 			up.puntosABots(puntosBot1, puntosBot2, puntosBot3);
 			
-			ulp.leccionTerminada(nivActual, up.getId_usuario());
+//			ulp.leccionTerminada(nivActual, up.getId_usuario());
 			
 			if(nivActual != 6 || nivActual != 12 || nivActual != 18 || nivActual != 24) {
 				ulp.desbloquearLeccion(up.getId_usuario(), nivActual + 1);
+				pl.cargarLec(lp.datosLeccion(lenguaje), lenguaje, ulp.cargarLecciones(up.getId_usuario(), lenguaje));
 			}
 			vp.dispose();
 			vm.cargarPanel(pl);
@@ -826,7 +827,7 @@ public class ProjectListener implements ActionListener {
 		
 		
 		
-		ArrayList<Boolean> nvlsOK = ulp.cargarLecciones(up.getId_usuario());
+		ArrayList<Boolean> nvlsOK = ulp.cargarLecciones(up.getId_usuario(), id_curso);
 		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
 
 		pl.cargarLec(nomLec, lenguaje, nvlsOK);
