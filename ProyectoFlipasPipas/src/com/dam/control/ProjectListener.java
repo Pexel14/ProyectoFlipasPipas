@@ -35,7 +35,7 @@ public class ProjectListener implements ActionListener {
 	
 	private static final double PIPAS_MAX_BOT = 1.5;
 	private static final double PIPAS_MIN_BOT = 0.5;
-	private static final int CANT_PIPAS_LECCION = 500;
+	private static final int CANT_PIPAS_LECCION = 200;
 	private static final int CANT_PIPAS_PENALIZACION = 20;
 	//CLASES REGISTRO/INICIO
 	private VRegistro vr;
@@ -155,7 +155,7 @@ public class ProjectListener implements ActionListener {
 					if (correoYaExiste) {
 						JOptionPane.showMessageDialog(vr, "El correo ya está registrado", "Error de datos", JOptionPane.ERROR_MESSAGE);
 					} else {
-						usuario = new Usuarios(0, nombre, correo, "/img/usuario.png", 0, passw);
+						usuario = new Usuarios(0, nombre, correo, "/img/usuario.png", 0, passw, 0);
 						up.registrarUsuario(usuario);
 						
 						JOptionPane.showMessageDialog(vr, "Usuario creado con éxito", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);

@@ -665,3 +665,16 @@ INSERT INTO TEMARIO VALUES(13, 4, 19, 'CSS es un lenguaje de hojas de estilo que
 INSERT INTO TEMARIO VALUES(14, 4, 20, 'Un documento CSS se compone de varios selectores y reglas que trabajan juntos para formar la apariencia completa de una página web.');
 INSERT INTO TEMARIO VALUES(15, 4, 22, 'Los colores en CSS pueden ser especificados de varias maneras para el texto el fondo sus elementos y tienen multiples variaciones.');
 INSERT INTO TEMARIO VALUES(16, 4, 23, 'El posicionamiento en CSS es una característica poderosa que permite controlar exactamente dónde se colocan los elementos HTML en una página web.');
+
+update USUARIOS set PUNTOS = 200 where ID_USUARIO = 5;
+
+DROP TABLE LECCIONES;
+
+CREATE TABLE LECCIONES(
+    ID_LECCION NUMBER(2) CONSTRAINT PK_LECCIONES_IDLEC PRIMARY KEY,
+    ID_CURSO NUMBER(1) CONSTRAINT FK_LECCIONES_IDCUR REFERENCES CURSOS(ID_CURSO),
+    ID_USUARIO INTEGER CONSTRAINT FK_LECCIONES_IDUSER REFERENCES USUARIOS(ID_USUARIO),
+    LECCION VARCHAR2(50),
+    COMPLETADA BOOLEAN
+);
+

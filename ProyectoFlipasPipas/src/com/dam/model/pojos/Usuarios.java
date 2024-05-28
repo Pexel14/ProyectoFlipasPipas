@@ -8,14 +8,16 @@ public class Usuarios {
     private String fotoPerfil;
     private int monedas;
     private String contrasenia;
+    private int puntos;
 
-    public Usuarios(int id_usuario, String nick, String email, String fotoPerfil,  int monedas, String contrasenia) {
+    public Usuarios(int id_usuario, String nick, String email, String fotoPerfil,  int monedas, String contrasenia, int puntos) {
         this.idUsuario = id_usuario;
         this.nick = nick;
         this.email = email;
         this.fotoPerfil = fotoPerfil;
         this.monedas = monedas;
         this.contrasenia = contrasenia;
+        this.puntos = puntos;
     }
 
 
@@ -47,6 +49,10 @@ public class Usuarios {
 
 	public String getContrasenia() {
 		return contrasenia;
+	}
+	
+	public int getPuntos() {
+		return puntos;
 	}
 		
 }

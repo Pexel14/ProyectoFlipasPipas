@@ -291,7 +291,7 @@ public class UsuariosPer {
 			rlst = stmt.executeQuery();
 			
 			if(rlst.next()) {
-				usuario = new Usuarios(0, rlst.getString(1), rlst.getString(2), "", rlst.getInt(3), "");
+				usuario = new Usuarios(0, rlst.getString(1), rlst.getString(2), "", rlst.getInt(3), "", 0);
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -511,10 +511,6 @@ public class UsuariosPer {
 		
 		String query = "SELECT " + TablaUsuariosConst.NOM_COL_FOTOPERFIL
 				+ " FROM " + TablaUsuariosConst.NOM_TABLA
-				//+ " FETCH NEXT " + PnlRanking.CANT_USU_RNKG + " ROWS"G
-				+ " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
-				+ " LIMIT " + PnlRanking.CANT_USU_RNKG
-	               + " FROM " + TablaUsuariosConst.NOM_TABLA
 	               + " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
 	               + " LIMIT " + PnlRanking.CANT_USU_RNKG;
 
@@ -557,7 +553,9 @@ public class UsuariosPer {
 
         String query = "SELECT " + TablaUsuariosConst.NOM_COL_NICK
                         + ", " + TablaUsuariosConst.NOM_COL_PUNTOS
-                        + " FROM " + TablaUsuariosConst.NOM_TABLA;
+                        + " FROM " + TablaUsuariosConst.NOM_TABLA
+     	               + " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
+    	               + " LIMIT " + PnlRanking.CANT_USU_RNKG;
         
         Connection con = null;
         Statement stmt = null;
@@ -597,7 +595,7 @@ public class UsuariosPer {
 		
 		String query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
 				" SET " + TablaUsuariosConst.NOM_COL_MONEDAS + " = (" + TablaUsuariosConst.NOM_COL_MONEDAS + "+?)"
-				+ "WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?;";
+				+ "WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?";
 		
 		Connection con = null;
 		
@@ -633,7 +631,7 @@ public class UsuariosPer {
 
 		String query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
 				" SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = (" + TablaUsuariosConst.NOM_COL_PUNTOS + "+?)"
-				+ "WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?;";
+				+ "WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?";
 		
 		Connection con = null;
 		
