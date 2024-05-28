@@ -152,7 +152,7 @@ public class ProjectListener implements ActionListener {
 						
 						JOptionPane.showMessageDialog(vr, "Usuario creado con éxito", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
 						
-						 up.getID(correo);
+						 up.getUser(correo);
 						 ut.crearTienda(up.getId_usuario());
 						
 						
@@ -319,7 +319,7 @@ public class ProjectListener implements ActionListener {
 				
 				vu.getLblEmailUsuario().setText(usuario.getEmail());
 				vu.getLblNomUsuario().setText(usuario.getNick());
-				vu.getLblPipaCoins().setText(String.valueOf(usuario.getMonedas()) + vu.getLblPipaCoins().getText());
+				vu.getLblPipaCoins().setText(String.valueOf(usuario.getMonedas()) + " flipa coins");
 				
 				vu.hacerVisible();
 			}
@@ -388,6 +388,7 @@ public class ProjectListener implements ActionListener {
 			else if(e.getSource().equals(vu.getBtnEditarPerfil())) {
 				vu.dispose();
 				vcu.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
+				vcu.getTxtNombre().setText(up.getNick());
 				vcu.hacerVisible();
 			}
 			
@@ -570,12 +571,14 @@ public class ProjectListener implements ActionListener {
 							if(actualizado != 0) {
 								comprado = true;
 								pti.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
-								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.PLAIN_MESSAGE);								
+								saldo = up.comprobarSaldo();
+								pti.cargarSaldo(saldo);
+								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.INFORMATION_MESSAGE);								
 							}
 						} 
 					}
 				}
-				if(!comprado) {
+				if(!comprado && id != null) {
 					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			}

@@ -317,8 +317,8 @@ public class UsuariosPer {
 	}
 	
 	
-	public void getID(String email) {
-		String select = "SELECT " + COL_ID + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?";
+	public void getUser(String email) {
+		String select = "SELECT " + COL_ID + ", " + COL_NICK + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -335,6 +335,7 @@ public class UsuariosPer {
 			
 			if(rlst.next()) {
 				id_usuario = rlst.getInt(1);
+				nick = rlst.getString(2);
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -492,6 +493,10 @@ public class UsuariosPer {
 	
 	public String getFotoPerfil() {
 		return fotoPerfil;
+	}
+	
+	public String getNick() {
+		return nick;
 	}
 
 	public ArrayList<String> imgUsu() {
