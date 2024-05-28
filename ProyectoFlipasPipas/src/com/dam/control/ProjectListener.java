@@ -1,6 +1,5 @@
 package com.dam.control;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -148,7 +147,7 @@ public class ProjectListener implements ActionListener {
 					if (correoYaExiste) {
 						JOptionPane.showMessageDialog(vr, "El correo ya está registrado", "Error de datos", JOptionPane.ERROR_MESSAGE);
 					} else {
-						usuario = new Usuarios(0, nombre, correo, "Foto 1", 0, passw);
+						usuario = new Usuarios(0, nombre, correo, "/img/usuario.png", 0, passw);
 						up.registrarUsuario(usuario);
 						
 						JOptionPane.showMessageDialog(vr, "Usuario creado con éxito", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
@@ -199,12 +198,70 @@ public class ProjectListener implements ActionListener {
 							 JOptionPane.showMessageDialog(vi, "Contraseña incorrecta", "Error de datos", JOptionPane.ERROR_MESSAGE);
 						 } else {
 							 vi.dispose();
+							 
+							 String foto = up.getFotoPerfil();
+							 
+							 if(foto != null) {
+								 vm.cambiarFotoPerfil(foto);
+							 }
+							 
 							 vm.cargarPanel(pc);
 							 vm.hacerVisible();
 						 }
 						 
 					 }
 					 
+				}
+				
+			}
+			
+			else if(e.getSource() == vcu.getBtnFP1() 
+					|| e.getSource() == vcu.getBtnFP2() 
+					|| e.getSource() == vcu.getBtnFP3()
+					|| e.getSource() == vcu.getBtnFP4() 
+					|| e.getSource() == vcu.getBtnFP5() 
+					|| e.getSource() == vcu.getBtnFP6()) {
+				String boton = e.getActionCommand();
+				switch (boton) {
+					case "imagen1":
+						img = vcu.getTxtFP1();
+						break;
+						
+					case "imagen2":
+						img = vcu.getTxtFP2();
+						break;
+						
+					case "imagen3":
+						img = vcu.getTxtFP3();
+						break;
+						
+					case "imagen4":
+						img = vcu.getTxtFP4();
+						break;
+						
+					case "imagen5":
+						img = vcu.getTxtFP5();
+						break;
+						
+					case "imagen6":
+						img = vcu.getTxtFP6();
+						break;
+				}
+			}
+			
+			else if(e.getSource() == vcu.getBtnGuardar()) {
+				
+				if(img == null) {
+					img = "/img/usuario.png";
+				}
+				
+				int res = up.customizarPerfil(img, vcu.getTxtNombre().getText());
+				
+				if(res != 0) {
+					vm.cambiarFotoPerfil(img);
+					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
@@ -223,7 +280,7 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTienda())){
-				pti.cargarObjetos(ut.cargarBotones());
+				pti.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
 				
 				int saldo = up.comprobarSaldo();
 				pti.cargarSaldo(saldo);
@@ -234,10 +291,14 @@ public class ProjectListener implements ActionListener {
 			else if(e.getSource().equals(vm.getBtnRanking())){
 				vm.cargarPanel(pr);
 				// Guardo nombre y puntos de usuario en un HashMap
-				HashMap<String, Integer> tablaUsuPnt = upp.nickPuntUsu();
+
+				HashMap<String, Integer> tablaUsuPnt = up.nickPuntUsu();
+				// Busco las imagenes de los usuarios
+				ArrayList<String> imagenesUsu = up.imgUsu();
+
 				// Esto lo uso para hacer un entry en un arraylist
 				ArrayList<Entry<String, Integer>> tablaRanking = new ArrayList<Entry<String,Integer>>(tablaUsuPnt.entrySet());
-				pr.mostrarRanking(tablaRanking);
+				pr.mostrarRanking(tablaRanking,imagenesUsu);
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTemario())){
@@ -254,8 +315,13 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource().equals(vm.getBtnPerfil())){
+				Usuarios usuario = up.cargarDatosUsuario();
+				
+				vu.getLblEmailUsuario().setText(usuario.getEmail());
+				vu.getLblNomUsuario().setText(usuario.getNick());
+				vu.getLblPipaCoins().setText(String.valueOf(usuario.getMonedas()) + vu.getLblPipaCoins().getText());
+				
 				vu.hacerVisible();
-				up.cargarDatosUsuario();
 			}
 						
 			//BOTONES NIVELES
@@ -342,7 +408,7 @@ public class ProjectListener implements ActionListener {
 			//USUARIO
 			else if(e.getSource().equals(vu.getBtnEditarPerfil())) {
 				vu.dispose();
-				vcu.cargarObjetos(ut.cargarBotones());
+				vcu.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
 				vcu.hacerVisible();
 			}
 			
@@ -360,12 +426,16 @@ public class ProjectListener implements ActionListener {
 						vm.dispose();
 						vi.hacerVisible();
 						break;
+						/* * * * NO ENTRA EN EL CASE * * * */
 					case VAjustes.ACT_CMD_BTN_BORRAR_CUENTA:
+
 
 						up.borrarcuenta();
 						va.dispose();
 						vi.hacerVisible();
 
+						up.borrarcuenta();
+						vi.hacerVisible();
 						break;
 					}
 				}
@@ -377,21 +447,25 @@ public class ProjectListener implements ActionListener {
 				// CSS
 			else if (e.getSource().equals(pc.getBtnCss())) {
 				lenguaje = "CSS";
+				cargarLecCur(FlipasPipasConst.ID_CURSO_CSS);
 				vm.cargarPanel(pl);
 			}
 				// HTML
 			else if (e.getSource().equals(pc.getBtnHtml())) {
 				lenguaje = "HTML";
+				cargarLecCur(FlipasPipasConst.ID_CURSO_HTML);
 				vm.cargarPanel(pl);
 			}
 				// JAVA
 			else if (e.getSource().equals(pc.getBtnJava())) {
 				lenguaje = "JAVA";
+				cargarLecCur(FlipasPipasConst.ID_CURSO_JAVA);
 				vm.cargarPanel(pl);
 			}
 				// SQL
 			else if (e.getSource().equals(pc.getBtnSql())) {
 				lenguaje = "SQL";
+				cargarLecCur(FlipasPipasConst.ID_CURSO_SQL);
 				vm.cargarPanel(pl);
 			}
 			
@@ -467,6 +541,7 @@ public class ProjectListener implements ActionListener {
 				vd.dispose();;
 			}
 
+
 			else if(e.getSource() == vcu.getBtnFP1() 
 					|| e.getSource() == vcu.getBtnFP2() 
 					|| e.getSource() == vcu.getBtnFP3()
@@ -502,15 +577,18 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			else if(e.getSource() == vcu.getBtnGuardar()) {
-				int res = up.customizarPerfil(img);
-				
-				if(res != 0) {
-					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}
+//				int res = up.customizarPerfil(img);
+//				
+//				if(res != 0) {
+//					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+//				} else {
+//					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
+//				}
 				
 			} // TODO
+			
+
+			
 			
 			else if(e.getSource() == pti.getBtnObj1() 
 					|| e.getSource() == pti.getBtnObj2() 
@@ -556,14 +634,14 @@ public class ProjectListener implements ActionListener {
 				if(id != null) {
 					int saldo = pti.getSaldo();
 					if(saldo > 0) {
-						int realizado = ut.comprarObjeto(id);
+						int realizado = ut.comprarObjeto(id, up.getId_usuario());
 						
 						if(realizado != 0) {
 							int actualizado = up.compradoObjeto(saldo - id.getPrecio());
 							
 							if(actualizado != 0) {
 								comprado = true;
-								pti.cargarObjetos(ut.cargarBotones());
+								pti.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
 								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.PLAIN_MESSAGE);								
 							}
 						} 
@@ -593,8 +671,8 @@ public class ProjectListener implements ActionListener {
 	private void obtenerEstablecerPregunta(int num) {
 		preguntas = upp.getPreg(num);
 		vm.dispose();
-		vp.hacerVisible();
 		vp.setPregunta(preguntas.get(pregPos));
+		vp.hacerVisible();
 	}
 
 
@@ -635,24 +713,25 @@ public class ProjectListener implements ActionListener {
 		}
 	}
 	
-//	private void cargarLecCur(int id_curso) {
-//		vm.cargarPanel(pl);
-//		
+	private void cargarLecCur(int id_curso) {
+		vm.cargarPanel(pl);
+		
 //		String nomCur = "";
-//		
+		
 //		switch (id_curso) {
 //		case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
 //		case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
 //		case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
 //		case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
 //		}
-//		
-//		
-//		
-//		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
-//		pl.cargarLec(nomLec, nomCur);
-//
-//	}
+		
+		
+		
+		ArrayList<Boolean> nvlsOK = lp.nvlCompletados(id_curso);
+		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
+		pl.cargarLec(nomLec, lenguaje, nvlsOK);
+
+	}
 
 
 	public void setPanel(PnlTienda tienda) {

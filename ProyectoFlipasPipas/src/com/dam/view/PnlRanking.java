@@ -3,6 +3,7 @@ package com.dam.view;
 import java.awt.Color;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -12,7 +13,7 @@ import java.util.Map.Entry;
 
 public class PnlRanking extends JPanel {
 	
-	private static final int CANT_USU_RNKG = 4;
+	public static final int CANT_USU_RNKG = 4;
 	private JLabel[] lblNomUsuarios = new JLabel[CANT_USU_RNKG];
     private JLabel[] lblPuntosUsuarios = new JLabel[CANT_USU_RNKG];
     private JLabel[] lblImgUsuarios = new JLabel[CANT_USU_RNKG];
@@ -69,8 +70,7 @@ public class PnlRanking extends JPanel {
 			pnlUsuario.add(lblPuntosUsuarios[i]);
 			
 			lblImgUsuarios[i] = new JLabel("");
-			// TODO: Añadir Icon
-			lblImgUsuarios[i].setBounds(25, 10, 80, 80);
+			lblImgUsuarios[i].setBounds(25, 8, 75, 75);
 			pnlUsuario.add(lblImgUsuarios[i]);
 
 			/*
@@ -102,13 +102,14 @@ public class PnlRanking extends JPanel {
 		}
 	}
 
-	public void mostrarRanking(ArrayList<Entry<String, Integer>> tablaRanking) {
+	public void mostrarRanking(ArrayList<Entry<String, Integer>> tablaRanking, ArrayList<String> imagenesUsu) {
 		// Lo ordeno comparando por valor de mayor a menor
 		tablaRanking.sort(Entry.comparingByValue(Comparator.reverseOrder()));
 		
 		for (int i = 0; i < CANT_USU_RNKG; i++) {
 			lblNomUsuarios[i].setText(tablaRanking.get(i).getKey());
 			lblPuntosUsuarios[i].setText(tablaRanking.get(i).getValue() + " pts.");
+			lblImgUsuarios[i].setIcon(new ImageIcon(PnlRanking.class.getResource(imagenesUsu.get(i))));
 		}
 	}
 }

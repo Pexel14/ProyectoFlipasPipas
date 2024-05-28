@@ -70,35 +70,30 @@ public class PnlTienda extends JPanel {
 		
 		btnObj2 = new JButton(ACT_COM_BTN_OBJ2);
 		btnObj2.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen2Tienda.jpeg")));
-		btnObj2.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj2.setFont(new Font("Tahoma", Font.BOLD, 25));
 		btnObj2.setBounds(507, 272, 267, 169);
 		add(btnObj2);
 		
 		btnObj3 = new JButton(ACT_COM_BTN_OBJ3);
 		btnObj3.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen3Tienda.jpeg")));
-		btnObj3.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj3.setFont(new Font("Tahoma", Font.BOLD, 25));
 		btnObj3.setBounds(898, 272, 267, 169);
 		add(btnObj3);
 		
 		btnObj4 = new JButton(ACT_COM_BTN_OBJ4);
 		btnObj4.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen4Tienda.jpeg")));
-		btnObj4.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj4.setFont(new Font("Tahoma", Font.BOLD, 25));
 		btnObj4.setBounds(116, 558, 267, 169);
 		add(btnObj4);
 		
 		btnObj5 = new JButton(ACT_COM_BTN_OBJ5);
 		btnObj5.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen5Tienda.jpeg")));
-		btnObj5.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj5.setFont(new Font("Tahoma", Font.BOLD, 25));
 		btnObj5.setBounds(507, 558, 267, 169);
 		add(btnObj5);
 		
 		btnObj6 = new JButton(ACT_COM_BTN_OBJ6);
 		btnObj6.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen6Tienda.jpeg")));
-		btnObj6.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnObj6.setFont(new Font("Tahoma", Font.BOLD, 25));
 		btnObj6.setBounds(898, 558, 267, 169);
 		add(btnObj6);

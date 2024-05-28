@@ -5,8 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import com.dam.db.AccesoDB;
 import com.dam.model.pojos.Usuarios;
+
+
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.dam.view.PnlRanking;
+import com.dam.db.constants.TablaUsuPregConst;
 
 import com.dam.db.constants.TablaUsuariosConst;
 
@@ -23,6 +32,7 @@ public class UsuariosPer {
 	private AccesoDB accesoBD;
 	
 	private static int id_usuario;
+	private static String fotoPerfil;
 	private static String nick;
 	
 
@@ -34,7 +44,7 @@ public class UsuariosPer {
 		
 		boolean existe = false;
 		
-		String query = "SELECT " + COL_ID + ", " + COL_NICK + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?;";
+		String query = "SELECT " + COL_ID + ", " + COL_NICK + ", " + COL_FOTO + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?;";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -53,6 +63,7 @@ public class UsuariosPer {
 				existe = true;
 				id_usuario = rslt.getInt(1);
 				nick = rslt.getString(2);
+				fotoPerfil = rslt.getString(3);
 			}
 			
 			
@@ -256,12 +267,14 @@ public class UsuariosPer {
 	}
 
 
-	public void cargarDatosUsuario() {
+	public Usuarios cargarDatosUsuario() {
 		String query = "SELECT " + TablaUsuariosConst.NOM_COL_NICK 
 				+ ", " + TablaUsuariosConst.NOM_COL_EMAIL 
 				+ ", " + TablaUsuariosConst.NOM_COL_MONEDAS 
 				+ " FROM " + TablaUsuariosConst.NOM_TABLA 
 				+ " WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
+		
+		Usuarios usuario = null;
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -272,16 +285,13 @@ public class UsuariosPer {
 			
 			stmt = con.prepareStatement(query);
 			
-//			stmt.setString(1, id);
+			stmt.setInt(1, id_usuario);
 			
 			rlst = stmt.executeQuery();
 			
-//			if(rlst.next()) {
-//				vu.getLblNomUsuario().setText(rlst.getString(1));
-//				vu.getLblEmailUsuario().setText(rlst.getString(2));
-//				vu.getLblRacha().setText("1" + vu.getLblPipaCoins().getText());
-//				vu.getLblPipaCoins().setText(rlst.getString(3) + vu.getLblPipaCoins().getText());
-//			}
+			if(rlst.next()) {
+				usuario = new Usuarios(0, rlst.getString(1), rlst.getString(2), "", rlst.getInt(3), "");
+			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -303,7 +313,7 @@ public class UsuariosPer {
 				e2.printStackTrace();
 			}
 		}
-		
+		return usuario;
 	}
 	
 	
@@ -351,14 +361,11 @@ public class UsuariosPer {
 	}
 	
 
-	public int customizarPerfil(String img) {
-		String update = "UPDATE " + TablaUsuariosConst.NOM_TABLA 
+	public int customizarPerfil(String img, String nombre) {
+ 		String update = "UPDATE " + TablaUsuariosConst.NOM_TABLA 
 				+ " SET " + TablaUsuariosConst.NOM_COL_FOTOPERFIL + " = ?, " 
 				+ TablaUsuariosConst.NOM_COL_NICK + " = ? "
 				+ " WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
-//		if(!nombre.equals(vcu.getTxtNombre().getText()){
-//			nombre = vcu.getTxtNombre().getText();
-//		}
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -370,8 +377,8 @@ public class UsuariosPer {
 			stmt = con.prepareStatement(update);
 			
 			stmt.setString(1, img);
-//			stmt.setString(2, nombre);
-//			stmt.setString(3, id);
+			stmt.setString(2, nombre);
+			stmt.setInt(3, id_usuario);
 			
 			res = stmt.executeUpdate();
 			
@@ -482,5 +489,91 @@ public class UsuariosPer {
 	public int getId_usuario() {
 		return id_usuario;
 	}
+	
+	public String getFotoPerfil() {
+		return fotoPerfil;
+	}
+
+	public ArrayList<String> imgUsu() {
+		
+		ArrayList<String> imgs = new ArrayList<String>();
+	
+		String query = "SELECT " + TablaUsuariosConst.NOM_COL_FOTOPERFIL
+				+ " FROM " + TablaUsuariosConst.NOM_TABLA
+				//+ " FETCH NEXT " + PnlRanking.CANT_USU_RNKG + " ROWS"G
+				+ " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
+				+ " LIMIT " + PnlRanking.CANT_USU_RNKG;
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rslt = null;
+		
+		try {
+			con = accesoBD.getConexion();
+			stmt = con.createStatement();
+			rslt = stmt.executeQuery(query);
+			
+			while(rslt.next()) {
+				imgs.add(rslt.getString(1));
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}  finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return imgs;
+		}
+	
+	public HashMap<String, Integer> nickPuntUsu() {
+        HashMap<String, Integer> tup = new HashMap<String, Integer>();
+
+        String query = "SELECT " + TablaUsuariosConst.NOM_COL_NICK
+                        + ", " + TablaUsuariosConst.NOM_COL_PUNTOS
+                        + " FROM " + TablaUsuariosConst.NOM_TABLA;
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rslt = null;
+
+        try {
+            con = accesoBD.getConexion();
+            stmt = con.createStatement();
+            rslt = stmt.executeQuery(query);
+
+            while(rslt.next()) {
+                tup.put(rslt.getString(1), rslt.getInt(2));
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            try {
+                if (rslt != null) {
+                    rslt.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        return tup;
+    }
 	
 }

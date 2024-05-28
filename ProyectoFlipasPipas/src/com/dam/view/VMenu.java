@@ -183,7 +183,11 @@ public class VMenu extends JFrame {
 		return btnAjustes;
 	}
 
-
+	public void cambiarFotoPerfil(String img) {
+		btnPerfil.setIcon(new ImageIcon(VMenu.class.getResource(img)));
+	}
+	
+	
 	public void setListener(ProjectListener listener) {
 		btnHome.addActionListener(listener);
 		btnPerfil.addActionListener(listener);

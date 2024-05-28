@@ -215,7 +215,7 @@ public class PnlLeciones extends JPanel {
 	}
 
 
-	public void cargarLec(ArrayList<String> nomLec, String nomCur) {
+	public void cargarLec(ArrayList<String> nomLec, String nomCur, ArrayList<Boolean> nvlsOK) {
 		lblTitulo.setText(nomLec.get(0));
 		lblTitulo_1.setText(nomLec.get(1));
 		lblTitulo_Rep1.setText(nomLec.get(2));
@@ -224,6 +224,13 @@ public class PnlLeciones extends JPanel {
 		lblTitulo_Rep2.setText(nomLec.get(5));
 		
 		lblCurso.setText(nomCur);
+		
+		btnLec_1.setEnabled(nvlsOK.get(0));;
+        btnLec_2.setEnabled(nvlsOK.get(1));;
+        btnRepaso.setEnabled(nvlsOK.get(2));;
+        btnLec_3.setEnabled(nvlsOK.get(3));;
+        btnLec_4.setEnabled(nvlsOK.get(4));;
+        btnExamen.setEnabled(nvlsOK.get(5));;
 		
 	}
 }
