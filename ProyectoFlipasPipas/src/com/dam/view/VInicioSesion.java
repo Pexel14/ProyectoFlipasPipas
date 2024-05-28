@@ -7,6 +7,8 @@ import javax.swing.WindowConstants;
 
 import com.dam.control.ProjectListener;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -18,7 +20,7 @@ public class VInicioSesion extends JFrame {
 	private static final int ANCHO = 1920;
 	private static final int ALTO = 1080;
 	private JTextField txtCorreo;
-	private JTextField txtPassw;
+	private JPasswordField txtPassw;
 	private JButton btnRegistrarse;
 	private JButton btnIniciarSesion;
 
@@ -53,7 +55,7 @@ public class VInicioSesion extends JFrame {
 		txtCorreo.setBounds(420, 190, 700, 50);
 		getContentPane().add(txtCorreo);
 		
-		txtPassw = new JTextField();
+		txtPassw = new JPasswordField();
 		txtPassw.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		txtPassw.setColumns(10);
 		txtPassw.setBounds(420, 330, 700, 50);
@@ -111,10 +113,15 @@ public class VInicioSesion extends JFrame {
 	}
 
 	public String getTxtPassw() {
-		return txtPassw.getText();
+		return String.valueOf(txtPassw.getPassword());
 	}
 
 	public void setTxtPassw(String texto) {
 		txtPassw.setText(texto);
+	}
+
+	public void limpiarDatos() {
+		txtCorreo.setText("");
+		txtPassw.setText("");
 	}
 }

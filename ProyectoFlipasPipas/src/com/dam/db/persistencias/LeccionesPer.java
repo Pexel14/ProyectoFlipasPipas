@@ -61,17 +61,56 @@ public class LeccionesPer {
 		
 		return nomLec;
 	}
+	
+	public void leccionTerminada(int nivActual) {
+		
+		String query = "UPDATE " + TablaLeccionesConst.NOM_TABLA + " SET " + TablaLeccionesConst.NOM_COL_COMPLETADA + " = 1 WHERE "
+				+ TablaLeccionesConst.NOM_COL_ID_LECCION + " = ?;";
+		
+		Connection con = null;
+		
+		PreparedStatement stmt = null;
+		
+		ResultSet rslt = null;
+		
+		try {
+			
+			con = acceso.getConexion();
+			
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, nivActual);
+			
+			stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+	}
 
-	public ArrayList<String> getDef(String lenguaje) { // TODO
+	public ArrayList<String> getDef(int lenguaje) { // TODO
 		ArrayList<String> deflist = new ArrayList<String>();
 		
 		String query = "SELECT " + TablaTemarioConst.NOM_COL_COLUMNA3 + " FROM "  + TablaTemarioConst.NOM_TABLA;  
 		
-		if (lenguaje.equals("JAVA")) {
+		if (lenguaje == (FlipasPipasConst.ID_CURSO_JAVA)) {
 			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_JAVA;
-		} else if (lenguaje.equals("SQL")) {
+		} else if (lenguaje == FlipasPipasConst.ID_CURSO_SQL) {
 			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_SQL;
-		} else if (lenguaje.equals("HTML")) {
+		} else if (lenguaje == FlipasPipasConst.ID_CURSO_HTML) {
 			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_HTML;
 		} else {
 			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_CSS;

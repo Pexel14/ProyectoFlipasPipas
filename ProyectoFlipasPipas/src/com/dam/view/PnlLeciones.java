@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import com.dam.control.ProjectListener;
+import com.dam.db.constants.FlipasPipasConst;
 
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
@@ -215,7 +216,7 @@ public class PnlLeciones extends JPanel {
 	}
 
 
-	public void cargarLec(ArrayList<String> nomLec, String nomCur, ArrayList<Boolean> nvlsOK) {
+	public void cargarLec(ArrayList<String> nomLec, int nomCur, ArrayList<Boolean> nvlsOK) {
 		lblTitulo.setText(nomLec.get(0));
 		lblTitulo_1.setText(nomLec.get(1));
 		lblTitulo_Rep1.setText(nomLec.get(2));
@@ -223,7 +224,23 @@ public class PnlLeciones extends JPanel {
 		lblTitulo_3.setText(nomLec.get(4));
 		lblTitulo_Rep2.setText(nomLec.get(5));
 		
-		lblCurso.setText(nomCur);
+		switch (nomCur) {
+		case FlipasPipasConst.ID_CURSO_JAVA:
+			lblCurso.setText("JAVA");
+			break;
+		case FlipasPipasConst.ID_CURSO_SQL:
+			lblCurso.setText("SQL");
+			break;
+		case FlipasPipasConst.ID_CURSO_HTML:
+			lblCurso.setText("HTML");
+			break;
+		case FlipasPipasConst.ID_CURSO_CSS:
+			lblCurso.setText("CSS");
+			break;
+		default:
+			break;
+		}
+		
 		
 		btnLec_1.setEnabled(nvlsOK.get(0));;
         btnLec_2.setEnabled(nvlsOK.get(1));;
