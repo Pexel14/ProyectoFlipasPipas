@@ -24,7 +24,7 @@ import java.util.Random;
 
 import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.persistencias.LeccionesPer;
-
+import com.dam.db.persistencias.UsuLecPer;
 
 import com.dam.model.pojos.Tienda;
 
@@ -66,6 +66,7 @@ public class ProjectListener implements ActionListener {
 	private LeccionesPer lp;
 	private UsuTienda ut;
 	private NotificacionesPer pn;
+	private UsuLecPer ulp;
 	
 	// CLASES POJOS
 	private Usuarios usuario;
@@ -102,6 +103,8 @@ public class ProjectListener implements ActionListener {
 		up = new UsuariosPer();
 		
 		ut = new UsuTienda();
+		
+		ulp = new UsuLecPer();
 	}
 
 	
@@ -160,9 +163,9 @@ public class ProjectListener implements ActionListener {
 						
 						JOptionPane.showMessageDialog(vr, "Usuario creado con éxito", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
 						
-						 up.getUser(correo);
-						 ut.crearTienda(up.getId_usuario());
-						
+						up.getUser(correo);
+						ut.crearTienda(up.getId_usuario());
+						ulp.insertarLecciones(up.getId_usuario());
 						
 						vr.dispose();
 						vr.limpiarDatos();
@@ -712,10 +715,18 @@ public class ProjectListener implements ActionListener {
 
 
 	private void estabelcerNivelActual(int i, int j, int k, int l) {
-		if(lenguaje == FlipasPipasConst.ID_CURSO_JAVA) nivActual = i;
-		else if (lenguaje == FlipasPipasConst.ID_CURSO_SQL) nivActual = j;
-		else if (lenguaje == FlipasPipasConst.ID_CURSO_HTML) nivActual = k;
-		else if (lenguaje == FlipasPipasConst.ID_CURSO_CSS) nivActual = l;
+		if(lenguaje == FlipasPipasConst.ID_CURSO_JAVA) {
+			nivActual = i;
+		}
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_SQL) {
+			nivActual = j;
+		}
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_HTML) {
+			nivActual = k;
+		}
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_CSS) {
+			nivActual = l;
+		}
 	}
 
 
@@ -785,7 +796,11 @@ public class ProjectListener implements ActionListener {
 			int puntosBot3 = rd.nextInt((int) Math.round(pipasUsuario*PIPAS_MIN_BOT), (int) Math.round(pipasUsuario*PIPAS_MAX_BOT));
 			up.puntosABots(puntosBot1, puntosBot2, puntosBot3);
 			
-			lp.leccionTerminada(nivActual);
+			ulp.leccionTerminada(nivActual, up.getId_usuario());
+			
+			if(nivActual != 6 || nivActual != 12 || nivActual != 18 || nivActual != 24) {
+				ulp.desbloquearLeccion(up.getId_usuario(), nivActual + 1);
+			}
 			vp.dispose();
 			vm.cargarPanel(pl);
 			vm.hacerVisible();
@@ -803,15 +818,15 @@ public class ProjectListener implements ActionListener {
 		String nomCur = "";
 		
 		switch (id_curso) {
-		case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
-		case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
-		case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
-		case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
+			case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
+			case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
+			case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
+			case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
 		}
 		
 		
 		
-		ArrayList<Boolean> nvlsOK = lp.nvlCompletados(id_curso);
+		ArrayList<Boolean> nvlsOK = ulp.cargarLecciones(up.getId_usuario());
 		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
 
 		pl.cargarLec(nomLec, lenguaje, nvlsOK);

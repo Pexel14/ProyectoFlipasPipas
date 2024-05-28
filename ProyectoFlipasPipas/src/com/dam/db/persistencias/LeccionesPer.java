@@ -62,44 +62,7 @@ public class LeccionesPer {
 		return nomLec;
 	}
 	
-	public void leccionTerminada(int nivActual) {
-		
-		String query = "UPDATE " + TablaLeccionesConst.NOM_TABLA + " SET " + TablaLeccionesConst.NOM_COL_COMPLETADA + " = 1 WHERE "
-				+ TablaLeccionesConst.NOM_COL_ID_LECCION + " = ?;";
-		
-		Connection con = null;
-		
-		PreparedStatement stmt = null;
-		
-		ResultSet rslt = null;
-		
-		try {
-			
-			con = acceso.getConexion();
-			
-			stmt = con.prepareStatement(query);
-			stmt.setInt(1, nivActual);
-			
-			stmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if (rslt != null) {
-					rslt.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-	}
+	
 
 	public ArrayList<String> getDef(int lenguaje) { // TODO
 		ArrayList<String> deflist = new ArrayList<String>();
@@ -155,43 +118,5 @@ public class LeccionesPer {
 		
 	}
 
-	public ArrayList<Boolean> nvlCompletados(int id_curso) {
-        ArrayList<Boolean> booleans = new ArrayList<Boolean>();
-
-        String query = "SELECT " + TablaLeccionesConst.NOM_COL_COMPLETADA
-                        + " FROM " + TablaLeccionesConst.NOM_TABLA
-                        + " WHERE " + TablaLeccionesConst.NOM_COL_ID_CURSO + " = " + id_curso;
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rslt = null;
-
-        try {
-            con = acceso.getConexion();
-            stmt = con.createStatement();
-            rslt = stmt.executeQuery(query);
-
-            while(rslt.next()) {
-                booleans.add(rslt.getBoolean(1));
-            }
-
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }  finally {
-            try {
-                if (rslt != null) {
-                    rslt.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        return booleans;
-    }
+	
 }

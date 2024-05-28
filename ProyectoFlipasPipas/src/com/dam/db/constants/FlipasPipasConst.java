@@ -11,5 +11,5 @@ public class FlipasPipasConst {
 	public static final int ID_BOT2 = 2;
 	public static final int ID_BOT3 = 3;
 	
-	
+	public static final int CANT_LECCIONES = 24;
 }
