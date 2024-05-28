@@ -498,10 +498,17 @@ public class UsuariosPer {
 		
 		ArrayList<String> imgs = new ArrayList<String>();
 	
+//		String query = "SELECT " + TablaUsuariosConst.NOM_COL_FOTOPERFIL
+//				+ " FROM " + TablaUsuariosConst.NOM_TABLA
+//				+ " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
+//				+ " FETCH NEXT " + PnlRanking.CANT_USU_RNKG + " ROWS";
+		
 		String query = "SELECT " + TablaUsuariosConst.NOM_COL_FOTOPERFIL
-				+ " FROM " + TablaUsuariosConst.NOM_TABLA
-				+ " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
-				+ " FETCH NEXT " + PnlRanking.CANT_USU_RNKG + " ROWS";
+	               + " FROM " + TablaUsuariosConst.NOM_TABLA
+	               + " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
+	               + " LIMIT " + PnlRanking.CANT_USU_RNKG;
+
+		
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rslt = null;
@@ -541,6 +548,7 @@ public class UsuariosPer {
         String query = "SELECT " + TablaUsuariosConst.NOM_COL_NICK
                         + ", " + TablaUsuariosConst.NOM_COL_PUNTOS
                         + " FROM " + TablaUsuariosConst.NOM_TABLA;
+        
         Connection con = null;
         Statement stmt = null;
         ResultSet rslt = null;
@@ -574,5 +582,165 @@ public class UsuariosPer {
 
         return tup;
     }
+
+	public void aniadirPipas(String correoUsuActual, int pipas) {
+		
+		String query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
+				" SET " + TablaUsuariosConst.NOM_COL_MONEDAS + " = (" + TablaUsuariosConst.NOM_COL_MONEDAS + "+?)"
+				+ "WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?;";
+		
+		Connection con = null;
+		
+		PreparedStatement stmt = null;
+		
+		try {
+			
+			con = accesoBD.getConexion();
+			
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, pipas);
+			stmt.setString(2, correoUsuActual);
+			
+			stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+		}
+	}
+
+	public void aniadirPuntos(String correoUsuActual, int puntos) {
+
+		String query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
+				" SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = (" + TablaUsuariosConst.NOM_COL_PUNTOS + "+?)"
+				+ "WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?;";
+		
+		Connection con = null;
+		
+		PreparedStatement stmt = null;
+		
+		try {
+			
+			con = accesoBD.getConexion();
+			
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, puntos);
+			stmt.setString(2, correoUsuActual);
+			
+			stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+		}
+	}
 	
+	public void puntosABots(int puntosBot1, int puntosBot2, int puntosBot3) {
+	    Connection con = null;
+	    PreparedStatement stmt = null;
+	    
+	    try {
+	        con = accesoBD.getConexion();
+	        
+	        // Bot 1
+	        String query1 = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
+	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
+	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = 1";
+	        stmt = con.prepareStatement(query1);
+	        stmt.setInt(1, puntosBot1);
+	        stmt.executeUpdate();
+	        
+	        // Bot 2
+	        String query2 = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
+	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
+	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = 2";
+	        stmt = con.prepareStatement(query2);
+	        stmt.setInt(1, puntosBot2);
+	        stmt.executeUpdate();
+	        
+	        // Bot 3
+	        String query3 = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
+	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
+	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = 3";
+	        stmt = con.prepareStatement(query3);
+	        stmt.setInt(1, puntosBot3);
+	        stmt.executeUpdate();
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (stmt != null) {
+	                stmt.close();
+	            }
+	            if (con != null) {
+	                con.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	public int getPipasUsuario(String correoUsuActual) {
+		int pipas = 0;
+		
+		String query = "SELECT " + TablaUsuariosConst.NOM_COL_MONEDAS + " FROM " + TablaUsuariosConst.NOM_TABLA
+				+ " WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?";
+		
+		Connection con = null;
+		
+		PreparedStatement stmt = null;
+		
+		ResultSet rslt = null;
+		
+		try {
+			con = accesoBD.getConexion();
+			
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, correoUsuActual);
+			
+			rslt = stmt.executeQuery();
+			if (rslt.next()) {
+				pipas = rslt.getInt(TablaUsuariosConst.NOM_COL_MONEDAS);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+		}
+		
+		return pipas;
+	}
+
+
 }

@@ -13,6 +13,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import java.awt.Component;
+import javax.swing.SwingConstants;
 
 public class PnlLeciones extends JPanel {
 	
@@ -142,11 +144,13 @@ public class PnlLeciones extends JPanel {
 		lblTitulo_Rep2.setBounds(1046, 210, 150, 28);
 		add(lblTitulo_Rep2);
 		
-		lblCurso = new JLabel("");
+		lblCurso = new JLabel("Curso\r\n");
+		lblCurso.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCurso.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblCurso.setForeground(Color.WHITE);
-		lblCurso.setFont(new Font("Tahoma", Font.BOLD, 40));
+		lblCurso.setFont(new Font("Tahoma", Font.BOLD, 70));
 		lblCurso.setBackground(Color.BLACK);
-		lblCurso.setBounds(496, 26, 300, 50);
+		lblCurso.setBounds(396, 26, 500, 100);
 		add(lblCurso);
 
 	}

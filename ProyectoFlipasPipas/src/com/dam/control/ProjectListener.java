@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
+import javax.swing.JTextArea;
 
 import com.dam.db.persistencias.UsuPregPer;
 import com.dam.db.persistencias.UsuTienda;
@@ -20,8 +20,7 @@ import com.dam.db.persistencias.NotificacionesPer;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
-
-
+import java.util.Random;
 
 import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.persistencias.LeccionesPer;
@@ -33,6 +32,11 @@ import com.dam.view.*;
 
 
 public class ProjectListener implements ActionListener {
+	
+	private static final double PIPAS_MAX_BOT = 1.5;
+	private static final double PIPAS_MIN_BOT = 0.5;
+	private static final int CANT_PIPAS_LECCION = 500;
+	private static final int CANT_PIPAS_PENALIZACION = 20;
 	//CLASES REGISTRO/INICIO
 	private VRegistro vr;
 	private VInicioSesion vi;
@@ -70,9 +74,17 @@ public class ProjectListener implements ActionListener {
 	private int lenguaje;
 	private int nivActual;
 	
+	// CORREO DE USUARIO
+	private String correoUsuActual;
+	
 	// PREGUNTAS
 	private int pregPos;
 	private ArrayList<Preguntas> preguntas;
+	
+	// FALLOS Y PUNTOS
+	private int cantFallos = 0;
+	private int pipas = 0;
+	private int puntos = 0;
 	
 //	public ProjectListener() {
 //		
@@ -178,23 +190,26 @@ public class ProjectListener implements ActionListener {
 				String correo = vi.getTxtCorreo();
 				String passw = vi.getTxtPassw();
 				
-				if (correo.isBlank() || correo.equals("Correo")) {
+				if (correo.isBlank()) {
 					JOptionPane.showMessageDialog(vi, "Introduzca el nombre de usuario", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (passw.isBlank()) {
 					JOptionPane.showMessageDialog(vi, "Introduzca la contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else {
 					 
-					boolean correoCorrecto = up.existeUsuario(correo);
+					boolean correoCorrecto = up.existeUsuario(correo.trim());
 					 
 					 if (!correoCorrecto) {
 						 JOptionPane.showMessageDialog(vi, "El usuario no existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
 					 } else {
 						 
-						 boolean contraCorrecta = up.contraCorrecta(correo, passw);
+						 boolean contraCorrecta = up.contraCorrecta(correo.trim(), passw);
 						 
 						 if (!contraCorrecta) {
 							 JOptionPane.showMessageDialog(vi, "Contraseña incorrecta", "Error de datos", JOptionPane.ERROR_MESSAGE);
 						 } else {
+							 
+							 correoUsuActual = correo;
+							 
 							 vi.dispose();
 							 vi.limpiarDatos();
 							 
@@ -290,12 +305,11 @@ public class ProjectListener implements ActionListener {
 			
 			else if(e.getSource().equals(vm.getBtnRanking())){
 				vm.cargarPanel(pr);
-				// Guardo nombre y puntos de usuario en un HashMap
-
+				
+				// Guardar nombre y puntos de los usuarios en un HashMap
 				HashMap<String, Integer> tablaUsuPnt = up.nickPuntUsu();
 				// Busco las imagenes de los usuarios
 				ArrayList<String> imagenesUsu = up.imgUsu();
-
 				// Esto lo uso para hacer un entry en un arraylist
 				ArrayList<Entry<String, Integer>> tablaRanking = new ArrayList<Entry<String,Integer>>(tablaUsuPnt.entrySet());
 				pr.mostrarRanking(tablaRanking,imagenesUsu);
@@ -615,6 +629,8 @@ public class ProjectListener implements ActionListener {
 				}
 			}
 				
+		} else if (e.getSource() instanceof JTextArea) {
+			System.out.println("hola");
 		}
 		
 	}
@@ -650,6 +666,9 @@ public class ProjectListener implements ActionListener {
 	private void preguntaFallada() {
 		JOptionPane.showMessageDialog(vp, "Has fallado!", "" , JOptionPane.ERROR_MESSAGE);
 		
+		// 
+		if (cantFallos < Math.floor(CANT_PIPAS_LECCION/CANT_PIPAS_PENALIZACION)) cantFallos+=1;
+		
 		// Mueve la pregunta fallida al final del ArrayList
 		preguntas.add(preguntas.get(pregPos));
 		
@@ -672,7 +691,21 @@ public class ProjectListener implements ActionListener {
 		
 		// Si has acertado la última pregunta
 		if (pregPos == preguntas.size()) {
-			JOptionPane.showMessageDialog(vp, "¡Has acabado la lección!", "¡Enhorabuena!", JOptionPane.INFORMATION_MESSAGE);
+			// Calcular cantidad de pipas
+			pipas = CANT_PIPAS_LECCION - cantFallos*CANT_PIPAS_PENALIZACION;
+			puntos = CANT_PIPAS_LECCION - cantFallos*CANT_PIPAS_PENALIZACION;
+			JOptionPane.showMessageDialog(vp, "¡Has acabado la lección! Has obtenido " + pipas + " pipacoins y "
+					+ puntos + " puntos", "¡Enhorabuena!", JOptionPane.INFORMATION_MESSAGE);
+			// Añadir pipas al usuario
+			up.aniadirPipas(correoUsuActual, pipas);
+			up.aniadirPuntos(correoUsuActual, puntos);
+			// Añadir pipas a los bots
+			int pipasUsuario = up.getPipasUsuario(correoUsuActual);
+			Random rd = new Random();
+			int puntosBot1 = rd.nextInt((int) Math.round(pipasUsuario*PIPAS_MIN_BOT), (int) Math.round(pipasUsuario*PIPAS_MAX_BOT));
+			int puntosBot2 = rd.nextInt((int) Math.round(pipasUsuario*PIPAS_MIN_BOT), (int) Math.round(pipasUsuario*PIPAS_MAX_BOT));
+			int puntosBot3 = rd.nextInt((int) Math.round(pipasUsuario*PIPAS_MIN_BOT), (int) Math.round(pipasUsuario*PIPAS_MAX_BOT));
+			up.puntosABots(puntosBot1, puntosBot2, puntosBot3);
 			lp.leccionTerminada(nivActual);
 			vp.dispose();
 			vm.cargarPanel(pl);
