@@ -56,7 +56,8 @@ public class ProjectListener implements ActionListener {
 	private PnlLeciones pl;
 	private VPreguntas vp;
 	
-
+	// TAMAÑO NOMBRE
+	private static final int TAM_NOMBRE = 15;
 
 	// CLASES PERSISTENCIAS
 	private UsuariosPer up;
@@ -127,9 +128,12 @@ public class ProjectListener implements ActionListener {
 				String passw = vr.getTxtContrasenia();
 				String confPasswd = vr.getTxtConfirmarContrasenia();
 				
-				if (nombre.isBlank() || nombre.equals("Nombre")) {
+				if (nombre.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduce un nombre", "Error de datos", JOptionPane.ERROR_MESSAGE);
-				} else if (correo.isBlank() || correo.equals("Correo")) {
+				} else if (nombre.length() > TAM_NOMBRE) {
+					JOptionPane.showMessageDialog(vr, "El nombre no puede contener más de " + TAM_NOMBRE + " caracteres"
+							, "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (correo.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduce un correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (up.correoRepetido(correo)) {
 					JOptionPane.showMessageDialog(vr, "El correo introducido ya existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
@@ -255,14 +259,22 @@ public class ProjectListener implements ActionListener {
 					img = "/img/usuario.png";
 				}
 				
-				int res = up.customizarPerfil(img, vcu.getTxtNombre().getText());
+				String nom = vcu.getTxtNombre().getText();
 				
-				if(res != 0) {
-					vm.cambiarFotoPerfil(img);
-					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+				if (nom.length() <= TAM_NOMBRE) {
+					int res = up.customizarPerfil(img, vcu.getTxtNombre().getText());
+					if(res != 0) {
+						vm.cambiarFotoPerfil(img);
+						JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
 				} else {
-					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(vr, "El nombre no puede contener más de " + TAM_NOMBRE + " caracteres"
+							, "Error de datos", JOptionPane.ERROR_MESSAGE);
 				}
+				
+				
 				
 			}
 			
@@ -582,6 +594,12 @@ public class ProjectListener implements ActionListener {
 				}
 				if(!comprado) {
 					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+			} else if (e.getSource().equals(vm.getBtnSalirMenu())) {
+				int opc = JOptionPane.showConfirmDialog(vm, "¿Segur@ de que desea salir?", "Confirmación",
+						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (opc == JOptionPane.YES_OPTION) {
+					System.exit(0);
 				}
 			}
 				
