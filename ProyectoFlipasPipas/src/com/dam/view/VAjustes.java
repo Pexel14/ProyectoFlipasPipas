@@ -16,12 +16,11 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class VAjustes extends JDialog {
 	
 	public static final String ACT_CMD_BTN_BORRAR_CUENTA = "Borrar cuenta";
-	
-	private JSlider sldVolumen;
 	private JButton btnBorrarCuenta;
 	private JLabel lbl2;
 	private JButton btnSalir;
@@ -54,38 +53,38 @@ public class VAjustes extends JDialog {
 	
 	private void componentes() {
 		JLabel lblAjustes = new JLabel("Ajustes");
+		lblAjustes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAjustes.setForeground(Color.WHITE);
-		lblAjustes.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblAjustes.setBounds(187, 50, 89, 43);
+		lblAjustes.setFont(new Font("Tahoma", Font.BOLD, 40));
+		lblAjustes.setBounds(148, 50, 155, 55);
 		getContentPane().add(lblAjustes);
-		
-		sldVolumen = new JSlider();
-		sldVolumen.setBounds(132, 120, 200, 26);
-		getContentPane().add(sldVolumen);
 		
 		btnBorrarCuenta = new JButton(ACT_CMD_BTN_BORRAR_CUENTA);
 		btnBorrarCuenta.setForeground(Color.WHITE);
 		btnBorrarCuenta.setBackground(Color.RED);
 		btnBorrarCuenta.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnBorrarCuenta.setBounds(150, 204, 164, 35);
+		btnBorrarCuenta.setBounds(125, 155, 200, 75);
 		getContentPane().add(btnBorrarCuenta);
 		
-		lbl2 = new JLabel("siguenos en: ");
+		lbl2 = new JLabel("Siguenos en: ");
+		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl2.setForeground(Color.WHITE);
-		lbl2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lbl2.setBounds(161, 273, 142, 43);
+		lbl2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lbl2.setBounds(133, 260, 185, 40);
 		getContentPane().add(lbl2);
 		
-		JLabel lblTwier = new JLabel("twiter: @FlipaPipas");
+		JLabel lblTwier = new JLabel("Twitter: @FlipaPipas");
+		lblTwier.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTwier.setForeground(Color.WHITE);
-		lblTwier.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblTwier.setBounds(117, 334, 229, 43);
+		lblTwier.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTwier.setBounds(130, 320, 190, 30);
 		getContentPane().add(lblTwier);
 		
-		JLabel lblInstagram = new JLabel("instagram: @FlipaPipas");
+		JLabel lblInstagram = new JLabel("Instagram: @FlipaPipas");
+		lblInstagram.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInstagram.setForeground(Color.WHITE);
-		lblInstagram.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblInstagram.setBounds(106, 382, 251, 43);
+		lblInstagram.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblInstagram.setBounds(115, 370, 220, 30);
 		getContentPane().add(lblInstagram);
 		
 		btnSalir = new JButton("");

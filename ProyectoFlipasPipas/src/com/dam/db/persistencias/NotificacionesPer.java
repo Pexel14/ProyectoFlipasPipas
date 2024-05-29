@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.dam.db.AccesoDB;
 import com.dam.db.constants.TablaNotificacionesConst;
+import com.dam.db.constants.TablaUsuNotifConst;
 
 public class NotificacionesPer {
 	
@@ -17,15 +18,14 @@ public class NotificacionesPer {
 		this.acceso = new AccesoDB();
 	}
 	
-	public ArrayList<String> selectNotificaciones() {
+	public String selectNotificaciones(int notificacion, int usuario) {
 		
-		ArrayList<String> listNotis = new ArrayList<String>();
+		String notif = "";		
 		
-		// TODO query solo las 4 del id del usuario que le pases por paramentro ;
-		
-	       String query = "SELECT " + TablaNotificacionesConst.NOM_COL_COLUMNA3 + " FROM " + TablaNotificacionesConst.NOM_TABLA + 
-	    		   " WHERE " + TablaNotificacionesConst.NOM_COL_COLUMNA2 + " = ? ORDER BY " 
-	    		   + TablaNotificacionesConst.NOM_COL_COLUMNA1;
+		String query = "SELECT N." + TablaNotificacionesConst.NOM_COL_COLUMNA3 
+				+ " FROM " + TablaNotificacionesConst.NOM_TABLA + " N JOIN " 
+				+ TablaUsuNotifConst.NOM_TABLA + " UN ON UN." + TablaUsuNotifConst.COL_IDNOTIF + " = N." + TablaNotificacionesConst.NOM_COL_COLUMNA1 
+				+ " WHERE UN." + TablaUsuNotifConst.COL_IDUSU + " = ? AND N." + TablaNotificacionesConst.NOM_COL_COLUMNA1 + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -35,13 +35,15 @@ public class NotificacionesPer {
 			con = acceso.getConexion();
 			
 			stmt = con.prepareStatement(query);
-			stmt.setInt(1, 1); // TODO seleciona el id del usario que le digas
+			
+			stmt.setInt(1, usuario);
+			stmt.setInt(2, notificacion);
+			
 			rslt = stmt.executeQuery();
 			
 			
-			while (rslt.next()) {
-				listNotis.add(rslt.getString(1));
-
+			if(rslt.next()) {
+				notif = rslt.getString(1);
 			}
 			
 			
@@ -61,7 +63,7 @@ public class NotificacionesPer {
 		}
 	 
 		
-		return listNotis;
+		return notif;
 		
 	}
 	

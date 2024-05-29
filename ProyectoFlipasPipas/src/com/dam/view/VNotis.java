@@ -28,10 +28,12 @@ public class VNotis extends JDialog {
 
 	private static VMenu vm;
 
-	private JTextArea textArea;
-	private JTextArea textArea_1;
-	private JTextArea textArea_2;
-	private JTextArea textArea_3;
+	private JTextArea txtaNotif1;
+	private JTextArea txtaNotif2;
+	private JTextArea txtaNotif3;
+	private JTextArea txtaNotif4;
+	
+	static String [] notificaciones = {"","","",""};
 	
 	public VNotis() {
 		
@@ -59,24 +61,18 @@ public class VNotis extends JDialog {
 		
 		JPanel pnlDecoracion1 = new JPanel();
 		pnlDecoracion1.setBackground(new Color(50, 50, 75));
-		pnlDecoracion1.setBounds(35, 175, 300, 10);
+		pnlDecoracion1.setBounds(65, 175, 300, 10);
 		panel.add(pnlDecoracion1);
 		
 		JPanel pnlDecoracion2 = new JPanel();
 		pnlDecoracion2.setBackground(new Color(50, 50, 75));
-		pnlDecoracion2.setBounds(35, 335, 300, 10);
+		pnlDecoracion2.setBounds(65, 335, 300, 10);
 		panel.add(pnlDecoracion2);
 		
 		JPanel pnlDecoracion3 = new JPanel();
 		pnlDecoracion3.setBackground(new Color(50, 50, 75));
-		pnlDecoracion3.setBounds(35, 495, 300, 10);
+		pnlDecoracion3.setBounds(65, 495, 300, 10);
 		panel.add(pnlDecoracion3);
-		
-
-		JLabel lblNoti4 = new JLabel();
-		lblNoti4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNoti4.setBounds(35, 530, 300, 100);
-		panel.add(lblNoti4);
 		
 		btnSalir = new JButton("");
 		btnSalir.setIcon(new ImageIcon(VNotis.class.getResource("/img/salir.png")));
@@ -85,50 +81,50 @@ public class VNotis extends JDialog {
 		btnSalir.setBounds(340, 10, 50, 50);
 
 		btnSalir = new JButton("x");
-		btnSalir.setBounds(306, 11, 48, 23);
+		btnSalir.setBounds(341, 11, 48, 23);
 
 		panel.add(btnSalir);
 		
-		textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setForeground(Color.WHITE);
-		textArea.setFont(new Font("Monospaced", Font.BOLD, 13));
-		textArea.setBackground(new Color(79, 79, 117));
-		textArea.setBounds(35, 33, 300, 118);
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
-		panel.add(textArea);
+		txtaNotif1 = new JTextArea();
+		txtaNotif1.setEditable(false);
+		txtaNotif1.setForeground(Color.WHITE);
+		txtaNotif1.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtaNotif1.setBackground(new Color(79, 79, 117));
+		txtaNotif1.setBounds(65, 33, 300, 118);
+		txtaNotif1.setLineWrap(true);
+		txtaNotif1.setWrapStyleWord(true);
+		panel.add(txtaNotif1);
 		
-		textArea_1 = new JTextArea();
-		textArea_1.setEditable(false);
-		textArea_1.setForeground(Color.WHITE);
-		textArea_1.setFont(new Font("Monospaced", Font.BOLD, 13));
-		textArea_1.setBackground(new Color(79, 79, 117));
-		textArea_1.setBounds(35, 195, 300, 118);
-		textArea_1.setLineWrap(true);
-		textArea_1.setLineWrap(true);
-		textArea_1.setWrapStyleWord(true);
-		panel.add(textArea_1);
+		txtaNotif2 = new JTextArea();
+		txtaNotif2.setEditable(false);
+		txtaNotif2.setForeground(Color.WHITE);
+		txtaNotif2.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtaNotif2.setBackground(new Color(79, 79, 117));
+		txtaNotif2.setBounds(65, 195, 300, 118);
+		txtaNotif2.setLineWrap(true);
+		txtaNotif2.setLineWrap(true);
+		txtaNotif2.setWrapStyleWord(true);
+		panel.add(txtaNotif2);
 		
-		textArea_2 = new JTextArea();
-		textArea_2.setEditable(false);
-		textArea_2.setForeground(Color.WHITE);
-		textArea_2.setFont(new Font("Monospaced", Font.BOLD, 13));
-		textArea_2.setBackground(new Color(79, 79, 117));
-		textArea_2.setBounds(35, 355, 300, 118);
-		textArea_2.setLineWrap(true);
-		textArea_2.setWrapStyleWord(true);
-		panel.add(textArea_2);
+		txtaNotif3 = new JTextArea();
+		txtaNotif3.setEditable(false);
+		txtaNotif3.setForeground(Color.WHITE);
+		txtaNotif3.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtaNotif3.setBackground(new Color(79, 79, 117));
+		txtaNotif3.setBounds(65, 355, 300, 118);
+		txtaNotif3.setLineWrap(true);
+		txtaNotif3.setWrapStyleWord(true);
+		panel.add(txtaNotif3);
 		
-		textArea_3 = new JTextArea();
-		textArea_3.setEditable(false);
-		textArea_3.setForeground(Color.WHITE);
-		textArea_3.setFont(new Font("Monospaced", Font.BOLD, 13));
-		textArea_3.setBackground(new Color(79, 79, 117));
-		textArea_3.setBounds(35, 515, 300, 118);
-		textArea_3.setLineWrap(true);
-		textArea_3.setWrapStyleWord(true);
-		panel.add(textArea_3);
+		txtaNotif4 = new JTextArea();
+		txtaNotif4.setEditable(false);
+		txtaNotif4.setForeground(Color.WHITE);
+		txtaNotif4.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtaNotif4.setBackground(new Color(79, 79, 117));
+		txtaNotif4.setBounds(65, 515, 300, 118);
+		txtaNotif4.setLineWrap(true);
+		txtaNotif4.setWrapStyleWord(true);
+		panel.add(txtaNotif4);
 	}
 
 	public JButton getBtnSalir() {
@@ -149,12 +145,30 @@ public class VNotis extends JDialog {
 		btnSalir.addActionListener(l);
 	}
 
-	public void setNotis(ArrayList<String> listNotis) {
+	public void setNotificaciones(String notificacion) {
 		
-		// TODO inserta las notificaciones del array en los lbls correspondientes
-		textArea.setText(listNotis.get(0));
-		textArea_1.setText(listNotis.get(1));
-		textArea_2.setText(listNotis.get(2));
-		textArea_3.setText(listNotis.get(3));
+		for (int i = notificaciones.length - 1; i >= 0; i--) {
+			
+			if(i == 0) {
+				notificaciones[i] = notificacion;
+			
+			} else {
+				notificaciones[i] = notificaciones[i-1];
+			}
+			
+		}
+		
+		txtaNotif1.setText(notificaciones[0]);
+		txtaNotif2.setText(notificaciones[1]);
+		txtaNotif3.setText(notificaciones[2]);
+		txtaNotif4.setText(notificaciones[3]);
 	}
+	
+	public void limpiar() {
+		txtaNotif1.setText("");
+		txtaNotif2.setText("");
+		txtaNotif3.setText("");
+		txtaNotif4.setText("");
+	}
+	
 }

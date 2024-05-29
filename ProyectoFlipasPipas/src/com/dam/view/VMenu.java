@@ -25,9 +25,9 @@ public class VMenu extends JFrame {
 	private JButton btnTemario;
 	private JButton btnTienda;
 	private JButton btnNotis;
-	private JButton btnVidas;
 	private JButton btnPerfil;
 	private JButton btnAjustes;
+	private JButton btnSalirMenu;
 
 	public VMenu() {
 		super("Flipas Pipas");
@@ -84,17 +84,8 @@ public class VMenu extends JFrame {
 		btnNotis.setIcon(new ImageIcon(VMenu.class.getResource("/img/notis.png")));
 		btnNotis.setBorderPainted(false);
 		btnNotis.setContentAreaFilled(false);
-		btnNotis.setBounds(1445, 477, 75, 75);
+		btnNotis.setBounds(1445, 293, 75, 75);
 		getContentPane().add(btnNotis);
-		
-		btnVidas = new JButton("");
-		btnVidas.setIcon(new ImageIcon(VMenu.class.getResource("/img/6 vidas.png")));
-//		btnVidas.setIcon(new ImageIcon(VMenu.class.getResource("/img/vidas.png")));
-		btnVidas.setBorderPainted(false);
-		btnVidas.setContentAreaFilled(false);
-		btnVidas.setEnabled(false);
-		btnVidas.setBounds(1445, 293, 75, 75);
-		getContentPane().add(btnVidas);
 		
 		btnPerfil = new JButton("");
 		btnPerfil.setIcon(new ImageIcon(VMenu.class.getResource("/img/usuario.png")));
@@ -107,7 +98,7 @@ public class VMenu extends JFrame {
 		btnAjustes.setIcon(new ImageIcon(VMenu.class.getResource("/img/ajustes.png")));
 		btnAjustes.setBorderPainted(false);
 		btnAjustes.setContentAreaFilled(false);
-		btnAjustes.setBounds(1445, 661, 75, 75);
+		btnAjustes.setBounds(1445, 477, 75, 75);
 		getContentPane().add(btnAjustes);
 		
 		JPanel pnlDecoracionMenu = new JPanel();
@@ -123,6 +114,13 @@ public class VMenu extends JFrame {
 		scrpPanel = new JScrollPane();
 		scrpPanel.setBounds(0, -1, ANCHO_PANEL, ALTO_PANEL);
 		getContentPane().add(scrpPanel);
+		
+		btnSalirMenu = new JButton("New button");
+		btnSalirMenu.setIcon(new ImageIcon(VMenu.class.getResource("/img/salir_app.png")));
+		btnSalirMenu.setBounds(1445, 661, 75, 75);
+		btnSalirMenu.setBorderPainted(false);
+		btnSalirMenu.setContentAreaFilled(false);
+		getContentPane().add(btnSalirMenu);
 		
 	}
 	
@@ -165,8 +163,8 @@ public class VMenu extends JFrame {
 		return btnTienda;
 	}
 
-	public JButton getBtnVidas() {
-		return btnVidas;
+	public JButton getBtnSalirMenu() {
+		return btnSalirMenu;
 	}
 
 	public JButton getBtnNotis() {
@@ -196,7 +194,7 @@ public class VMenu extends JFrame {
 		btnTemario.addActionListener(listener);
 		btnNotis.addActionListener(listener);
 		btnAjustes.addActionListener(listener);
+		btnSalirMenu.addActionListener(listener);
 		
 	}
-	
 }

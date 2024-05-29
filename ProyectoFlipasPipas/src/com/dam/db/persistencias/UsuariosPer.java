@@ -29,6 +29,7 @@ public class UsuariosPer {
 	private static final String COL_FOTO = "FOTO_PERFIL";
 	private static final String COL_MONEDAS = "MONEDAS";
 	private static final String COL_CONTRASENIA = "CONTRASENIA";
+	private static final String COL_PUNTOS = "PUNTOS";
 	
 	private AccesoDB accesoBD;
 	
@@ -204,8 +205,8 @@ public class UsuariosPer {
 	public void registrarUsuario(Usuarios usuario) {
 
 		String query = "INSERT INTO " + NOM_TABLA + " ("
-		+ COL_NICK + ", " + COL_EMAIL + ", " + COL_FOTO + ", " + COL_MONEDAS + ", " + COL_CONTRASENIA
-		+ ") VALUES (?, ?, ?, ?, ?);";
+		+ COL_NICK + ", " + COL_EMAIL + ", " + COL_FOTO + ", " + COL_MONEDAS + ", " + COL_CONTRASENIA + ", " + COL_PUNTOS
+		+ ") VALUES (?, ?, ?, ?, ?, ?);";
 		
 		Connection con = null;
 		
@@ -222,6 +223,7 @@ public class UsuariosPer {
 			stmt.setString(3, usuario.getFotoPerfil());
 			stmt.setInt(4, usuario.getMonedas());
 			stmt.setString(5, usuario.getContrasenia());
+			stmt.setInt(6, usuario.getPuntos());
 			
 			stmt.executeUpdate();
 			

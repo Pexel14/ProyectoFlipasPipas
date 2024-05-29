@@ -3,6 +3,7 @@ package com.dam.view;
 import java.awt.Color;
 
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -58,7 +59,7 @@ public class PnlRanking extends JPanel {
 			pnlUsuario.setLayout(null);
 			
 			lblNomUsuarios[i] = new JLabel("");
-			lblNomUsuarios[i].setFont(new Font("Tahoma", Font.BOLD, 40));
+			lblNomUsuarios[i].setFont(new Font("Tahoma", Font.BOLD, 30));
 			lblNomUsuarios[i].setForeground(new Color(240, 240, 240));
 			lblNomUsuarios[i].setBounds(125, 0, 351, 100);
 			pnlUsuario.add(lblNomUsuarios[i]);
@@ -66,26 +67,13 @@ public class PnlRanking extends JPanel {
 			lblPuntosUsuarios[i] = new JLabel("");
 			lblPuntosUsuarios[i].setForeground(new Color(240, 240, 240));
 			lblPuntosUsuarios[i].setFont(new Font("Tahoma", Font.BOLD, 30));
-			lblPuntosUsuarios[i].setBounds(486, 0, 135, 100);
+			lblPuntosUsuarios[i].setBounds(431, 0, 200, 100);
+			lblPuntosUsuarios[i].setHorizontalAlignment(SwingConstants.RIGHT);
 			pnlUsuario.add(lblPuntosUsuarios[i]);
 			
 			lblImgUsuarios[i] = new JLabel("");
 			lblImgUsuarios[i].setBounds(25, 8, 75, 75);
 			pnlUsuario.add(lblImgUsuarios[i]);
-
-			/*
-			lblImg2 = new JLabel("");
-			lblImg2.setBounds(25, 10, 80, 80);
-			pnlUsuario.add(lblImg2);
-
-			lblImg3 = new JLabel("");
-			lblImg3.setBounds(25, 10, 80, 80);
-			pnlUsuario.add(lblImg3);
-
-			lblImg4 = new JLabel("");
-			lblImg4.setBounds(25, 10, 80, 80);
-			pnlUsuario.add(lblImg4);
-			*/
 			
 			//PUESTOS
 			pnlPuesto = new JPanel();

@@ -10,6 +10,7 @@ import com.dam.control.ProjectListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class VUsuario extends JDialog {
 	
@@ -47,42 +48,45 @@ public class VUsuario extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JLabel lblPantallaUsuario = new JLabel("Usuario");
+		lblPantallaUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPantallaUsuario.setForeground(new Color(240, 240, 240));
-		lblPantallaUsuario.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPantallaUsuario.setBounds(258, 10, 70, 25);
+		lblPantallaUsuario.setFont(new Font("Tahoma", Font.BOLD, 40));
+		lblPantallaUsuario.setBounds(193, 20, 200, 40);
 		getContentPane().add(lblPantallaUsuario);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(50, 50, 75));
-		panel.setBounds(50, 45, 500, 10);
+		panel.setBounds(50, 75, 500, 10);
 		getContentPane().add(panel);
 		
-		lblNomUsuario = new JLabel("");
+		lblNomUsuario = new JLabel("Nombre :");
 		lblNomUsuario.setForeground(new Color(240, 240, 240));
-		lblNomUsuario.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNomUsuario.setBounds(175, 65, 235, 30);
+		lblNomUsuario.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNomUsuario.setBounds(175, 110, 235, 30);
 		getContentPane().add(lblNomUsuario);
 		
-		lblEmailUsuario = new JLabel("");
+		lblEmailUsuario = new JLabel("Email :");
 		lblEmailUsuario.setForeground(new Color(240, 240, 240));
-		lblEmailUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblEmailUsuario.setBounds(175, 105, 180, 15);
+		lblEmailUsuario.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblEmailUsuario.setBounds(175, 150, 180, 30);
 		getContentPane().add(lblEmailUsuario);
 		
 		btnEditarPerfil = new JButton(ACT_COM_BTN_EDITAR);
 		btnEditarPerfil.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnEditarPerfil.setBounds(465, 65, 85, 30);
+		btnEditarPerfil.setBounds(465, 110, 85, 30);
 		getContentPane().add(btnEditarPerfil);
 		
 		
 		lblPipaCoins = new JLabel(" pipa coins");
-		lblPipaCoins.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPipaCoins.setBounds(175, 212, 250, 20);
+		lblPipaCoins.setForeground(new Color(255, 255, 255));
+		lblPipaCoins.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPipaCoins.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblPipaCoins.setBounds(175, 212, 250, 40);
 		getContentPane().add(lblPipaCoins);
 		
 		btnCerrarSesion = new JButton(ACT_COM_BTN_CERRARSESION);
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnCerrarSesion.setBounds(175, 332, 235, 20);
+		btnCerrarSesion.setBounds(175, 322, 235, 30);
 		getContentPane().add(btnCerrarSesion);
 		
 		btnCerrarVentana = new JButton("");
@@ -90,7 +94,7 @@ public class VUsuario extends JDialog {
 		btnCerrarVentana.setBorderPainted(false);
 		btnCerrarVentana.setContentAreaFilled(false);
 		btnCerrarVentana.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnCerrarVentana.setBounds(536, 1, 50, 50);
+		btnCerrarVentana.setBounds(536, 0, 50, 50);
 		getContentPane().add(btnCerrarVentana);
 	}
 	

@@ -84,10 +84,10 @@ public class VRegistro extends JFrame {
 		btnVolver.setBounds(50, 50, 65, 65);
 		getContentPane().add(btnVolver);
 		
-		JLabel lblNombre = new JLabel("Nombre :");
+		JLabel lblNombre = new JLabel("Nick :");
 		lblNombre.setForeground(new Color(255, 255, 255));
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNombre.setBounds(295, 166, 115, 50);
+		lblNombre.setBounds(339, 166, 71, 50);
 		getContentPane().add(lblNombre);
 		
 		JLabel lblCorreo = new JLabel("Correo :");

@@ -25,7 +25,7 @@ import java.util.Random;
 import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.persistencias.LeccionesPer;
 import com.dam.db.persistencias.UsuLecPer;
-
+import com.dam.db.persistencias.UsuNotificacionesPer;
 import com.dam.model.pojos.Tienda;
 
 import com.dam.view.*;
@@ -60,12 +60,16 @@ public class ProjectListener implements ActionListener {
 	private PnlLeciones pl;
 	private VPreguntas vp;
 
+	// TAMAÑO NOMBRE
+	private static final int TAM_NOMBRE = 15;
+
 	// CLASES PERSISTENCIAS
 	private UsuariosPer up;
 	private UsuPregPer upp;
 	private LeccionesPer lp;
 	private UsuTienda ut;
-	private NotificacionesPer pn;
+	private NotificacionesPer np;
+	private UsuNotificacionesPer unp;
 	private UsuLecPer ulp;
 	
 	// CLASES POJOS
@@ -95,8 +99,9 @@ public class ProjectListener implements ActionListener {
 		this.vi = vi;
 
 
-		pn = new NotificacionesPer();
-
+		np = new NotificacionesPer();
+		unp = new UsuNotificacionesPer();
+		
 		upp = new UsuPregPer();
 		lp = new LeccionesPer();
 
@@ -136,8 +141,12 @@ public class ProjectListener implements ActionListener {
 				String passw = vr.getTxtContrasenia();
 				String confPasswd = vr.getTxtConfirmarContrasenia();
 				
-				if (nombre.isBlank() || nombre.equals("Nombre")) {
+				if (nombre.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduce un nombre", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					
+				} else if (nombre.length() > TAM_NOMBRE) {
+					JOptionPane.showMessageDialog(vr, "El nombre no puede contener más de " + TAM_NOMBRE + " caracteres"
+							, "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (correo.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduce un correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (!correo.contains("@")) {
@@ -166,6 +175,10 @@ public class ProjectListener implements ActionListener {
 						up.getUser(correo);
 						ut.crearTienda(up.getId_usuario());
 						ulp.insertarLecciones(up.getId_usuario());
+						
+						vn.limpiar();
+						
+						unp.enviarNotificacion(up.getId_usuario());
 						
 						vr.dispose();
 						vr.limpiarDatos();
@@ -222,6 +235,7 @@ public class ProjectListener implements ActionListener {
 								 vm.cambiarFotoPerfil(foto);
 							 }
 							 
+							 vn.setNotificaciones(np.selectNotificaciones(2, up.getId_usuario()));
 							 vm.cargarPanel(pc);
 							 vm.hacerVisible();
 						 }
@@ -272,14 +286,22 @@ public class ProjectListener implements ActionListener {
 					img = "/img/usuario.png";
 				}
 				
-				int res = up.customizarPerfil(img, vcu.getTxtNombre().getText());
+				String nom = vcu.getTxtNombre().getText();
 				
-				if(res != 0) {
-					vm.cambiarFotoPerfil(img);
-					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+				if (nom.length() <= TAM_NOMBRE) {
+					int res = up.customizarPerfil(img, vcu.getTxtNombre().getText());
+					if(res != 0) {
+						vm.cambiarFotoPerfil(img);
+						JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
 				} else {
-					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(vr, "El nombre no puede contener más de " + TAM_NOMBRE + " caracteres"
+							, "Error de datos", JOptionPane.ERROR_MESSAGE);
 				}
+				
+				
 				
 			}
 			
@@ -309,6 +331,8 @@ public class ProjectListener implements ActionListener {
 			else if(e.getSource().equals(vm.getBtnRanking())){
 				vm.cargarPanel(pr);
 				
+				vn.setNotificaciones(np.selectNotificaciones(4, up.getId_usuario()));
+				
 				// Guardar nombre y puntos de los usuarios en un HashMap
 				HashMap<String, Integer> tablaUsuPnt = up.nickPuntUsu();
 				// Busco las imagenes de los usuarios
@@ -328,7 +352,7 @@ public class ProjectListener implements ActionListener {
 			
 			else if(e.getSource().equals(vm.getBtnNotis())){
 				vn.hacerVisible();
-				vn.setNotis(pn.selectNotificaciones());
+//				vn.setNotis(pn.selectNotificaciones());
 			}
 			
 			else if(e.getSource().equals(vm.getBtnPerfil())){
@@ -420,6 +444,10 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			
+			// Botón atrás
+			else if (e.getSource().equals(pl.getBtnAtrasLecciones())) {
+				vm.cargarPanel(pc);
+			}
 					
 			//BOTONES USUARIO
 			//USUARIO
@@ -697,13 +725,20 @@ public class ProjectListener implements ActionListener {
 								pti.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
 								saldo = up.comprobarSaldo();
 								pti.cargarSaldo(saldo);
-								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.INFORMATION_MESSAGE);								
+								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.INFORMATION_MESSAGE);
+								vn.setNotificaciones(np.selectNotificaciones(3, up.getId_usuario()));
 							}
 						} 
 					}
 				}
 				if(!comprado && id != null) {
 					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+			} else if (e.getSource().equals(vm.getBtnSalirMenu())) {
+				int opc = JOptionPane.showConfirmDialog(vm, "¿Segur@ de que desea salir?", "Confirmación",
+						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (opc == JOptionPane.YES_OPTION) {
+					System.exit(0);
 				}
 			}
 				
@@ -782,6 +817,8 @@ public class ProjectListener implements ActionListener {
 			puntos = CANT_PIPAS_LECCION - cantFallos*CANT_PIPAS_PENALIZACION;
 			JOptionPane.showMessageDialog(vp, "¡Has acabado la lección! Has obtenido " + pipas + " pipacoins y "
 					+ puntos + " puntos", "¡Enhorabuena!", JOptionPane.INFORMATION_MESSAGE);
+			
+			vn.setNotificaciones(np.selectNotificaciones(1, up.getId_usuario()));
 			
 			// Añadir pipas al usuario
 			up.aniadirPipas(correoUsuActual, pipas);
