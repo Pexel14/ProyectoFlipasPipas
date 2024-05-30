@@ -226,6 +226,8 @@ public class ProjectListener implements ActionListener {
 							 
 							 correoUsuActual = correo;
 							 
+							 up.getUser(correo);
+							 
 							 vi.dispose();
 							 vi.limpiarDatos();
 							 
@@ -235,6 +237,7 @@ public class ProjectListener implements ActionListener {
 								 vm.cambiarFotoPerfil(foto);
 							 }
 							 
+							 pti.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
 							 vn.setNotificaciones(np.selectNotificaciones(2, up.getId_usuario()));
 							 vm.cargarPanel(pc);
 							 vm.hacerVisible();
@@ -292,12 +295,15 @@ public class ProjectListener implements ActionListener {
 					int res = up.customizarPerfil(img, vcu.getTxtNombre().getText());
 					if(res != 0) {
 						vm.cambiarFotoPerfil(img);
-						JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+						vu.getLblNomUsuario().setText(vcu.getTxtNombre().getText());
+						JOptionPane.showMessageDialog(vcu, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+						vcu.dispose();
+						vu.hacerVisible();
 					} else {
 						JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(vr, "El nombre no puede contener más de " + TAM_NOMBRE + " caracteres"
+					JOptionPane.showMessageDialog(vr, "El nombre no puede contener más de " + TAM_NOMBRE + " carácteres"
 							, "Error de datos", JOptionPane.ERROR_MESSAGE);
 				}
 				
@@ -454,7 +460,7 @@ public class ProjectListener implements ActionListener {
 			else if(e.getSource().equals(vu.getBtnEditarPerfil())) {
 				vu.dispose();
 				vcu.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
-				vcu.getTxtNombre().setText(up.getNick());
+				vcu.getTxtNombre().setText(vu.getLblNomUsuario().getText());
 				vcu.hacerVisible();
 			}
 			
@@ -463,7 +469,7 @@ public class ProjectListener implements ActionListener {
 				String texto = e.getActionCommand();
 
 				
-				int res = JOptionPane.showConfirmDialog( vp,"¿Estás seguro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+				int res = JOptionPane.showConfirmDialog( vp,"¿Estás seguro?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				
 				if(res == JOptionPane.YES_OPTION) {
 					switch (texto) {
@@ -661,7 +667,7 @@ public class ProjectListener implements ActionListener {
 				int res = up.customizarPerfil(img, vu.getLblNomUsuario().getText());
 				
 				if(res != 0) {
-					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}

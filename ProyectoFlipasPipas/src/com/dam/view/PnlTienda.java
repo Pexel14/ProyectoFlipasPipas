@@ -197,6 +197,7 @@ public class PnlTienda extends JPanel {
 			
 		} else {
 			lblPrecioObj1.setText(cargarBotones.get(0).getPrecio() + " Pipa Coins");
+			btnObj1.setEnabled(true);
 		}
 		
 		if(cargarBotones.get(1).isComprada()) {
@@ -205,6 +206,7 @@ public class PnlTienda extends JPanel {
 			
 		} else {
 			lblPrecioObj2.setText(cargarBotones.get(1).getPrecio() + " Pipa Coins");
+			btnObj2.setEnabled(true);
 		}
 		
 		if(cargarBotones.get(2).isComprada()) {
@@ -213,6 +215,7 @@ public class PnlTienda extends JPanel {
 			
 		} else {
 			lblPrecioObj3.setText(cargarBotones.get(2).getPrecio() + " Pipa Coins");
+			btnObj3.setEnabled(true);
 		}
 		
 		if(cargarBotones.get(3).isComprada()) {
@@ -221,6 +224,7 @@ public class PnlTienda extends JPanel {
 			
 		} else {
 			lblPrecioObj4.setText(cargarBotones.get(3).getPrecio() + " Pipa Coins");
+			btnObj4.setEnabled(true);
 		}
 		
 		if(cargarBotones.get(4).isComprada()) {
@@ -229,6 +233,7 @@ public class PnlTienda extends JPanel {
 			
 		} else {
 			lblPrecioObj5.setText(cargarBotones.get(4).getPrecio() + " Pipa Coins");
+			btnObj5.setEnabled(true);
 		}
 		
 		if(cargarBotones.get(5).isComprada()) {
@@ -237,6 +242,7 @@ public class PnlTienda extends JPanel {
 			
 		} else {
 			lblPrecioObj6.setText(cargarBotones.get(5).getPrecio() + " Pipa Coins");
+			btnObj6.setEnabled(true);
 		}
 	}
 
