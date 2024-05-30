@@ -825,13 +825,18 @@ public class ProjectListener implements ActionListener {
 			up.aniadirPuntos(correoUsuActual, puntos);
 			
 //			 Añadir pipas a los bots
-			int pipasUsuario = up.getPipasUsuario(correoUsuActual);
+			int pntsUsuario = up.getPipasUsuario(correoUsuActual);
 			Random rd = new Random();
 			
-			int puntosBot1 = rd.nextInt((int) Math.round(pipasUsuario*PIPAS_MIN_BOT), (int) Math.round(pipasUsuario*PIPAS_MAX_BOT));
-			int puntosBot2 = rd.nextInt((int) Math.round(pipasUsuario*PIPAS_MIN_BOT), (int) Math.round(pipasUsuario*PIPAS_MAX_BOT));
-			int puntosBot3 = rd.nextInt((int) Math.round(pipasUsuario*PIPAS_MIN_BOT), (int) Math.round(pipasUsuario*PIPAS_MAX_BOT));
-			up.puntosABots(puntosBot1, puntosBot2, puntosBot3);
+			//SELECT PNTS 3 PRIMEROS ID
+			int[] pntsBots = new int[3];
+			pntsBots = up.getPntsBots();
+			
+			int puntosBot1 = rd.nextInt((int) Math.round(pntsUsuario*PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*PIPAS_MAX_BOT));
+			int puntosBot2 = rd.nextInt((int) Math.round(pntsUsuario*PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*PIPAS_MAX_BOT));
+			int puntosBot3 = rd.nextInt((int) Math.round(pntsUsuario*PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*PIPAS_MAX_BOT));
+			// LE SUMO LAS PARTES DEL ARRAY
+			up.puntosABots(pntsBots[0]+puntosBot1, pntsBots[1]+puntosBot2, pntsBots[2]+puntosBot3);
 			
 //			ulp.leccionTerminada(nivActual, up.getId_usuario());
 			
@@ -842,6 +847,9 @@ public class ProjectListener implements ActionListener {
 			vp.dispose();
 			vm.cargarPanel(pl);
 			vm.hacerVisible();
+			
+			// Reestablecer cantidad de pipas ganadas
+			cantFallos = 0;
 		}
 		// Si no
 		else {

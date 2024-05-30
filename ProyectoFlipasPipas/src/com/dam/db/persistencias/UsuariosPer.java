@@ -713,9 +713,9 @@ public class UsuariosPer {
 	}
 
 	public int getPipasUsuario(String correoUsuActual) {
-		int pipas = 0;
+		int pnts = 0;
 		
-		String query = "SELECT " + TablaUsuariosConst.NOM_COL_MONEDAS + " FROM " + TablaUsuariosConst.NOM_TABLA
+		String query = "SELECT " + TablaUsuariosConst.NOM_COL_PUNTOS + " FROM " + TablaUsuariosConst.NOM_TABLA
 				+ " WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?";
 		
 		Connection con = null;
@@ -732,7 +732,7 @@ public class UsuariosPer {
 			
 			rslt = stmt.executeQuery();
 			if (rslt.next()) {
-				pipas = rslt.getInt(TablaUsuariosConst.NOM_COL_MONEDAS);
+				pnts = rslt.getInt(1);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -749,7 +749,51 @@ public class UsuariosPer {
 			}
 		}
 		
-		return pipas;
+		return pnts;
+	}
+
+	public int[] getPntsBots() {
+		int[] pnts = new int[3];
+		
+		String query = "SELECT " + TablaUsuariosConst.NOM_COL_PUNTOS + " FROM " + TablaUsuariosConst.NOM_TABLA
+				+ " WHERE " + TablaUsuariosConst.NOM_COL_ID + " IN (" + FlipasPipasConst.ID_BOT1 + "," + FlipasPipasConst.ID_BOT2 + "," + FlipasPipasConst.ID_BOT3 + ")";
+		
+		Connection con = null;
+		
+		Statement stmt = null;
+		
+		ResultSet rslt = null;
+		
+		int i = 0;
+		
+		try {
+            con = accesoBD.getConexion();
+            stmt = con.createStatement();
+            rslt = stmt.executeQuery(query);
+
+            while(rslt.next()) {
+            	pnts[i] = rslt.getInt(1);
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            try {
+                if (rslt != null) {
+                    rslt.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		
+		return pnts;
 	}
 
 
