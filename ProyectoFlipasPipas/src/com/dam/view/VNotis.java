@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
 
 import javax.swing.ImageIcon;
 
@@ -34,6 +35,7 @@ public class VNotis extends JDialog {
 	private JTextArea txtaNotif4;
 	
 	static String [] notificaciones = {"","","",""};
+	private JScrollPane scrp;
 	
 	public VNotis() {
 		
@@ -46,7 +48,7 @@ public class VNotis extends JDialog {
 	private void componentes() {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrp = new JScrollPane();
+		scrp = new JScrollPane();
 		scrp.setBounds(0, 0, ANCHO, ALTO);
 		scrp.getVerticalScrollBar().setUnitIncrement(20);
 		scrp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -88,7 +90,7 @@ public class VNotis extends JDialog {
 		txtaNotif1 = new JTextArea();
 		txtaNotif1.setEditable(false);
 		txtaNotif1.setForeground(Color.WHITE);
-		txtaNotif1.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtaNotif1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtaNotif1.setBackground(new Color(79, 79, 117));
 		txtaNotif1.setBounds(65, 33, 300, 118);
 		txtaNotif1.setLineWrap(true);
@@ -98,7 +100,7 @@ public class VNotis extends JDialog {
 		txtaNotif2 = new JTextArea();
 		txtaNotif2.setEditable(false);
 		txtaNotif2.setForeground(Color.WHITE);
-		txtaNotif2.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtaNotif2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtaNotif2.setBackground(new Color(79, 79, 117));
 		txtaNotif2.setBounds(65, 195, 300, 118);
 		txtaNotif2.setLineWrap(true);
@@ -109,7 +111,7 @@ public class VNotis extends JDialog {
 		txtaNotif3 = new JTextArea();
 		txtaNotif3.setEditable(false);
 		txtaNotif3.setForeground(Color.WHITE);
-		txtaNotif3.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtaNotif3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtaNotif3.setBackground(new Color(79, 79, 117));
 		txtaNotif3.setBounds(65, 355, 300, 118);
 		txtaNotif3.setLineWrap(true);
@@ -119,7 +121,7 @@ public class VNotis extends JDialog {
 		txtaNotif4 = new JTextArea();
 		txtaNotif4.setEditable(false);
 		txtaNotif4.setForeground(Color.WHITE);
-		txtaNotif4.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtaNotif4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtaNotif4.setBackground(new Color(79, 79, 117));
 		txtaNotif4.setBounds(65, 515, 300, 118);
 		txtaNotif4.setLineWrap(true);

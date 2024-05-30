@@ -21,6 +21,8 @@ import com.dam.db.persistencias.NotificacionesPer;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.dam.db.constants.FlipasPipasConst;
 import com.dam.db.persistencias.LeccionesPer;
@@ -140,17 +142,20 @@ public class ProjectListener implements ActionListener {
 				String correo = vr.getTxtCorreo();
 				String passw = vr.getTxtContrasenia();
 				String confPasswd = vr.getTxtConfirmarContrasenia();
+				Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+		        Matcher mat = pattern.matcher(correo);
 				
 				if (nombre.isBlank()) {
-					JOptionPane.showMessageDialog(vr, "Introduce un nombre", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(vr, "Introduce un nick", "Error de datos", JOptionPane.ERROR_MESSAGE);
 					
 				} else if (nombre.length() > TAM_NOMBRE) {
-					JOptionPane.showMessageDialog(vr, "El nombre no puede contener más de " + TAM_NOMBRE + " caracteres"
+					JOptionPane.showMessageDialog(vr, "El nick no puede contener más de " + TAM_NOMBRE + " caracteres"
 							, "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (correo.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduce un correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
-				} else if (!correo.contains("@")) {
-					JOptionPane.showMessageDialog(vr, "El correo debe contener un arroba (@)", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				} else if (!mat.matches()) {
+					JOptionPane.showMessageDialog(vr, "El correo debe tener formato 'texto@direccion.abc'",
+							"Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (up.correoRepetido(correo)) {
 					JOptionPane.showMessageDialog(vr, "El correo introducido ya existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (passw.isBlank()) {
@@ -207,7 +212,7 @@ public class ProjectListener implements ActionListener {
 				String passw = vi.getTxtPassw();
 				
 				if (correo.isBlank()) {
-					JOptionPane.showMessageDialog(vi, "Introduzca el nombre de usuario", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(vi, "Introduzca el correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else if (passw.isBlank()) {
 					JOptionPane.showMessageDialog(vi, "Introduzca la contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -785,7 +790,7 @@ public class ProjectListener implements ActionListener {
 
 
 	private void preguntaFallada() {
-		JOptionPane.showMessageDialog(vp, "Has fallado!", "" , JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(vp, "Has fallado!", "Respuesta incorrecta" , JOptionPane.ERROR_MESSAGE);
 		
 		// 
 		if (cantFallos < Math.floor(CANT_PIPAS_LECCION/CANT_PIPAS_PENALIZACION)) cantFallos+=1;

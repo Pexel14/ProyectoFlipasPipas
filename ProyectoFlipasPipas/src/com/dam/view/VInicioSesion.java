@@ -68,7 +68,7 @@ public class VInicioSesion extends JFrame {
 		
 		btnRegistrarse = new JButton(ACT_COM_BTN_REGISTRO);
 		btnRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnRegistrarse.setBounds(595, 700, 350, 30);
+		btnRegistrarse.setBounds(595, 700, 350, 50);
 		getContentPane().add(btnRegistrarse);
 		
 		JLabel lblCorreo = new JLabel("Correo :");

@@ -43,6 +43,8 @@ public class VPreguntas extends JFrame {
 
 	public VPreguntas() {
 		
+		super("Nivel");
+		
 		ConfigurarFrame();
 
 		componentes();
