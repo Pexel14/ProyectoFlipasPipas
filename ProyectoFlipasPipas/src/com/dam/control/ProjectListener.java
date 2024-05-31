@@ -372,6 +372,7 @@ public class ProjectListener implements ActionListener {
 				vu.getLblEmailUsuario().setText(usuario.getEmail());
 				vu.getLblNomUsuario().setText(usuario.getNick());
 				vu.getLblPipaCoins().setText(String.valueOf(usuario.getMonedas()) + " flipa coins");
+				vu.getLblPuntos().setText(usuario.getPuntos() + " Ptns");
 				
 				vu.hacerVisible();
 			}
@@ -743,7 +744,7 @@ public class ProjectListener implements ActionListener {
 					}
 				}
 				if(!comprado && id != null) {
-					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transaccion", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transacción", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			} else if (e.getSource().equals(vm.getBtnSalirMenu())) {
 				int opc = JOptionPane.showConfirmDialog(vm, "¿Segur@ de que desea salir?", "Confirmación",

@@ -35,7 +35,6 @@ public class PnlTienda extends JPanel {
 	private JButton btnObj5;
 	private JButton btnObj6;
 	private JLabel lblCantPipas;
-	private JButton btnImgPipa;
 	private JLabel lblPrecioObj1;
 	private JLabel lblPrecioObj2;
 	private JLabel lblPrecioObj3;
@@ -56,11 +55,6 @@ public class PnlTienda extends JPanel {
 		lblPipaCoins.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblPipaCoins.setBounds(116, 111, 175, 50);
 		add(lblPipaCoins);
-		
-		btnImgPipa = new JButton("");
-		btnImgPipa.setEnabled(false);
-		btnImgPipa.setBounds(410, 111, 50, 50);
-		add(btnImgPipa);
 		
 		btnObj1 = new JButton(ACT_COM_BTN_OBJ1);
 		btnObj1.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/Imagen1Tienda.jpeg")));
@@ -101,7 +95,7 @@ public class PnlTienda extends JPanel {
 		lblCantPipas = new JLabel("0");
 		lblCantPipas.setForeground(UIManager.getColor("Button.background"));
 		lblCantPipas.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblCantPipas.setBounds(285, 111, 115, 50);
+		lblCantPipas.setBounds(285, 111, 134, 50);
 		add(lblCantPipas);
 		
 		lblPrecioObj1 = new JLabel("");
@@ -139,6 +133,11 @@ public class PnlTienda extends JPanel {
 		lblPrecioObj6.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblPrecioObj6.setBounds(930, 744, 211, 23);
 		add(lblPrecioObj6);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(PnlTienda.class.getResource("/img/PipcoinLt.png")));
+		lblNewLabel.setBounds(435, 102, 73, 73);
+		add(lblNewLabel);
 	}
 	
 	public JButton getBtnObj1() {

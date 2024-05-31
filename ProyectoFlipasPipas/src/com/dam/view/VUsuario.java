@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
 
 public class VUsuario extends JDialog {
 	
@@ -28,6 +31,8 @@ public class VUsuario extends JDialog {
 	private JButton btnCerrarVentana;
 	private static VMenu vm;
 	private JLabel lblEmailUsuario;
+	private JLabel lblCorreo;
+	private JLabel lblPuntosSet;
 
 	public VUsuario() {
 		super(vm, "Usuario", true);
@@ -62,31 +67,37 @@ public class VUsuario extends JDialog {
 		lblNomUsuario = new JLabel("Nombre :");
 		lblNomUsuario.setForeground(new Color(240, 240, 240));
 		lblNomUsuario.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNomUsuario.setBounds(175, 110, 235, 30);
+		lblNomUsuario.setBounds(123, 100, 283, 40);
 		getContentPane().add(lblNomUsuario);
 		
 		lblEmailUsuario = new JLabel("Email :");
 		lblEmailUsuario.setForeground(new Color(240, 240, 240));
 		lblEmailUsuario.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblEmailUsuario.setBounds(175, 150, 180, 30);
+		lblEmailUsuario.setBounds(157, 150, 298, 40);
 		getContentPane().add(lblEmailUsuario);
 		
-		btnEditarPerfil = new JButton(ACT_COM_BTN_EDITAR);
+		btnEditarPerfil = new JButton("");
+		btnEditarPerfil.setIcon(new ImageIcon(VUsuario.class.getResource("/img/pen.jpg")));
+		btnEditarPerfil.setToolTipText("Edita tu información");
+		btnEditarPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnEditarPerfil.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnEditarPerfil.setBounds(465, 110, 85, 30);
+		btnEditarPerfil.setBounds(465, 139, 80, 80);
 		getContentPane().add(btnEditarPerfil);
 		
 		
-		lblPipaCoins = new JLabel(" pipa coins");
+		lblPipaCoins = new JLabel("pipa coins");
 		lblPipaCoins.setForeground(new Color(255, 255, 255));
-		lblPipaCoins.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPipaCoins.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPipaCoins.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblPipaCoins.setBounds(175, 212, 250, 40);
+		lblPipaCoins.setBounds(180, 203, 298, 40);
 		getContentPane().add(lblPipaCoins);
 		
 		btnCerrarSesion = new JButton(ACT_COM_BTN_CERRARSESION);
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnCerrarSesion.setBounds(175, 322, 235, 30);
+		btnCerrarSesion.setBounds(157, 312, 269, 40);
 		getContentPane().add(btnCerrarSesion);
 		
 		btnCerrarVentana = new JButton("");
@@ -96,6 +107,36 @@ public class VUsuario extends JDialog {
 		btnCerrarVentana.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnCerrarVentana.setBounds(536, 0, 50, 50);
 		getContentPane().add(btnCerrarVentana);
+		
+		JLabel lblNombre = new JLabel("Nick :");
+		lblNombre.setForeground(UIManager.getColor("Button.background"));
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNombre.setBounds(51, 100, 117, 40);
+		getContentPane().add(lblNombre);
+		
+		lblCorreo = new JLabel("Correo :");
+		lblCorreo.setForeground(UIManager.getColor("Button.background"));
+		lblCorreo.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblCorreo.setBounds(50, 150, 107, 40);
+		getContentPane().add(lblCorreo);
+		
+		JLabel lblMoneda = new JLabel("Monedas :");
+		lblMoneda.setForeground(UIManager.getColor("Button.background"));
+		lblMoneda.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblMoneda.setBounds(50, 203, 118, 40);
+		getContentPane().add(lblMoneda);
+		
+		JLabel lblPuntos = new JLabel("Puntos :");
+		lblPuntos.setForeground(UIManager.getColor("Button.background"));
+		lblPuntos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblPuntos.setBounds(50, 253, 107, 40);
+		getContentPane().add(lblPuntos);
+		
+		lblPuntosSet = new JLabel("Moneda :");
+		lblPuntosSet.setForeground(UIManager.getColor("Button.background"));
+		lblPuntosSet.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblPuntosSet.setBounds(148, 253, 245, 40);
+		getContentPane().add(lblPuntosSet);
 	}
 	
 	public JButton getBtnEditarPerfil() {
@@ -134,5 +175,9 @@ public class VUsuario extends JDialog {
 		btnEditarPerfil.addActionListener(listener);
 		btnCerrarVentana.addActionListener(listener);
 		btnCerrarSesion.addActionListener(listener);
+	}
+
+	public JLabel getLblPuntos() {
+		return	lblPuntosSet;	
 	}
 }
