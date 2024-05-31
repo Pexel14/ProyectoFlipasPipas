@@ -6,25 +6,20 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 import com.dam.control.ProjectListener;
 import com.dam.model.pojos.Preguntas;
 
-import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.JPanel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /*
  * @author alejandro
  * */
 
 public class VPreguntas extends JFrame {
+	private static final long serialVersionUID = 1L;
 	
 	public static final String ACT_CMD_BTN_SALIRPREG = "X";
 	public static final String ACT_CMD_BTN_A = "A";
@@ -101,12 +96,7 @@ public class VPreguntas extends JFrame {
 		btnSalir.setContentAreaFilled(false);
 		btnSalir.setBounds(1350, 105, 50, 50);
 		getContentPane().add(btnSalir);
-		
-		
-		
 	}
-
-	
 	
 	public JButton getBtnA() {
 		return btnA;
@@ -143,7 +133,6 @@ public class VPreguntas extends JFrame {
 		btnC.addActionListener(pl);
 		btnD.addActionListener(pl);
 		btnSalir.addActionListener(pl);
-//		txtaHola.addac
 	}
 
 	public void setPregunta(Preguntas pregunta) {
@@ -153,8 +142,6 @@ public class VPreguntas extends JFrame {
 		btnB.setText(pregunta.getResp2());
 		btnC.setText(pregunta.getResp3());
 		btnD.setText(pregunta.getResp4());
-		
-		//System.out.println(pregunta.getIdPregunta());
 		
 	}
 }

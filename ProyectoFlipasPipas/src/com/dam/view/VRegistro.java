@@ -3,7 +3,6 @@ package com.dam.view;
 import java.awt.Color;
 
 import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
 import com.dam.control.ProjectListener;
 
@@ -15,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class VRegistro extends JFrame {
+	private static final long serialVersionUID = 1L;
 	
 	private static final int ANCHO = 1920;
 	private static final int ALTO = 1080;
@@ -114,32 +114,6 @@ public class VRegistro extends JFrame {
 		setVisible(true);
 	}
 	
-	public JTextField getTxt(int i) {
-		
-		switch (i) {
-			case 1:
-				return txtNombre;
-			case 2:
-				return txtCorreo;
-			default :
-				return null;
-		}
-		
-	}
-	
-//	public JButton getBtn(int i) {
-//		
-//		switch (i) {
-//			case 1:
-//				return btnRegistrar;
-//			case 2:
-//				return btnVolver;
-//			default :
-//				return null;
-//		}
-//		
-//	}
-	
 	public JButton getBtnRegistrar() {
 		return btnRegistrar;
 	}
@@ -148,47 +122,20 @@ public class VRegistro extends JFrame {
 		return btnVolver;
 	}
 	
-	public String getTxtNombre() {
+	public String getTxtNombre() { 
 		return txtNombre.getText();
-	}
-
-	public void setTxtNombre(String texto) {
-		txtNombre.setText(texto);
 	}
 
 	public String getTxtCorreo() {
 		return txtCorreo.getText();
 	}
 
-	public void setTxtCorreo(String texto) {
-		txtCorreo.setText(texto);
-	}
-
 	public String getTxtContrasenia() {
 		return String.valueOf(txtContrasenia.getPassword());
 	}
 
-	public void setTxtContrasenia(String texto) {
-		txtContrasenia.setText(texto);
-	}
-
 	public String getTxtConfirmarContrasenia() {
 		return String.valueOf(txtConfirmarContrasenia.getPassword());
-	}
-
-	public void setTxtConfirmarContrasenia(String texto) {
-		txtConfirmarContrasenia.setText(texto);
-	}
-
-	public void establecerTexto (int i, String s) {
-		
-		switch (i) {
-			case 1:
-				txtNombre.setText(s);
-			case 2:
-				txtCorreo.setText(s);
-		}
-		
 	}
 
 	public void setListener(ProjectListener listener) {

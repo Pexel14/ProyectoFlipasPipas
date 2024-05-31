@@ -8,13 +8,14 @@ import com.dam.control.ProjectListener;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JPanel;
-import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Insets;
 
 public class VMenu extends JFrame {
+	private static final long serialVersionUID = 1L;
+	
 	public static final int ALTO_PANEL = 845;
 	public static final int ANCHO_PANEL = 1292;
 	private static final int ANCHO = 1920;
@@ -24,7 +25,7 @@ public class VMenu extends JFrame {
 	private JButton btnRanking;
 	private JButton btnTemario;
 	private JButton btnTienda;
-	private JButton btnNotis;
+	private JButton btnNotificaciones;
 	private JButton btnPerfil;
 	private JButton btnAjustes;
 	private JButton btnSalirMenu;
@@ -80,12 +81,12 @@ public class VMenu extends JFrame {
 		btnTienda.setBounds(1320, 661, 75, 75);
 		getContentPane().add(btnTienda);
 		
-		btnNotis = new JButton("");
-		btnNotis.setIcon(new ImageIcon(VMenu.class.getResource("/img/notis.png")));
-		btnNotis.setBorderPainted(false);
-		btnNotis.setContentAreaFilled(false);
-		btnNotis.setBounds(1445, 293, 75, 75);
-		getContentPane().add(btnNotis);
+		btnNotificaciones = new JButton("");
+		btnNotificaciones.setIcon(new ImageIcon(VMenu.class.getResource("/img/notis.png")));
+		btnNotificaciones.setBorderPainted(false);
+		btnNotificaciones.setContentAreaFilled(false);
+		btnNotificaciones.setBounds(1445, 293, 75, 75);
+		getContentPane().add(btnNotificaciones);
 		
 		btnPerfil = new JButton("");
 		btnPerfil.setIcon(new ImageIcon(VMenu.class.getResource("/img/usuario.png")));
@@ -132,18 +133,6 @@ public class VMenu extends JFrame {
 		setVisible(true);
 	}
 	
-//	public JButton getBtn(int i) {
-//		
-//		switch (i) {
-//			case 1 :
-//				return btnHome;
-//			default :
-//				return null;
-//		}
-//	}
-
-	
-	
 	public JButton getBtnHome() {
 		return btnHome;
 	}
@@ -167,15 +156,14 @@ public class VMenu extends JFrame {
 		return btnSalirMenu;
 	}
 
-	public JButton getBtnNotis() {
-		return btnNotis;
+	public JButton getBtnNotificaciones() {
+		return btnNotificaciones;
 	}
 
 
 	public JButton getBtnPerfil() {
 		return btnPerfil;
 	}
-
 
 	public JButton getBtnAjustes() {
 		return btnAjustes;
@@ -192,7 +180,7 @@ public class VMenu extends JFrame {
 		btnRanking.addActionListener(listener);
 		btnTienda.addActionListener(listener);
 		btnTemario.addActionListener(listener);
-		btnNotis.addActionListener(listener);
+		btnNotificaciones.addActionListener(listener);
 		btnAjustes.addActionListener(listener);
 		btnSalirMenu.addActionListener(listener);
 		

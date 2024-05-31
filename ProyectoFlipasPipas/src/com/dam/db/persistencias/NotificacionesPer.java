@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.dam.db.AccesoDB;
 import com.dam.db.constants.TablaNotificacionesConst;
@@ -22,10 +21,10 @@ public class NotificacionesPer {
 		
 		String notif = "";		
 		
-		String query = "SELECT N." + TablaNotificacionesConst.NOM_COL_COLUMNA3 
+		String query = "SELECT N." + TablaNotificacionesConst.COL_NOTIF 
 				+ " FROM " + TablaNotificacionesConst.NOM_TABLA + " N JOIN " 
-				+ TablaUsuNotifConst.NOM_TABLA + " UN ON UN." + TablaUsuNotifConst.COL_IDNOTIF + " = N." + TablaNotificacionesConst.NOM_COL_COLUMNA1 
-				+ " WHERE UN." + TablaUsuNotifConst.COL_IDUSU + " = ? AND N." + TablaNotificacionesConst.NOM_COL_COLUMNA1 + " = ?";
+				+ TablaUsuNotifConst.NOM_TABLA + " UN ON UN." + TablaUsuNotifConst.COL_IDNOTIF + " = N." + TablaNotificacionesConst.COL_IDNOTIF 
+				+ " WHERE UN." + TablaUsuNotifConst.COL_IDUSU + " = ? AND N." + TablaNotificacionesConst.COL_IDNOTIF + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -48,20 +47,26 @@ public class NotificacionesPer {
 			
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			
 			try {
-				if (rslt != null) rslt.close();
-				if (stmt != null) stmt.close();
-				if (con != null) con.close();
+				if (rslt != null) {
+					rslt.close();
+				}
+				
+				if (stmt != null) {
+					stmt.close();
+				}
+				
+				if (con != null) {
+					con.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
 		}
-	 
 		
 		return notif;
 		

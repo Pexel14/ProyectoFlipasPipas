@@ -43,7 +43,6 @@ public class UsuTienda {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -85,7 +84,6 @@ public class UsuTienda {
 			res = stmt.executeUpdate();
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -128,7 +126,6 @@ public class UsuTienda {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -173,7 +170,6 @@ public class UsuTienda {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {

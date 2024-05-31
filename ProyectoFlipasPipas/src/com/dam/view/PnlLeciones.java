@@ -7,9 +7,6 @@ import javax.swing.JPanel;
 import com.dam.control.ProjectListener;
 import com.dam.db.constants.FlipasPipasConst;
 
-import javax.swing.ButtonGroup;
-import javax.swing.Icon;
-
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -19,15 +16,8 @@ import java.awt.Component;
 import javax.swing.SwingConstants;
 
 public class PnlLeciones extends JPanel {
+	private static final long serialVersionUID = 1L;
 	
-	/*TODO: --------------------- - - - - - - PONER TÍTULO DEL CURSO ARRIBA DEL TODO EN LA LECCIÓN - - - - - - ------------------------------------*/
-	
-	public static final String ACT_COM_BTN_1 = "1";
-	public static final String ACT_COM_BTN_2 = "2";
-	public static final String ACT_COM_BTN_3 = "3";
-	public static final String ACT_COM_BTN_4 = "4";
-	public static final String ACT_COM_BTN_REPASO = "Text";
-	private static final String ACT_COM_BTN_EXAMEN = "Text";
 	private JButton btnLec_1;
 	private JButton btnLec_3;
 	private JButton btnLec_2;
@@ -59,22 +49,22 @@ public class PnlLeciones extends JPanel {
 	private void componentes() {
 		setLayout(null);
 		
-		btnLec_1 = new JButton(ACT_COM_BTN_1);
+		btnLec_1 = new JButton("1");
 		btnLec_1.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		btnLec_1.setBounds(44, 500, 111, 111);
 		add(btnLec_1);
 		
-		btnLec_2 = new JButton(ACT_COM_BTN_2);
+		btnLec_2 = new JButton("2");
 		btnLec_2.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		btnLec_2.setBounds(252, 249, 111, 111);
 		add(btnLec_2);
 		
-		btnLec_3 = new JButton(ACT_COM_BTN_3);
+		btnLec_3 = new JButton("3");
 		btnLec_3.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		btnLec_3.setBounds(640, 249, 111, 111);
 		add(btnLec_3);
 		
-		btnLec_4 = new JButton(ACT_COM_BTN_4);
+		btnLec_4 = new JButton("4");
 		btnLec_4.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		btnLec_4.setBounds(867, 500, 111, 111);
 		add(btnLec_4);
@@ -170,8 +160,6 @@ public class PnlLeciones extends JPanel {
 
 	}
 	
-
-
 
 	public JButton getBtnDfn_1() {
 		return btnDfn_1;

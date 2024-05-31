@@ -10,33 +10,22 @@ import com.dam.db.AccesoDB;
 import com.dam.model.pojos.Preguntas;
 
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-
-import com.dam.db.constants.TablaLeccionesConst;
-import com.dam.db.constants.TablaUsuPregConst;
-import com.dam.db.constants.TablaUsuariosConst;
+import com.dam.db.constants.TablaPreguntasConst;
 
 public class UsuPregPer {
 	
-	private AccesoDB acceso = new AccesoDB();
+	private AccesoDB acceso;
 	
-	private static final String NOM_TABLA = "PREGUNTAS";
-	private static final String COL_ID_PREG = "ID_PREGUNTA";
-	private static final String COL_ID_LECC = "ID_LECCION";
-	private static final String COL_PREG = "PREGUNTA";
-	private static final String COL_RESP1 = "RESP1";
-	private static final String COL_RESP2 = "RESP2";
-	private static final String COL_RESP3 = "RESP3";
-	private static final String COL_RESP4 = "RESP4";
-	private static final String COL_CORRECTA = "CORRECTA";
+	public UsuPregPer() {
+		acceso = new AccesoDB();
+	}
 
 	public ArrayList<Preguntas> getPreg(int idLeccion) {
 		
 		ArrayList <Preguntas>  preguntas = new ArrayList<>();
 		Preguntas pregunta = null;
 		
-		String query = "SELECT DISTINCT * FROM " + NOM_TABLA + " WHERE " + COL_ID_LECC + " = ?;";
+		String query = "SELECT DISTINCT * FROM " + TablaPreguntasConst.NOM_TABLA + " WHERE " + TablaPreguntasConst.COL_ID_LECC + " = ?;";
 		
 		Connection con = null;
 		
@@ -54,14 +43,14 @@ public class UsuPregPer {
 			rslt = stmt.executeQuery();
 			
 			while (rslt.next()) {
-				pregunta = new Preguntas(rslt.getInt(COL_ID_PREG),
-						rslt.getInt(COL_ID_LECC),
-						rslt.getString(COL_PREG),
-						rslt.getString(COL_RESP1),
-						rslt.getString(COL_RESP2),
-						rslt.getString(COL_RESP3),
-						rslt.getString(COL_RESP4),
-						rslt.getString(COL_CORRECTA));
+				pregunta = new Preguntas(rslt.getInt(TablaPreguntasConst.COL_ID_PREG),
+						rslt.getInt(TablaPreguntasConst.COL_ID_LECC),
+						rslt.getString(TablaPreguntasConst.COL_PREG),
+						rslt.getString(TablaPreguntasConst.COL_RESP1),
+						rslt.getString(TablaPreguntasConst.COL_RESP2),
+						rslt.getString(TablaPreguntasConst.COL_RESP3),
+						rslt.getString(TablaPreguntasConst.COL_RESP4),
+						rslt.getString(TablaPreguntasConst.COL_CORRECTA));
 				
 				preguntas.add(pregunta);
 			}

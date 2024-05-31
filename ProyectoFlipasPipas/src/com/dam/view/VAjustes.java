@@ -4,14 +4,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-import javax.swing.JSlider;
-import javax.swing.RootPaneContainer;
 
 import com.dam.control.ProjectListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 public class VAjustes extends JDialog {
+	private static final long serialVersionUID = 1L;
 	
 	public static final String ACT_CMD_BTN_BORRAR_CUENTA = "Borrar cuenta";
 	private JButton btnBorrarCuenta;
@@ -32,7 +30,7 @@ public class VAjustes extends JDialog {
 	
 	public VAjustes() {
 		
-		super(vm, "Configuración", true); // ROBERTO : Lo he puesto aquí porque sino da error
+		super(vm, "Configuración", true);
 
 		frame();
 		
@@ -106,11 +104,6 @@ public class VAjustes extends JDialog {
 	public void setListener(ProjectListener listener) {
 		btnSalir.addActionListener(listener);
 		btnBorrarCuenta.addActionListener(listener);
-	}
-	
-	public void setLisener(ProjectListener lissener) {
-		btnBorrarCuenta.addActionListener(lissener);
-		btnSalir.addActionListener(lissener);//TODO
 	}
 	
 }

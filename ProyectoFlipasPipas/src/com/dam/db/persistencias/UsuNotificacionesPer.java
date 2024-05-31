@@ -35,8 +35,21 @@ public class UsuNotificacionesPer {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				
+				if(stmt != null) {
+					stmt.close();
+				}
+				
+				if(con != null) {
+					con.close();
+				}
+				
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
 		}
 		
 		

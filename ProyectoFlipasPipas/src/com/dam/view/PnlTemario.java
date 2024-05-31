@@ -5,19 +5,16 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
-import com.dam.control.ProjectListener;
 import javax.swing.ScrollPaneConstants;
 
 public class PnlTemario extends JPanel {
+	private static final long serialVersionUID = 1L;
 	
 	private static final int ANCHO_TOTAL = 1292;
-	//private static final int ANCHO = 1274;
 	private static final int ALTO_PANEL = 811;
 	private static final int ALTO_TOTAL = 5275;
 
@@ -30,8 +27,7 @@ public class PnlTemario extends JPanel {
 
 	private void configurarPanel() {
 		setBackground(new Color(50, 50, 75));
-		//setSize(ANCHO_TOTAL, ALTO_TOTAL); // PARA EL DESIGN
-		setSize(ANCHO_TOTAL, ALTO_PANEL); //PARA EL FINAL
+		setSize(ANCHO_TOTAL, ALTO_PANEL);
 		setLayout(null);
 	}
 
@@ -63,8 +59,7 @@ public class PnlTemario extends JPanel {
 		scrp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrp.getVerticalScrollBar().setUnitIncrement(20); // Para que la barra lateral se desplace más rápido
 		pnlPantalla.setLayout(null);
-		//scrp.setBounds(0, 0, ANCHO_TOTAL, ALTO_TOTAL); // PARA EL DESIGN
-		scrp.setBounds(0, 0, ANCHO_TOTAL, ALTO_PANEL); //PARA EL FINAL
+		scrp.setBounds(0, 0, ANCHO_TOTAL, ALTO_PANEL);
 		add(scrp);
 		
 		JPanel pnlJava = new JPanel();
@@ -138,11 +133,6 @@ public class PnlTemario extends JPanel {
 		lblCss.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCss.setBounds(50, 100, 1074, 900);
 		pnlCss.add(lblCss);
-		
-	}
-
-	public void setListener(ProjectListener listener) {
-		// TODO Auto-generated method stub
 		
 	}
 }

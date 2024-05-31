@@ -23,20 +23,6 @@ public class Preguntas {
 		this.correcta = correcta;
 	}
 
-	@Override
-	public String toString() {
-		return "Preguntas [idPregunta=" + idPregunta + ", idLeccion=" + idLeccion + ", pregunta=" + pregunta
-				+ ", resp1=" + resp1 + ", resp2=" + resp2 + ", resp3=" + resp3 + ", resp4=" + resp4 + ", correcta="
-				+ correcta + "]";
-	}
-
-	public int getIdPregunta() {
-		return idPregunta;
-	}
-
-	public int getIdLeccion() {
-		return idLeccion;
-	}
 
 	public String getPregunta() {
 		return pregunta;

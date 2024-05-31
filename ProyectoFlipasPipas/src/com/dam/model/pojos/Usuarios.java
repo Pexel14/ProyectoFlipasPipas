@@ -20,17 +20,6 @@ public class Usuarios {
         this.puntos = puntos;
     }
 
-
-	@Override
-	public String toString() {
-		return "Usuarios [id_usuario=" + idUsuario + ", nick=" + nick + ", email=" + email + ", fotoPerfil=" + fotoPerfil + ", monedas=" + monedas + ", contraseña="
-				+ contrasenia + "]";
-	}
-
-	public int getIdUsuario() {
-		return idUsuario;
-	}
-
 	public String getNick() {
 		return nick;
 	}

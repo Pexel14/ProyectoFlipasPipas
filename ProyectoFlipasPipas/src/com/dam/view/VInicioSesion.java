@@ -3,7 +3,6 @@ package com.dam.view;
 import java.awt.Color;
 
 import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
 import com.dam.control.ProjectListener;
 import javax.swing.JLabel;
@@ -14,13 +13,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class VInicioSesion extends JFrame {
+	private static final long serialVersionUID = 1L;
 	
 	public static final String ACT_COM_BTN_INICIO_SESION = "Iniciar sesión";
 	public static final String ACT_COM_BTN_REGISTRO = "¿Aún no tienes cuenta?";
 	private static final int ANCHO = 1920;
 	private static final int ALTO = 1080;
 	private JTextField txtCorreo;
-	private JPasswordField txtPassw;
+	private JPasswordField pwdPassw;
 	private JButton btnRegistrarse;
 	private JButton btnIniciarSesion;
 
@@ -55,11 +55,11 @@ public class VInicioSesion extends JFrame {
 		txtCorreo.setBounds(420, 190, 700, 50);
 		getContentPane().add(txtCorreo);
 		
-		txtPassw = new JPasswordField();
-		txtPassw.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		txtPassw.setColumns(10);
-		txtPassw.setBounds(420, 330, 700, 50);
-		getContentPane().add(txtPassw);
+		pwdPassw = new JPasswordField();
+		pwdPassw.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		pwdPassw.setColumns(10);
+		pwdPassw.setBounds(420, 330, 700, 50);
+		getContentPane().add(pwdPassw);
 		
 		btnIniciarSesion = new JButton(ACT_COM_BTN_INICIO_SESION);
 		btnIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -112,16 +112,16 @@ public class VInicioSesion extends JFrame {
 		txtCorreo.setText(texto);
 	}
 
-	public String getTxtPassw() {
-		return String.valueOf(txtPassw.getPassword());
+	public String getPwdPassw() {
+		return String.valueOf(pwdPassw.getPassword());
 	}
 
 	public void setTxtPassw(String texto) {
-		txtPassw.setText(texto);
+		pwdPassw.setText(texto);
 	}
 
 	public void limpiarDatos() {
 		txtCorreo.setText("");
-		txtPassw.setText("");
+		pwdPassw.setText("");
 	}
 }

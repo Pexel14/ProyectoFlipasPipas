@@ -20,10 +20,6 @@ public class Tienda {
 		return id_objeto;
 	}
 
-	public String getObjeto() {
-		return objeto;
-	}
-
 	public int getPrecio() {
 		return precio;
 	}

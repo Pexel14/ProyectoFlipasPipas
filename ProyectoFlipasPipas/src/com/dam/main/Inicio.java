@@ -11,7 +11,7 @@ import com.dam.view.VAjustes;
 import com.dam.view.VCustomizacion;
 import com.dam.view.VInicioSesion;
 import com.dam.view.VMenu;
-import com.dam.view.VNotis;
+import com.dam.view.VNotificaciones;
 import com.dam.view.VPreguntas;
 import com.dam.view.VRegistro;
 import com.dam.view.VUsuario;
@@ -37,7 +37,7 @@ public class Inicio {
 				PnlTemario pte = new PnlTemario();
 				PnlCursos pc = new PnlCursos();
 				VAjustes va = new VAjustes();
-				VNotis vn = new VNotis();
+				VNotificaciones vn = new VNotificaciones();
 				VUsuario vu = new VUsuario();
 				VCustomizacion vcu = new VCustomizacion();
 				
@@ -69,7 +69,6 @@ public class Inicio {
 				vi.setListener(listener);
 				vm.setListener(listener);
 				pti.setListener(listener);
-				pte.setListener(listener);
 				pc.setListener(listener);
 				va.setListener(listener);
 				vn.setListener(listener);

@@ -297,7 +297,8 @@ INSERT INTO PREGUNTAS VALUES(71,24,'¿En qué formato se expresa un color en CSS
 INSERT INTO PREGUNTAS VALUES(72,24,'¿Para qué sirve esta propiedad “color”?','Saber qué color tiene el fondo','Establece un color seleccionado a la fuente','Para cambiar el color del fondo','Te colorea la página web','resp2');
 
 
---ARREGLOS BBDD
+
+-------------------------------------------------------------------------------------------------------------ARREGLOS BBDD-------------------------------------------------------------------------------------------------------------------
 UPDATE PREGUNTAS SET CORRECTA = 'resp2' WHERE id_pregunta = 67;
 
 DROP TABLE USUARIOS;
@@ -364,9 +365,9 @@ CREATE TABLE USUARIOS_PREGUNTAS(
     CONSTRAINT FK_USERPREG_IDPREG FOREIGN KEY (ID_PREGUNTA) REFERENCES USUARIOS(ID_PREGUNTA)
 );
 
-INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Fernando', 'usuario1@prueba.com','img/Imagen5CustomButton.png',100,'usuarioprueba1');
-INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Pepe', 'usuario2@prueba.com','img/Imagen5CustomButton.png',200,'usuarioprueba2');
-INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Sara', 'usuario3@prueba.com','img/Imagen5CustomButton.png',300,'usuarioprueba2');
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Fernando', 'usuario1@prueba.com','/img/Imagen5CustomButton.png',100,'usuarioprueba1');
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Pepe', 'usuario2@prueba.com','/img/Imagen5CustomButton.png',200,'usuarioprueba2');
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Sara', 'usuario3@prueba.com','/img/Imagen5CustomButton.png',300,'usuarioprueba2');
 
 DROP TABLE USUARIOS_PREGUNTAS;
 
@@ -625,9 +626,9 @@ CREATE TABLE USUARIOS(
 
 UPDATE LECCIONES SET COMPLETADA = true WHERE ID_LECCION IN(1,7,13,19);
 
-INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Fernando', 'usuario1@prueba.com','/img/usuario.png',100,'usuarioprueba1');
-INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Pepe', 'usuario2@prueba.com','/img/usuario.png',200,'usuarioprueba2');
-INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA) VALUES('Sara', 'usuario3@prueba.com','/img/usuario.png',300,'usuarioprueba2');
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA, PUNTOS) VALUES('Fernando', 'usuario1@prueba.com','/img/usuario.png',100,'usuarioprueba1',0);
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA, PUNTOS) VALUES('Pepe', 'usuario2@prueba.com','/img/usuario.png',200,'usuarioprueba2',0);
+INSERT INTO USUARIOS(NICK, EMAIL, FOTO_PERFIL, MONEDAS, CONTRASENIA, PUNTOS) VALUES('Sara', 'usuario3@prueba.com','/img/usuario.png',300,'usuarioprueba2',0);
 
 
 DELETE FROM USUARIOS WHERE ID_USUARIO = 4 CASCADE;
@@ -637,8 +638,7 @@ DROP TABLE TEMARIO;
 CREATE TABLE TEMARIO(
     ID_TEMARIO NUMBER(2) CONSTRAINT PK_TEMARIO_IDTEM PRIMARY KEY,
     ID_CURSO NUMBER(2) CONSTRAINT FK_TEMARIO_IDCUR REFERENCES CURSOS(ID_CURSO),
-    ID_LECCION NUMBER(2) CONSTRAINT FK_TEMARIO_IDLEC REFERENCES LECCIONES(ID_LECCION),
-    TEAMRIO VARCHAR2(255)
+    TEMARIO VARCHAR2(255)
 );
 
 UPDATE PREGUNTAS SET RESP1 = '<HTML>' || RESP1 || '</HTML>' WHERE ID_LECCION NOT BETWEEN 13 AND 18;
@@ -648,23 +648,23 @@ UPDATE PREGUNTAS SET RESP4 = '<HTML>' || RESP4 || '</HTML>' WHERE ID_LECCION NOT
 UPDATE PREGUNTAS SET CORRECTA = '<HTML>' || CORRECTA || '</HTML>' WHERE ID_LECCION NOT BETWEEN 13 AND 18;
 
 
-INSERT INTO TEMARIO VALUES(1, 1, 1, 'Variables  Una variable es una zona de memoria donde se puede almacenar información del tipo que se desee con un nombre que la identifica. Existen dos tipos de variables, las variables primitivas y las de referencia. Se distinguen por la declaración del tipo de dato, en las de referencia la primera letra será en mayúscula.');
-INSERT INTO TEMARIO VALUES(2, 1, 2, 'Los operadores aritméticos son herramientas que nos permiten realizar operaciones matemáticas básicas.');
-INSERT INTO TEMARIO VALUES(3, 1, 4, 'En Java, los operadores lógicos son herramientas que nos ayudan a tomar decisiones en nuestro código. ¡Vamos a descubrir más sobre ellos!');
-INSERT INTO TEMARIO VALUES(4, 1, 5, 'En Java, los bucles son estructuras que nos permiten repetir un bloque de código varias veces. ¡Vamos a aprender más sobre ellos!');
-INSERT INTO TEMARIO VALUES(5, 2, 7, 'En SQL, la creación de tablas es un proceso fundamental que nos permite estructurar y almacenar nuestros datos.');
-INSERT INTO TEMARIO VALUES(6, 2, 8, 'En SQL, los constraints son reglas que nos ayudan a mantener la integridad y la precisión de los datos en nuestras tablas. ¡Vamos a aprender más sobre ellos!');
-INSERT INTO TEMARIO VALUES(7, 2, 10, 'alter table nos permite cambiar la estructura de una tabla existente, como añadir o eliminar columnas. insert into se usa para añadir nuevos registros a una tabla.');
-INSERT INTO TEMARIO VALUES(8, 2, 11, 'En el manejo de bases de datos, las operaciones de actualización y eliminación son fundamentales. La sentencia UPDATE permite modificar los valores existentes, mientras que DELETE elimina registros innecesarios.');
+INSERT INTO TEMARIO VALUES(1, 1, 'Variables  Una variable es una zona de memoria donde se puede almacenar información del tipo que se desee con un nombre que la identifica. Existen dos tipos de variables, las variables primitivas y las de referencia. Se distinguen por la declaración del tipo de dato, en las de referencia la primera letra será en mayúscula.');
+INSERT INTO TEMARIO VALUES(2, 2, 'Los operadores aritméticos son herramientas que nos permiten realizar operaciones matemáticas básicas.');
+INSERT INTO TEMARIO VALUES(3, 4, 'En Java, los operadores lógicos son herramientas que nos ayudan a tomar decisiones en nuestro código. ¡Vamos a descubrir más sobre ellos!');
+INSERT INTO TEMARIO VALUES(4, 5, 'En Java, los bucles son estructuras que nos permiten repetir un bloque de código varias veces. ¡Vamos a aprender más sobre ellos!');
+INSERT INTO TEMARIO VALUES(5, 7, 'En SQL, la creación de tablas es un proceso fundamental que nos permite estructurar y almacenar nuestros datos.');
+INSERT INTO TEMARIO VALUES(6, 8, 'En SQL, los constraints son reglas que nos ayudan a mantener la integridad y la precisión de los datos en nuestras tablas. ¡Vamos a aprender más sobre ellos!');
+INSERT INTO TEMARIO VALUES(7, 10, 'alter table nos permite cambiar la estructura de una tabla existente, como añadir o eliminar columnas. insert into se usa para añadir nuevos registros a una tabla.');
+INSERT INTO TEMARIO VALUES(8, 11, 'En el manejo de bases de datos, las operaciones de actualización y eliminación son fundamentales. La sentencia UPDATE permite modificar los valores existentes, mientras que DELETE elimina registros innecesarios.');
 
-INSERT INTO TEMARIO VALUES(9, 3, 13, 'Una página HTML sigue una estructura básica compuesta por tres partes principales el head el body y sus elementos.');
-INSERT INTO TEMARIO VALUES(10, 3, 14, 'Las listas son una parte esencial de HTML y se utilizan para presentar información de manera ordenada y estructurada.');
-INSERT INTO TEMARIO VALUES(11, 3, 16, 'la etiqueta de enlace, también conocida como la etiqueta <a> se utiliza para enlazar a diferentes partes de la misma página, a otras páginas en el mismo sitio web, o a páginas en otros sitios web. ');
-INSERT INTO TEMARIO VALUES(12, 3, 17, 'Los formularios son esenciales para interactuar con los usuarios, ya que permiten recoger información de ellos.');
-INSERT INTO TEMARIO VALUES(13, 4, 19, 'CSS es un lenguaje de hojas de estilo que se utiliza para describir la apariencia o la presentación de un documento escrito en HTML.');
-INSERT INTO TEMARIO VALUES(14, 4, 20, 'Un documento CSS se compone de varios selectores y reglas que trabajan juntos para formar la apariencia completa de una página web.');
-INSERT INTO TEMARIO VALUES(15, 4, 22, 'Los colores en CSS pueden ser especificados de varias maneras para el texto el fondo sus elementos y tienen multiples variaciones.');
-INSERT INTO TEMARIO VALUES(16, 4, 23, 'El posicionamiento en CSS es una característica poderosa que permite controlar exactamente dónde se colocan los elementos HTML en una página web.');
+INSERT INTO TEMARIO VALUES(9, 13, 'Una página HTML sigue una estructura básica compuesta por tres partes principales el head el body y sus elementos.');
+INSERT INTO TEMARIO VALUES(10, 14, 'Las listas son una parte esencial de HTML y se utilizan para presentar información de manera ordenada y estructurada.');
+INSERT INTO TEMARIO VALUES(11, 16, 'la etiqueta de enlace, también conocida como la etiqueta <a> se utiliza para enlazar a diferentes partes de la misma página, a otras páginas en el mismo sitio web, o a páginas en otros sitios web. ');
+INSERT INTO TEMARIO VALUES(12, 17, 'Los formularios son esenciales para interactuar con los usuarios, ya que permiten recoger información de ellos.');
+INSERT INTO TEMARIO VALUES(13, 19, 'CSS es un lenguaje de hojas de estilo que se utiliza para describir la apariencia o la presentación de un documento escrito en HTML.');
+INSERT INTO TEMARIO VALUES(14, 20, 'Un documento CSS se compone de varios selectores y reglas que trabajan juntos para formar la apariencia completa de una página web.');
+INSERT INTO TEMARIO VALUES(15, 22, 'Los colores en CSS pueden ser especificados de varias maneras para el texto el fondo sus elementos y tienen multiples variaciones.');
+INSERT INTO TEMARIO VALUES(16, 23, 'El posicionamiento en CSS es una característica poderosa que permite controlar exactamente dónde se colocan los elementos HTML en una página web.');
 
 update USUARIOS set PUNTOS = 200 where ID_USUARIO = 5;
 
@@ -713,8 +713,6 @@ CREATE TABLE USUARIOS_LECCIONES(
 
 UPDATE PREGUNTAS SET RESP1 = '<HTML>Cascada</HTML>' WHERE ID_PREGUNTA IN(57, 63);
 
-DELETE FROM USUARIOS_TIENDA;
-
 drop table NOTIFICACIONES;
 
 CREATE TABLE NOTIFICACIONES(
@@ -735,3 +733,4 @@ CREATE TABLE USUARIOS_NOTIFICACIONES(
     ID_USUARIO NUMBER(3) CONSTRAINT FK_USUNOTIF_IDUSER REFERENCES USUARIOS(ID_USUARIO),
     CONSTRAINT PK_NOTIFICACIONES_IDNOTIF PRIMARY KEY (ID_NOTIFICACION, ID_USUARIO)
 );
+

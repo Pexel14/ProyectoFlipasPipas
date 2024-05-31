@@ -15,8 +15,10 @@ import com.dam.control.ProjectListener;
 import com.dam.model.pojos.Tienda;
 
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class VCustomizacion extends JDialog {
+	private static final long serialVersionUID = 1L;
 	
 	private static final int ANCHO = 500;
 	private static final int ALTO = 550;
@@ -40,7 +42,7 @@ public class VCustomizacion extends JDialog {
 	private static VMenu vm;
 	
 	public VCustomizacion() {
-		super(vm, "Customizacion", true);
+		super(vm, "Customización", true);
 		configurarFrame();
 		
 		configurarComponentes();
@@ -62,9 +64,10 @@ public class VCustomizacion extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JLabel lblCustomizacion = new JLabel("Customización");
+		lblCustomizacion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCustomizacion.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblCustomizacion.setForeground(new Color(255, 255, 255));
-		lblCustomizacion.setBounds(175, 20, 150, 30);
+		lblCustomizacion.setBounds(127, 20, 229, 30);
 		getContentPane().add(lblCustomizacion);
 		
 		JButton btnA1 = new JButton("");
@@ -147,13 +150,14 @@ public class VCustomizacion extends JDialog {
 		return btnSalir;
 	}
 	
+	public JButton getBtnFP1() {
+		return btnFP1;
+	}
+
 	public JButton getBtnFP2() {
 		return btnFP2;
 	}
 
-	public JButton getBtnFP1() {
-		return btnFP1;
-	}
 	
 	public JButton getBtnFP3() {
 		return btnFP3;
@@ -163,13 +167,14 @@ public class VCustomizacion extends JDialog {
 		return btnFP4;
 	}
 
+	public JButton getBtnFP5() {
+		return btnFP5;
+	}
+
 	public JButton getBtnFP6() {
 		return btnFP6;
 	}
 
-	public JButton getBtnFP5() {
-		return btnFP5;
-	}
 
 	public JButton getBtnGuardar() {
 		return btnGuardar;

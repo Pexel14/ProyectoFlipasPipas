@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.dam.db.AccesoDB;
@@ -47,7 +46,6 @@ public class UsuLecPer {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -68,7 +66,7 @@ public class UsuLecPer {
 	}
 	
 	public ArrayList<Boolean> cargarLecciones(int id, int curso){
-		//TODO: Que al entrar en los niveles se carguen a los que puede acceder el usuario
+		//Al entrar en los niveles, se cargaran las lecciones a las que puede acceder el usuario
 		
 		String select = "SELECT UL." + TablaUsuLecConst.COL_COMPLETADA + " FROM " 
 		+ TablaUsuLecConst.NOM_TABLA + " UL JOIN " +  TablaLeccionesConst.NOM_TABLA + " L ON L." + TablaLeccionesConst.NOM_COL_ID_LECCION + "= UL." + TablaUsuLecConst.COL_IDLEC  
@@ -93,7 +91,6 @@ public class UsuLecPer {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -118,45 +115,6 @@ public class UsuLecPer {
 		return lecciones;
 	}
 	
-//	public void leccionTerminada(int nivActual, int id) {
-//		
-//		String query = "UPDATE " + TablaUsuLecConst.NOM_TABLA + " SET " + TablaUsuLecConst.COL_COMPLETADA + " = true WHERE "
-//				+ TablaUsuLecConst.COL_IDLEC + " = ? AND " + TablaUsuLecConst.COL_IDUSU + " = ?";
-//		
-//		Connection con = null;
-//		
-//		PreparedStatement stmt = null;
-//		
-//		ResultSet rslt = null;
-//		
-//		try {
-//			
-//			con = acceso.getConexion();
-//			
-//			stmt = con.prepareStatement(query);
-//			stmt.setInt(1, nivActual);
-//			stmt.setInt(2, id);
-//			
-//			stmt.executeUpdate();
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}finally {
-//			try {
-//				if (rslt != null) {
-//					rslt.close();
-//				}
-//				if (stmt != null) {
-//					stmt.close();
-//				}
-//				if (con != null) {
-//					con.close();
-//				}
-//			} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//	}
 	
 	public void desbloquearLeccion(int id, int leccion) {
 		String update = "UPDATE " + TablaUsuLecConst.NOM_TABLA + " SET " + TablaUsuLecConst.COL_COMPLETADA + " = true " 
@@ -176,7 +134,6 @@ public class UsuLecPer {
 			stmt.executeUpdate();
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {

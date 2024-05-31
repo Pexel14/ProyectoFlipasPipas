@@ -16,21 +16,10 @@ import java.util.HashMap;
 
 import com.dam.view.PnlRanking;
 import com.dam.db.constants.FlipasPipasConst;
-import com.dam.db.constants.TablaUsuPregConst;
 
 import com.dam.db.constants.TablaUsuariosConst;
 
 public class UsuariosPer {
-	
-	private static final String NOM_TABLA = "USUARIOS";
-	private static final String COL_ID = "ID_USUARIO";
-	private static final String COL_NICK = "NICK";
-	private static final String COL_EMAIL = "EMAIL";
-	private static final String COL_FOTO = "FOTO_PERFIL";
-	private static final String COL_MONEDAS = "MONEDAS";
-	private static final String COL_CONTRASENIA = "CONTRASENIA";
-	private static final String COL_PUNTOS = "PUNTOS";
-	
 	private AccesoDB accesoBD;
 	
 	private static int id_usuario;
@@ -46,7 +35,9 @@ public class UsuariosPer {
 		
 		boolean existe = false;
 		
-		String query = "SELECT " + COL_ID + ", " + COL_NICK + ", " + COL_FOTO + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?;";
+		String query = "SELECT " + TablaUsuariosConst.COL_ID + ", " 
+					+ TablaUsuariosConst.COL_NICK + ", " + TablaUsuariosConst.COL_FOTO 
+					+ " FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.COL_EMAIL + " = ?;";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -73,9 +64,15 @@ public class UsuariosPer {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(rslt != null) rslt.close();
-				if(stmt != null) stmt.close();
-				if(con != null) con.close();
+				if(rslt != null) {
+					rslt.close();
+				}
+				if(stmt != null) {
+					stmt.close();
+				}
+				if(con != null) {
+					con.close();
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -85,14 +82,12 @@ public class UsuariosPer {
 	}
 	
 	
-	
-	
-	
 	public boolean contraCorrecta(String correo, String passw) {
 		
 		boolean coincide = false;
 		
-		String query = "SELECT " + COL_CONTRASENIA + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?;";
+		String query = "SELECT " + TablaUsuariosConst.COL_CONTRASENIA 
+				+ " FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.COL_EMAIL + " = ?;";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -117,9 +112,18 @@ public class UsuariosPer {
 			e.printStackTrace();
 		} finally {
 			try {
-				rslt.close();
-				stmt.close();
-				con.close();
+				if(stmt != null) {
+					stmt.close();
+				}
+				
+				if(rslt != null) {
+					rslt.close();
+				}
+				
+				if(con != null) {
+					con.close();
+				}
+					
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -132,7 +136,8 @@ public class UsuariosPer {
 		
 		boolean repetido = false;
 		
-		String query = "SELECT " + COL_EMAIL + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?;";
+		String query = "SELECT " + TablaUsuariosConst.COL_EMAIL 
+				+ " FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.COL_EMAIL + " = ?;";
 		
 		Connection con = null;
 		
@@ -154,48 +159,21 @@ public class UsuariosPer {
 			e.printStackTrace();
 		} finally {
 			try {
-				rslt.close();
-				stmt.close();
-				rslt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return repetido;
-	}
-
-	public boolean nombreRepetido(String nombre) {
-		
-		boolean repetido = false;
-		
-		String query = "SELECT " + COL_NICK + " FROM " + NOM_TABLA + " WHERE " + COL_NICK + " = ?;";
-		
-		Connection con = null;
-		
-		PreparedStatement stmt = null;
-		
-		ResultSet rslt = null;
-		
-		try {
-			con = accesoBD.getConexion();
-			
-			stmt = con.prepareStatement(query);
-			stmt.setString(1, nombre);
-			
-			rslt = stmt.executeQuery();
-			
-			repetido = rslt.next();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rslt.close();
-				stmt.close();
-				rslt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+				
+				if(stmt != null) {
+					stmt.close();
+				}
+				
+				if(rslt != null) {
+					rslt.close();
+				}
+				
+				if(con != null) {
+					con.close();
+				}
+				
+			} catch (SQLException e2) {
+				e2.printStackTrace();
 			}
 		}
 		
@@ -204,8 +182,10 @@ public class UsuariosPer {
 	
 	public void registrarUsuario(Usuarios usuario) {
 
-		String query = "INSERT INTO " + NOM_TABLA + " ("
-		+ COL_NICK + ", " + COL_EMAIL + ", " + COL_FOTO + ", " + COL_MONEDAS + ", " + COL_CONTRASENIA + ", " + COL_PUNTOS
+		String query = "INSERT INTO " + TablaUsuariosConst.NOM_TABLA + " ("
+		+ TablaUsuariosConst.COL_NICK + ", " + TablaUsuariosConst.COL_EMAIL 
+		+ ", " + TablaUsuariosConst.COL_FOTO + ", " + TablaUsuariosConst.COL_MONEDAS 
+		+ ", " + TablaUsuariosConst.COL_CONTRASENIA + ", " + TablaUsuariosConst.COL_PUNTOS
 		+ ") VALUES (?, ?, ?, ?, ?, ?);";
 		
 		Connection con = null;
@@ -233,9 +213,13 @@ public class UsuariosPer {
 		} finally {
 			
 			try {
-				if(stmt != null) stmt.close();
+				if(stmt != null) {
+					stmt.close();
+				}
 				
-				if(con != null) con.close();
+				if(con != null) {
+					con.close();
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -243,7 +227,7 @@ public class UsuariosPer {
 	}
 	
 	public void borrarcuenta() { 
-		String deletStm = "DELETE FROM " + NOM_TABLA + " WHERE " + COL_ID
+		String deletStm = "DELETE FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.COL_ID
 				+ " = ?";
 		
 		Connection con = null;
@@ -259,8 +243,12 @@ public class UsuariosPer {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (pstmt != null) pstmt.close();
-				if (con != null) con.close();
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
 			} catch (SQLException e2) {
 				e2.printStackTrace();
 			}
@@ -271,11 +259,12 @@ public class UsuariosPer {
 
 
 	public Usuarios cargarDatosUsuario() {
-		String query = "SELECT " + TablaUsuariosConst.NOM_COL_NICK 
-				+ ", " + TablaUsuariosConst.NOM_COL_EMAIL 
-				+ ", " + TablaUsuariosConst.NOM_COL_MONEDAS 
+		String query = "SELECT " + TablaUsuariosConst.COL_NICK 
+				+ ", " + TablaUsuariosConst.COL_EMAIL 
+				+ ", " + TablaUsuariosConst.COL_MONEDAS 
+				+ ", " + TablaUsuariosConst.COL_PUNTOS 
 				+ " FROM " + TablaUsuariosConst.NOM_TABLA 
-				+ " WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
+				+ " WHERE " + TablaUsuariosConst.COL_ID + " = ?";
 		
 		Usuarios usuario = null;
 		
@@ -293,11 +282,10 @@ public class UsuariosPer {
 			rlst = stmt.executeQuery();
 			
 			if(rlst.next()) {
-				usuario = new Usuarios(0, rlst.getString(1), rlst.getString(2), "", rlst.getInt(3), "", 0);
+				usuario = new Usuarios(0, rlst.getString(1), rlst.getString(2), "", rlst.getInt(3), "", rlst.getInt(4));
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -321,7 +309,8 @@ public class UsuariosPer {
 	
 	
 	public void getUser(String email) {
-		String select = "SELECT " + COL_ID + ", " + COL_NICK + " FROM " + NOM_TABLA + " WHERE " + COL_EMAIL + " = ?";
+		String select = "SELECT " + TablaUsuariosConst.COL_ID + ", " + TablaUsuariosConst.COL_NICK 
+				+ " FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.COL_EMAIL + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -342,7 +331,6 @@ public class UsuariosPer {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -367,9 +355,9 @@ public class UsuariosPer {
 
 	public int customizarPerfil(String img, String nombre) {
  		String update = "UPDATE " + TablaUsuariosConst.NOM_TABLA 
-				+ " SET " + TablaUsuariosConst.NOM_COL_FOTOPERFIL + " = ?, " 
-				+ TablaUsuariosConst.NOM_COL_NICK + " = ? "
-				+ " WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
+				+ " SET " + TablaUsuariosConst.COL_FOTO + " = ?, " 
+				+ TablaUsuariosConst.COL_NICK + " = ? "
+				+ " WHERE " + TablaUsuariosConst.COL_ID + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -387,7 +375,6 @@ public class UsuariosPer {
 			res = stmt.executeUpdate();
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -406,7 +393,7 @@ public class UsuariosPer {
 	}
 	
 	public int comprobarSaldo() {
-		String query = "SELECT " + TablaUsuariosConst.NOM_COL_MONEDAS + " FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
+		String query = "SELECT " + TablaUsuariosConst.COL_MONEDAS + " FROM " + TablaUsuariosConst.NOM_TABLA + " WHERE " + TablaUsuariosConst.COL_ID + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -428,7 +415,6 @@ public class UsuariosPer {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -451,7 +437,8 @@ public class UsuariosPer {
 	}
 	
 	public int compradoObjeto(int saldo) {
-		String update = "UPDATE " + TablaUsuariosConst.NOM_TABLA + " SET " + TablaUsuariosConst.NOM_COL_MONEDAS + " = ? WHERE " + TablaUsuariosConst.NOM_COL_ID + " = ?";
+		String update = "UPDATE " + TablaUsuariosConst.NOM_TABLA + " SET " + TablaUsuariosConst.COL_MONEDAS 
+				+ " = ? WHERE " + TablaUsuariosConst.COL_ID + " = ?";
 		
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -469,7 +456,6 @@ public class UsuariosPer {
 				res = stmt.executeUpdate();
 				
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				try {
@@ -505,15 +491,11 @@ public class UsuariosPer {
 	public ArrayList<String> imgUsu() {
 		
 		ArrayList<String> imgs = new ArrayList<String>();
-	
-//		String query = "SELECT " + TablaUsuariosConst.NOM_COL_FOTOPERFIL
-//				+ " FROM " + TablaUsuariosConst.NOM_TABLA
-//				+ " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
-//				+ " FETCH NEXT " + PnlRanking.CANT_USU_RNKG + " ROWS";
+
 		
-		String query = "SELECT " + TablaUsuariosConst.NOM_COL_FOTOPERFIL
+		String query = "SELECT " + TablaUsuariosConst.COL_FOTO
 				+ " FROM " + TablaUsuariosConst.NOM_TABLA
-	               + " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
+	               + " ORDER BY " + TablaUsuariosConst.COL_PUNTOS + " DESC"
 	               + " LIMIT " + PnlRanking.CANT_USU_RNKG;
 
 		
@@ -553,10 +535,10 @@ public class UsuariosPer {
 	public HashMap<String, Integer> nickPuntUsu() {
         HashMap<String, Integer> tup = new HashMap<String, Integer>();
 
-        String query = "SELECT " + TablaUsuariosConst.NOM_COL_NICK
-                        + ", " + TablaUsuariosConst.NOM_COL_PUNTOS
+        String query = "SELECT " + TablaUsuariosConst.COL_NICK
+                        + ", " + TablaUsuariosConst.COL_PUNTOS
                         + " FROM " + TablaUsuariosConst.NOM_TABLA
-     	               + " ORDER BY " + TablaUsuariosConst.NOM_COL_PUNTOS + " DESC"
+     	               + " ORDER BY " + TablaUsuariosConst.COL_PUNTOS + " DESC"
     	               + " LIMIT " + PnlRanking.CANT_USU_RNKG;
         
         Connection con = null;
@@ -596,8 +578,8 @@ public class UsuariosPer {
 	public void aniadirPipas(String correoUsuActual, int pipas) {
 		
 		String query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
-				" SET " + TablaUsuariosConst.NOM_COL_MONEDAS + " = (" + TablaUsuariosConst.NOM_COL_MONEDAS + "+?)"
-				+ "WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?";
+				" SET " + TablaUsuariosConst.COL_MONEDAS + " = (" + TablaUsuariosConst.COL_MONEDAS + "+?)"
+				+ "WHERE " + TablaUsuariosConst.COL_EMAIL + " = ?";
 		
 		Connection con = null;
 		
@@ -632,8 +614,8 @@ public class UsuariosPer {
 	public void aniadirPuntos(String correoUsuActual, int puntos) {
 
 		String query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
-				" SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = (" + TablaUsuariosConst.NOM_COL_PUNTOS + "+?)"
-				+ "WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?";
+				" SET " + TablaUsuariosConst.COL_PUNTOS + " = (" + TablaUsuariosConst.COL_PUNTOS + "+?)"
+				+ "WHERE " + TablaUsuariosConst.COL_EMAIL + " = ?";
 		
 		Connection con = null;
 		
@@ -674,24 +656,24 @@ public class UsuariosPer {
 	        
 	        // Bot 1
 	        String query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
-	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
-	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = " + FlipasPipasConst.ID_BOT1;
+	                        " SET " + TablaUsuariosConst.COL_PUNTOS + " = ? " +
+	                        "WHERE " + TablaUsuariosConst.COL_ID + " = " + FlipasPipasConst.ID_BOT1;
 	        stmt = con.prepareStatement(query);
 	        stmt.setInt(1, puntosBot1);
 	        stmt.executeUpdate();
 	        
 	        // Bot 2
 	        query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
-	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
-	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = " + FlipasPipasConst.ID_BOT2;
+	                        " SET " + TablaUsuariosConst.COL_PUNTOS + " = ? " +
+	                        "WHERE " + TablaUsuariosConst.COL_ID + " = " + FlipasPipasConst.ID_BOT2;
 	        stmt = con.prepareStatement(query);
 	        stmt.setInt(1, puntosBot2);
 	        stmt.executeUpdate();
 	        
 	        // Bot 3
 	        query = "UPDATE " + TablaUsuariosConst.NOM_TABLA +
-	                        " SET " + TablaUsuariosConst.NOM_COL_PUNTOS + " = ? " +
-	                        "WHERE " + TablaUsuariosConst.NOM_COL_ID + " = " + FlipasPipasConst.ID_BOT3;
+	                        " SET " + TablaUsuariosConst.COL_PUNTOS + " = ? " +
+	                        "WHERE " + TablaUsuariosConst.COL_ID + " = " + FlipasPipasConst.ID_BOT3;
 	        stmt = con.prepareStatement(query);
 	        stmt.setInt(1, puntosBot3);
 	        stmt.executeUpdate();
@@ -715,8 +697,8 @@ public class UsuariosPer {
 	public int getPipasUsuario(String correoUsuActual) {
 		int pnts = 0;
 		
-		String query = "SELECT " + TablaUsuariosConst.NOM_COL_PUNTOS + " FROM " + TablaUsuariosConst.NOM_TABLA
-				+ " WHERE " + TablaUsuariosConst.NOM_COL_EMAIL + " = ?";
+		String query = "SELECT " + TablaUsuariosConst.COL_PUNTOS + " FROM " + TablaUsuariosConst.NOM_TABLA
+				+ " WHERE " + TablaUsuariosConst.COL_EMAIL + " = ?";
 		
 		Connection con = null;
 		
@@ -755,8 +737,8 @@ public class UsuariosPer {
 	public int[] getPntsBots() {
 		int[] pnts = new int[3];
 		
-		String query = "SELECT " + TablaUsuariosConst.NOM_COL_PUNTOS + " FROM " + TablaUsuariosConst.NOM_TABLA
-				+ " WHERE " + TablaUsuariosConst.NOM_COL_ID + " IN (" + FlipasPipasConst.ID_BOT1 + "," + FlipasPipasConst.ID_BOT2 + "," + FlipasPipasConst.ID_BOT3 + ")";
+		String query = "SELECT " + TablaUsuariosConst.COL_PUNTOS + " FROM " + TablaUsuariosConst.NOM_TABLA
+				+ " WHERE " + TablaUsuariosConst.COL_ID + " IN (" + FlipasPipasConst.ID_BOT1 + "," + FlipasPipasConst.ID_BOT2 + "," + FlipasPipasConst.ID_BOT3 + ")";
 		
 		Connection con = null;
 		

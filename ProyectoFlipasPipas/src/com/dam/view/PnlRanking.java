@@ -5,7 +5,6 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -13,19 +12,13 @@ import java.util.Comparator;
 import java.util.Map.Entry;
 
 public class PnlRanking extends JPanel {
+	private static final long serialVersionUID = 1L;
 	
 	public static final int CANT_USU_RNKG = 4;
 	private JLabel[] lblNomUsuarios = new JLabel[CANT_USU_RNKG];
     private JLabel[] lblPuntosUsuarios = new JLabel[CANT_USU_RNKG];
     private JLabel[] lblImgUsuarios = new JLabel[CANT_USU_RNKG];
     
-    /*
-	private JLabel lblImg1;
-	private JLabel lblImg4;
-	private JLabel lblImg3;
-	private JLabel lblImg2;	
-    */
-
 	public PnlRanking() {
 		
 		configurarPanel();
@@ -91,7 +84,7 @@ public class PnlRanking extends JPanel {
 	}
 
 	public void mostrarRanking(ArrayList<Entry<String, Integer>> tablaRanking, ArrayList<String> imagenesUsu) {
-		// Lo ordeno comparando por valor de mayor a menor
+		// Lo ordeno comparando por valor (puntos) de mayor a menor
 		tablaRanking.sort(Entry.comparingByValue(Comparator.reverseOrder()));
 		
 		for (int i = 0; i < CANT_USU_RNKG; i++) {

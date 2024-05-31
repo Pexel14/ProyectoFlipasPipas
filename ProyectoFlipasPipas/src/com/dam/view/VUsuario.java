@@ -11,21 +11,17 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 
 public class VUsuario extends JDialog {
+	private static final long serialVersionUID = 1L;
 	
 	public static final String ACT_COM_BTN_CERRARSESION = "Cerrar Sesión";
-	public static final String ACT_COM_BTN_COINS = " pipa coins";
-	public static final String ACT_COM_BTN_RACHA = " días de racha";
-	public static final String ACT_COM_BTN_EDITAR = "Editar";
+
 	private static final int ANCHO = 600;
 	private static final int ALTO = 400;
 	private JLabel lblNomUsuario;
-	private JButton btnEditarPerfil;
-	private JLabel lblRacha;
+	private JButton btnEditarPerfil;;
 	private JLabel lblPipaCoins;
 	private JButton btnCerrarSesion;
 	private JButton btnCerrarVentana;
@@ -43,7 +39,6 @@ public class VUsuario extends JDialog {
 	private void componentes() {
 		
 		setSize(ANCHO, ALTO);
-//		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
 	}
@@ -79,10 +74,6 @@ public class VUsuario extends JDialog {
 		btnEditarPerfil = new JButton("");
 		btnEditarPerfil.setIcon(new ImageIcon(VUsuario.class.getResource("/img/pen.jpg")));
 		btnEditarPerfil.setToolTipText("Edita tu información");
-		btnEditarPerfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnEditarPerfil.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnEditarPerfil.setBounds(465, 139, 80, 80);
 		getContentPane().add(btnEditarPerfil);
@@ -155,8 +146,8 @@ public class VUsuario extends JDialog {
 		return lblNomUsuario;
 	}
 
-	public JLabel getLblRacha() {
-		return lblRacha;
+	public JLabel getLblPuntos() {
+		return	lblPuntosSet;	
 	}
 
 	public JLabel getLblPipaCoins() {
@@ -177,7 +168,5 @@ public class VUsuario extends JDialog {
 		btnCerrarSesion.addActionListener(listener);
 	}
 
-	public JLabel getLblPuntos() {
-		return	lblPuntosSet;	
-	}
+
 }

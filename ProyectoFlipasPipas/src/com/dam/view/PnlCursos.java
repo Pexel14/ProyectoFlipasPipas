@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class PnlCursos extends JPanel {
+	private static final long serialVersionUID = 1L;
+	
 	public static final String ACT_COM_BTN_CSS = "CSS";
 	public static final String ACT_COM_BTN_HTML = "HTML";
 	public static final String ACT_COM_BTN_SQL = "SQL";
@@ -109,7 +111,6 @@ public class PnlCursos extends JPanel {
 		return btnInterrogante4;
 	}
 
-	// TODO
 	public void setListener(ProjectListener listener) {
 		btnCss.addActionListener(listener);
 		btnHtml.addActionListener(listener);

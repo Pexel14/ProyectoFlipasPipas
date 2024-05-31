@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 
 import com.dam.db.persistencias.UsuPregPer;
 import com.dam.db.persistencias.UsuTienda;
@@ -35,101 +34,66 @@ import com.dam.view.*;
 
 public class ProjectListener implements ActionListener {
 	
-	private static final double PIPAS_MAX_BOT = 1.5;
-	private static final double PIPAS_MIN_BOT = 0.5;
-	private static final int CANT_PIPAS_LECCION = 200;
-	private static final int CANT_PIPAS_PENALIZACION = 20;
 	//CLASES REGISTRO/INICIO
-	private VRegistro vr;
-	private VInicioSesion vi;
+	private VRegistro vr; //---> Ventana de registro de usuario
+	private VInicioSesion vi; //---> Ventana de inicio de sesión
 	
 	//CLASES MENU
-	private VMenu vm;
-	private String img;
-	private PnlTienda pti;
-	private PnlRanking pr;
-	private PnlTemario pte;
-	private PnlCursos pc;
-	private VAjustes va;
-	private VNotis vn;
-	private VUsuario vu;
-	private VCustomizacion vcu;
-	
-	//CLASES GENERALES
-	private Vdefiniciones vd;
-	
-	//CLASES NIVELES
-	private PnlLeciones pl;
-	private VPreguntas vp;
-
-	// TAMAÑO NOMBRE
-	private static final int TAM_NOMBRE = 15;
+	private VMenu vm; //---> Ventana Menú, con el menú donde se cargarán los paneles
+	private PnlTienda pti; //---> Panel de Tienda, donde se cargan los iconos a comprar
+	private PnlRanking pr; //---> Panel de Ranking, donde aparecen los usuarios con más puntos
+	private PnlTemario pte; //---> Panel de Temario, donde podrás consultar el temario
+	private PnlCursos pc; //---> Panel de Cursos, donde se cargarán los cursos
+	private VAjustes va; //---> Ventana de Ajustes, donde podrás consultar las redes sociales de FliplasPipas y borrar la cuenta
+	private VNotificaciones vn; //---> Ventana de Notificaciones, donde se irán enviando notificaciones
+	private VUsuario vu; //---> Ventana de Usuario, donde podrás consultar el nombre, correo, monedas y puntos. También podrás ir a la customización del usuario
+	private VCustomizacion vcu; //---> Ventana de Customización, donde pordrás cambiar el nombre de usuario y la imagen
+	private Vdefiniciones vd; //---> Ventana de Definiciones, donde podrás consultar en detalle el temario de una lección
+	private PnlLeciones pl; //---> Panel de Lecciones, donde según el curso en el que estes aparecerán unos niveles u otros
+	private VPreguntas vp; //---> Ventana de Preguntas, donde se mostrarán las preguntas con sus respuestas
 
 	// CLASES PERSISTENCIAS
-	private UsuariosPer up;
-	private UsuPregPer upp;
-	private LeccionesPer lp;
-	private UsuTienda ut;
-	private NotificacionesPer np;
-	private UsuNotificacionesPer unp;
-	private UsuLecPer ulp;
+	private UsuariosPer up; //---> Clase que se encarga de la gestión de la tabla usuarios
+	private UsuPregPer upp; //---> Clase que se encarga de la gestión de las preguntas
+	private LeccionesPer lp; //---> Clase que se encarga de la gestión de las lecciones
+	private UsuTienda ut; //---> Clase que se encarga de la gestión de la tienda
+	private NotificacionesPer np; //---> Clase que se encarga de enviar las notificaciones
+	private UsuNotificacionesPer unp; //---> Clase que se encarga de crear las notificaciones de cada usuario
+	private UsuLecPer ulp; //---> Clase que se encarga de crear las lecciones
 	
 	// CLASES POJOS
-	private Usuarios usuario;
+	private Usuarios usuario; //---> Clase POJO que se encarga de representar un Usuario
+
 	
-	// EN QUÉ VENTANA Y NIVEL ESTÁ EL USUARIO
-	private int lenguaje;
-	private int nivActual;
-	
-	// CORREO DE USUARIO
-	private String correoUsuActual;
+	private int lenguaje; //---> Variable que se encarga de almacenar el curso en el que esta el usuario
+	private int nivActual; //---> Variable que se encarga de almacenar el nivel actual
+	private String correoUsuActual; //---> Variable que se encarga de almacenar el correo del usuario
 	
 	// PREGUNTAS
-	private int pregPos;
-	private ArrayList<Preguntas> preguntas;
+	private int pregPos; //---> Variable que se encarga de almacenar el curso en el que esta el usuario
+	private ArrayList<Preguntas> preguntas; //---> Colección que se encarga de almacenar las preguntas
 	
 	// FALLOS Y PUNTOS
-	private int cantFallos = 0;
-	private int pipas = 0;
-	private int puntos = 0;
+	private int cantFallos = 0; //---> Variable que se encarga de almacenar la cantidad de fallos cometidos en los niveles
+	private int pipas = 0; //---> Variable que se encarga de almacenar la cantidad de monedas ganadas
+	private int puntos = 0; //---> Variable que se encarga de almacenar la cantidad de puntos ganados
 	
-//	public ProjectListener() {
-//		
-//	}
+	private String img; //---> Variable que se encarga de almacenar la imagen seleccionada por el usuario
 	
 	public ProjectListener(VInicioSesion vi) {
 		this.vi = vi;
-
-
+		
 		np = new NotificacionesPer();
 		unp = new UsuNotificacionesPer();
-		
 		upp = new UsuPregPer();
 		lp = new LeccionesPer();
-
 		up = new UsuariosPer();
-		
 		ut = new UsuTienda();
-		
 		ulp = new UsuLecPer();
 	}
 
 	
 	public void actionPerformed(ActionEvent e) {
-		
-//		String s = e.getActionCommand();
-//		
-//		switch (s) {
-//		case VInicioSesion.ACT_COM_BTN_INICIO_SESION:
-//			vr.dispose();
-//			vm.cargarPanel(pc);
-//			vm.hacerVisible();
-//			break;
-//
-//		default:
-//			break;
-//		}
-		
 		
 		// BOTONES
 		if (e.getSource() instanceof JButton) {
@@ -148,26 +112,35 @@ public class ProjectListener implements ActionListener {
 				if (nombre.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduce un nick", "Error de datos", JOptionPane.ERROR_MESSAGE);
 					
-				} else if (nombre.length() > TAM_NOMBRE) {
-					JOptionPane.showMessageDialog(vr, "El nick no puede contener más de " + TAM_NOMBRE + " caracteres"
+				} else if (nombre.length() > FlipasPipasConst.TAM_NOMBRE) {
+					JOptionPane.showMessageDialog(vr, "El nick no puede contener más de " + FlipasPipasConst.TAM_NOMBRE + " caracteres"
 							, "Error de datos", JOptionPane.ERROR_MESSAGE);
+					
 				} else if (correo.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduce un correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					
 				} else if (!mat.matches()) {
 					JOptionPane.showMessageDialog(vr, "El correo debe tener formato 'texto@direccion.abc'",
 							"Error de datos", JOptionPane.ERROR_MESSAGE);
+					
 				} else if (up.correoRepetido(correo)) {
 					JOptionPane.showMessageDialog(vr, "El correo introducido ya existe", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					
 				} else if (passw.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduzca una contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				
+				} else if(passw.length() > FlipasPipasConst.TAM_CONTRASENIA) {
+					JOptionPane.showMessageDialog(vr, "La contraseña no puede tener más de " + FlipasPipasConst.TAM_CONTRASENIA + " caracteres", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				
 				} else if (confPasswd.isBlank()) {
 					JOptionPane.showMessageDialog(vr, "Introduzca la confirmación de contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					
 				} else if (!passw.equals(confPasswd)) {
 					JOptionPane.showMessageDialog(vr, "Las contraseñas no coinciden", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					
 				} else {
 					
 					boolean correoYaExiste = up.correoRepetido(correo);
-					boolean nombreYaExiste = up.nombreRepetido(nombre);
 					
 					if (correoYaExiste) {
 						JOptionPane.showMessageDialog(vr, "El correo ya está registrado", "Error de datos", JOptionPane.ERROR_MESSAGE);
@@ -194,27 +167,32 @@ public class ProjectListener implements ActionListener {
 				
 			}
 			
-			else if(e.getSource() == vu.getBtnCerrarVentana()) {
+			else if(e.getSource().equals(vu.getBtnCerrarVentana())) {
 				vu.dispose();
 			}
 			
 			// Volver (REGISTRO)
 			else if (e.getSource().equals(vr.getBtnVolver())) {
 				vr.dispose();
-				vr.limpiarDatos();
-				vi.hacerVisible();
+				vr.limpiarDatos(); 
+				vi.hacerVisible(); // ---> Te lleva a inicio de sesión
 			}
 			
 			// Iniciar sesión (INICIAR SESIÓN)
 			else if (e.getSource().equals(vi.getBtnIniciarSesion())) {
 				
 				String correo = vi.getTxtCorreo();
-				String passw = vi.getTxtPassw();
+				String passw = vi.getPwdPassw();
 				
 				if (correo.isBlank()) {
 					JOptionPane.showMessageDialog(vi, "Introduzca el correo", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					
 				} else if (passw.isBlank()) {
 					JOptionPane.showMessageDialog(vi, "Introduzca la contraseña", "Error de datos", JOptionPane.ERROR_MESSAGE);
+					
+				} else if(passw.length() > FlipasPipasConst.TAM_CONTRASENIA) {
+					JOptionPane.showMessageDialog(vi, "La contraseña no puede tener más de " + FlipasPipasConst.TAM_CONTRASENIA + " caracteres", "Error de datos", JOptionPane.ERROR_MESSAGE);
+				
 				} else {
 					 
 					boolean correoCorrecto = up.existeUsuario(correo.trim());
@@ -241,9 +219,9 @@ public class ProjectListener implements ActionListener {
 							 if(foto != null) {
 								 vm.cambiarFotoPerfil(foto);
 							 }
-							 
-							 pti.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
-							 vn.setNotificaciones(np.selectNotificaciones(2, up.getId_usuario()));
+							 img = null;
+							 pti.cargarObjetos(ut.cargarBotones(up.getId_usuario())); //---> Carga los objetos que tengas comprados en la tienda
+							 vn.setNotificaciones(np.selectNotificaciones(FlipasPipasConst.NOTIFICACIONES[1], up.getId_usuario())); //---> Envía una notificación al iniciar sesión
 							 vm.cargarPanel(pc);
 							 vm.hacerVisible();
 						 }
@@ -263,7 +241,7 @@ public class ProjectListener implements ActionListener {
 				String boton = e.getActionCommand();
 				switch (boton) {
 					case "imagen1":
-						img = vcu.getTxtFP1();
+						img = vcu.getTxtFP1(); //---> Recoge al ruta relativa de la imagen
 						break;
 						
 					case "imagen2":
@@ -290,17 +268,17 @@ public class ProjectListener implements ActionListener {
 			
 			else if(e.getSource() == vcu.getBtnGuardar()) {
 				
-				if(img == null) {
+				if(img == null) { //---> Si le das al botón guardar sin seleccionar antes una imagen se te pone la por defecto
 					img = "/img/usuario.png";
 				}
 				
 				String nom = vcu.getTxtNombre().getText();
 				
-				if (nom.length() <= TAM_NOMBRE) {
+				if (nom.length() <= FlipasPipasConst.TAM_NOMBRE) {
 					int res = up.customizarPerfil(img, vcu.getTxtNombre().getText());
 					if(res != 0) {
 						vm.cambiarFotoPerfil(img);
-						vu.getLblNomUsuario().setText(vcu.getTxtNombre().getText());
+						vu.getLblNomUsuario().setText(vcu.getTxtNombre().getText()); //---> Pone el nuevo nombre en VUsuario
 						JOptionPane.showMessageDialog(vcu, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
 						vcu.dispose();
 						vu.hacerVisible();
@@ -308,11 +286,9 @@ public class ProjectListener implements ActionListener {
 						JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(vr, "El nombre no puede contener más de " + TAM_NOMBRE + " carácteres"
+					JOptionPane.showMessageDialog(vr, "El nick no puede contener más de " + FlipasPipasConst.TAM_NOMBRE + " carácteres"
 							, "Error de datos", JOptionPane.ERROR_MESSAGE);
 				}
-				
-				
 				
 			}
 			
@@ -324,17 +300,17 @@ public class ProjectListener implements ActionListener {
 			}
 			
 			
-			//BOTONES MENU
+			//BOTONES MENÚ
 			// Home (CURSOS)
 			else if (e.getSource().equals(vm.getBtnHome())) {
 				vm.cargarPanel(pc);
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTienda())){
-				pti.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
+				pti.cargarObjetos(ut.cargarBotones(up.getId_usuario())); //---> Se habilitan los botones de la tienda si no tiene comprados los iconos
 				
 				int saldo = up.comprobarSaldo();
-				pti.cargarSaldo(saldo);
+				pti.cargarSaldo(saldo); //---> Carga el label con las monedas que tiene el usuario
 				
 				vm.cargarPanel(pti);
 			}
@@ -342,15 +318,15 @@ public class ProjectListener implements ActionListener {
 			else if(e.getSource().equals(vm.getBtnRanking())){
 				vm.cargarPanel(pr);
 				
-				vn.setNotificaciones(np.selectNotificaciones(4, up.getId_usuario()));
+				vn.setNotificaciones(np.selectNotificaciones(FlipasPipasConst.NOTIFICACIONES[3], up.getId_usuario())); //---> Envía una notificación al usuario
 				
 				// Guardar nombre y puntos de los usuarios en un HashMap
-				HashMap<String, Integer> tablaUsuPnt = up.nickPuntUsu();
-				// Busco las imagenes de los usuarios
-				ArrayList<String> imagenesUsu = up.imgUsu();
+				HashMap<String, Integer> tablaUsuPnt = up.nickPuntUsu(); //---> Coge el nombre y los puntos de los usuarios con mayor puntuación
+				// Busco las imágenes de los usuarios
+				ArrayList<String> imagenesUsu = up.imgUsu(); //---> Coge la ruta de la imagen de los usuarios
 				// Esto lo uso para hacer un entry en un arraylist
 				ArrayList<Entry<String, Integer>> tablaRanking = new ArrayList<Entry<String,Integer>>(tablaUsuPnt.entrySet());
-				pr.mostrarRanking(tablaRanking,imagenesUsu);
+				pr.mostrarRanking(tablaRanking,imagenesUsu); //---> Ordena los usuarios por puntos y carga los datos
 			}
 			
 			else if(e.getSource().equals(vm.getBtnTemario())){
@@ -361,9 +337,8 @@ public class ProjectListener implements ActionListener {
 				va.hacerVisible();
 			}
 			
-			else if(e.getSource().equals(vm.getBtnNotis())){
+			else if(e.getSource().equals(vm.getBtnNotificaciones())){
 				vn.hacerVisible();
-//				vn.setNotis(pn.selectNotificaciones());
 			}
 			
 			else if(e.getSource().equals(vm.getBtnPerfil())){
@@ -377,26 +352,8 @@ public class ProjectListener implements ActionListener {
 				vu.hacerVisible();
 			}
 						
-			//BOTONES NIVELES
-			//CURSOS
-
-//			else if(e.getSource().equals(pc.getBtnJava()) || e.getSource().equals(pc.getBtnHtml()) || e.getSource().equals(pc.getBtnCss()) || e.getSource().equals(pc.getBtnSql())) {
-////				cargarLecciones(); //Posible metodo para diferenciar lecciones segun el lenguaje
-//				vm.cargarPanel(pl);
-//			}
-
-			//Metodo en la persistencia de Lecciones pasándoles el id del curso
-//			else if(e.getSource().equals(pc.getBtnJava())) {
-//				cargarLecCur(FlipasPipasConst.ID_CURSO_JAVA);
-//			} else if (e.getSource().equals(pc.getBtnHtml())){
-//				cargarLecCur(FlipasPipasConst.ID_CURSO_HTML);
-//			} else if (e.getSource().equals(pc.getBtnCss())){
-//				cargarLecCur(FlipasPipasConst.ID_CURSO_CSS);
-//			} else if (e.getSource().equals(pc.getBtnSql())){
-//				cargarLecCur(FlipasPipasConst.ID_CURSO_SQL);
-//			}
 			
-			//BOTONES DEFINICION
+			//BOTONES DEFINICIÓN
 			else if(e.getSource().equals(pc.getBtnInterrogante1())) {
 				vd.mostrarInterrogantes(0);
 				vd.hacerVisible();
@@ -417,60 +374,48 @@ public class ProjectListener implements ActionListener {
 				vd.hacerVisible();
 			}
 			
-			//LECCIONES
-			//JUNTAR TODOS
-//			else if(e.getSource().equals(pl.getBtnLec_1()) 
-//					|| e.getSource().equals(pl.getBtnExamen()) 
-//					|| e.getSource().equals(pl.getBtnRepaso()) 
-//					|| e.getSource().equals(pl.getBtnLec_2()) 
-//					|| e.getSource().equals(pl.getBtnLec_3()) 
-//					|| e.getSource().equals(pl.getBtnLec_4())) {
-//				vm.dispose();
-//				vp.hacerVisible();
-//			}
-			
+
 			//BOTONES DEFINICION
-			//JUNTAR TODOS
 			else if(e.getSource().equals(pl.getBtnDfn_1())) {
-				ArrayList<String> defList = lp.getDef(lenguaje);// TODO definir segun curso oh id de lecion interna oh externamente?
+				ArrayList<String> defList = lp.getDef(lenguaje);
 				vd.mostrarDef(defList.get(0));
 				vd.hacerVisible();
 			}
 			
 			else if(e.getSource().equals(pl.getBtnDfn_2())) {
-				ArrayList<String> defList = lp.getDef(lenguaje);// TODO definir segun curso oh id de lecion interna oh externamente?
+				ArrayList<String> defList = lp.getDef(lenguaje);
 				vd.mostrarDef(defList.get(1));
 				vd.hacerVisible();
 			}
 			
 			else if(e.getSource().equals(pl.getBtnDfn_3())) {
-				ArrayList<String> defList = lp.getDef(lenguaje);// TODO definir segun curso oh id de lecion interna oh externamente?
+				ArrayList<String> defList = lp.getDef(lenguaje);
 				vd.mostrarDef(defList.get(2));
 				vd.hacerVisible();
 			}
 			
 			else if(e.getSource().equals(pl.getBtnDfn_4())) {
-				ArrayList<String> defList = lp.getDef(lenguaje);// TODO definir segun curso oh id de lecion interna oh externamente?
+				ArrayList<String> defList = lp.getDef(lenguaje);
 				vd.mostrarDef(defList.get(3));
 				vd.hacerVisible();
 			}
 			
 			
-			// Botón atrás
+			// Botón atrás en lecciones
 			else if (e.getSource().equals(pl.getBtnAtrasLecciones())) {
 				vm.cargarPanel(pc);
 			}
 					
 			//BOTONES USUARIO
-			//USUARIO
+			//CUSTOMIZACIÓN
 			else if(e.getSource().equals(vu.getBtnEditarPerfil())) {
 				vu.dispose();
-				vcu.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
+				vcu.cargarObjetos(ut.cargarBotones(up.getId_usuario())); //---> Habilita los botones si el usuario actual tiene comprado los iconos de la tienda
 				vcu.getTxtNombre().setText(vu.getLblNomUsuario().getText());
 				vcu.hacerVisible();
 			}
 			
-			//BOTONES CONFIRMACION
+			//BOTONES CONFIRMACIÓN
 			else if(e.getSource() == vu.getBtnCerrarSesion() || e.getSource() == va.getBtnBorrarCuenta()) {
 				String texto = e.getActionCommand();
 
@@ -484,15 +429,10 @@ public class ProjectListener implements ActionListener {
 						vm.dispose();
 						vi.hacerVisible();
 						break;
-						/* * * * NO ENTRA EN EL CASE * * * */
 					case VAjustes.ACT_CMD_BTN_BORRAR_CUENTA:
-
-
+						vm.dispose();
 						up.borrarcuenta();
 						va.dispose();
-						vi.hacerVisible();
-
-						up.borrarcuenta();
 						vi.hacerVisible();
 						break;
 					}
@@ -504,8 +444,8 @@ public class ProjectListener implements ActionListener {
 			// CURSOS
 				// CSS
 			else if (e.getSource().equals(pc.getBtnCss())) {
-				lenguaje = FlipasPipasConst.ID_CURSO_CSS;
-				cargarLecCur(FlipasPipasConst.ID_CURSO_CSS);
+				lenguaje = FlipasPipasConst.ID_CURSO_CSS; //---> Almacenamos el lenguaje seleccionado
+				cargarLecCur(FlipasPipasConst.ID_CURSO_CSS); //---> Carga los nombres de los niveles, la lección y habilita los niveles que haya completado y el siguiente nivel
 				vm.cargarPanel(pl);
 			}
 				// HTML
@@ -530,8 +470,8 @@ public class ProjectListener implements ActionListener {
 			// PREGUNTAS
 				//Pregunta 1
 			else if (e.getSource().equals(pl.getBtnLec_1())) {
-				cargarPregunta(19, 13, 1, 7);
-				estabelcerNivelActual(1, 7, 13, 19);
+				cargarPregunta(19, 13, 1, 7); //---> Recoge los primeros niveles de cada curso dependiendo de donde estés
+				estabelcerNivelActual(1, 7, 13, 19); //---> Dependiendo de en que curso estés, se te cargará unas preguntas
 			}
 				// Pregunta 2
 			else if (e.getSource().equals(pl.getBtnLec_2())) {
@@ -564,7 +504,9 @@ public class ProjectListener implements ActionListener {
 				// Si aciertas la pregunta
 				if (vp.getBtnA().getText().equals(preguntas.get(pregPos).getCorrecta())) {
 					preguntaAcertada();
-					if (pregPos != preguntas.size()) JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+					if (pregPos != preguntas.size()) {
+						JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 				// Si fallas
 				else preguntaFallada();
@@ -575,7 +517,9 @@ public class ProjectListener implements ActionListener {
 				// Si aciertas la pregunta
 				if (vp.getBtnB().getText().equals(preguntas.get(pregPos).getCorrecta())) {
 					preguntaAcertada();
-					if (pregPos != preguntas.size()) JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+					if (pregPos != preguntas.size()) {
+						JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 				// Si fallas
 				else preguntaFallada();
@@ -586,7 +530,9 @@ public class ProjectListener implements ActionListener {
 				// Si aciertas la pregunta
 				if (vp.getBtnC().getText().equals(preguntas.get(pregPos).getCorrecta())) {
 					preguntaAcertada();
-					if (pregPos != preguntas.size()) JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+					if (pregPos != preguntas.size()) {
+						JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!", "Sigue así", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 				// Si fallas
 				else preguntaFallada();
@@ -597,11 +543,14 @@ public class ProjectListener implements ActionListener {
 				// Si aciertas la pregunta
 				if (vp.getBtnD().getText().equals(preguntas.get(pregPos).getCorrecta())) {
 					preguntaAcertada();
-					if (pregPos != preguntas.size()) JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!",
-							"Sigue así", JOptionPane.INFORMATION_MESSAGE);
+					if (pregPos != preguntas.size()){
+						JOptionPane.showMessageDialog(vm, "¡Pregunta acertada, muy bien!","Sigue así", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 				// Si fallas
-				else preguntaFallada();
+				else {
+					preguntaFallada();
+				}
 			}
 
 			
@@ -610,13 +559,14 @@ public class ProjectListener implements ActionListener {
 				va.dispose();
 			}			
 			
-			else if(e.getSource() == vn.getBtnSalir()) {
+			else if(e.getSource().equals(vn.getBtnSalir())) {
 				vn.dispose();
 			}
 			
 			else if(e.getSource().equals(vp.getBtnSalir())) {
 				int opc = JOptionPane.showConfirmDialog(vp,"¿Estás segur@ de que quieres salir? Tu progreso no se guardará",
 						"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				
 				if (opc == JOptionPane.YES_OPTION) {
 					vp.dispose();
 					vm.hacerVisible();
@@ -624,7 +574,7 @@ public class ProjectListener implements ActionListener {
 				}
 			}
 			
-			else if(e.getSource() == vcu.getBtnSalir()) {
+			else if(e.getSource().equals(vcu.getBtnSalir())) {
 				vcu.dispose();
 				vu.hacerVisible();
 			}
@@ -633,54 +583,17 @@ public class ProjectListener implements ActionListener {
 			else if (e.getSource().equals(vd.getBtnSalirDef())) {
 				vd.dispose();;
 			}
-
-
-			else if(e.getSource() == vcu.getBtnFP1() 
-					|| e.getSource() == vcu.getBtnFP2() 
-					|| e.getSource() == vcu.getBtnFP3()
-					|| e.getSource() == vcu.getBtnFP4() 
-					|| e.getSource() == vcu.getBtnFP5() 
-					|| e.getSource() == vcu.getBtnFP6()) {
-				String boton = e.getActionCommand();
-				switch (boton) {
-					case "imagen1":
-						img = vcu.getBtnFP1().getIcon().toString();
-						break;
-						
-					case "imagen2":
-						img = vcu.getBtnFP2().getIcon().toString();
-						break;
-						
-					case "imagen3":
-						img = vcu.getBtnFP3().getIcon().toString();
-						break;
-						
-					case "imagen4":
-						img = vcu.getBtnFP4().getIcon().toString();
-						break;
-						
-					case "imagen5":
-						img = vcu.getBtnFP5().getIcon().toString();
-						break;
-						
-					case "imagen6":
-						img = vcu.getBtnFP6().getIcon().toString();
-						break;
-				}
-			}
 			
 			else if(e.getSource() == vcu.getBtnGuardar()) {
 				int res = up.customizarPerfil(img, vu.getLblNomUsuario().getText());
 				
 				if(res != 0) {
-					JOptionPane.showMessageDialog(vcu, "Guardado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(vcu, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(vcu, "Algo no ha ido como esperado", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			} 
-			
-
 			
 			
 			else if(e.getSource() == pti.getBtnObj1() 
@@ -691,71 +604,70 @@ public class ProjectListener implements ActionListener {
 					|| e.getSource() == pti.getBtnObj6()) {
 				String boton = e.getActionCommand();
 				
-				int res = JOptionPane.showConfirmDialog(pti, "¿Estás seguro?", "Confirmacion Compra", JOptionPane.YES_NO_OPTION);
-				Tienda id = null;
+				int res = JOptionPane.showConfirmDialog(pti, "¿Estás seguro?", "Confirmación Compra", JOptionPane.YES_NO_OPTION);
+				Tienda objeto = null;
 				
 				if(res == JOptionPane.YES_OPTION) {
 					switch (boton) {
 					case "Objeto1":
-						id = ut.comprobarObjeto(pti.getBtnObj1().getText());
+						objeto = ut.comprobarObjeto(pti.getBtnObj1().getText()); //---> Recoge el objeto de tipo Tienda y lo guarda en una variable
 						break;
 					case "Objeto2":
-						id = ut.comprobarObjeto(pti.getBtnObj2().getText());
+						objeto = ut.comprobarObjeto(pti.getBtnObj2().getText());
 						break;
 					case "Objeto3":
-						id = ut.comprobarObjeto(pti.getBtnObj3().getText());
+						objeto = ut.comprobarObjeto(pti.getBtnObj3().getText());
 						break;
 					case "Objeto4":
-						id = ut.comprobarObjeto(pti.getBtnObj4().getText());
+						objeto = ut.comprobarObjeto(pti.getBtnObj4().getText());
 						break;
 					case "Objeto5":
-						id = ut.comprobarObjeto(pti.getBtnObj5().getText());
+						objeto = ut.comprobarObjeto(pti.getBtnObj5().getText());
 						break;
 					case "Objeto6":
-						id = ut.comprobarObjeto(pti.getBtnObj6().getText());
+						objeto = ut.comprobarObjeto(pti.getBtnObj6().getText());
 						break;
 					}
-					
-					
-
 				}
-				
-
 				
 				boolean comprado = false;
 				
-				if(id != null) {
-					int saldo = pti.getSaldo();
+				if(objeto != null) {
+					int saldo = pti.getSaldo(); 
 					if(saldo > 0) {
-						int realizado = ut.comprarObjeto(id, up.getId_usuario());
+						int realizado = ut.comprarObjeto(objeto, up.getId_usuario()); //---> Actualiza en la base de datos que el objeto está comprado
 						
 						if(realizado != 0) {
-							int actualizado = up.compradoObjeto(saldo - id.getPrecio());
+							int actualizado = up.compradoObjeto(saldo - objeto.getPrecio()); //---> Modifica las monedas de la base de datos del usuario
 							
 							if(actualizado != 0) {
 								comprado = true;
-								pti.cargarObjetos(ut.cargarBotones(up.getId_usuario()));
+								pti.cargarObjetos(ut.cargarBotones(up.getId_usuario())); //---> Actualiza la tienda
+								
 								saldo = up.comprobarSaldo();
-								pti.cargarSaldo(saldo);
+								pti.cargarSaldo(saldo); //---> Actualiza las monedas dentro del label
+								
 								JOptionPane.showMessageDialog(pti, "Ha comprado el icono", "Compra Realizada", JOptionPane.INFORMATION_MESSAGE);
-								vn.setNotificaciones(np.selectNotificaciones(3, up.getId_usuario()));
+								vn.setNotificaciones(np.selectNotificaciones(FlipasPipasConst.NOTIFICACIONES[2], up.getId_usuario()));
 							}
 						} 
 					}
 				}
-				if(!comprado && id != null) {
+				if(!comprado && objeto != null) { 
 					JOptionPane.showMessageDialog(pti, "No se ha podido completar la transacción", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
+				
+				
 			} else if (e.getSource().equals(vm.getBtnSalirMenu())) {
 				int opc = JOptionPane.showConfirmDialog(vm, "¿Segur@ de que desea salir?", "Confirmación",
 						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				
 				if (opc == JOptionPane.YES_OPTION) {
 					System.exit(0);
+					
 				}
 			}
 				
-		} else if (e.getSource() instanceof JTextArea) {
-			System.out.println("hola");
 		}
 		
 	}
@@ -781,26 +693,40 @@ public class ProjectListener implements ActionListener {
 		preguntas = null;
 		pregPos = 0;
 		
-		if (lenguaje == FlipasPipasConst.ID_CURSO_CSS) obtenerEstablecerPregunta(css);
-		else if (lenguaje == FlipasPipasConst.ID_CURSO_HTML) obtenerEstablecerPregunta(html);
-		else if (lenguaje == FlipasPipasConst.ID_CURSO_JAVA) obtenerEstablecerPregunta(java);
-		else if (lenguaje == FlipasPipasConst.ID_CURSO_SQL) obtenerEstablecerPregunta(sql);
+		if (lenguaje == FlipasPipasConst.ID_CURSO_CSS) {
+			obtenerEstablecerPregunta(css); //---> Establece la pregunta actual del nivel
+			
+		}
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_HTML) {
+			obtenerEstablecerPregunta(html);
+			
+		}
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_JAVA) {
+			obtenerEstablecerPregunta(java);
+			
+		}
+		else if (lenguaje == FlipasPipasConst.ID_CURSO_SQL) {
+			obtenerEstablecerPregunta(sql);
+			
+		}
 	}
 
 
 	private void obtenerEstablecerPregunta(int num) {
-		preguntas = upp.getPreg(num);
+		preguntas = upp.getPreg(num); //---> Recoge las preguntas y las mete en un array
 		vm.dispose();
-		vp.setPregunta(preguntas.get(pregPos));
+		vp.setPregunta(preguntas.get(pregPos)); //---> Manda una pregunta de dentro del array a la ventana donde la cargará
 		vp.hacerVisible();
 	}
 
 
 	private void preguntaFallada() {
-		JOptionPane.showMessageDialog(vp, "Has fallado!", "Respuesta incorrecta" , JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(vp, "¡Has fallado!", "Respuesta incorrecta" , JOptionPane.ERROR_MESSAGE);
 		
 		// 
-		if (cantFallos < Math.floor(CANT_PIPAS_LECCION/CANT_PIPAS_PENALIZACION)) cantFallos+=1;
+		if (cantFallos < Math.floor(FlipasPipasConst.CANT_PIPAS_LECCION/FlipasPipasConst.CANT_PIPAS_PENALIZACION)) {
+			cantFallos+=1;
+		}
 		
 		// Mueve la pregunta fallida al final del ArrayList
 		preguntas.add(preguntas.get(pregPos));
@@ -808,6 +734,7 @@ public class ProjectListener implements ActionListener {
 		// Si aún quedan preguntas, pasa a la siguiente
 		if (pregPos < preguntas.size() - 1) {
 		    pregPos += 1;
+		    
 		} else {
 		    pregPos = 0;
 		}
@@ -824,43 +751,45 @@ public class ProjectListener implements ActionListener {
 		
 		// Si has acertado la última pregunta
 		if (pregPos == preguntas.size()) {
-			// Calcular cantidad de pipas
-			pipas = CANT_PIPAS_LECCION - cantFallos*CANT_PIPAS_PENALIZACION;
-			puntos = CANT_PIPAS_LECCION - cantFallos*CANT_PIPAS_PENALIZACION;
+			// Calcular cantidad de monedas
+			pipas = FlipasPipasConst.CANT_PIPAS_LECCION - cantFallos*FlipasPipasConst.CANT_PIPAS_PENALIZACION;
+			puntos = FlipasPipasConst.CANT_PIPAS_LECCION - cantFallos*FlipasPipasConst.CANT_PIPAS_PENALIZACION;
 			JOptionPane.showMessageDialog(vp, "¡Has acabado la lección! Has obtenido " + pipas + " pipacoins y "
 					+ puntos + " puntos", "¡Enhorabuena!", JOptionPane.INFORMATION_MESSAGE);
 			
-			vn.setNotificaciones(np.selectNotificaciones(1, up.getId_usuario()));
+			vn.setNotificaciones(np.selectNotificaciones(FlipasPipasConst.NOTIFICACIONES[0], up.getId_usuario()));
 			
-			// Añadir pipas al usuario
+			// Añadir monedas al usuario
 			up.aniadirPipas(correoUsuActual, pipas);
 			up.aniadirPuntos(correoUsuActual, puntos);
 			
-//			 Añadir pipas a los bots
+//			 Añadir monedas a los bots
 			int pntsUsuario = up.getPipasUsuario(correoUsuActual);
 			Random rd = new Random();
 			
-			//SELECT PNTS 3 PRIMEROS ID
+			//SELECT PNTS 3 PRIMEROS ID's (Bots)
 			int[] pntsBots = new int[3];
 			pntsBots = up.getPntsBots();
 			
-			int puntosBot1 = rd.nextInt((int) Math.round(pntsUsuario*PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*PIPAS_MAX_BOT));
-			int puntosBot2 = rd.nextInt((int) Math.round(pntsUsuario*PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*PIPAS_MAX_BOT));
-			int puntosBot3 = rd.nextInt((int) Math.round(pntsUsuario*PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*PIPAS_MAX_BOT));
+			//Calculamos la cantidad de puntos para los bots
+			int puntosBot1 = rd.nextInt((int) Math.round(pntsUsuario*FlipasPipasConst.PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*FlipasPipasConst.PIPAS_MAX_BOT));
+			
+			int puntosBot2 = rd.nextInt((int) Math.round(pntsUsuario*FlipasPipasConst.PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*FlipasPipasConst.PIPAS_MAX_BOT));
+			
+			int puntosBot3 = rd.nextInt((int) Math.round(pntsUsuario*FlipasPipasConst.PIPAS_MIN_BOT), (int) Math.round(pntsUsuario*FlipasPipasConst.PIPAS_MAX_BOT));
+			
 			// LE SUMO LAS PARTES DEL ARRAY
 			up.puntosABots(pntsBots[0]+puntosBot1, pntsBots[1]+puntosBot2, pntsBots[2]+puntosBot3);
 			
-//			ulp.leccionTerminada(nivActual, up.getId_usuario());
-			
 			if(nivActual != 6 || nivActual != 12 || nivActual != 18 || nivActual != 24) {
-				ulp.desbloquearLeccion(up.getId_usuario(), nivActual + 1);
-				pl.cargarLec(lp.datosLeccion(lenguaje), lenguaje, ulp.cargarLecciones(up.getId_usuario(), lenguaje));
+				ulp.desbloquearLeccion(up.getId_usuario(), nivActual + 1); //---> Una vez completada una lección se habilitará la siguiente
+				pl.cargarLec(lp.datosLeccion(lenguaje), lenguaje, ulp.cargarLecciones(up.getId_usuario(), lenguaje)); //---> Actualiza el panel de lecciones
 			}
 			vp.dispose();
 			vm.cargarPanel(pl);
 			vm.hacerVisible();
 			
-			// Reestablecer cantidad de pipas ganadas
+			// Reestablecer cantidad de fallos ganadas
 			cantFallos = 0;
 		}
 		// Si no
@@ -873,27 +802,15 @@ public class ProjectListener implements ActionListener {
 	private void cargarLecCur(int id_curso) {
 		vm.cargarPanel(pl);
 		
-		String nomCur = "";
-		
-		switch (id_curso) {
-			case FlipasPipasConst.ID_CURSO_JAVA: nomCur="JAVA";break;
-			case FlipasPipasConst.ID_CURSO_SQL: nomCur="SQL";break;
-			case FlipasPipasConst.ID_CURSO_HTML: nomCur="HTML";break;
-			case FlipasPipasConst.ID_CURSO_CSS: nomCur="CSS";break;
-		}
-		
-		
-		
-		ArrayList<Boolean> nvlsOK = ulp.cargarLecciones(up.getId_usuario(), id_curso);
-		ArrayList<String> nomLec = lp.datosLeccion(id_curso);
+		ArrayList<Boolean> nvlsOK = ulp.cargarLecciones(up.getId_usuario(), id_curso); //---> Busca los niveles completados y no completados del curso seleccionado
+		ArrayList<String> nomLec = lp.datosLeccion(id_curso); //---> Busca el nombre del título y de los niveles según el curso seleccionado
 
-		pl.cargarLec(nomLec, lenguaje, nvlsOK);
+		pl.cargarLec(nomLec, lenguaje, nvlsOK); //---> Lleva la información al panel para cargar los datos buscados
 
-//		pl.cargarLec(nomLec, lenguaje, nomCur);
 
 	}
 
-
+	// Métodos 'set' encargados de optimizar el constructor
 	public void setPanel(PnlTienda tienda) {
 		this.pti = tienda;
 	}
@@ -922,13 +839,11 @@ public class ProjectListener implements ActionListener {
 		this.va = ajustes;
 	}
 	
-
-	
 	public void setVentana(VCustomizacion customizacion) {
 		this.vcu = customizacion;
 	}
 	
-	public void setVentana(VNotis notificaciones) {
+	public void setVentana(VNotificaciones notificaciones) {
 		this.vn = notificaciones;
 	}
 	

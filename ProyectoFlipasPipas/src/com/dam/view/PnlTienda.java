@@ -1,26 +1,22 @@
 package com.dam.view;
 
 import java.awt.Color;
-import java.awt.Component;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import com.dam.control.ProjectListener;
 import com.dam.model.pojos.Tienda;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class PnlTienda extends JPanel {
+	private static final long serialVersionUID = 1L;
 	
 	public static final String ACT_COM_BTN_OBJ1 = "Objeto1";
 	public static final String ACT_COM_BTN_OBJ2 = "Objeto2";
@@ -28,6 +24,7 @@ public class PnlTienda extends JPanel {
 	public static final String ACT_COM_BTN_OBJ4 = "Objeto4";
 	public static final String ACT_COM_BTN_OBJ5 = "Objeto5";
 	public static final String ACT_COM_BTN_OBJ6 = "Objeto6";
+	
 	private JButton btnObj1;
 	private JButton btnObj2;
 	private JButton btnObj3;

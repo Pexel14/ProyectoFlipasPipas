@@ -2,7 +2,6 @@ package com.dam.db.persistencias;
 
 import java.sql.Statement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,19 +63,23 @@ public class LeccionesPer {
 	
 	
 
-	public ArrayList<String> getDef(int lenguaje) { // TODO
+	public ArrayList<String> getDef(int lenguaje) {
 		ArrayList<String> deflist = new ArrayList<String>();
 		
 		String query = "SELECT " + TablaTemarioConst.NOM_COL_COLUMNA3 + " FROM "  + TablaTemarioConst.NOM_TABLA;  
 		
 		if (lenguaje == (FlipasPipasConst.ID_CURSO_JAVA)) {
 			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_JAVA;
+			
 		} else if (lenguaje == FlipasPipasConst.ID_CURSO_SQL) {
 			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_SQL;
+			
 		} else if (lenguaje == FlipasPipasConst.ID_CURSO_HTML) {
 			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_HTML;
+			
 		} else {
 			query += " WHERE " + TablaTemarioConst.NOM_COL_COLUMNA4 + " = "  + FlipasPipasConst.ID_CURSO_CSS;
+			
 		}
 		
 		

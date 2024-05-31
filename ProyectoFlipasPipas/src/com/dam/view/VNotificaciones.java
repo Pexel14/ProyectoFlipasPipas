@@ -2,25 +2,22 @@ package com.dam.view;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import com.dam.control.ProjectListener;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Point;
 
 import javax.swing.ImageIcon;
 
-import java.util.ArrayList;
 import javax.swing.JTextArea;
 
 
-public class VNotis extends JDialog {
+public class VNotificaciones extends JDialog {
+	private static final long serialVersionUID = 1L;
 	
 	private static final int ALTO_TOTAL = 655;
 	private static final int ANCHO = 430;
@@ -37,7 +34,7 @@ public class VNotis extends JDialog {
 	static String [] notificaciones = {"","","",""};
 	private JScrollPane scrp;
 	
-	public VNotis() {
+	public VNotificaciones() {
 		
 		super(vm, "Notificaciones", true);
 		configurarFrame();
@@ -77,7 +74,7 @@ public class VNotis extends JDialog {
 		panel.add(pnlDecoracion3);
 		
 		btnSalir = new JButton("");
-		btnSalir.setIcon(new ImageIcon(VNotis.class.getResource("/img/salir.png")));
+		btnSalir.setIcon(new ImageIcon(VNotificaciones.class.getResource("/img/salir.png")));
 		btnSalir.setBorderPainted(false);
 		btnSalir.setContentAreaFilled(false);
 		btnSalir.setBounds(340, 10, 50, 50);
@@ -135,7 +132,6 @@ public class VNotis extends JDialog {
 	
 	private void configurarFrame() {
 		setSize(ANCHO, ALTO);
-//		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}
 
