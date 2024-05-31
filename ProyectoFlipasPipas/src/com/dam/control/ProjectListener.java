@@ -86,7 +86,7 @@ public class ProjectListener implements ActionListener {
 		np = new NotificacionesPer();
 		unp = new UsuNotificacionesPer();
 		upp = new UsuPregPer();
-		lp = new LeccionesPer();
+ 		lp = new LeccionesPer();
 		up = new UsuariosPer();
 		ut = new UsuTienda();
 		ulp = new UsuLecPer();
