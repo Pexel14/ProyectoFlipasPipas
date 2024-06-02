@@ -634,7 +634,7 @@ public class ProjectListener implements ActionListener {
 				
 				if(objeto != null) {
 					int saldo = pti.getSaldo(); 
-					if(saldo > 0) {
+					if(saldo > objeto.getPrecio()) {
 						int realizado = ut.comprarObjeto(objeto, up.getId_usuario()); //---> Actualiza en la base de datos que el objeto está comprado
 						
 						if(realizado != 0) {
